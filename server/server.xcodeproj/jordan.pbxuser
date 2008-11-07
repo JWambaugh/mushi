@@ -502,6 +502,12 @@
 			174AF3B10EC4DD9D004C63A5 /* PBXTextBookmark */ = 174AF3B10EC4DD9D004C63A5 /* PBXTextBookmark */;
 			174AF3B20EC4DD9D004C63A5 /* PBXTextBookmark */ = 174AF3B20EC4DD9D004C63A5 /* PBXTextBookmark */;
 			174AF3B30EC4DD9D004C63A5 /* PBXTextBookmark */ = 174AF3B30EC4DD9D004C63A5 /* PBXTextBookmark */;
+			174AF3B60EC4DE33004C63A5 /* PBXTextBookmark */ = 174AF3B60EC4DE33004C63A5 /* PBXTextBookmark */;
+			174AF3B70EC4DE33004C63A5 /* PBXTextBookmark */ = 174AF3B70EC4DE33004C63A5 /* PBXTextBookmark */;
+			174AF3B80EC4DE34004C63A5 /* PBXTextBookmark */ = 174AF3B80EC4DE34004C63A5 /* PBXTextBookmark */;
+			174AF3B90EC4DE34004C63A5 /* PBXTextBookmark */ = 174AF3B90EC4DE34004C63A5 /* PBXTextBookmark */;
+			174AF3BA0EC4DE34004C63A5 /* PBXTextBookmark */ = 174AF3BA0EC4DE34004C63A5 /* PBXTextBookmark */;
+			174AF3BF0EC4DE67004C63A5 /* PBXTextBookmark */ = 174AF3BF0EC4DE67004C63A5 /* PBXTextBookmark */;
 		};
 		sourceControlManager = 170F68730EC4142600649B85 /* Source Control */;
 		userBuildSettings = {
@@ -3898,9 +3904,9 @@
 	};
 	170F6CEC0EC4C1C500649B85 /* json_reader.cpp */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1145, 10654}}";
-			sepNavSelRange = "{10, 0}";
-			sepNavVisRange = "{0, 582}";
+			sepNavIntBoundsRect = "{{0, 0}, {1533, 10738}}";
+			sepNavSelRange = "{0, 20}";
+			sepNavVisRange = "{0, 1105}";
 		};
 	};
 	170F6CED0EC4C1C500649B85 /* json_value.cpp */ = {
@@ -4856,6 +4862,64 @@
 		rLoc = 458;
 		rType = 0;
 		vrLen = 462;
+		vrLoc = 0;
+	};
+	174AF3B60EC4DE33004C63A5 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		comments = "error: reader.h: No such file or directory";
+		fRef = 170F6CEC0EC4C1C500649B85 /* json_reader.cpp */;
+		rLen = 1;
+		rLoc = 0;
+		rType = 1;
+	};
+	174AF3B70EC4DE33004C63A5 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 170F6CEC0EC4C1C500649B85 /* json_reader.cpp */;
+		name = "json_reader.cpp: 1";
+		rLen = 20;
+		rLoc = 0;
+		rType = 0;
+		vrLen = 393;
+		vrLoc = 0;
+	};
+	174AF3B80EC4DE34004C63A5 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 170F69B40EC41BEF00649B85 /* MushiServer.h */;
+		name = "MushiServer.h: 25";
+		rLen = 0;
+		rLoc = 458;
+		rType = 0;
+		vrLen = 462;
+		vrLoc = 0;
+	};
+	174AF3B90EC4DE34004C63A5 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 170F69B40EC41BEF00649B85 /* MushiServer.h */;
+		name = "MushiServer.h: 25";
+		rLen = 0;
+		rLoc = 458;
+		rType = 0;
+		vrLen = 462;
+		vrLoc = 0;
+	};
+	174AF3BA0EC4DE34004C63A5 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 170F6CEC0EC4C1C500649B85 /* json_reader.cpp */;
+		name = "json_reader.cpp: 1";
+		rLen = 20;
+		rLoc = 0;
+		rType = 0;
+		vrLen = 754;
+		vrLoc = 0;
+	};
+	174AF3BF0EC4DE67004C63A5 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 170F6CEC0EC4C1C500649B85 /* json_reader.cpp */;
+		name = "json_reader.cpp: 1";
+		rLen = 20;
+		rLoc = 0;
+		rType = 0;
+		vrLen = 1105;
 		vrLoc = 0;
 	};
 	8DD76F620486A84900D96B5E /* mushiServer */ = {
