@@ -1,0 +1,390 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 45;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		170F69610EC41A0000649B85 /* auth.c in Sources */ = {isa = PBXBuildFile; fileRef = 170F69310EC41A0000649B85 /* auth.c */; };
+		170F69630EC41A0000649B85 /* cgi.c in Sources */ = {isa = PBXBuildFile; fileRef = 170F69330EC41A0000649B85 /* cgi.c */; };
+		170F69660EC41A0000649B85 /* compat_unix.c in Sources */ = {isa = PBXBuildFile; fileRef = 170F69370EC41A0000649B85 /* compat_unix.c */; };
+		170F696A0EC41A0000649B85 /* io_cgi.c in Sources */ = {isa = PBXBuildFile; fileRef = 170F69410EC41A0000649B85 /* io_cgi.c */; };
+		170F696C0EC41A0000649B85 /* io_dir.c in Sources */ = {isa = PBXBuildFile; fileRef = 170F69430EC41A0000649B85 /* io_dir.c */; };
+		170F696E0EC41A0000649B85 /* io_emb.c in Sources */ = {isa = PBXBuildFile; fileRef = 170F69450EC41A0000649B85 /* io_emb.c */; };
+		170F69700EC41A0000649B85 /* io_file.c in Sources */ = {isa = PBXBuildFile; fileRef = 170F69470EC41A0000649B85 /* io_file.c */; };
+		170F69720EC41A0000649B85 /* io_socket.c in Sources */ = {isa = PBXBuildFile; fileRef = 170F69490EC41A0000649B85 /* io_socket.c */; };
+		170F69740EC41A0000649B85 /* io_ssi.c in Sources */ = {isa = PBXBuildFile; fileRef = 170F694B0EC41A0000649B85 /* io_ssi.c */; };
+		170F69760EC41A0000649B85 /* io_ssl.c in Sources */ = {isa = PBXBuildFile; fileRef = 170F694D0EC41A0000649B85 /* io_ssl.c */; };
+		170F69790EC41A0000649B85 /* log.c in Sources */ = {isa = PBXBuildFile; fileRef = 170F69510EC41A0000649B85 /* log.c */; };
+		170F697C0EC41A0000649B85 /* md5.c in Sources */ = {isa = PBXBuildFile; fileRef = 170F69540EC41A0000649B85 /* md5.c */; };
+		170F697E0EC41A0000649B85 /* shttpd.c in Sources */ = {isa = PBXBuildFile; fileRef = 170F69590EC41A0000649B85 /* shttpd.c */; };
+		170F69810EC41A0000649B85 /* string.c in Sources */ = {isa = PBXBuildFile; fileRef = 170F695F0EC41A0000649B85 /* string.c */; };
+		170F6A230EC423C100649B85 /* URLHandlers.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 170F6A220EC423C100649B85 /* URLHandlers.cpp */; };
+		170F6A280EC4240400649B85 /* MushiServer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 170F6A270EC4240400649B85 /* MushiServer.cpp */; };
+		170F6AFE0EC42A0100649B85 /* sqlite3.c in Sources */ = {isa = PBXBuildFile; fileRef = 170F6AFB0EC42A0100649B85 /* sqlite3.c */; };
+		170F6B850EC4325100649B85 /* MushiDB.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 170F6B840EC4325100649B85 /* MushiDB.cpp */; };
+		170F6BEC0EC4373400649B85 /* MushiDBResult.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 170F6BEB0EC4373400649B85 /* MushiDBResult.cpp */; };
+		170F6CF20EC4C1C500649B85 /* json_reader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 170F6CEC0EC4C1C500649B85 /* json_reader.cpp */; };
+		170F6CF30EC4C1C500649B85 /* json_value.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 170F6CED0EC4C1C500649B85 /* json_value.cpp */; };
+		170F6CF40EC4C1C500649B85 /* json_writer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 170F6CEF0EC4C1C500649B85 /* json_writer.cpp */; };
+		174AF35A0EC4C833004C63A5 /* MushiSetup.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 174AF3590EC4C833004C63A5 /* MushiSetup.cpp */; };
+		8DD76F650486A84900D96B5E /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 08FB7796FE84155DC02AAC07 /* main.cpp */; settings = {ATTRIBUTES = (); }; };
+		8DD76F6A0486A84900D96B5E /* server.1 in CopyFiles */ = {isa = PBXBuildFile; fileRef = C6859E8B029090EE04C91782 /* server.1 */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		8DD76F690486A84900D96B5E /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 8;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+				8DD76F6A0486A84900D96B5E /* server.1 in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		08FB7796FE84155DC02AAC07 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		170F69310EC41A0000649B85 /* auth.c */ = {isa = PBXFileReference; fileEncoding = 7; lastKnownFileType = sourcecode.c.c; name = auth.c; path = ../shttpd/auth.c; sourceTree = SOURCE_ROOT; };
+		170F69330EC41A0000649B85 /* cgi.c */ = {isa = PBXFileReference; fileEncoding = 7; lastKnownFileType = sourcecode.c.c; name = cgi.c; path = ../shttpd/cgi.c; sourceTree = SOURCE_ROOT; };
+		170F69370EC41A0000649B85 /* compat_unix.c */ = {isa = PBXFileReference; fileEncoding = 7; lastKnownFileType = sourcecode.c.c; name = compat_unix.c; path = ../shttpd/compat_unix.c; sourceTree = SOURCE_ROOT; };
+		170F69380EC41A0000649B85 /* compat_unix.h */ = {isa = PBXFileReference; fileEncoding = 7; lastKnownFileType = sourcecode.c.h; name = compat_unix.h; path = ../shttpd/compat_unix.h; sourceTree = SOURCE_ROOT; };
+		170F693E0EC41A0000649B85 /* config.h */ = {isa = PBXFileReference; fileEncoding = 7; lastKnownFileType = sourcecode.c.h; name = config.h; path = ../shttpd/config.h; sourceTree = SOURCE_ROOT; };
+		170F693F0EC41A0000649B85 /* defs.h */ = {isa = PBXFileReference; fileEncoding = 7; lastKnownFileType = sourcecode.c.h; name = defs.h; path = ../shttpd/defs.h; sourceTree = SOURCE_ROOT; };
+		170F69400EC41A0000649B85 /* io.h */ = {isa = PBXFileReference; fileEncoding = 7; lastKnownFileType = sourcecode.c.h; name = io.h; path = ../shttpd/io.h; sourceTree = SOURCE_ROOT; };
+		170F69410EC41A0000649B85 /* io_cgi.c */ = {isa = PBXFileReference; fileEncoding = 7; lastKnownFileType = sourcecode.c.c; name = io_cgi.c; path = ../shttpd/io_cgi.c; sourceTree = SOURCE_ROOT; };
+		170F69430EC41A0000649B85 /* io_dir.c */ = {isa = PBXFileReference; fileEncoding = 7; lastKnownFileType = sourcecode.c.c; name = io_dir.c; path = ../shttpd/io_dir.c; sourceTree = SOURCE_ROOT; };
+		170F69450EC41A0000649B85 /* io_emb.c */ = {isa = PBXFileReference; fileEncoding = 7; lastKnownFileType = sourcecode.c.c; name = io_emb.c; path = ../shttpd/io_emb.c; sourceTree = SOURCE_ROOT; };
+		170F69470EC41A0000649B85 /* io_file.c */ = {isa = PBXFileReference; fileEncoding = 7; lastKnownFileType = sourcecode.c.c; name = io_file.c; path = ../shttpd/io_file.c; sourceTree = SOURCE_ROOT; };
+		170F69490EC41A0000649B85 /* io_socket.c */ = {isa = PBXFileReference; fileEncoding = 7; lastKnownFileType = sourcecode.c.c; name = io_socket.c; path = ../shttpd/io_socket.c; sourceTree = SOURCE_ROOT; };
+		170F694B0EC41A0000649B85 /* io_ssi.c */ = {isa = PBXFileReference; fileEncoding = 7; lastKnownFileType = sourcecode.c.c; name = io_ssi.c; path = ../shttpd/io_ssi.c; sourceTree = SOURCE_ROOT; };
+		170F694D0EC41A0000649B85 /* io_ssl.c */ = {isa = PBXFileReference; fileEncoding = 7; lastKnownFileType = sourcecode.c.c; name = io_ssl.c; path = ../shttpd/io_ssl.c; sourceTree = SOURCE_ROOT; };
+		170F69500EC41A0000649B85 /* llist.h */ = {isa = PBXFileReference; fileEncoding = 7; lastKnownFileType = sourcecode.c.h; name = llist.h; path = ../shttpd/llist.h; sourceTree = SOURCE_ROOT; };
+		170F69510EC41A0000649B85 /* log.c */ = {isa = PBXFileReference; fileEncoding = 7; lastKnownFileType = sourcecode.c.c; name = log.c; path = ../shttpd/log.c; sourceTree = SOURCE_ROOT; };
+		170F69540EC41A0000649B85 /* md5.c */ = {isa = PBXFileReference; fileEncoding = 7; lastKnownFileType = sourcecode.c.c; name = md5.c; path = ../shttpd/md5.c; sourceTree = SOURCE_ROOT; };
+		170F69550EC41A0000649B85 /* md5.h */ = {isa = PBXFileReference; fileEncoding = 7; lastKnownFileType = sourcecode.c.h; name = md5.h; path = ../shttpd/md5.h; sourceTree = SOURCE_ROOT; };
+		170F69580EC41A0000649B85 /* shttpd.1 */ = {isa = PBXFileReference; fileEncoding = 7; lastKnownFileType = text.man; name = shttpd.1; path = ../shttpd/shttpd.1; sourceTree = SOURCE_ROOT; };
+		170F69590EC41A0000649B85 /* shttpd.c */ = {isa = PBXFileReference; fileEncoding = 7; lastKnownFileType = sourcecode.c.c; name = shttpd.c; path = ../shttpd/shttpd.c; sourceTree = SOURCE_ROOT; };
+		170F695A0EC41A0000649B85 /* shttpd.h */ = {isa = PBXFileReference; fileEncoding = 7; lastKnownFileType = sourcecode.c.h; name = shttpd.h; path = ../shttpd/shttpd.h; sourceTree = SOURCE_ROOT; };
+		170F695C0EC41A0000649B85 /* ssl.h */ = {isa = PBXFileReference; fileEncoding = 7; lastKnownFileType = sourcecode.c.h; name = ssl.h; path = ../shttpd/ssl.h; sourceTree = SOURCE_ROOT; };
+		170F695E0EC41A0000649B85 /* std_includes.h */ = {isa = PBXFileReference; fileEncoding = 7; lastKnownFileType = sourcecode.c.h; name = std_includes.h; path = ../shttpd/std_includes.h; sourceTree = SOURCE_ROOT; };
+		170F695F0EC41A0000649B85 /* string.c */ = {isa = PBXFileReference; fileEncoding = 7; lastKnownFileType = sourcecode.c.c; name = string.c; path = ../shttpd/string.c; sourceTree = SOURCE_ROOT; };
+		170F69B40EC41BEF00649B85 /* MushiServer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MushiServer.h; sourceTree = "<group>"; };
+		170F6A210EC423C100649B85 /* URLHandlers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = URLHandlers.h; sourceTree = "<group>"; };
+		170F6A220EC423C100649B85 /* URLHandlers.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = URLHandlers.cpp; sourceTree = "<group>"; };
+		170F6A270EC4240400649B85 /* MushiServer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MushiServer.cpp; sourceTree = "<group>"; };
+		170F6AFB0EC42A0100649B85 /* sqlite3.c */ = {isa = PBXFileReference; fileEncoding = 7; lastKnownFileType = sourcecode.c.c; path = sqlite3.c; sourceTree = SOURCE_ROOT; };
+		170F6AFC0EC42A0100649B85 /* sqlite3.h */ = {isa = PBXFileReference; fileEncoding = 7; lastKnownFileType = sourcecode.c.h; path = sqlite3.h; sourceTree = SOURCE_ROOT; };
+		170F6B830EC4325100649B85 /* MushiDB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MushiDB.h; sourceTree = "<group>"; };
+		170F6B840EC4325100649B85 /* MushiDB.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MushiDB.cpp; sourceTree = "<group>"; };
+		170F6BEA0EC4373400649B85 /* MushiDBResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MushiDBResult.h; sourceTree = "<group>"; };
+		170F6BEB0EC4373400649B85 /* MushiDBResult.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MushiDBResult.cpp; sourceTree = "<group>"; };
+		170F6CE20EC4C1C500649B85 /* autolink.h */ = {isa = PBXFileReference; fileEncoding = 7; lastKnownFileType = sourcecode.c.h; name = autolink.h; path = json/autolink.h; sourceTree = "<group>"; };
+		170F6CE30EC4C1C500649B85 /* config.h */ = {isa = PBXFileReference; fileEncoding = 7; lastKnownFileType = sourcecode.c.h; name = config.h; path = json/config.h; sourceTree = "<group>"; };
+		170F6CE40EC4C1C500649B85 /* forwards.h */ = {isa = PBXFileReference; fileEncoding = 7; lastKnownFileType = sourcecode.c.h; name = forwards.h; path = json/forwards.h; sourceTree = "<group>"; };
+		170F6CE50EC4C1C500649B85 /* json.h */ = {isa = PBXFileReference; fileEncoding = 7; lastKnownFileType = sourcecode.c.h; name = json.h; path = json/json.h; sourceTree = "<group>"; };
+		170F6CE60EC4C1C500649B85 /* reader.h */ = {isa = PBXFileReference; fileEncoding = 7; lastKnownFileType = sourcecode.c.h; name = reader.h; path = json/reader.h; sourceTree = "<group>"; };
+		170F6CE70EC4C1C500649B85 /* value.h */ = {isa = PBXFileReference; fileEncoding = 7; lastKnownFileType = sourcecode.c.h; name = value.h; path = json/value.h; sourceTree = "<group>"; };
+		170F6CE80EC4C1C500649B85 /* writer.h */ = {isa = PBXFileReference; fileEncoding = 7; lastKnownFileType = sourcecode.c.h; name = writer.h; path = json/writer.h; sourceTree = "<group>"; };
+		170F6CE90EC4C1C500649B85 /* json_batchallocator.h */ = {isa = PBXFileReference; fileEncoding = 7; lastKnownFileType = sourcecode.c.h; name = json_batchallocator.h; path = ../lib_json/json_batchallocator.h; sourceTree = SOURCE_ROOT; };
+		170F6CEA0EC4C1C500649B85 /* json_internalarray.inl */ = {isa = PBXFileReference; fileEncoding = 7; lastKnownFileType = text; name = json_internalarray.inl; path = ../lib_json/json_internalarray.inl; sourceTree = SOURCE_ROOT; };
+		170F6CEB0EC4C1C500649B85 /* json_internalmap.inl */ = {isa = PBXFileReference; fileEncoding = 7; lastKnownFileType = text; name = json_internalmap.inl; path = ../lib_json/json_internalmap.inl; sourceTree = SOURCE_ROOT; };
+		170F6CEC0EC4C1C500649B85 /* json_reader.cpp */ = {isa = PBXFileReference; fileEncoding = 7; lastKnownFileType = sourcecode.cpp.cpp; name = json_reader.cpp; path = ../lib_json/json_reader.cpp; sourceTree = SOURCE_ROOT; };
+		170F6CED0EC4C1C500649B85 /* json_value.cpp */ = {isa = PBXFileReference; fileEncoding = 7; lastKnownFileType = sourcecode.cpp.cpp; name = json_value.cpp; path = ../lib_json/json_value.cpp; sourceTree = SOURCE_ROOT; };
+		170F6CEE0EC4C1C500649B85 /* json_valueiterator.inl */ = {isa = PBXFileReference; fileEncoding = 7; lastKnownFileType = text; name = json_valueiterator.inl; path = ../lib_json/json_valueiterator.inl; sourceTree = SOURCE_ROOT; };
+		170F6CEF0EC4C1C500649B85 /* json_writer.cpp */ = {isa = PBXFileReference; fileEncoding = 7; lastKnownFileType = sourcecode.cpp.cpp; name = json_writer.cpp; path = ../lib_json/json_writer.cpp; sourceTree = SOURCE_ROOT; };
+		170F6CF00EC4C1C500649B85 /* lib_json.vcproj */ = {isa = PBXFileReference; fileEncoding = 7; lastKnownFileType = text.xml; name = lib_json.vcproj; path = ../lib_json/lib_json.vcproj; sourceTree = SOURCE_ROOT; };
+		170F6CF10EC4C1C500649B85 /* sconscript */ = {isa = PBXFileReference; fileEncoding = 7; lastKnownFileType = text; name = sconscript; path = ../lib_json/sconscript; sourceTree = SOURCE_ROOT; };
+		174AF3580EC4C833004C63A5 /* MushiSetup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MushiSetup.h; sourceTree = "<group>"; };
+		174AF3590EC4C833004C63A5 /* MushiSetup.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MushiSetup.cpp; sourceTree = "<group>"; };
+		8DD76F6C0486A84900D96B5E /* mushiServer */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = mushiServer; sourceTree = BUILT_PRODUCTS_DIR; };
+		C6859E8B029090EE04C91782 /* server.1 */ = {isa = PBXFileReference; lastKnownFileType = text.man; path = server.1; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		8DD76F660486A84900D96B5E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		08FB7794FE84155DC02AAC07 /* server */ = {
+			isa = PBXGroup;
+			children = (
+				08FB7795FE84155DC02AAC07 /* Source */,
+				C6859E8C029090F304C91782 /* Documentation */,
+				1AB674ADFE9D54B511CA2CBB /* Products */,
+			);
+			name = server;
+			sourceTree = "<group>";
+		};
+		08FB7795FE84155DC02AAC07 /* Source */ = {
+			isa = PBXGroup;
+			children = (
+				170F6BEA0EC4373400649B85 /* MushiDBResult.h */,
+				170F6BEB0EC4373400649B85 /* MushiDBResult.cpp */,
+				170F6B830EC4325100649B85 /* MushiDB.h */,
+				170F6B840EC4325100649B85 /* MushiDB.cpp */,
+				174AF3580EC4C833004C63A5 /* MushiSetup.h */,
+				174AF3590EC4C833004C63A5 /* MushiSetup.cpp */,
+				170F6CE00EC4C1C500649B85 /* lib_json */,
+				170F69300EC41A0000649B85 /* shttpd */,
+				08FB7796FE84155DC02AAC07 /* main.cpp */,
+				170F6AFB0EC42A0100649B85 /* sqlite3.c */,
+				170F6AFC0EC42A0100649B85 /* sqlite3.h */,
+				170F6A270EC4240400649B85 /* MushiServer.cpp */,
+				170F69B40EC41BEF00649B85 /* MushiServer.h */,
+				170F6A210EC423C100649B85 /* URLHandlers.h */,
+				170F6A220EC423C100649B85 /* URLHandlers.cpp */,
+			);
+			name = Source;
+			sourceTree = "<group>";
+		};
+		170F69300EC41A0000649B85 /* shttpd */ = {
+			isa = PBXGroup;
+			children = (
+				170F69310EC41A0000649B85 /* auth.c */,
+				170F69330EC41A0000649B85 /* cgi.c */,
+				170F69370EC41A0000649B85 /* compat_unix.c */,
+				170F69380EC41A0000649B85 /* compat_unix.h */,
+				170F693E0EC41A0000649B85 /* config.h */,
+				170F693F0EC41A0000649B85 /* defs.h */,
+				170F69400EC41A0000649B85 /* io.h */,
+				170F69410EC41A0000649B85 /* io_cgi.c */,
+				170F69430EC41A0000649B85 /* io_dir.c */,
+				170F69450EC41A0000649B85 /* io_emb.c */,
+				170F69470EC41A0000649B85 /* io_file.c */,
+				170F69490EC41A0000649B85 /* io_socket.c */,
+				170F694B0EC41A0000649B85 /* io_ssi.c */,
+				170F694D0EC41A0000649B85 /* io_ssl.c */,
+				170F69500EC41A0000649B85 /* llist.h */,
+				170F69510EC41A0000649B85 /* log.c */,
+				170F69540EC41A0000649B85 /* md5.c */,
+				170F69550EC41A0000649B85 /* md5.h */,
+				170F69580EC41A0000649B85 /* shttpd.1 */,
+				170F69590EC41A0000649B85 /* shttpd.c */,
+				170F695A0EC41A0000649B85 /* shttpd.h */,
+				170F695C0EC41A0000649B85 /* ssl.h */,
+				170F695E0EC41A0000649B85 /* std_includes.h */,
+				170F695F0EC41A0000649B85 /* string.c */,
+			);
+			name = shttpd;
+			path = ../shttpd;
+			sourceTree = SOURCE_ROOT;
+		};
+		170F6CE00EC4C1C500649B85 /* lib_json */ = {
+			isa = PBXGroup;
+			children = (
+				170F6CE20EC4C1C500649B85 /* autolink.h */,
+				170F6CE30EC4C1C500649B85 /* config.h */,
+				170F6CE40EC4C1C500649B85 /* forwards.h */,
+				170F6CE50EC4C1C500649B85 /* json.h */,
+				170F6CE60EC4C1C500649B85 /* reader.h */,
+				170F6CE70EC4C1C500649B85 /* value.h */,
+				170F6CE80EC4C1C500649B85 /* writer.h */,
+				170F6CE90EC4C1C500649B85 /* json_batchallocator.h */,
+				170F6CEA0EC4C1C500649B85 /* json_internalarray.inl */,
+				170F6CEB0EC4C1C500649B85 /* json_internalmap.inl */,
+				170F6CEC0EC4C1C500649B85 /* json_reader.cpp */,
+				170F6CED0EC4C1C500649B85 /* json_value.cpp */,
+				170F6CEE0EC4C1C500649B85 /* json_valueiterator.inl */,
+				170F6CEF0EC4C1C500649B85 /* json_writer.cpp */,
+				170F6CF00EC4C1C500649B85 /* lib_json.vcproj */,
+				170F6CF10EC4C1C500649B85 /* sconscript */,
+			);
+			name = lib_json;
+			path = ../lib_json;
+			sourceTree = SOURCE_ROOT;
+		};
+		1AB674ADFE9D54B511CA2CBB /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				8DD76F6C0486A84900D96B5E /* mushiServer */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		C6859E8C029090F304C91782 /* Documentation */ = {
+			isa = PBXGroup;
+			children = (
+				C6859E8B029090EE04C91782 /* server.1 */,
+			);
+			name = Documentation;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		8DD76F620486A84900D96B5E /* mushiServer */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1DEB923108733DC60010E9CD /* Build configuration list for PBXNativeTarget "mushiServer" */;
+			buildPhases = (
+				8DD76F640486A84900D96B5E /* Sources */,
+				8DD76F660486A84900D96B5E /* Frameworks */,
+				8DD76F690486A84900D96B5E /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = mushiServer;
+			productInstallPath = "$(HOME)/bin";
+			productName = server;
+			productReference = 8DD76F6C0486A84900D96B5E /* mushiServer */;
+			productType = "com.apple.product-type.tool";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		08FB7793FE84155DC02AAC07 /* Project object */ = {
+			isa = PBXProject;
+			buildConfigurationList = 1DEB923508733DC60010E9CD /* Build configuration list for PBXProject "server" */;
+			compatibilityVersion = "Xcode 3.1";
+			hasScannedForEncodings = 1;
+			mainGroup = 08FB7794FE84155DC02AAC07 /* server */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				8DD76F620486A84900D96B5E /* mushiServer */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		8DD76F640486A84900D96B5E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8DD76F650486A84900D96B5E /* main.cpp in Sources */,
+				170F69610EC41A0000649B85 /* auth.c in Sources */,
+				170F69630EC41A0000649B85 /* cgi.c in Sources */,
+				170F69660EC41A0000649B85 /* compat_unix.c in Sources */,
+				170F696A0EC41A0000649B85 /* io_cgi.c in Sources */,
+				170F696C0EC41A0000649B85 /* io_dir.c in Sources */,
+				170F696E0EC41A0000649B85 /* io_emb.c in Sources */,
+				170F69700EC41A0000649B85 /* io_file.c in Sources */,
+				170F69720EC41A0000649B85 /* io_socket.c in Sources */,
+				170F69740EC41A0000649B85 /* io_ssi.c in Sources */,
+				170F69760EC41A0000649B85 /* io_ssl.c in Sources */,
+				170F69790EC41A0000649B85 /* log.c in Sources */,
+				170F697C0EC41A0000649B85 /* md5.c in Sources */,
+				170F697E0EC41A0000649B85 /* shttpd.c in Sources */,
+				170F69810EC41A0000649B85 /* string.c in Sources */,
+				170F6A230EC423C100649B85 /* URLHandlers.cpp in Sources */,
+				170F6A280EC4240400649B85 /* MushiServer.cpp in Sources */,
+				170F6AFE0EC42A0100649B85 /* sqlite3.c in Sources */,
+				170F6B850EC4325100649B85 /* MushiDB.cpp in Sources */,
+				170F6BEC0EC4373400649B85 /* MushiDBResult.cpp in Sources */,
+				170F6CF20EC4C1C500649B85 /* json_reader.cpp in Sources */,
+				170F6CF30EC4C1C500649B85 /* json_value.cpp in Sources */,
+				170F6CF40EC4C1C500649B85 /* json_writer.cpp in Sources */,
+				174AF35A0EC4C833004C63A5 /* MushiSetup.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		1DEB923208733DC60010E9CD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_MODEL_TUNING = G5;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"_GLIBCXX_DEBUG=1",
+					"_GLIBCXX_DEBUG_PEDANTIC=1",
+				);
+				INSTALL_PATH = /usr/local/bin;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/../shttpd\"",
+				);
+				PRODUCT_NAME = mushiServer;
+			};
+			name = Debug;
+		};
+		1DEB923308733DC60010E9CD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_MODEL_TUNING = G5;
+				INSTALL_PATH = /usr/local/bin;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/../shttpd\"",
+				);
+				PRODUCT_NAME = server;
+			};
+			name = Release;
+		};
+		1DEB923608733DC60010E9CD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				FRAMEWORK_SEARCH_PATHS = ../shttpd;
+				GCC_C_LANGUAGE_STANDARD = c99;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = (
+					lib_json/json,
+					../shttpd,
+				);
+				LIBRARY_SEARCH_PATHS = ../shttpd;
+				ONLY_ACTIVE_ARCH = YES;
+				PREBINDING = NO;
+				PRODUCT_NAME = mushiServer;
+				SDKROOT = macosx10.5;
+			};
+			name = Debug;
+		};
+		1DEB923708733DC60010E9CD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				GCC_C_LANGUAGE_STANDARD = c99;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				PREBINDING = NO;
+				SDKROOT = macosx10.5;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		1DEB923108733DC60010E9CD /* Build configuration list for PBXNativeTarget "mushiServer" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1DEB923208733DC60010E9CD /* Debug */,
+				1DEB923308733DC60010E9CD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		1DEB923508733DC60010E9CD /* Build configuration list for PBXProject "server" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1DEB923608733DC60010E9CD /* Debug */,
+				1DEB923708733DC60010E9CD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 08FB7793FE84155DC02AAC07 /* Project object */;
+}
