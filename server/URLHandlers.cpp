@@ -31,6 +31,7 @@
 #include <string.h>
 #include <iostream>
 #include "../shttpd/shttpd.h"
+#include "../shttpd/defs.h"
 #include "utils.h"
 #include "MushiServer.h"
 #include "URLHandlers.h"
@@ -59,8 +60,14 @@ void m_receiveCommand(struct shttpd_arg *arg){
 		/* If not all data is POSTed, wait for the rest */
 		if (arg->flags & SHTTPD_MORE_POST_DATA)
 			return;
-		printf("%s\n",arg->in.buf);
-		reader.parse(arg->in.buf, command);
+		
+		std::string input = arg->in.buf;
+		input=replaceOnce(input,"hmm=", "");
+		printf("%s\n",input.c_str());
+		
+		_shttpd_url_decode(arg->in.buf,arg->in.len,arg->in.buf,arg->in.len+1 );
+		reader.parse(input, command);
+		
 		shttpd_printf(arg, "%s",(char *)writer.write(MushiServer::getInstance()->runCommand(command)).c_str());
 	} 
 	//not a POST

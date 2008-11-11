@@ -6,6 +6,7 @@
  *  Copyright 2008 Solitex Networks. All rights reserved.
  *
  */
+#include <string>
 #include <stdlib.h>
 #include <stdio.h>
 #include "utils.h"
@@ -32,4 +33,16 @@ char *getPostBody(char *search){
 	found=strstr(search, "\r\n");
 	printf("%d", found);
 	return search + 4;
+}
+
+
+std::string replaceOnce(
+						std::string result, 
+						const std::string& replaceWhat, 
+						const std::string& replaceWithWhat)
+{
+	const int pos = result.find(replaceWhat);
+	if (pos==-1) return result;
+	result.replace(pos,replaceWhat.size(),replaceWithWhat);
+	return result;
 }
