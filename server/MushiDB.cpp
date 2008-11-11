@@ -6,6 +6,7 @@
  *  Copyright 2008 Solitex Networks. All rights reserved.
  *
  */
+#include <string>
 #include <string.h>
 #include <stdio.h>
 #include "sqlite3.h"
@@ -28,11 +29,11 @@ void MushiDB::init(){
 	}
 }
 	
-MushiDBResult* MushiDB::query(const char *sql){
+MushiDBResult* MushiDB::query(const std::string sql){
 	MushiDBResult *r = new MushiDBResult;
-	r->sql=(char *)sql;
+	r->sql=(char *)sql.c_str();
 	
-	sqlite3_get_table(db,sql,&r->result,&r->row,&r->column,&r->errMsg);
+	sqlite3_get_table(db,r->sql,&r->result,&r->row,&r->column,&r->errMsg);
 	if(r->errMsg && strlen(r->errMsg) > 0){
 		printf("db error: %s\n",r->errMsg);
 	}

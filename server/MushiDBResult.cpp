@@ -6,12 +6,14 @@
 
  *
  */
+#include <stdio.h>
 #include "sqlite3.h"
 #include "MushiDBResult.h"
 
 MushiDBResult::~MushiDBResult(){
 	if(this->result!=0);
 	sqlite3_free_table(this->result);
+
 }
 
 MushiDBResult::MushiDBResult(){

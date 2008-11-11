@@ -8,14 +8,15 @@
  */
 #ifndef MUSHIDB
 #define MUSHIDB
-
+#include <string>
 #include "MushiDBResult.h"
+#include "sqlite3.h"
 
 class MushiDB {
 public:
 	void init();
 	sqlite3 *getHandle();
-	MushiDBResult * query(const char *sql);
+	MushiDBResult * query(const std::string sql);
 	
 private:
 	sqlite3 *db;

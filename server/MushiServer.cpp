@@ -29,13 +29,20 @@
 #include <stdlib.h>
 #include <assert.h>
 #include <string.h>
-
+#include <string>
 
 #include "../shttpd/shttpd.h"
+#include "AddTicketCommand.h"
 #include "MushiServer.h"
 #include "URLHandlers.h"
 #include "MushiDB.h"
 #include "MushiSetup.h"
+#include "MushiConfig.h"
+#include "MushiCommand.h"
+#include "MushiSession.h"
+#include "../lib_json/json.h"
+#include "utils.h"
+
 
 
 MushiServer::MushiServer(){
@@ -45,9 +52,15 @@ MushiServer::MushiServer(){
 
 
 
+
+void MushiServer::installCommands(){
+	this->registerCommand(new AddTicketCommand);
+}
+
+
+
+
 MushiServer * MushiServer::instance = 0;
-
-
 MushiDB * MushiServer::getDB(){
 	return db;
 }
@@ -61,19 +74,46 @@ MushiServer * MushiServer::getInstance(){
 	
 }	
 
+int MushiServer::registerCommand(MushiCommand *command){
+	commands.push_back(command);
+	return 1;
+}
 
-void MushiServer::defineHandlers(){
+
+
+Json::Value MushiServer::runCommand(Json::Value command){
+	MushiSession session;
 	
-	shttpd_register_uri(ctx, "/", &::m_show_index,NULL);
 
+	//check for a session id
+	if(!command["sessionID"]){
+		session.load();
+	}else{
+		
+		session.load(command["sessionID"].asString());
+	}
+	
+	
+
+		
+	Json::Value ret;
+	//give the command to command handlers for handling
+	try{
+		for(int x=0;x<commands.size();x++){
+			ret = commands.at(x)->run(session, command, ret);
+		}
+	} catch (Json::Value val){
+			 return val;
+	}
+	session.save();
+	return ret;
 }
 
 
 
 
-
 void MushiServer::startup(int argc, char *argv[]){
-	printf("\n\nMushi Tracker server version %s\n", MUSHI_SERVER_VERSION);
+	printf("\n\n%s version %s\n", MUSHI_SERVER_NAME,MUSHI_SERVER_VERSION);
 	/* Get rid of warnings */
 	argc = argc;
 	argv = argv;
@@ -82,20 +122,22 @@ void MushiServer::startup(int argc, char *argv[]){
 	db=new MushiDB();
 	db->init();
 	//build our tables!
-	MushiSetup::createTables();
+	MushiSetup::checkStatus();	
 	
+	this->installCommands();
 	
 	ctx = shttpd_init(argc, argv);
 	//	shttpd_set_option(ctx, "ssl_cert", "shttpd.pem");
-	shttpd_set_option(ctx, "ports", "8080");
-	
-		
+	shttpd_set_option(ctx, "ports", "8080"/*MushiConfig::getValue("listenPort")*/);
+	char *port = MushiConfig::getValue("listenPort");
+	printf("listening on port %s.\n",port);
+	free(port);
 	
 	//shttpd_handle_error(ctx, 404, show_404, NULL);
 	defineHandlers();
 	
     printf("Server started.\n");
-	
+
 	
 	
 

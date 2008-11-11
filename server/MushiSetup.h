@@ -13,6 +13,7 @@
 class MushiSetup{
 public:
 	static int createTables();
+	static int checkStatus();
 };
 
 

@@ -5,15 +5,50 @@
  *  Created by Jordan Wambaugh on 11/7/08.
  *
  */
+
+#include <stdio.h>
 #include "MushiServer.h"
 #include "MushiSetup.h"
+#include "MushiConfig.h"
 #include "MushiDB.h"
+
+
+int MushiSetup::checkStatus(){
+	MushiDBResult *r;
+	MushiDB *db = MushiServer::getInstance()->getDB();
+	
+	
+	//determine if this is a fresh install. if it is, this query should return an error
+	r=db->query("select * from config LIMIT 1");
+	if(r->row<1){
+		printf("This must be a fresh Mushi Server install. Setting up/initializing with defaults...\n");
+		MushiSetup::createTables();
+		MushiConfig::setDefaults();
+		printf("Completed setup. Have a nice day.\n");
+		delete r;
+		return 1;
+	}
+	delete r;
+	return 1;
+}
+
+
 
 int MushiSetup::createTables(){
 	MushiDBResult *r;
 	MushiDB *db = MushiServer::getInstance()->getDB();
 	
-	r=db->query("create table if not exists user ("
+	
+	db->query("create table if not exists config ("
+				"id integer PRIMARY KEY AUTOINCREMENT"
+				",key"
+				",value"
+				",createDate datetime DEFAULT (datetime('NOW'))"
+				
+				")");
+	
+	
+	db->query("create table if not exists user ("
 				  "id integer PRIMARY KEY AUTOINCREMENT"
 				  ",firstName"
 				  ",lastName"
@@ -22,10 +57,7 @@ int MushiSetup::createTables(){
 				  ",createDate datetime DEFAULT (datetime('NOW'))"
 				
 				  ")");
-	delete r;
-	
-	
-	r=db->query("create table if not exists role ("
+	db->query("create table if not exists role ("
 				"id integer PRIMARY KEY AUTOINCREMENT"
 				",name"
 				",description"
@@ -37,26 +69,23 @@ int MushiSetup::createTables(){
 				",deleteProject bit DEFAULT 0"
 				",createDate datetime DEFAULT (datetime('NOW'))"
 				")");
-	delete r;
 	
-	r=db->query("create table if not exists category ("
+	
+	db->query("create table if not exists category ("
 				"id integer PRIMARY KEY AUTOINCREMENT"
 				",name"
 				",description"
 				",defaultOwnerID integer REFERENCES user(id)"
 				",createDate datetime DEFAULT (datetime('NOW'))"
 				")");
-	delete r;
 	
-		
-	r=db->query("create table if not exists project ("
+	db->query("create table if not exists project ("
 				"id integer PRIMARY KEY AUTOINCREMENT"
 				",name"
 				",description"
 				",createDate datetime DEFAULT (datetime('NOW'))"
 				")");
-	delete r;
-	
+
 	
 	r=db->query("create table if not exists projectUser ("
 				"id integer PRIMARY KEY AUTOINCREMENT"
@@ -65,10 +94,9 @@ int MushiSetup::createTables(){
 				",roleID REFERENCES role(id)"
 				",createDate datetime DEFAULT (datetime('NOW'))"
 				")");
-	delete r;
 	
 	
-	r=db->query("create table if not exists task ("
+	db->query("create table if not exists task ("
 				"id integer PRIMARY KEY AUTOINCREMENT"
 				",title"
 				",description"
@@ -80,18 +108,18 @@ int MushiSetup::createTables(){
 				",parentTaskID integer REFERENCES task(id)"
 				 ",createDate datetime DEFAULT (datetime('NOW'))"
 				")");
-	delete r;
 	
-	r=db->query("create table if not exists note ("
+	
+	db->query("create table if not exists note ("
 				"id integer PRIMARY KEY AUTOINCREMENT"
 				",someID int"
 				",tableName"  //the name of the table to which it should be joined to
 				",authorID REFERENCES user(id)"
 				",createDate datetime DEFAULT (datetime('NOW'))"
 				")");
-	delete r;
 	
-	r=db->query("create table if not exists textHistory ("
+	
+	db->query("create table if not exists textHistory ("
 				"id integer PRIMARY KEY AUTOINCREMENT"
 				",someID int"
 				",tableName"  //the name of the table to which it should be joined to
@@ -100,8 +128,14 @@ int MushiSetup::createTables(){
 				",originalCreateDate datetime"
 				",createDate datetime DEFAULT (datetime('NOW'))"
 				")");
-	delete r;
 	
+	
+	db->query("create table if not exists session ("
+				"id PRIMARY KEY"
+				",data"
+				",lastSeen datetime"
+				",createDate datetime DEFAULT (datetime('NOW'))"
+				")");
 	
 	return 0;
 }

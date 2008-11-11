@@ -30,6 +30,11 @@
 		170F6CF30EC4C1C500649B85 /* json_value.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 170F6CED0EC4C1C500649B85 /* json_value.cpp */; };
 		170F6CF40EC4C1C500649B85 /* json_writer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 170F6CEF0EC4C1C500649B85 /* json_writer.cpp */; };
 		174AF35A0EC4C833004C63A5 /* MushiSetup.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 174AF3590EC4C833004C63A5 /* MushiSetup.cpp */; };
+		174AF4050EC4E646004C63A5 /* MushiConfig.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 174AF4040EC4E646004C63A5 /* MushiConfig.cpp */; };
+		174AF5A30EC5147A004C63A5 /* MushiCommand.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 174AF5A20EC5147A004C63A5 /* MushiCommand.cpp */; };
+		177F11320EC903D1000A07B6 /* AddTicketCommand.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 177F11310EC903D1000A07B6 /* AddTicketCommand.cpp */; };
+		177F11DF0EC90DA8000A07B6 /* MushiSession.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 177F11DE0EC90DA8000A07B6 /* MushiSession.cpp */; };
+		1795A9060EC536D00071BA83 /* utils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1795A9050EC536D00071BA83 /* utils.cpp */; };
 		8DD76F650486A84900D96B5E /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 08FB7796FE84155DC02AAC07 /* main.cpp */; settings = {ATTRIBUTES = (); }; };
 		8DD76F6A0486A84900D96B5E /* server.1 in CopyFiles */ = {isa = PBXBuildFile; fileRef = C6859E8B029090EE04C91782 /* server.1 */; };
 /* End PBXBuildFile section */
@@ -83,13 +88,6 @@
 		170F6B840EC4325100649B85 /* MushiDB.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MushiDB.cpp; sourceTree = "<group>"; };
 		170F6BEA0EC4373400649B85 /* MushiDBResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MushiDBResult.h; sourceTree = "<group>"; };
 		170F6BEB0EC4373400649B85 /* MushiDBResult.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MushiDBResult.cpp; sourceTree = "<group>"; };
-		170F6CE20EC4C1C500649B85 /* autolink.h */ = {isa = PBXFileReference; fileEncoding = 7; lastKnownFileType = sourcecode.c.h; name = autolink.h; path = json/autolink.h; sourceTree = "<group>"; };
-		170F6CE30EC4C1C500649B85 /* config.h */ = {isa = PBXFileReference; fileEncoding = 7; lastKnownFileType = sourcecode.c.h; name = config.h; path = json/config.h; sourceTree = "<group>"; };
-		170F6CE40EC4C1C500649B85 /* forwards.h */ = {isa = PBXFileReference; fileEncoding = 7; lastKnownFileType = sourcecode.c.h; name = forwards.h; path = json/forwards.h; sourceTree = "<group>"; };
-		170F6CE50EC4C1C500649B85 /* json.h */ = {isa = PBXFileReference; fileEncoding = 7; lastKnownFileType = sourcecode.c.h; name = json.h; path = json/json.h; sourceTree = "<group>"; };
-		170F6CE60EC4C1C500649B85 /* reader.h */ = {isa = PBXFileReference; fileEncoding = 7; lastKnownFileType = sourcecode.c.h; name = reader.h; path = json/reader.h; sourceTree = "<group>"; };
-		170F6CE70EC4C1C500649B85 /* value.h */ = {isa = PBXFileReference; fileEncoding = 7; lastKnownFileType = sourcecode.c.h; name = value.h; path = json/value.h; sourceTree = "<group>"; };
-		170F6CE80EC4C1C500649B85 /* writer.h */ = {isa = PBXFileReference; fileEncoding = 7; lastKnownFileType = sourcecode.c.h; name = writer.h; path = json/writer.h; sourceTree = "<group>"; };
 		170F6CE90EC4C1C500649B85 /* json_batchallocator.h */ = {isa = PBXFileReference; fileEncoding = 7; lastKnownFileType = sourcecode.c.h; name = json_batchallocator.h; path = ../lib_json/json_batchallocator.h; sourceTree = SOURCE_ROOT; };
 		170F6CEA0EC4C1C500649B85 /* json_internalarray.inl */ = {isa = PBXFileReference; fileEncoding = 7; lastKnownFileType = text; name = json_internalarray.inl; path = ../lib_json/json_internalarray.inl; sourceTree = SOURCE_ROOT; };
 		170F6CEB0EC4C1C500649B85 /* json_internalmap.inl */ = {isa = PBXFileReference; fileEncoding = 7; lastKnownFileType = text; name = json_internalmap.inl; path = ../lib_json/json_internalmap.inl; sourceTree = SOURCE_ROOT; };
@@ -101,6 +99,23 @@
 		170F6CF10EC4C1C500649B85 /* sconscript */ = {isa = PBXFileReference; fileEncoding = 7; lastKnownFileType = text; name = sconscript; path = ../lib_json/sconscript; sourceTree = SOURCE_ROOT; };
 		174AF3580EC4C833004C63A5 /* MushiSetup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MushiSetup.h; sourceTree = "<group>"; };
 		174AF3590EC4C833004C63A5 /* MushiSetup.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MushiSetup.cpp; sourceTree = "<group>"; };
+		174AF4030EC4E646004C63A5 /* MushiConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MushiConfig.h; sourceTree = "<group>"; };
+		174AF4040EC4E646004C63A5 /* MushiConfig.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MushiConfig.cpp; sourceTree = "<group>"; };
+		174AF5A10EC5147A004C63A5 /* MushiCommand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MushiCommand.h; sourceTree = "<group>"; };
+		174AF5A20EC5147A004C63A5 /* MushiCommand.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MushiCommand.cpp; sourceTree = "<group>"; };
+		177F11300EC903D1000A07B6 /* AddTicketCommand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddTicketCommand.h; sourceTree = "<group>"; };
+		177F11310EC903D1000A07B6 /* AddTicketCommand.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AddTicketCommand.cpp; sourceTree = "<group>"; };
+		177F11DD0EC90DA8000A07B6 /* MushiSession.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MushiSession.h; sourceTree = "<group>"; };
+		177F11DE0EC90DA8000A07B6 /* MushiSession.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MushiSession.cpp; sourceTree = "<group>"; };
+		177F12540EC9167B000A07B6 /* autolink.h */ = {isa = PBXFileReference; fileEncoding = 7; lastKnownFileType = sourcecode.c.h; path = autolink.h; sourceTree = "<group>"; };
+		177F12550EC9167B000A07B6 /* config.h */ = {isa = PBXFileReference; fileEncoding = 7; lastKnownFileType = sourcecode.c.h; path = config.h; sourceTree = "<group>"; };
+		177F12560EC9167B000A07B6 /* forwards.h */ = {isa = PBXFileReference; fileEncoding = 7; lastKnownFileType = sourcecode.c.h; path = forwards.h; sourceTree = "<group>"; };
+		177F12570EC9167B000A07B6 /* json.h */ = {isa = PBXFileReference; fileEncoding = 7; lastKnownFileType = sourcecode.c.h; path = json.h; sourceTree = "<group>"; };
+		177F12580EC9167B000A07B6 /* reader.h */ = {isa = PBXFileReference; fileEncoding = 7; lastKnownFileType = sourcecode.c.h; path = reader.h; sourceTree = "<group>"; };
+		177F12590EC9167B000A07B6 /* value.h */ = {isa = PBXFileReference; fileEncoding = 7; lastKnownFileType = sourcecode.c.h; path = value.h; sourceTree = "<group>"; };
+		177F125A0EC9167B000A07B6 /* writer.h */ = {isa = PBXFileReference; fileEncoding = 7; lastKnownFileType = sourcecode.c.h; path = writer.h; sourceTree = "<group>"; };
+		1795A9040EC536D00071BA83 /* utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = utils.h; sourceTree = "<group>"; };
+		1795A9050EC536D00071BA83 /* utils.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = utils.cpp; sourceTree = "<group>"; };
 		8DD76F6C0486A84900D96B5E /* mushiServer */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = mushiServer; sourceTree = BUILT_PRODUCTS_DIR; };
 		C6859E8B029090EE04C91782 /* server.1 */ = {isa = PBXFileReference; lastKnownFileType = text.man; path = server.1; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -129,6 +144,13 @@
 		08FB7795FE84155DC02AAC07 /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				177F11DD0EC90DA8000A07B6 /* MushiSession.h */,
+				177F11DE0EC90DA8000A07B6 /* MushiSession.cpp */,
+				177F112F0EC903B8000A07B6 /* commands */,
+				174AF5A10EC5147A004C63A5 /* MushiCommand.h */,
+				174AF5A20EC5147A004C63A5 /* MushiCommand.cpp */,
+				174AF4030EC4E646004C63A5 /* MushiConfig.h */,
+				174AF4040EC4E646004C63A5 /* MushiConfig.cpp */,
 				170F6BEA0EC4373400649B85 /* MushiDBResult.h */,
 				170F6BEB0EC4373400649B85 /* MushiDBResult.cpp */,
 				170F6B830EC4325100649B85 /* MushiDB.h */,
@@ -143,6 +165,8 @@
 				170F6A270EC4240400649B85 /* MushiServer.cpp */,
 				170F69B40EC41BEF00649B85 /* MushiServer.h */,
 				170F6A210EC423C100649B85 /* URLHandlers.h */,
+				1795A9040EC536D00071BA83 /* utils.h */,
+				1795A9050EC536D00071BA83 /* utils.cpp */,
 				170F6A220EC423C100649B85 /* URLHandlers.cpp */,
 			);
 			name = Source;
@@ -183,13 +207,13 @@
 		170F6CE00EC4C1C500649B85 /* lib_json */ = {
 			isa = PBXGroup;
 			children = (
-				170F6CE20EC4C1C500649B85 /* autolink.h */,
-				170F6CE30EC4C1C500649B85 /* config.h */,
-				170F6CE40EC4C1C500649B85 /* forwards.h */,
-				170F6CE50EC4C1C500649B85 /* json.h */,
-				170F6CE60EC4C1C500649B85 /* reader.h */,
-				170F6CE70EC4C1C500649B85 /* value.h */,
-				170F6CE80EC4C1C500649B85 /* writer.h */,
+				177F12540EC9167B000A07B6 /* autolink.h */,
+				177F12550EC9167B000A07B6 /* config.h */,
+				177F12560EC9167B000A07B6 /* forwards.h */,
+				177F12570EC9167B000A07B6 /* json.h */,
+				177F12580EC9167B000A07B6 /* reader.h */,
+				177F12590EC9167B000A07B6 /* value.h */,
+				177F125A0EC9167B000A07B6 /* writer.h */,
 				170F6CE90EC4C1C500649B85 /* json_batchallocator.h */,
 				170F6CEA0EC4C1C500649B85 /* json_internalarray.inl */,
 				170F6CEB0EC4C1C500649B85 /* json_internalmap.inl */,
@@ -203,6 +227,15 @@
 			name = lib_json;
 			path = ../lib_json;
 			sourceTree = SOURCE_ROOT;
+		};
+		177F112F0EC903B8000A07B6 /* commands */ = {
+			isa = PBXGroup;
+			children = (
+				177F11300EC903D1000A07B6 /* AddTicketCommand.h */,
+				177F11310EC903D1000A07B6 /* AddTicketCommand.cpp */,
+			);
+			path = commands;
+			sourceTree = "<group>";
 		};
 		1AB674ADFE9D54B511CA2CBB /* Products */ = {
 			isa = PBXGroup;
@@ -287,6 +320,11 @@
 				170F6CF30EC4C1C500649B85 /* json_value.cpp in Sources */,
 				170F6CF40EC4C1C500649B85 /* json_writer.cpp in Sources */,
 				174AF35A0EC4C833004C63A5 /* MushiSetup.cpp in Sources */,
+				174AF4050EC4E646004C63A5 /* MushiConfig.cpp in Sources */,
+				174AF5A30EC5147A004C63A5 /* MushiCommand.cpp in Sources */,
+				1795A9060EC536D00071BA83 /* utils.cpp in Sources */,
+				177F11320EC903D1000A07B6 /* AddTicketCommand.cpp in Sources */,
+				177F11DF0EC90DA8000A07B6 /* MushiSession.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -340,7 +378,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = (
-					lib_json/json,
+					lib_json,
 					../shttpd,
 				);
 				LIBRARY_SEARCH_PATHS = ../shttpd;
