@@ -32,7 +32,7 @@
 		174AF35A0EC4C833004C63A5 /* MushiSetup.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 174AF3590EC4C833004C63A5 /* MushiSetup.cpp */; };
 		174AF4050EC4E646004C63A5 /* MushiConfig.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 174AF4040EC4E646004C63A5 /* MushiConfig.cpp */; };
 		174AF5A30EC5147A004C63A5 /* MushiCommand.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 174AF5A20EC5147A004C63A5 /* MushiCommand.cpp */; };
-		177F11320EC903D1000A07B6 /* AddTicketCommand.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 177F11310EC903D1000A07B6 /* AddTicketCommand.cpp */; };
+		177F11320EC903D1000A07B6 /* AddTaskCommand.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 177F11310EC903D1000A07B6 /* AddTaskCommand.cpp */; };
 		177F11DF0EC90DA8000A07B6 /* MushiSession.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 177F11DE0EC90DA8000A07B6 /* MushiSession.cpp */; };
 		1795A9060EC536D00071BA83 /* utils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1795A9050EC536D00071BA83 /* utils.cpp */; };
 		8DD76F650486A84900D96B5E /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 08FB7796FE84155DC02AAC07 /* main.cpp */; settings = {ATTRIBUTES = (); }; };
@@ -103,8 +103,8 @@
 		174AF4040EC4E646004C63A5 /* MushiConfig.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MushiConfig.cpp; sourceTree = "<group>"; };
 		174AF5A10EC5147A004C63A5 /* MushiCommand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MushiCommand.h; sourceTree = "<group>"; };
 		174AF5A20EC5147A004C63A5 /* MushiCommand.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MushiCommand.cpp; sourceTree = "<group>"; };
-		177F11300EC903D1000A07B6 /* AddTicketCommand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddTicketCommand.h; sourceTree = "<group>"; };
-		177F11310EC903D1000A07B6 /* AddTicketCommand.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AddTicketCommand.cpp; sourceTree = "<group>"; };
+		177F11300EC903D1000A07B6 /* AddTaskCommand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddTaskCommand.h; sourceTree = "<group>"; };
+		177F11310EC903D1000A07B6 /* AddTaskCommand.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AddTaskCommand.cpp; sourceTree = "<group>"; };
 		177F11DD0EC90DA8000A07B6 /* MushiSession.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MushiSession.h; sourceTree = "<group>"; };
 		177F11DE0EC90DA8000A07B6 /* MushiSession.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MushiSession.cpp; sourceTree = "<group>"; };
 		177F12540EC9167B000A07B6 /* autolink.h */ = {isa = PBXFileReference; fileEncoding = 7; lastKnownFileType = sourcecode.c.h; path = autolink.h; sourceTree = "<group>"; };
@@ -164,9 +164,9 @@
 				170F6AFC0EC42A0100649B85 /* sqlite3.h */,
 				170F6A270EC4240400649B85 /* MushiServer.cpp */,
 				170F69B40EC41BEF00649B85 /* MushiServer.h */,
-				170F6A210EC423C100649B85 /* URLHandlers.h */,
 				1795A9040EC536D00071BA83 /* utils.h */,
 				1795A9050EC536D00071BA83 /* utils.cpp */,
+				170F6A210EC423C100649B85 /* URLHandlers.h */,
 				170F6A220EC423C100649B85 /* URLHandlers.cpp */,
 			);
 			name = Source;
@@ -231,8 +231,8 @@
 		177F112F0EC903B8000A07B6 /* commands */ = {
 			isa = PBXGroup;
 			children = (
-				177F11300EC903D1000A07B6 /* AddTicketCommand.h */,
-				177F11310EC903D1000A07B6 /* AddTicketCommand.cpp */,
+				177F11300EC903D1000A07B6 /* AddTaskCommand.h */,
+				177F11310EC903D1000A07B6 /* AddTaskCommand.cpp */,
 			);
 			path = commands;
 			sourceTree = "<group>";
@@ -323,7 +323,7 @@
 				174AF4050EC4E646004C63A5 /* MushiConfig.cpp in Sources */,
 				174AF5A30EC5147A004C63A5 /* MushiCommand.cpp in Sources */,
 				1795A9060EC536D00071BA83 /* utils.cpp in Sources */,
-				177F11320EC903D1000A07B6 /* AddTicketCommand.cpp in Sources */,
+				177F11320EC903D1000A07B6 /* AddTaskCommand.cpp in Sources */,
 				177F11DF0EC90DA8000A07B6 /* MushiSession.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

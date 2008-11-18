@@ -120,6 +120,9 @@ _shttpd_url_decode(const char *src, int src_len, char *dst, int dst_len)
 				dst[j] = '%';
 			}
 			break;
+		case '+':
+			dst[j] = ' ';
+				break;
 		default:
 			dst[j] = src[i];
 			break;

@@ -32,7 +32,7 @@
 #include <string>
 
 #include "../shttpd/shttpd.h"
-#include "AddTicketCommand.h"
+#include "AddTaskCommand.h"
 #include "MushiServer.h"
 #include "URLHandlers.h"
 #include "MushiDB.h"
@@ -54,7 +54,7 @@ MushiServer::MushiServer(){
 
 
 void MushiServer::installCommands(){
-	this->registerCommand(new AddTicketCommand);
+	this->registerCommand(new AddTaskCommand);
 }
 
 

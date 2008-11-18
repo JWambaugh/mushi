@@ -60,13 +60,18 @@ void m_receiveCommand(struct shttpd_arg *arg){
 		/* If not all data is POSTed, wait for the rest */
 		if (arg->flags & SHTTPD_MORE_POST_DATA)
 			return;
-		
-		std::string input = arg->in.buf;
-		input=replaceOnce(input,"hmm=", "");
-		printf("%s\n",input.c_str());
-		
 		_shttpd_url_decode(arg->in.buf,arg->in.len,arg->in.buf,arg->in.len+1 );
+		std::string input = arg->in.buf;
+		
+		//TODO: Remove this after testing!
+		input=replaceOnce(input,"hmm=", "");
+		
+		
 		reader.parse(input, command);
+		
+		
+		
+		
 		
 		shttpd_printf(arg, "%s",(char *)writer.write(MushiServer::getInstance()->runCommand(command)).c_str());
 	} 
@@ -118,7 +123,7 @@ void m_showVersion(struct shttpd_arg *arg){
  */
 void m_showIndex(struct shttpd_arg *arg){
 	
-	
+	printf("Loding root\n");
 	shttpd_printf(arg, "%s",
 				  "HTTP/1.1 200 OK\r\nContent-Type: text/html\r\n\r\n"
 				  "<html><body><h1>Mushi</h1>");

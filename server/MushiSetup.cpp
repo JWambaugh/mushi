@@ -104,9 +104,10 @@ int MushiSetup::createTables(){
 				",reporterId"
 				",ownerID"
 				",projectID"
+				",estimate"
 				",categoryID REFERENCES category(id)"
 				",parentTaskID integer REFERENCES task(id)"
-				 ",createDate datetime DEFAULT (datetime('NOW'))"
+				",createDate datetime DEFAULT (datetime('NOW'))"
 				")");
 	
 	
@@ -129,6 +130,13 @@ int MushiSetup::createTables(){
 				",createDate datetime DEFAULT (datetime('NOW'))"
 				")");
 	
+	db->query("create table if not exists attachment ("
+			  "id integer PRIMARY KEY AUTOINCREMENT"
+			  ",someID int"
+			  ",tableName"  //the name of the table to which it should be joined to
+			  ",fileName"
+			  ",createDate datetime DEFAULT (datetime('NOW'))"
+			  ")");
 	
 	db->query("create table if not exists session ("
 				"id PRIMARY KEY"

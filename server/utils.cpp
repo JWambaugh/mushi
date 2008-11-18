@@ -46,3 +46,17 @@ std::string replaceOnce(
 	result.replace(pos,replaceWhat.size(),replaceWithWhat);
 	return result;
 }
+
+std::string dbin(std::string str){
+	int pos=0;
+	while((pos= str.find("'", pos))!=-1){
+		
+		str.replace(pos,1,"''");
+		pos+=2;
+	}
+	return str;
+}
+
+
+
+

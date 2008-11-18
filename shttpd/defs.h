@@ -301,7 +301,11 @@ extern int	_shttpd_tz_offset;	/* Offset from GMT time zone	*/
 extern const struct vec _shttpd_known_http_methods[];
 
 extern void	_shttpd_stop_stream(struct stream *stream);
+#ifdef __cplusplus
+extern "C" int	_shttpd_url_decode(const char *, int, char *dst, int);
+#else
 extern int	_shttpd_url_decode(const char *, int, char *dst, int);
+#endif
 extern void	_shttpd_send_server_error(struct conn *, int, const char *);
 extern int	_shttpd_get_headers_len(const char *buf, size_t buflen);
 extern void	_shttpd_parse_headers(const char *s, int, struct headers *);
