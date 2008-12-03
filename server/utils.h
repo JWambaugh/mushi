@@ -9,7 +9,7 @@
 #ifndef UTILS_H
 #define UTILS_H
 
-char *uID();
+std::string uID();
 
 char *getPostBody(char *);
 std::string replaceOnce(

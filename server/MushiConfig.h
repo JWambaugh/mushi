@@ -7,7 +7,8 @@
  *
  */
 
-
+#ifndef MUSHICONFIG_H
+#define MUSHICONFIG_H
 class MushiConfig{
 public:
 	static char *getValue(char *key);
@@ -15,3 +16,4 @@ public:
 	
 	static void setDefaults();
 };
+#endif

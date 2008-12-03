@@ -14,6 +14,7 @@ class MushiSetup{
 public:
 	static int createTables();
 	static int checkStatus();
+	static void insertDefaults();
 };
 
 

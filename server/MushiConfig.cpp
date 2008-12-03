@@ -67,6 +67,8 @@ void MushiConfig::setDefaults(){
 	setValue("membersOnly","1");
 	setValue("webAddess","http://www.example.com");
 	setValue("adminEmail","admin@example.com");
+	setValue("defaultStatusID","1");
+	
 	
 }	
 

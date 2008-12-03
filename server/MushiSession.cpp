@@ -6,7 +6,7 @@
  *  Copyright 2008 Solitex Networks. All rights reserved.
  *
  */
-
+#include <string>
 #include <exception>
 #include <iostream>
 #include <sstream>
@@ -45,8 +45,8 @@ void MushiSession::load(std::string id){
 void MushiSession::load(){
 	std::string id;
 	id=uID();
-	char query[200];
-	sprintf(query,"insert into session (id, data, lastSeen) VALUES ('%s','{}',datetime('NOW'))", id.c_str());
+	char query[300];
+	sprintf(query,"insert into session (id, data, lastSeen) VALUES ('%s','{}',datetime('NOW'))",id.c_str());
 	MushiServer::getInstance()->getDB()->query(query);
 	
 	this->load(id);

@@ -23,7 +23,10 @@ int MushiSetup::checkStatus(){
 	if(r->row<1){
 		printf("This must be a fresh Mushi Server install. Setting up/initializing with defaults...\n");
 		MushiSetup::createTables();
+		MushiSetup::insertDefaults();
 		MushiConfig::setDefaults();
+		
+		
 		printf("Completed setup. Have a nice day.\n");
 		delete r;
 		return 1;
@@ -105,6 +108,7 @@ int MushiSetup::createTables(){
 				",ownerID"
 				",projectID"
 				",estimate"
+				",statusID"
 				",categoryID REFERENCES category(id)"
 				",parentTaskID integer REFERENCES task(id)"
 				",createDate datetime DEFAULT (datetime('NOW'))"
@@ -145,5 +149,54 @@ int MushiSetup::createTables(){
 				",createDate datetime DEFAULT (datetime('NOW'))"
 				")");
 	
+	db->query("create table if not exists status ("
+			  "id PRIMARY KEY"
+			  ",name"
+			  ",isOpen"
+			  ",createDate datetime DEFAULT (datetime('NOW'))"
+			  ")");
 	return 0;
 }
+
+
+
+void MushiSetup::insertDefaults(){
+	MushiDB *db = MushiServer::getInstance()->getDB();
+	
+	//add statuses
+	db->query("insert into status (name, isOpen) VALUES ('New',1);"
+			  "insert into status (name, isOpen) VALUES ('Accepted',1);"
+			  "insert into status (name, isOpen) VALUES ('In Development',1);"
+			  "insert into status (name, isOpen) VALUES ('Dev. Completed',1);"
+			  "insert into status (name, isOpen) VALUES ('QA Testing',1);"
+			  "insert into status (name, isOpen) VALUES ('QA Completed',1);"
+			  "insert into status (name, isOpen) VALUES ('Closed',0);"
+			  "insert into status (name, isOpen) VALUES ('Duplicate',0);"
+			  "insert into status (name, isOpen) VALUES ('Rejected',0);"
+			  "insert into status (name, isOpen) VALUES ('Won''t Fix',0);"
+			  "insert into status (name, isOpen) VALUES ('Cannot Duplicate',0);");
+	
+	//temp user
+	db->query("insert into user (firstName, lastName, password, email) values ('Jordan', 'Wambaugh', 'password', 'jordan@wambaugh.org')");
+
+	//insert roles
+	db->query("insert into role (name, description, isAdmin, createTask, modifyTask, deleteTask, modifyProject, deleteProject) values ('System Administrator','One who administers the system and thus requires full access to all', 1,1, 1, 1, 1, 1);"
+			  "insert into role (name, description, isAdmin, createTask, modifyTask, deleteTask, modifyProject, deleteProject) values ('Developer','A regular developer, can''t delete projects', 0, 1, 1, 1, 1, 0);"
+			  //template//  "('','', 1,1, 1, 1, 1, 1)	
+	);
+}
+
+/*
+db->query("create table if not exists role ("
+		  "id integer PRIMARY KEY AUTOINCREMENT"
+		  ",name"
+		  ",description"
+		  ",isAdmin bit DEFAULT 0"
+		  ",createTask bit DEFAULT 0"
+		  ",modifyTask bit DEFAULT 0"
+		  ",deleteTask bit DEFAULT 0"
+		  ",modifyProject bit DEFAULT 0"
+		  ",deleteProject bit DEFAULT 0"
+		  ",createDate datetime DEFAULT (datetime('NOW'))"
+		  ")");
+*/

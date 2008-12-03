@@ -1,0 +1,63 @@
+#include <QApplication>
+#include "textedit.h"
+#include "wysiwygEditor.h"
+#include <QWidget>
+#include <QFile>
+#include <QString>
+#include <QDir>
+#include "../edit_html/edit_html.h"
+
+
+
+static inline bool is_file(QString fullFileName)
+{
+    if (!fullFileName.size() > 3) {
+      return false;  
+    }
+    QFile f( fullFileName );
+	if ( f.exists(fullFileName) ) {
+    return true;  
+	} else {
+	return false;
+    }
+}
+
+static inline bool fwriteutf8(QString fullFileName,QString xml)
+{
+    if (fullFileName.contains("/", Qt::CaseInsensitive)) {
+    QString ultimacartellaaperta = fullFileName.left(fullFileName.lastIndexOf("/"))+"/";
+    QDir dira(ultimacartellaaperta);
+    if ( dira.mkpath(ultimacartellaaperta) ) { } else {
+    return false;
+    }
+    }
+    
+        QTextCodec *codecx;
+        codecx = QTextCodec::codecForMib(106);
+        QFile f( fullFileName );
+        if ( f.open( QFile::WriteOnly | QFile::Text ) )
+        {
+        QTextStream sw( &f );
+        sw.setCodec(codecx);
+        sw << xml;
+        f.close();
+        return true;
+        }
+        return false;
+}
+
+
+
+int main(int argc, char *argv[])
+{
+	QApplication app(argc, argv);
+	Edit_html *w = new Edit_html();
+//	QString tempFile = QString("%2/.editTemp.html").arg(QDir::homePath());
+//	fwriteutf8(tempFile, "<p></p>");
+
+
+//	w->SetFileBase(tempFile);
+	w->set_XHTML("<p></p>");
+	w->show();
+	return app.exec();
+}

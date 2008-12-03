@@ -33,6 +33,8 @@
 
 #include "../shttpd/shttpd.h"
 #include "AddTaskCommand.h"
+#include "FindTaskCommand.h"
+
 #include "MushiServer.h"
 #include "URLHandlers.h"
 #include "MushiDB.h"
@@ -55,6 +57,7 @@ MushiServer::MushiServer(){
 
 void MushiServer::installCommands(){
 	this->registerCommand(new AddTaskCommand);
+	this->registerCommand(new FindTaskCommand);
 }
 
 
@@ -82,6 +85,7 @@ int MushiServer::registerCommand(MushiCommand *command){
 
 
 Json::Value MushiServer::runCommand(Json::Value command){
+	
 	MushiSession session;
 	
 

@@ -23,7 +23,12 @@ MushiDBResult::MushiDBResult(){
 
 
 char * MushiDBResult::getCell(int _row, int _column){
-	if(_row > row)return 0;
-	if(_column > column)return 0;
-	return *(result+((_row*this->column)+_column));
+	if(_row > row)return "";
+	if(_column > column)return "";
+	char * row = *(result+((_row*this->column)+_column));
+	if(row==0){
+		return "";
+	} else{
+		return row;
+	}
 }

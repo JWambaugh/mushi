@@ -7,6 +7,7 @@
  *
  */
 #include <string>
+#include <sstream>
 #include <stdlib.h>
 #include <stdio.h>
 #include "utils.h"
@@ -14,13 +15,12 @@
 #include <unistd.h>
 #include <string.h>
 
-char *uID(){
+std::string uID(){
+	std::ostringstream str;
 	time_t t;
-	char *id;
 	t=time(&t);
-	id=(char *)malloc(16);
-	sprintf(id,"%X%X",t,random());
-	return id;
+	str << t << random();
+	return str.str();
 }
 
 

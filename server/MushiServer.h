@@ -10,6 +10,8 @@
 #include "URLHandlers.h"
 #include "MushiDB.h"
 #include "MushiCommand.h"
+#include "MushiConfig.h"
+
 #include "utils.h"
 #include "../lib_json/json.h"
 #ifndef JSON_WRITE_CLASS

@@ -3,7 +3,6 @@
  *  server
  *
  *  Created by Jordan Wambaugh on 11/10/08.
- *  Copyright 2008 Solitex Networks. All rights reserved.
  *
  */
 

@@ -49,7 +49,7 @@ void MushiServer::defineHandlers(){
 void m_receiveCommand(struct shttpd_arg *arg){
 	Json::Reader reader;
 	JSON_WRITE_CLASS writer;
-	Json::Value command;
+	Json::Value cmd;
 	const char	 *request_method;
 	
 	request_method = shttpd_get_env(arg, "REQUEST_METHOD");
@@ -67,13 +67,12 @@ void m_receiveCommand(struct shttpd_arg *arg){
 		input=replaceOnce(input,"hmm=", "");
 		
 		
-		reader.parse(input, command);
+		reader.parse(input, cmd);
 		
 		
+		char *buff = (char *)writer.write(MushiServer::getInstance()->runCommand(cmd)).c_str();
 		
-		
-		
-		shttpd_printf(arg, "%s",(char *)writer.write(MushiServer::getInstance()->runCommand(command)).c_str());
+		shttpd_printf(arg, "%s",buff);
 	} 
 	//not a POST
 	else{
