@@ -110,8 +110,8 @@
 					PBXFileDataSource_Warnings_ColumnID,
 				);
 			};
-			PBXPerProjectTemplateStateSaveDate = 249413401;
-			PBXWorkspaceStateSaveDate = 249413401;
+			PBXPerProjectTemplateStateSaveDate = 250051813;
+			PBXWorkspaceStateSaveDate = 250051813;
 		};
 		perUserProjectItems = {
 			170F69BF0EC41D2B00649B85 = 170F69BF0EC41D2B00649B85 /* PBXTextBookmark */;
@@ -268,6 +268,7 @@
 			17E815460ED50CE600317E45 = 17E815460ED50CE600317E45 /* PBXTextBookmark */;
 			17E815470ED50CE600317E45 = 17E815470ED50CE600317E45 /* PBXTextBookmark */;
 			17E815570ED50E3500317E45 = 17E815570ED50E3500317E45 /* PBXTextBookmark */;
+			17F86FC90EE77CF9008E3A03 /* PBXTextBookmark */ = 17F86FC90EE77CF9008E3A03 /* PBXTextBookmark */;
 		};
 		sourceControlManager = 170F68730EC4142600649B85 /* Source Control */;
 		userBuildSettings = {
@@ -1362,9 +1363,9 @@
 	};
 	177F11310EC903D1000A07B6 /* AddTaskCommand.cpp */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1145, 784}}";
+			sepNavIntBoundsRect = "{{0, 0}, {1060, 784}}";
 			sepNavSelRange = "{1546, 0}";
-			sepNavVisRange = "{782, 873}";
+			sepNavVisRange = "{0, 1044}";
 		};
 	};
 	177F11560EC904F5000A07B6 /* PBXTextBookmark */ = {
@@ -2271,6 +2272,16 @@
 		rType = 0;
 		vrLen = 1227;
 		vrLoc = 428;
+	};
+	17F86FC90EE77CF9008E3A03 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 177F11310EC903D1000A07B6 /* AddTaskCommand.cpp */;
+		name = "AddTaskCommand.cpp: 45";
+		rLen = 0;
+		rLoc = 1546;
+		rType = 0;
+		vrLen = 1044;
+		vrLoc = 0;
 	};
 	8DD76F620486A84900D96B5E /* mushiServer */ = {
 		activeExec = 0;

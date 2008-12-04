@@ -9,10 +9,15 @@ INCLUDEPATH += .
 
 # Input
 
-HEADERS += \
+HEADERS += ticketDetail.h \
+	qtMushi.h \
+	taskFinder.h
 	
 SOURCES += main.cpp \
 	ticketDetail.cpp \
+	qtMushi.cpp \
+	taskFinder.cpp
+
 RESOURCES += attach.qrc
 
 

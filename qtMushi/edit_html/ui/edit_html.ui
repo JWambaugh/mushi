@@ -5,7 +5,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>622</width>
+    <width>788</width>
     <height>485</height>
    </rect>
   </property>
@@ -13,53 +13,30 @@
    <string>Form</string>
   </property>
   <layout class="QGridLayout" >
-   <property name="leftMargin" >
+   <property name="margin" >
     <number>9</number>
    </property>
-   <property name="topMargin" >
-    <number>9</number>
-   </property>
-   <property name="rightMargin" >
-    <number>9</number>
-   </property>
-   <property name="bottomMargin" >
-    <number>9</number>
-   </property>
-   <property name="horizontalSpacing" >
-    <number>6</number>
-   </property>
-   <property name="verticalSpacing" >
+   <property name="spacing" >
     <number>6</number>
    </property>
    <item row="2" column="0" >
     <widget class="QTabWidget" name="tabWidget" >
      <property name="currentIndex" >
-      <number>0</number>
+      <number>1</number>
      </property>
      <widget class="QWidget" name="tab" >
       <attribute name="title" >
        <string>Edit and View</string>
       </attribute>
       <attribute name="icon" >
-       <iconset resource="../attach.qrc" >:/img/icon.png</iconset>
+       <iconset resource="../attach.qrc" >
+        <normaloff>:/img/icon.png</normaloff>:/img/icon.png</iconset>
       </attribute>
       <layout class="QGridLayout" >
-       <property name="leftMargin" >
+       <property name="margin" >
         <number>9</number>
        </property>
-       <property name="topMargin" >
-        <number>9</number>
-       </property>
-       <property name="rightMargin" >
-        <number>9</number>
-       </property>
-       <property name="bottomMargin" >
-        <number>9</number>
-       </property>
-       <property name="horizontalSpacing" >
-        <number>6</number>
-       </property>
-       <property name="verticalSpacing" >
+       <property name="spacing" >
         <number>6</number>
        </property>
        <item row="0" column="0" >
@@ -82,25 +59,14 @@
        <string>Source View</string>
       </attribute>
       <attribute name="icon" >
-       <iconset resource="../attach.qrc" >:/img/view-source.png</iconset>
+       <iconset resource="../attach.qrc" >
+        <normaloff>:/img/view-source.png</normaloff>:/img/view-source.png</iconset>
       </attribute>
       <layout class="QGridLayout" >
-       <property name="leftMargin" >
+       <property name="margin" >
         <number>9</number>
        </property>
-       <property name="topMargin" >
-        <number>9</number>
-       </property>
-       <property name="rightMargin" >
-        <number>9</number>
-       </property>
-       <property name="bottomMargin" >
-        <number>9</number>
-       </property>
-       <property name="horizontalSpacing" >
-        <number>6</number>
-       </property>
-       <property name="verticalSpacing" >
+       <property name="spacing" >
         <number>6</number>
        </property>
        <item row="0" column="0" >
@@ -108,16 +74,7 @@
          <property name="spacing" >
           <number>6</number>
          </property>
-         <property name="leftMargin" >
-          <number>0</number>
-         </property>
-         <property name="topMargin" >
-          <number>0</number>
-         </property>
-         <property name="rightMargin" >
-          <number>0</number>
-         </property>
-         <property name="bottomMargin" >
+         <property name="margin" >
           <number>0</number>
          </property>
          <item>
@@ -264,6 +221,9 @@
            <property name="frameShadow" >
             <enum>QFrame::Raised</enum>
            </property>
+           <property name="verticalScrollBarPolicy" >
+            <enum>Qt::ScrollBarAlwaysOff</enum>
+           </property>
            <property name="readOnly" >
             <bool>true</bool>
            </property>
@@ -290,16 +250,7 @@
      <property name="spacing" >
       <number>6</number>
      </property>
-     <property name="leftMargin" >
-      <number>0</number>
-     </property>
-     <property name="topMargin" >
-      <number>0</number>
-     </property>
-     <property name="rightMargin" >
-      <number>0</number>
-     </property>
-     <property name="bottomMargin" >
+     <property name="margin" >
       <number>0</number>
      </property>
      <item>
@@ -309,7 +260,8 @@
          <string>New Item</string>
         </property>
         <property name="icon" >
-         <iconset resource="../attach.qrc" >:/img/unordered-list.png</iconset>
+         <iconset resource="../attach.qrc" >
+          <normaloff>:/img/unordered-list.png</normaloff>:/img/unordered-list.png</iconset>
         </property>
        </item>
       </widget>
@@ -349,7 +301,8 @@ p, li { white-space: pre-wrap; }
         <string>...</string>
        </property>
        <property name="icon" >
-        <iconset resource="../attach.qrc" >:/img/info.png</iconset>
+        <iconset resource="../attach.qrc" >
+         <normaloff>:/img/info.png</normaloff>:/img/info.png</iconset>
        </property>
        <property name="iconSize" >
         <size>
@@ -374,7 +327,8 @@ p, li { white-space: pre-wrap; }
         <string>...</string>
        </property>
        <property name="icon" >
-        <iconset resource="../attach.qrc" >:/img/document.png</iconset>
+        <iconset resource="../attach.qrc" >
+         <normaloff>:/img/document.png</normaloff>:/img/document.png</iconset>
        </property>
        <property name="iconSize" >
         <size>
@@ -399,7 +353,8 @@ p, li { white-space: pre-wrap; }
         <string>...</string>
        </property>
        <property name="icon" >
-        <iconset resource="../attach.qrc" >:/img/pictures.png</iconset>
+        <iconset resource="../attach.qrc" >
+         <normaloff>:/img/pictures.png</normaloff>:/img/pictures.png</iconset>
        </property>
        <property name="iconSize" >
         <size>
@@ -424,7 +379,8 @@ p, li { white-space: pre-wrap; }
         <string>...</string>
        </property>
        <property name="icon" >
-        <iconset resource="../attach.qrc" >:/img/table.png</iconset>
+        <iconset resource="../attach.qrc" >
+         <normaloff>:/img/table.png</normaloff>:/img/table.png</iconset>
        </property>
        <property name="iconSize" >
         <size>
@@ -440,7 +396,8 @@ p, li { white-space: pre-wrap; }
         <string>Save HTML </string>
        </property>
        <property name="icon" >
-        <iconset resource="../attach.qrc" >:/img/filesave.png</iconset>
+        <iconset resource="../attach.qrc" >
+         <normaloff>:/img/filesave.png</normaloff>:/img/filesave.png</iconset>
        </property>
        <property name="iconSize" >
         <size>
@@ -458,7 +415,7 @@ p, li { white-space: pre-wrap; }
        <property name="orientation" >
         <enum>Qt::Horizontal</enum>
        </property>
-       <property name="sizeHint" >
+       <property name="sizeHint" stdset="0" >
         <size>
          <width>141</width>
          <height>23</height>
@@ -473,16 +430,7 @@ p, li { white-space: pre-wrap; }
      <property name="spacing" >
       <number>6</number>
      </property>
-     <property name="leftMargin" >
-      <number>0</number>
-     </property>
-     <property name="topMargin" >
-      <number>0</number>
-     </property>
-     <property name="rightMargin" >
-      <number>0</number>
-     </property>
-     <property name="bottomMargin" >
+     <property name="margin" >
       <number>0</number>
      </property>
      <item>
@@ -500,7 +448,8 @@ p, li { white-space: pre-wrap; }
         <string>...</string>
        </property>
        <property name="icon" >
-        <iconset resource="../attach.qrc" >:/img/fileprint.png</iconset>
+        <iconset resource="../attach.qrc" >
+         <normaloff>:/img/fileprint.png</normaloff>:/img/fileprint.png</iconset>
        </property>
        <property name="iconSize" >
         <size>
@@ -525,7 +474,8 @@ p, li { white-space: pre-wrap; }
         <string>...</string>
        </property>
        <property name="icon" >
-        <iconset resource="../attach.qrc" >:/img/exportpdf.png</iconset>
+        <iconset resource="../attach.qrc" >
+         <normaloff>:/img/exportpdf.png</normaloff>:/img/exportpdf.png</iconset>
        </property>
        <property name="iconSize" >
         <size>
@@ -550,7 +500,8 @@ p, li { white-space: pre-wrap; }
         <string>...</string>
        </property>
        <property name="icon" >
-        <iconset resource="../attach.qrc" >:/img/filesave.png</iconset>
+        <iconset resource="../attach.qrc" >
+         <normaloff>:/img/filesave.png</normaloff>:/img/filesave.png</iconset>
        </property>
        <property name="iconSize" >
         <size>
@@ -575,7 +526,8 @@ p, li { white-space: pre-wrap; }
         <string>...</string>
        </property>
        <property name="icon" >
-        <iconset resource="../attach.qrc" >:/img/editundo.png</iconset>
+        <iconset resource="../attach.qrc" >
+         <normaloff>:/img/editundo.png</normaloff>:/img/editundo.png</iconset>
        </property>
        <property name="iconSize" >
         <size>
@@ -600,7 +552,8 @@ p, li { white-space: pre-wrap; }
         <string>...</string>
        </property>
        <property name="icon" >
-        <iconset resource="../attach.qrc" >:/img/editredo.png</iconset>
+        <iconset resource="../attach.qrc" >
+         <normaloff>:/img/editredo.png</normaloff>:/img/editredo.png</iconset>
        </property>
        <property name="iconSize" >
         <size>
@@ -625,7 +578,8 @@ p, li { white-space: pre-wrap; }
         <string>...</string>
        </property>
        <property name="icon" >
-        <iconset resource="../attach.qrc" >:/img/cut.png</iconset>
+        <iconset resource="../attach.qrc" >
+         <normaloff>:/img/cut.png</normaloff>:/img/cut.png</iconset>
        </property>
        <property name="iconSize" >
         <size>
@@ -650,7 +604,8 @@ p, li { white-space: pre-wrap; }
         <string>...</string>
        </property>
        <property name="icon" >
-        <iconset resource="../attach.qrc" >:/img/copy.png</iconset>
+        <iconset resource="../attach.qrc" >
+         <normaloff>:/img/copy.png</normaloff>:/img/copy.png</iconset>
        </property>
        <property name="iconSize" >
         <size>
@@ -675,7 +630,8 @@ p, li { white-space: pre-wrap; }
         <string>...</string>
        </property>
        <property name="icon" >
-        <iconset resource="../attach.qrc" >:/img/paste.png</iconset>
+        <iconset resource="../attach.qrc" >
+         <normaloff>:/img/paste.png</normaloff>:/img/paste.png</iconset>
        </property>
        <property name="iconSize" >
         <size>
@@ -700,7 +656,8 @@ p, li { white-space: pre-wrap; }
         <string>...</string>
        </property>
        <property name="icon" >
-        <iconset resource="../attach.qrc" >:/img/link.png</iconset>
+        <iconset resource="../attach.qrc" >
+         <normaloff>:/img/link.png</normaloff>:/img/link.png</iconset>
        </property>
        <property name="iconSize" >
         <size>
@@ -725,7 +682,8 @@ p, li { white-space: pre-wrap; }
         <string>...</string>
        </property>
        <property name="icon" >
-        <iconset resource="../attach.qrc" >:/img/textbold.png</iconset>
+        <iconset resource="../attach.qrc" >
+         <normaloff>:/img/textbold.png</normaloff>:/img/textbold.png</iconset>
        </property>
        <property name="iconSize" >
         <size>
@@ -753,7 +711,8 @@ p, li { white-space: pre-wrap; }
         <string>...</string>
        </property>
        <property name="icon" >
-        <iconset resource="../attach.qrc" >:/img/textitalic.png</iconset>
+        <iconset resource="../attach.qrc" >
+         <normaloff>:/img/textitalic.png</normaloff>:/img/textitalic.png</iconset>
        </property>
        <property name="iconSize" >
         <size>
@@ -781,7 +740,8 @@ p, li { white-space: pre-wrap; }
         <string>...</string>
        </property>
        <property name="icon" >
-        <iconset resource="../attach.qrc" >:/img/textunder.png</iconset>
+        <iconset resource="../attach.qrc" >
+         <normaloff>:/img/textunder.png</normaloff>:/img/textunder.png</iconset>
        </property>
        <property name="iconSize" >
         <size>
@@ -809,7 +769,8 @@ p, li { white-space: pre-wrap; }
         <string>...</string>
        </property>
        <property name="icon" >
-        <iconset resource="../attach.qrc" >:/img/textleft.png</iconset>
+        <iconset resource="../attach.qrc" >
+         <normaloff>:/img/textleft.png</normaloff>:/img/textleft.png</iconset>
        </property>
        <property name="iconSize" >
         <size>
@@ -834,7 +795,8 @@ p, li { white-space: pre-wrap; }
         <string>...</string>
        </property>
        <property name="icon" >
-        <iconset resource="../attach.qrc" >:/img/textcenter.png</iconset>
+        <iconset resource="../attach.qrc" >
+         <normaloff>:/img/textcenter.png</normaloff>:/img/textcenter.png</iconset>
        </property>
        <property name="iconSize" >
         <size>
@@ -859,7 +821,8 @@ p, li { white-space: pre-wrap; }
         <string>...</string>
        </property>
        <property name="icon" >
-        <iconset resource="../attach.qrc" >:/img/textright.png</iconset>
+        <iconset resource="../attach.qrc" >
+         <normaloff>:/img/textright.png</normaloff>:/img/textright.png</iconset>
        </property>
        <property name="iconSize" >
         <size>
@@ -884,7 +847,8 @@ p, li { white-space: pre-wrap; }
         <string>...</string>
        </property>
        <property name="icon" >
-        <iconset resource="../attach.qrc" >:/img/textjustify.png</iconset>
+        <iconset resource="../attach.qrc" >
+         <normaloff>:/img/textjustify.png</normaloff>:/img/textjustify.png</iconset>
        </property>
        <property name="iconSize" >
         <size>
@@ -909,7 +873,8 @@ p, li { white-space: pre-wrap; }
         <string>...</string>
        </property>
        <property name="icon" >
-        <iconset resource="../attach.qrc" >:/img/view-source.png</iconset>
+        <iconset resource="../attach.qrc" >
+         <normaloff>:/img/view-source.png</normaloff>:/img/view-source.png</iconset>
        </property>
        <property name="iconSize" >
         <size>
@@ -927,7 +892,7 @@ p, li { white-space: pre-wrap; }
        <property name="orientation" >
         <enum>Qt::Horizontal</enum>
        </property>
-       <property name="sizeHint" >
+       <property name="sizeHint" stdset="0" >
         <size>
          <width>40</width>
          <height>20</height>

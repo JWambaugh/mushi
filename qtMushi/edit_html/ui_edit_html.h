@@ -106,11 +106,11 @@ public:
 	sline = new QTextEdit(tab_2);
 	sline->setObjectName(QString::fromUtf8("sline"));
 	QSizePolicy sizePolicy(static_cast<QSizePolicy::Policy>(7), static_cast<QSizePolicy::Policy>(7));
-	sizePolicy.setHorizontalStretch(0);
+	//sizePolicy.setHorizontalStretch(0);
 	sizePolicy.setVerticalStretch(0);
 	sizePolicy.setHeightForWidth(sline->sizePolicy().hasHeightForWidth());
 	sline->setSizePolicy(sizePolicy);
-	sline->setMinimumSize(QSize(75, 0));
+	sline->setMinimumSize(QSize(20, 0));
 	sline->setMaximumSize(QSize(75, 16777215));
 	QPalette palette;
 	QBrush brush(QColor(208, 208, 208, 255));

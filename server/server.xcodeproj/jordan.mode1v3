@@ -282,7 +282,7 @@
 								</array>
 							</array>
 							<key>PBXSmartGroupTreeModuleOutlineStateVisibleRectKey</key>
-							<string>{{0, 51}, {297, 707}}</string>
+							<string>{{0, 0}, {297, 707}}</string>
 						</dict>
 						<key>PBXTopSmartGroupGIDs</key>
 						<array/>
@@ -331,7 +331,7 @@
 										<key>_historyCapacity</key>
 										<integer>0</integer>
 										<key>bookmark</key>
-										<string>17E815570ED50E3500317E45</string>
+										<string>17F86FC90EE77CF9008E3A03</string>
 										<key>history</key>
 										<array>
 											<string>170F6D0E0EC4C2D500649B85</string>
@@ -392,7 +392,7 @@
 											<string>17E815220ED50CE600317E45</string>
 											<string>17E815230ED50CE600317E45</string>
 											<string>17E815240ED50CE600317E45</string>
-											<string>17E815250ED50CE600317E45</string>
+											<string>17E815570ED50E3500317E45</string>
 										</array>
 										<key>prevStack</key>
 										<array>
@@ -456,40 +456,6 @@
 											<string>176750E00ED336AD00917CDC</string>
 											<string>1767514E0ED396D000917CDC</string>
 											<string>176751500ED396D000917CDC</string>
-											<string>17E815260ED50CE600317E45</string>
-											<string>17E815270ED50CE600317E45</string>
-											<string>17E815280ED50CE600317E45</string>
-											<string>17E815290ED50CE600317E45</string>
-											<string>17E8152A0ED50CE600317E45</string>
-											<string>17E8152B0ED50CE600317E45</string>
-											<string>17E8152C0ED50CE600317E45</string>
-											<string>17E8152D0ED50CE600317E45</string>
-											<string>17E8152E0ED50CE600317E45</string>
-											<string>17E8152F0ED50CE600317E45</string>
-											<string>17E815300ED50CE600317E45</string>
-											<string>17E815310ED50CE600317E45</string>
-											<string>17E815320ED50CE600317E45</string>
-											<string>17E815330ED50CE600317E45</string>
-											<string>17E815340ED50CE600317E45</string>
-											<string>17E815350ED50CE600317E45</string>
-											<string>17E815360ED50CE600317E45</string>
-											<string>17E815370ED50CE600317E45</string>
-											<string>17E815380ED50CE600317E45</string>
-											<string>17E815390ED50CE600317E45</string>
-											<string>17E8153A0ED50CE600317E45</string>
-											<string>17E8153B0ED50CE600317E45</string>
-											<string>17E8153C0ED50CE600317E45</string>
-											<string>17E8153D0ED50CE600317E45</string>
-											<string>17E8153E0ED50CE600317E45</string>
-											<string>17E8153F0ED50CE600317E45</string>
-											<string>17E815400ED50CE600317E45</string>
-											<string>17E815410ED50CE600317E45</string>
-											<string>17E815420ED50CE600317E45</string>
-											<string>17E815430ED50CE600317E45</string>
-											<string>17E815440ED50CE600317E45</string>
-											<string>17E815450ED50CE600317E45</string>
-											<string>17E815460ED50CE600317E45</string>
-											<string>17E815470ED50CE600317E45</string>
 										</array>
 									</dict>
 									<key>SplitCount</key>
@@ -547,9 +513,9 @@
 			</array>
 			<key>TableOfContents</key>
 			<array>
-				<string>17E815490ED50CE600317E45</string>
+				<string>17F86FCA0EE77CF9008E3A03</string>
 				<string>1CE0B1FE06471DED0097A5F4</string>
-				<string>17E8154A0ED50CE600317E45</string>
+				<string>17F86FCB0EE77CF9008E3A03</string>
 				<string>1CE0B20306471E060097A5F4</string>
 				<string>1CE0B20506471E060097A5F4</string>
 			</array>
@@ -683,8 +649,6 @@
 	<integer>5</integer>
 	<key>WindowOrderList</key>
 	<array>
-		<string>1CD10A99069EF8BA00B06720</string>
-		<string>170F68D50EC416D400649B85</string>
 		<string>/Users/jordan/source/mushi/server/server.xcodeproj</string>
 	</array>
 	<key>WindowString</key>
