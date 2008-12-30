@@ -7,20 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		170F69610EC41A0000649B85 /* auth.c in Sources */ = {isa = PBXBuildFile; fileRef = 170F69310EC41A0000649B85 /* auth.c */; };
-		170F69630EC41A0000649B85 /* cgi.c in Sources */ = {isa = PBXBuildFile; fileRef = 170F69330EC41A0000649B85 /* cgi.c */; };
-		170F69660EC41A0000649B85 /* compat_unix.c in Sources */ = {isa = PBXBuildFile; fileRef = 170F69370EC41A0000649B85 /* compat_unix.c */; };
-		170F696A0EC41A0000649B85 /* io_cgi.c in Sources */ = {isa = PBXBuildFile; fileRef = 170F69410EC41A0000649B85 /* io_cgi.c */; };
-		170F696C0EC41A0000649B85 /* io_dir.c in Sources */ = {isa = PBXBuildFile; fileRef = 170F69430EC41A0000649B85 /* io_dir.c */; };
-		170F696E0EC41A0000649B85 /* io_emb.c in Sources */ = {isa = PBXBuildFile; fileRef = 170F69450EC41A0000649B85 /* io_emb.c */; };
-		170F69700EC41A0000649B85 /* io_file.c in Sources */ = {isa = PBXBuildFile; fileRef = 170F69470EC41A0000649B85 /* io_file.c */; };
-		170F69720EC41A0000649B85 /* io_socket.c in Sources */ = {isa = PBXBuildFile; fileRef = 170F69490EC41A0000649B85 /* io_socket.c */; };
-		170F69740EC41A0000649B85 /* io_ssi.c in Sources */ = {isa = PBXBuildFile; fileRef = 170F694B0EC41A0000649B85 /* io_ssi.c */; };
-		170F69760EC41A0000649B85 /* io_ssl.c in Sources */ = {isa = PBXBuildFile; fileRef = 170F694D0EC41A0000649B85 /* io_ssl.c */; };
-		170F69790EC41A0000649B85 /* log.c in Sources */ = {isa = PBXBuildFile; fileRef = 170F69510EC41A0000649B85 /* log.c */; };
-		170F697C0EC41A0000649B85 /* md5.c in Sources */ = {isa = PBXBuildFile; fileRef = 170F69540EC41A0000649B85 /* md5.c */; };
-		170F697E0EC41A0000649B85 /* shttpd.c in Sources */ = {isa = PBXBuildFile; fileRef = 170F69590EC41A0000649B85 /* shttpd.c */; };
-		170F69810EC41A0000649B85 /* string.c in Sources */ = {isa = PBXBuildFile; fileRef = 170F695F0EC41A0000649B85 /* string.c */; };
 		170F6A230EC423C100649B85 /* URLHandlers.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 170F6A220EC423C100649B85 /* URLHandlers.cpp */; };
 		170F6A280EC4240400649B85 /* MushiServer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 170F6A270EC4240400649B85 /* MushiServer.cpp */; };
 		170F6AFE0EC42A0100649B85 /* sqlite3.c in Sources */ = {isa = PBXBuildFile; fileRef = 170F6AFB0EC42A0100649B85 /* sqlite3.c */; };
@@ -36,6 +22,7 @@
 		177F11320EC903D1000A07B6 /* AddTaskCommand.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 177F11310EC903D1000A07B6 /* AddTaskCommand.cpp */; };
 		177F11DF0EC90DA8000A07B6 /* MushiSession.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 177F11DE0EC90DA8000A07B6 /* MushiSession.cpp */; };
 		1795A9060EC536D00071BA83 /* utils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1795A9050EC536D00071BA83 /* utils.cpp */; };
+		17E99AF20F0AC349003E2085 /* mongoose.c in Sources */ = {isa = PBXBuildFile; fileRef = 17E99AF00F0AC349003E2085 /* mongoose.c */; };
 		8DD76F650486A84900D96B5E /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 08FB7796FE84155DC02AAC07 /* main.cpp */; settings = {ATTRIBUTES = (); }; };
 		8DD76F6A0486A84900D96B5E /* server.1 in CopyFiles */ = {isa = PBXBuildFile; fileRef = C6859E8B029090EE04C91782 /* server.1 */; };
 /* End PBXBuildFile section */
@@ -55,30 +42,6 @@
 
 /* Begin PBXFileReference section */
 		08FB7796FE84155DC02AAC07 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
-		170F69310EC41A0000649B85 /* auth.c */ = {isa = PBXFileReference; fileEncoding = 7; lastKnownFileType = sourcecode.c.c; name = auth.c; path = ../shttpd/auth.c; sourceTree = SOURCE_ROOT; };
-		170F69330EC41A0000649B85 /* cgi.c */ = {isa = PBXFileReference; fileEncoding = 7; lastKnownFileType = sourcecode.c.c; name = cgi.c; path = ../shttpd/cgi.c; sourceTree = SOURCE_ROOT; };
-		170F69370EC41A0000649B85 /* compat_unix.c */ = {isa = PBXFileReference; fileEncoding = 7; lastKnownFileType = sourcecode.c.c; name = compat_unix.c; path = ../shttpd/compat_unix.c; sourceTree = SOURCE_ROOT; };
-		170F69380EC41A0000649B85 /* compat_unix.h */ = {isa = PBXFileReference; fileEncoding = 7; lastKnownFileType = sourcecode.c.h; name = compat_unix.h; path = ../shttpd/compat_unix.h; sourceTree = SOURCE_ROOT; };
-		170F693E0EC41A0000649B85 /* config.h */ = {isa = PBXFileReference; fileEncoding = 7; lastKnownFileType = sourcecode.c.h; name = config.h; path = ../shttpd/config.h; sourceTree = SOURCE_ROOT; };
-		170F693F0EC41A0000649B85 /* defs.h */ = {isa = PBXFileReference; fileEncoding = 7; lastKnownFileType = sourcecode.c.h; name = defs.h; path = ../shttpd/defs.h; sourceTree = SOURCE_ROOT; };
-		170F69400EC41A0000649B85 /* io.h */ = {isa = PBXFileReference; fileEncoding = 7; lastKnownFileType = sourcecode.c.h; name = io.h; path = ../shttpd/io.h; sourceTree = SOURCE_ROOT; };
-		170F69410EC41A0000649B85 /* io_cgi.c */ = {isa = PBXFileReference; fileEncoding = 7; lastKnownFileType = sourcecode.c.c; name = io_cgi.c; path = ../shttpd/io_cgi.c; sourceTree = SOURCE_ROOT; };
-		170F69430EC41A0000649B85 /* io_dir.c */ = {isa = PBXFileReference; fileEncoding = 7; lastKnownFileType = sourcecode.c.c; name = io_dir.c; path = ../shttpd/io_dir.c; sourceTree = SOURCE_ROOT; };
-		170F69450EC41A0000649B85 /* io_emb.c */ = {isa = PBXFileReference; fileEncoding = 7; lastKnownFileType = sourcecode.c.c; name = io_emb.c; path = ../shttpd/io_emb.c; sourceTree = SOURCE_ROOT; };
-		170F69470EC41A0000649B85 /* io_file.c */ = {isa = PBXFileReference; fileEncoding = 7; lastKnownFileType = sourcecode.c.c; name = io_file.c; path = ../shttpd/io_file.c; sourceTree = SOURCE_ROOT; };
-		170F69490EC41A0000649B85 /* io_socket.c */ = {isa = PBXFileReference; fileEncoding = 7; lastKnownFileType = sourcecode.c.c; name = io_socket.c; path = ../shttpd/io_socket.c; sourceTree = SOURCE_ROOT; };
-		170F694B0EC41A0000649B85 /* io_ssi.c */ = {isa = PBXFileReference; fileEncoding = 7; lastKnownFileType = sourcecode.c.c; name = io_ssi.c; path = ../shttpd/io_ssi.c; sourceTree = SOURCE_ROOT; };
-		170F694D0EC41A0000649B85 /* io_ssl.c */ = {isa = PBXFileReference; fileEncoding = 7; lastKnownFileType = sourcecode.c.c; name = io_ssl.c; path = ../shttpd/io_ssl.c; sourceTree = SOURCE_ROOT; };
-		170F69500EC41A0000649B85 /* llist.h */ = {isa = PBXFileReference; fileEncoding = 7; lastKnownFileType = sourcecode.c.h; name = llist.h; path = ../shttpd/llist.h; sourceTree = SOURCE_ROOT; };
-		170F69510EC41A0000649B85 /* log.c */ = {isa = PBXFileReference; fileEncoding = 7; lastKnownFileType = sourcecode.c.c; name = log.c; path = ../shttpd/log.c; sourceTree = SOURCE_ROOT; };
-		170F69540EC41A0000649B85 /* md5.c */ = {isa = PBXFileReference; fileEncoding = 7; lastKnownFileType = sourcecode.c.c; name = md5.c; path = ../shttpd/md5.c; sourceTree = SOURCE_ROOT; };
-		170F69550EC41A0000649B85 /* md5.h */ = {isa = PBXFileReference; fileEncoding = 7; lastKnownFileType = sourcecode.c.h; name = md5.h; path = ../shttpd/md5.h; sourceTree = SOURCE_ROOT; };
-		170F69580EC41A0000649B85 /* shttpd.1 */ = {isa = PBXFileReference; fileEncoding = 7; lastKnownFileType = text.man; name = shttpd.1; path = ../shttpd/shttpd.1; sourceTree = SOURCE_ROOT; };
-		170F69590EC41A0000649B85 /* shttpd.c */ = {isa = PBXFileReference; fileEncoding = 7; lastKnownFileType = sourcecode.c.c; name = shttpd.c; path = ../shttpd/shttpd.c; sourceTree = SOURCE_ROOT; };
-		170F695A0EC41A0000649B85 /* shttpd.h */ = {isa = PBXFileReference; fileEncoding = 7; lastKnownFileType = sourcecode.c.h; name = shttpd.h; path = ../shttpd/shttpd.h; sourceTree = SOURCE_ROOT; };
-		170F695C0EC41A0000649B85 /* ssl.h */ = {isa = PBXFileReference; fileEncoding = 7; lastKnownFileType = sourcecode.c.h; name = ssl.h; path = ../shttpd/ssl.h; sourceTree = SOURCE_ROOT; };
-		170F695E0EC41A0000649B85 /* std_includes.h */ = {isa = PBXFileReference; fileEncoding = 7; lastKnownFileType = sourcecode.c.h; name = std_includes.h; path = ../shttpd/std_includes.h; sourceTree = SOURCE_ROOT; };
-		170F695F0EC41A0000649B85 /* string.c */ = {isa = PBXFileReference; fileEncoding = 7; lastKnownFileType = sourcecode.c.c; name = string.c; path = ../shttpd/string.c; sourceTree = SOURCE_ROOT; };
 		170F69B40EC41BEF00649B85 /* MushiServer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MushiServer.h; sourceTree = "<group>"; };
 		170F6A210EC423C100649B85 /* URLHandlers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = URLHandlers.h; sourceTree = "<group>"; };
 		170F6A220EC423C100649B85 /* URLHandlers.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = URLHandlers.cpp; sourceTree = "<group>"; };
@@ -119,6 +82,8 @@
 		177F125A0EC9167B000A07B6 /* writer.h */ = {isa = PBXFileReference; fileEncoding = 7; lastKnownFileType = sourcecode.c.h; path = writer.h; sourceTree = "<group>"; };
 		1795A9040EC536D00071BA83 /* utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = utils.h; sourceTree = "<group>"; };
 		1795A9050EC536D00071BA83 /* utils.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = utils.cpp; sourceTree = "<group>"; };
+		17E99AF00F0AC349003E2085 /* mongoose.c */ = {isa = PBXFileReference; fileEncoding = 7; lastKnownFileType = sourcecode.c.c; path = mongoose.c; sourceTree = "<group>"; };
+		17E99AF10F0AC349003E2085 /* mongoose.h */ = {isa = PBXFileReference; fileEncoding = 7; lastKnownFileType = sourcecode.c.h; path = mongoose.h; sourceTree = "<group>"; };
 		8DD76F6C0486A84900D96B5E /* mushiServer */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = mushiServer; sourceTree = BUILT_PRODUCTS_DIR; };
 		C6859E8B029090EE04C91782 /* server.1 */ = {isa = PBXFileReference; lastKnownFileType = text.man; path = server.1; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -147,6 +112,8 @@
 		08FB7795FE84155DC02AAC07 /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				17E99AF00F0AC349003E2085 /* mongoose.c */,
+				17E99AF10F0AC349003E2085 /* mongoose.h */,
 				177F11DD0EC90DA8000A07B6 /* MushiSession.h */,
 				177F11DE0EC90DA8000A07B6 /* MushiSession.cpp */,
 				177F112F0EC903B8000A07B6 /* commands */,
@@ -161,7 +128,6 @@
 				174AF3580EC4C833004C63A5 /* MushiSetup.h */,
 				174AF3590EC4C833004C63A5 /* MushiSetup.cpp */,
 				170F6CE00EC4C1C500649B85 /* lib_json */,
-				170F69300EC41A0000649B85 /* shttpd */,
 				08FB7796FE84155DC02AAC07 /* main.cpp */,
 				170F6AFB0EC42A0100649B85 /* sqlite3.c */,
 				170F6AFC0EC42A0100649B85 /* sqlite3.h */,
@@ -174,38 +140,6 @@
 			);
 			name = Source;
 			sourceTree = "<group>";
-		};
-		170F69300EC41A0000649B85 /* shttpd */ = {
-			isa = PBXGroup;
-			children = (
-				170F69310EC41A0000649B85 /* auth.c */,
-				170F69330EC41A0000649B85 /* cgi.c */,
-				170F69370EC41A0000649B85 /* compat_unix.c */,
-				170F69380EC41A0000649B85 /* compat_unix.h */,
-				170F693E0EC41A0000649B85 /* config.h */,
-				170F693F0EC41A0000649B85 /* defs.h */,
-				170F69400EC41A0000649B85 /* io.h */,
-				170F69410EC41A0000649B85 /* io_cgi.c */,
-				170F69430EC41A0000649B85 /* io_dir.c */,
-				170F69450EC41A0000649B85 /* io_emb.c */,
-				170F69470EC41A0000649B85 /* io_file.c */,
-				170F69490EC41A0000649B85 /* io_socket.c */,
-				170F694B0EC41A0000649B85 /* io_ssi.c */,
-				170F694D0EC41A0000649B85 /* io_ssl.c */,
-				170F69500EC41A0000649B85 /* llist.h */,
-				170F69510EC41A0000649B85 /* log.c */,
-				170F69540EC41A0000649B85 /* md5.c */,
-				170F69550EC41A0000649B85 /* md5.h */,
-				170F69580EC41A0000649B85 /* shttpd.1 */,
-				170F69590EC41A0000649B85 /* shttpd.c */,
-				170F695A0EC41A0000649B85 /* shttpd.h */,
-				170F695C0EC41A0000649B85 /* ssl.h */,
-				170F695E0EC41A0000649B85 /* std_includes.h */,
-				170F695F0EC41A0000649B85 /* string.c */,
-			);
-			name = shttpd;
-			path = ../shttpd;
-			sourceTree = SOURCE_ROOT;
 		};
 		170F6CE00EC4C1C500649B85 /* lib_json */ = {
 			isa = PBXGroup;
@@ -302,20 +236,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				8DD76F650486A84900D96B5E /* main.cpp in Sources */,
-				170F69610EC41A0000649B85 /* auth.c in Sources */,
-				170F69630EC41A0000649B85 /* cgi.c in Sources */,
-				170F69660EC41A0000649B85 /* compat_unix.c in Sources */,
-				170F696A0EC41A0000649B85 /* io_cgi.c in Sources */,
-				170F696C0EC41A0000649B85 /* io_dir.c in Sources */,
-				170F696E0EC41A0000649B85 /* io_emb.c in Sources */,
-				170F69700EC41A0000649B85 /* io_file.c in Sources */,
-				170F69720EC41A0000649B85 /* io_socket.c in Sources */,
-				170F69740EC41A0000649B85 /* io_ssi.c in Sources */,
-				170F69760EC41A0000649B85 /* io_ssl.c in Sources */,
-				170F69790EC41A0000649B85 /* log.c in Sources */,
-				170F697C0EC41A0000649B85 /* md5.c in Sources */,
-				170F697E0EC41A0000649B85 /* shttpd.c in Sources */,
-				170F69810EC41A0000649B85 /* string.c in Sources */,
 				170F6A230EC423C100649B85 /* URLHandlers.cpp in Sources */,
 				170F6A280EC4240400649B85 /* MushiServer.cpp in Sources */,
 				170F6AFE0EC42A0100649B85 /* sqlite3.c in Sources */,
@@ -331,6 +251,7 @@
 				177F11320EC903D1000A07B6 /* AddTaskCommand.cpp in Sources */,
 				177F11DF0EC90DA8000A07B6 /* MushiSession.cpp in Sources */,
 				176750F30ED377CA00917CDC /* FindTaskCommand.cpp in Sources */,
+				17E99AF20F0AC349003E2085 /* mongoose.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

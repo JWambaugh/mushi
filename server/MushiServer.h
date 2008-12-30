@@ -11,7 +11,7 @@
 #include "MushiDB.h"
 #include "MushiCommand.h"
 #include "MushiConfig.h"
-
+#include "mongoose.h"
 #include "utils.h"
 #include "../lib_json/json.h"
 #ifndef JSON_WRITE_CLASS
@@ -43,7 +43,7 @@ public:
 	
 private:
 	MushiServer();
-	struct shttpd_ctx	*ctx;
+	mg_context	*ctx;
 	MushiDB *db;
 	std::vector<class MushiCommand *> commands;
 	void defineHandlers();

@@ -31,7 +31,7 @@
 #include <string.h>
 #include <string>
 
-#include "../shttpd/shttpd.h"
+#include "mongoose.h"
 #include "AddTaskCommand.h"
 #include "FindTaskCommand.h"
 
@@ -130,9 +130,8 @@ void MushiServer::startup(int argc, char *argv[]){
 	
 	this->installCommands();
 	
-	ctx = shttpd_init(argc, argv);
-	//	shttpd_set_option(ctx, "ssl_cert", "shttpd.pem");
-	shttpd_set_option(ctx, "ports", "8080"/*MushiConfig::getValue("listenPort")*/);
+	ctx = mg_start();
+	mg_set_option(ctx, "ports", "8080"/*MushiConfig::getValue("listenPort")*/);
 	char *port = MushiConfig::getValue("listenPort");
 	printf("listening on port %s.\n",port);
 	free(port);
@@ -150,10 +149,9 @@ void MushiServer::startup(int argc, char *argv[]){
 	
 	/* Serve connections infinitely until someone kills us */
 	while(1){
-		shttpd_poll(ctx, 1000);
-	}
+			}
 	/* Probably unreached, because we will be killed by a signal */
-	shttpd_fini(ctx);
+	
 	
 }	
 

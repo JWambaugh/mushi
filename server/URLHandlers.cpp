@@ -30,8 +30,7 @@
 #include <assert.h>
 #include <string.h>
 #include <iostream>
-#include "../shttpd/shttpd.h"
-#include "../shttpd/defs.h"
+#include "mongoose.h"
 #include "utils.h"
 #include "MushiServer.h"
 #include "URLHandlers.h"
@@ -39,32 +38,37 @@
 #include "../lib_json/json.h"
 
 void MushiServer::defineHandlers(){
-	shttpd_register_uri(ctx, "/", &::m_showIndex,NULL);
-	shttpd_register_uri(ctx, "/version", &::m_showVersion,NULL);
-	shttpd_register_uri(ctx, "/config", &::m_showConfig,NULL);
-	shttpd_register_uri(ctx, "/command", &::m_receiveCommand,NULL);
+	mg_bind_to_uri(ctx, "/", &m_showIndex,NULL);
+	mg_bind_to_uri(ctx, "/version", &m_showVersion,NULL);
+	mg_bind_to_uri(ctx, "/config", &m_showConfig,NULL);
+	
+	mg_bind_to_uri(ctx, "/command", &m_receiveCommand,NULL);
 }
 
 
-void m_receiveCommand(struct shttpd_arg *arg){
+static void
+m_receiveCommand(struct mg_connection *conn, const struct mg_request_info *ri, void *user_data)
+{
 	Json::Reader reader;
 	JSON_WRITE_CLASS writer;
 	Json::Value cmd;
-	const char	 *request_method;
-	
-	request_method = shttpd_get_env(arg, "REQUEST_METHOD");
-	
+	char	 *request_method;
+	char *data= mg_get_var(conn,"data");
+	request_method = ri->request_method;
+	if(data==0){
+		mg_printf(conn,"data wasn't posted.");
+		return;
+	}
 
 	if (!strcmp(request_method, "POST")) {
-	//	printf("Received POST\n");
+		printf("Received POST: %s\n",data);
 		/* If not all data is POSTed, wait for the rest */
-		if (arg->flags & SHTTPD_MORE_POST_DATA)
-			return;
-		_shttpd_url_decode(arg->in.buf,arg->in.len,arg->in.buf,arg->in.len+1 );
-		std::string input = arg->in.buf;
+		
+		//_shttpd_url_decode(arg->in.buf,arg->in.len,arg->in.buf,arg->in.len+1 );
+		std::string input =data;
 		
 		//TODO: Remove this after testing!
-		input=replaceOnce(input,"hmm=", "");
+		//input=replaceOnce(input,"hmm=", "");
 		
 		
 		reader.parse(input, cmd);
@@ -72,19 +76,21 @@ void m_receiveCommand(struct shttpd_arg *arg){
 		
 		char *buff = (char *)writer.write(MushiServer::getInstance()->runCommand(cmd)).c_str();
 		
-		shttpd_printf(arg, "%s",buff);
+		mg_printf(conn, "%s",
+				  "HTTP/1.1 200 OK\r\n"
+				  "Content-Type: text/html\r\n"
+				  "Connection: close\r\n\r\n");
+		mg_printf(conn, "%s",buff);
+		free(data);
 	} 
 	//not a POST
 	else{
 	
-		shttpd_printf(arg, "Commands may only be POSTed.");
+		mg_printf(conn, "Commands may only be POSTed.");
 	}
-	
-	arg->flags |= SHTTPD_END_OF_OUTPUT;
-	
 }
 
-void m_showConfig(struct shttpd_arg *arg){
+static void m_showConfig(struct mg_connection *conn, const struct mg_request_info *ri, void *user_data){
 	Json::Value val;
 	JSON_WRITE_CLASS writer;
 	val["version"] = MUSHI_SERVER_VERSION;
@@ -97,12 +103,11 @@ void m_showConfig(struct shttpd_arg *arg){
 		val[r->getCell(x,0)]=r->getCell(x,1);
 	}
 	
-	shttpd_printf(arg, "%s",(char *)writer.write(val).c_str());
-	arg->flags |= SHTTPD_END_OF_OUTPUT;
+	mg_printf(conn, "%s",(char *)writer.write(val).c_str());
 }
 
 
-void m_showVersion(struct shttpd_arg *arg){
+static void m_showVersion(struct mg_connection *conn, const struct mg_request_info *ri, void *user_data){
 	Json::Value val;
 	JSON_WRITE_CLASS writer;
 	val["version"] = MUSHI_SERVER_VERSION;
@@ -112,28 +117,25 @@ void m_showVersion(struct shttpd_arg *arg){
 	val["protocolVersion"] = MUSHI_PROTOCOL_VERSION;
 	val["name"] = MUSHI_SERVER_NAME;
 	
-	shttpd_printf(arg, "%s",(char *)writer.write(val).c_str());
-	arg->flags |= SHTTPD_END_OF_OUTPUT;
+	mg_printf(conn, "%s",(char *)writer.write(val).c_str());
 }
 
 
 /*
  * Handler for the / (root) of the server
  */
-void m_showIndex(struct shttpd_arg *arg){
+static void m_showIndex(struct mg_connection *conn, const struct mg_request_info *ri, void *user_data){
 	
 	printf("Loding root\n");
-	shttpd_printf(arg, "%s",
+	mg_printf(conn, "%s",
 				  "HTTP/1.1 200 OK\r\nContent-Type: text/html\r\n\r\n"
 				  "<html><body><h1>Mushi</h1>");
-    shttpd_printf(arg, MUSHI_ABOUT
+    mg_printf(conn, MUSHI_ABOUT
 				  "<hr>"
 				  "<br />Server version: <strong>" MUSHI_SERVER_VERSION "</strong>."
 				  "<br />Server status: <strong>OK</strong>."
 				  "<br />The server is running correctly");
 	
 	
-	
-	shttpd_printf(arg, "%s", "</body></html>");
-	arg->flags |= SHTTPD_END_OF_OUTPUT;
+	mg_printf(conn, "%s", "</body></html>");
 }

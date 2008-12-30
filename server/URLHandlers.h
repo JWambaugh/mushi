@@ -7,10 +7,10 @@
  */
 #ifndef URLHANDLERS
 #define URLHANDLERS
-void m_showIndex(struct shttpd_arg *);
-void m_showVersion(struct shttpd_arg *arg);
-void m_showConfig(struct shttpd_arg *arg);
-void m_receiveCommand(struct shttpd_arg *arg);
+static void m_showIndex(struct mg_connection *conn, const struct mg_request_info *ri,	 void *user_data);
+static void m_showVersion(struct mg_connection *conn, const struct mg_request_info *ri,	 void *user_data);
+static void m_showConfig(struct mg_connection *conn, const struct mg_request_info *ri,	 void *user_data);
+static void m_receiveCommand(struct mg_connection *conn, const struct mg_request_info *ri,	 void *user_data);
 
 
 #endif

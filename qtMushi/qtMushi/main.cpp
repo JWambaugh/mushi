@@ -23,11 +23,13 @@ static inline bool is_file(QString fullFileName)
 static inline bool fwriteutf8(QString fullFileName,QString xml)
 {
     if (fullFileName.contains("/", Qt::CaseInsensitive)) {
-    QString ultimacartellaaperta = fullFileName.left(fullFileName.lastIndexOf("/"))+"/";
-    QDir dira(ultimacartellaaperta);
-    if ( dira.mkpath(ultimacartellaaperta) ) { } else {
-    return false;
-    }
+        QString ultimacartellaaperta = fullFileName.left(fullFileName.lastIndexOf("/"))+"/";
+        QDir dira(ultimacartellaaperta);
+        if ( dira.mkpath(ultimacartellaaperta) ) {
+        }
+        else {
+            return false;
+        }
     }
     
         QTextCodec *codecx;

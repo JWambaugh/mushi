@@ -1,7 +1,7 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'taskFinder.h'
 **
-** Created: Wed Dec 3 18:55:57 2008
+** Created: Fri Dec 5 20:51:21 2008
 **      by: The Qt Meta Object Compiler version 59 (Qt 4.4.3)
 **
 ** WARNING! All changes made in this file will be lost!
@@ -23,15 +23,18 @@ static const uint qt_meta_data_taskFinder[] = {
        1,       // revision
        0,       // classname
        0,    0, // classinfo
-       0,    0, // methods
+       1,   10, // methods
        0,    0, // properties
        0,    0, // enums/sets
+
+ // slots: signature, parameters, type, tag, flags
+      12,   11,   11,   11, 0x0a,
 
        0        // eod
 };
 
 static const char qt_meta_stringdata_taskFinder[] = {
-    "taskFinder\0"
+    "taskFinder\0\0networkResponse(QNetworkReply*)\0"
 };
 
 const QMetaObject taskFinder::staticMetaObject = {
@@ -57,6 +60,12 @@ int taskFinder::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     _id = QWidget::qt_metacall(_c, _id, _a);
     if (_id < 0)
         return _id;
+    if (_c == QMetaObject::InvokeMetaMethod) {
+        switch (_id) {
+        case 0: networkResponse((*reinterpret_cast< QNetworkReply*(*)>(_a[1]))); break;
+        }
+        _id -= 1;
+    }
     return _id;
 }
 QT_END_MOC_NAMESPACE
