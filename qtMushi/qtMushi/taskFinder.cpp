@@ -1,23 +1,57 @@
 
 #include "taskFinder.h"
+#include "tasktreewidgetitem.h"
 taskFinder::taskFinder(QWidget *parent) : QWidget(parent){
 
-	//attempt to get all tickets
-	
-	connect(qtMushi::netManager, SIGNAL(finished(QNetworkReply*)),
-        this, SLOT(networkResponse(QNetworkReply*)));
-        QNetworkRequest request(QUrl(SERVER_LOCATION "/command"));
-        request.setRawHeader("Connection" ,"close");
-        qtMushi::netManager->post(request, QByteArray("data=%7B%0D%0A%22command%22%3A%22findTask%22%0D%0A%0D%0A%7D" ) );
-		
+
+        this->reply=0;
+        treeWidget = new QTreeWidget(this);
+        treeWidget->setColumnCount(2);
+        QStringList header;
+
+        header<<"Title"<<"Owner"<<"Description"<<"status";
+        treeWidget->setHeaderLabels(header);
+
+        layout = new QVBoxLayout();
+        layout->addWidget(treeWidget);
+        this->setLayout(layout);
+        search();
+
 
 
 }
 
+void taskFinder::search(){
+        //attempt to get all tickets
+        if(this->reply)return;
+        QNetworkRequest request(QUrl(SERVER_LOCATION "/command"));
+        request.setRawHeader("Connection" ,"close");
+        reply = qtMushi::netManager->post(request, QByteArray("data=%7B%0D%0A%22command%22%3A%22findTask%22%0D%0A%0D%0A%7D" ) );
+        connect(this->reply, SIGNAL(finished()), this, SLOT(networkResponse()));
+}
 
 
-void taskFinder::networkResponse(QNetworkReply *reply){
-	qDebug() << reply->readAll();
+void taskFinder::networkResponse(){
+        QString r = reply->readAll();
+        qDebug() << r;
+        Json::Reader reader;
+        Json::Value root;
+        reader.parse(r.toStdString(),root);
+        tickets = root["results"];
+
+
+        taskTreeWidgetItem *item;
+        for(int index=0;index<tickets.size();++index){
+            item =  new taskTreeWidgetItem(treeWidget);
+            item->taskValue = tickets[index];
+            item->setText(0,item->taskValue.get("title","NULL").asCString());
+            item->setText(1,item->taskValue.get("owner","").get("firstName","").asCString());
+            item->setText(2,item->taskValue.get("description","NULL").asCString());
+            item->setText(3,item->taskValue.get("status","NULL").asCString());
+            treeWidget->addTopLevelItem(item);
+        }
+        delete this->reply;
+        this->reply=0;
 }
 
 

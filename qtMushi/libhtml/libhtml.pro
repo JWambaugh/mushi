@@ -18,7 +18,7 @@ macx:TARGET	= tidy
 QT += xml
 
 macx:QMAKE_MAC_SDK=/Developer/SDKs/MacOSX10.4u.sdk
-macx:CONFIG+=x86 ppc
+macx:CONFIG+=x86
 
 
 # Input

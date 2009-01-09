@@ -59,12 +59,12 @@ m_receiveCommand(struct mg_connection *conn, const struct mg_request_info *ri, v
 		mg_printf(conn,"data wasn't posted.");
 		return;
 	}
-
+	//url_decode(data,strlen(data),data,strlen(data)+1 );
 	if (!strcmp(request_method, "POST")) {
 		printf("Received POST: %s\n",data);
 		/* If not all data is POSTed, wait for the rest */
 		
-		//_shttpd_url_decode(arg->in.buf,arg->in.len,arg->in.buf,arg->in.len+1 );
+		
 		std::string input =data;
 		
 		//TODO: Remove this after testing!
@@ -126,16 +126,53 @@ static void m_showVersion(struct mg_connection *conn, const struct mg_request_in
  */
 static void m_showIndex(struct mg_connection *conn, const struct mg_request_info *ri, void *user_data){
 	
-	printf("Loding root\n");
+	MushiDBResult *r;
+	MushiDB *db = MushiServer::getInstance()->getDB();
+	
+	r=db->query("select count(*) from task");
+	
 	mg_printf(conn, "%s",
 				  "HTTP/1.1 200 OK\r\nContent-Type: text/html\r\n\r\n"
-				  "<html><body><h1>Mushi</h1>");
+				  "<html><head><title>Mushi Server Status</title></head><body><h1>Mushi</h1>");
     mg_printf(conn, MUSHI_ABOUT
-				  "<hr>"
-				  "<br />Server version: <strong>" MUSHI_SERVER_VERSION "</strong>."
-				  "<br />Server status: <strong>OK</strong>."
-				  "<br />The server is running correctly");
+				"<hr><table border='1'>"
+				"<tr><td>Server version: </td><td><strong>" MUSHI_SERVER_VERSION "</strong></td></tr>"
+				"<tr><td>Mushi Protocol Version: </td><td><strong>" MUSHI_PROTOCOL_VERSION "</strong></td></tr>"
+				"<tr><td>Server status:</td><td> <strong>OK</strong></td></tr>"
+				"<tr><td>Number of tasks in database:</td><td> <strong>%s</strong></td></tr>"
+				"</table><br />The server is running correctly", r->getCell(1, 0));
 	
-	
+	delete r;
 	mg_printf(conn, "%s", "</body></html>");
+}
+
+
+static size_t url_decode(const char *src, size_t src_len, char *dst, size_t dst_len)
+{
+	size_t	i, j;
+	int	a, b;
+#define	HEXTOI(x)  (isdigit(x) ? x - '0' : x - 'W')
+	
+	for (i = j = 0; i < src_len && j < dst_len - 1; i++, j++)
+		switch (src[i]) {
+			case '%':
+				if (isxdigit(((unsigned char *) src)[i + 1]) &&
+					isxdigit(((unsigned char *) src)[i + 2])) {
+					a = tolower(((unsigned char *)src)[i + 1]);
+					b = tolower(((unsigned char *)src)[i + 2]);
+					dst[j] = ((HEXTOI(a) << 4) | HEXTOI(b)) & 0xff;
+					i += 2;
+				} else {
+					dst[j] = '%';
+				}
+				break;
+			case '+':dst[j] ='+';break;
+			default:
+				dst[j] = src[i];
+				break;
+		}
+	
+	dst[j] = '\0';	/* Null-terminate the destination */
+	
+	return (j);
 }

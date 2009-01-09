@@ -16,7 +16,7 @@
 
 class MushiCommand{
 public:
-	virtual Json::Value run(MushiSession sess, Json::Value command, Json::Value ret)=0;
+	virtual Json::Value run(MushiSession sess, Json::Value &command, Json::Value &ret)=0;
 
 };
 

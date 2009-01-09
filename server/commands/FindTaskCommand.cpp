@@ -11,7 +11,7 @@
 #include "FindTaskCommand.h"
 #include "MushiServer.h"
 
-Json::Value  FindTaskCommand::run(MushiSession sess, Json::Value command, Json::Value ret){
+Json::Value  FindTaskCommand::run(MushiSession sess, Json::Value &command, Json::Value &ret){
 	
 	
 	
@@ -22,8 +22,8 @@ Json::Value  FindTaskCommand::run(MushiSession sess, Json::Value command, Json::
 		MushiDB *db = MushiServer::getInstance()->getDB();
 		
 		query	<< "SELECT t.title, t.description, t.percentComplete, t.estimate, t.createDate" 
-				<< " , t.reporterId, r.firstName as reporterFirstName, r.lastName as reporterLastName, r.email as reporterEmail "
-				<< " ,t.ownerId, o.firstName as ownerFirstName, o.lastName as ownerLastName, o.email as ownerEmail "
+				<< " , t.reporterId as reporter_id, r.firstName as reporter_firstName, r.lastName as reporter_lastName, r.email as reporter_email "
+				<< " ,t.ownerId as owner_id, o.firstName as owner_firstName, o.lastName as owner_lastName, o.email as owner_email "
 				<< " ,s.name as status, s.isOpen as isOpen"
 				<< " FROM task t"
 				<< " LEFT JOIN user r on r.id = t.reporterId"
@@ -32,43 +32,10 @@ Json::Value  FindTaskCommand::run(MushiSession sess, Json::Value command, Json::
 				<< " WHERE 1";
 		printf("%s\n",query.str().c_str());
 		r=db->query(query.str());
-		
+		results=r->getNestedJson();
 		
 		ret["status"]="success";
 	
-		for(int x=1; x<=r->row;x++){
-			Json::Value task;
-			
-			task["title"] = r->getCell(x, 0);
-			task["description"] = r->getCell(x, 1);
-			task["percentComplete"] = r->getCell(x, 2);
-			task["estimate"] = r->getCell(x, 3);
-			task["createDate"] = r->getCell(x, 4);
-		//	task["percentComplete"] = r->getCell(x, 2);
-			
-			//reporter object
-			Json::Value reporter;
-			reporter["id"]=r->getCell(x,5);
-			reporter["firstName"]=r->getCell(x,6);
-			reporter["lastName"]=r->getCell(x,7);
-			reporter["email"]=r->getCell(x,8);
-			task["reporter"]=reporter;
-			
-			//owner object
-			Json::Value owner;
-			owner["id"]=r->getCell(x,9);
-			owner["firstName"]=r->getCell(x,10);
-			owner["lastName"]=r->getCell(x,11);
-			owner["email"]=r->getCell(x,12);
-			task["owner"]=owner;
-			
-			
-			task["status"]=r->getCell(x,13);
-			task["isOpen"]=r->getCell(x,14);
-			
-			
-			results.append(task);
-}
 		ret["results"]=results;
 		
 	}

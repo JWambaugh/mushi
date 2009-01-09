@@ -5,18 +5,21 @@ TEMPLATE = app
 TARGET = 
 DEPENDPATH += .
 INCLUDEPATH += .
+macx:CONFIG += x86
 
 # Input
-HEADERS += ticketDetail.h \
-    qtMushi.h \
-    taskFinder.h
+HEADERS += qtMushi.h \
+    taskFinder.h \
+    tasktreewidgetitem.h \
+    taskmanager.h
 SOURCES += main.cpp \
-    ticketDetail.cpp \
     qtMushi.cpp \
     taskFinder.cpp \
     ../../lib_json/json_writer.cpp \
     ../../lib_json/json_value.cpp \
-    ../../lib_json/json_reader.cpp
+    ../../lib_json/json_reader.cpp \
+    tasktreewidgetitem.cpp \
+    taskmanager.cpp
 RESOURCES += attach.qrc
 INCLUDEPATH += ../edit_html
 DEPENDPATH += ../edit_html
@@ -30,3 +33,4 @@ QT += xml
 QT += sql
 QT += network
 QT += webkit
+FORMS += taskmanager.ui

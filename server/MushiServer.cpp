@@ -30,7 +30,7 @@
 #include <assert.h>
 #include <string.h>
 #include <string>
-
+#include <sstream>
 #include "mongoose.h"
 #include "AddTaskCommand.h"
 #include "FindTaskCommand.h"
@@ -136,21 +136,14 @@ void MushiServer::startup(int argc, char *argv[]){
 	printf("listening on port %s.\n",port);
 	free(port);
 	
-	//shttpd_handle_error(ctx, 404, show_404, NULL);
+	
 	defineHandlers();
 	
     printf("Server started.\n");
-
-	
-	
-
 	
 	
 	
-	/* Serve connections infinitely until someone kills us */
-	while(1){
-			}
-	/* Probably unreached, because we will be killed by a signal */
+	
 	
 	
 }	

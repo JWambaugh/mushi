@@ -8,7 +8,7 @@
  */
 #ifndef MUSHIDB_RESULT
 #define MUSHIDB_RESULT
-
+#include "../lib_json/json.h"
 class MushiDBResult{
 public:
 	~MushiDBResult();
@@ -19,8 +19,10 @@ public:
 	int column;        /* Number of result columns written here */
 	char *errMsg;       /* Error msg written here */
 	char *getCell(int,int);
+	Json::Value getJson();
+	Json::Value getNestedJson();
 private:
 	int currentRow;
-	
+	void setNestedJsonObjectValue(Json::Value &parent,std::string name,std::string);
 };
 #endif
