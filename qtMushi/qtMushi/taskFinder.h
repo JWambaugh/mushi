@@ -25,7 +25,7 @@ public:
 public slots:
         void networkResponse();
         void search();
-
+        void itemActivated(QTreeWidgetItem *item,int);
 
 };
 #endif

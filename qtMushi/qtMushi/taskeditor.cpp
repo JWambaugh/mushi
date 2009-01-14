@@ -26,10 +26,17 @@ void TaskEditor::save(){
 
 
     this->updateStore();
+
+    if(this->store["id"].asString()==""){
+        this->store["command"]="addTask";
+    }else{
+        this->store["command"]="editTask";
+    }
+
     QNetworkRequest request(QUrl(SERVER_LOCATION "/command"));
     request.setRawHeader("Connection" ,"close");
     JSON_WRITE_CLASS writer;
-    this->store["command"]="addTask";
+
     std::string output="data=";
     std::string buff = writer.write(this->store);
     QByteArray encodedValue=QUrl::toPercentEncoding(QString(buff.c_str()));
@@ -59,3 +66,14 @@ void TaskEditor::networkResponse(){
     emit saveComplete();
 }
 
+
+void TaskEditor::updateFromStore(){
+    this->title->setText(this->store["title"].asString().c_str());
+    this->description->setHtml(this->store["description"].asString().c_str());
+}
+
+
+void TaskEditor::setStore(Json::Value &s){
+    this->store=s;
+    this->updateFromStore();
+}

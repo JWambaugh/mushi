@@ -17,11 +17,12 @@ protected:
 
 
     Json::Value store;
-protected slots:
-     void save();
-     void updateStore();
-     void networkResponse();
-
+public slots:
+    void save();
+    void updateStore();
+    void updateFromStore();
+    void networkResponse();
+    void setStore(Json::Value &);
 signals:
      void saveComplete();
 

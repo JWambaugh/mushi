@@ -12,7 +12,7 @@
 #include "sqlite3.h"
 #include "MushiServer.h"
 #include "MushiDBResult.h"
-
+#include <vector>
 
 sqlite3 * MushiDB::getHandle(){
 	return db;
@@ -41,4 +41,12 @@ MushiDBResult* MushiDB::query(const std::string sql){
 }
 
 
-
+/**
+ * Creates an update statement from a json value
+ */
+std::string  MushiDB::json2update(Json::Value &val,std::vector<std::string> &columns,std::string where,std::string table){
+	std::vector <std::string>::iterator iter;
+	for (iter=columns.begin(); iter!=columns.end();iter++){
+		
+	}
+}

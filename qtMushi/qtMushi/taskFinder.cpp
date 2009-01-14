@@ -1,6 +1,7 @@
 
 #include "taskFinder.h"
 #include "tasktreewidgetitem.h"
+#include "taskeditor.h"
 taskFinder::taskFinder(QWidget *parent) : QWidget(parent){
 
 
@@ -16,7 +17,7 @@ taskFinder::taskFinder(QWidget *parent) : QWidget(parent){
         layout->addWidget(treeWidget);
         this->setLayout(layout);
         search();
-
+        connect(treeWidget,SIGNAL(itemActivated(QTreeWidgetItem*,int)),this,SLOT(itemActivated(QTreeWidgetItem*,int)));
 
 
 }
@@ -61,4 +62,13 @@ QString html2plaintext(QString string){
     string = editor->toPlainText();
     delete editor;
     return string;
+}
+
+
+
+void taskFinder::itemActivated(QTreeWidgetItem *item,int column){
+    taskTreeWidgetItem *tItem = static_cast<taskTreeWidgetItem *> (item);
+    TaskEditor *editor=new TaskEditor();
+    editor->setStore(tItem->taskValue);
+    editor->show();
 }

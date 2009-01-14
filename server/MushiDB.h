@@ -11,13 +11,14 @@
 #include <string>
 #include "MushiDBResult.h"
 #include "sqlite3.h"
-
+#include "../lib_json/json.h"
+#include <vector>
 class MushiDB {
 public:
 	void init();
 	sqlite3 *getHandle();
 	MushiDBResult * query(const std::string sql);
-	
+	std::string json2update(Json::Value &val,std::vector<std::string>&columns,std::string where, std::string table);
 private:
 	sqlite3 *db;
 
