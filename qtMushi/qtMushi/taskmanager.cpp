@@ -1,11 +1,13 @@
 #include "taskmanager.h"
-#include "taskFinder.h"
+
+#include "taskEditor.h"
 TaskManager::TaskManager(QWidget *parent) :
     QWidget(parent){
     setupUi(this);
 
-    taskFinder *finder = new taskFinder();
+    finder = new taskFinder();
     this->taskFinderLayout->addWidget(finder);
+    connect(this->newButton,SIGNAL(clicked()),this,SLOT(newTask()));
 }
 
 void TaskManager::changeEvent(QEvent *e)
@@ -17,4 +19,11 @@ void TaskManager::changeEvent(QEvent *e)
     default:
         break;
     }
+}
+
+
+void TaskManager::newTask(){
+    TaskEditor* task = new TaskEditor();
+    connect(task,SIGNAL(saveComplete()),this->finder,SLOT(search()));
+    task->show();
 }

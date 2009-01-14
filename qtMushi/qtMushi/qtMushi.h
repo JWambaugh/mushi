@@ -7,6 +7,11 @@
 #include "taskFinder.h"
 
 #define SERVER_LOCATION "http://localhost:8080"
+#ifndef JSON_WRITE_CLASS
+#define JSON_WRITE_CLASS Json::StyledWriter
+#endif
+
+
 
 #include "../edit_html/edit_html.h"
 class qtMushi : public QApplication{

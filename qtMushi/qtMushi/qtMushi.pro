@@ -11,7 +11,8 @@ macx:CONFIG += x86
 HEADERS += qtMushi.h \
     taskFinder.h \
     tasktreewidgetitem.h \
-    taskmanager.h
+    taskmanager.h \
+    taskeditor.h
 SOURCES += main.cpp \
     qtMushi.cpp \
     taskFinder.cpp \
@@ -19,7 +20,8 @@ SOURCES += main.cpp \
     ../../lib_json/json_value.cpp \
     ../../lib_json/json_reader.cpp \
     tasktreewidgetitem.cpp \
-    taskmanager.cpp
+    taskmanager.cpp \
+    taskeditor.cpp
 RESOURCES += attach.qrc
 INCLUDEPATH += ../edit_html
 DEPENDPATH += ../edit_html
@@ -33,4 +35,5 @@ QT += xml
 QT += sql
 QT += network
 QT += webkit
-FORMS += taskmanager.ui
+FORMS += taskmanager.ui \
+    taskeditor.ui

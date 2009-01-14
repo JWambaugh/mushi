@@ -38,7 +38,7 @@ char * MushiDBResult::getCell(int _row, int _column){
  */
 Json::Value MushiDBResult::getJson(){
 	Json::Value rslt(Json::arrayValue);
-	for(int r=1;r<this->row;r++){
+	for(int r=1;r<this->row+1;r++){
 		Json::Value row;
 		for(int c=0;c<this->column;c++){
 			row[this->getCell(0, c)] =this->getCell(r, c); 
@@ -55,7 +55,7 @@ Json::Value MushiDBResult::getJson(){
  */
 Json::Value MushiDBResult::getNestedJson(){
 	Json::Value rslt(Json::arrayValue);
-	for(int r=1;r<this->row;r++){
+	for(int r=1;r<this->row+1;r++){
 		Json::Value row;
 		for(int c=0;c<this->column;c++){
 			Json::Value obj;

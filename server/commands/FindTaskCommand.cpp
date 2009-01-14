@@ -21,7 +21,7 @@ Json::Value  FindTaskCommand::run(MushiSession sess, Json::Value &command, Json:
 		MushiDBResult *r;
 		MushiDB *db = MushiServer::getInstance()->getDB();
 		
-		query	<< "SELECT t.title, t.description, t.percentComplete, t.estimate, t.createDate" 
+		query	<< "SELECT t.id, t.title, t.description, t.percentComplete, t.estimate, t.createDate" 
 				<< " , t.reporterId as reporter_id, r.firstName as reporter_firstName, r.lastName as reporter_lastName, r.email as reporter_email "
 				<< " ,t.ownerId as owner_id, o.firstName as owner_firstName, o.lastName as owner_lastName, o.email as owner_email "
 				<< " ,s.name as status, s.isOpen as isOpen"
