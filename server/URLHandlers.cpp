@@ -53,13 +53,13 @@ m_receiveCommand(struct mg_connection *conn, const struct mg_request_info *ri, v
 	JSON_WRITE_CLASS writer;
 	Json::Value cmd;
 	char	 *request_method;
-	char *data= mg_get_var(conn,"data");
+	char *data= ri->post_data;
 	request_method = ri->request_method;
 	if(data==0){
 		mg_printf(conn,"data wasn't posted.");
 		return;
 	}
-	//url_decode(data,strlen(data),data,strlen(data)+1 );
+	url_decode(data,strlen(data),data,strlen(data)+1 );
 	if (!strcmp(request_method, "POST")) {
 		printf("Received POST: %s\n",data);
 		/* If not all data is POSTed, wait for the rest */
@@ -68,7 +68,7 @@ m_receiveCommand(struct mg_connection *conn, const struct mg_request_info *ri, v
 		std::string input =data;
 		
 		//TODO: Remove this after testing!
-		//input=replaceOnce(input,"hmm=", "");
+		input=replaceOnce(input,"data=", "");
 		
 		
 		reader.parse(input, cmd);
@@ -81,7 +81,9 @@ m_receiveCommand(struct mg_connection *conn, const struct mg_request_info *ri, v
 				  "Content-Type: text/html\r\n"
 				  "Connection: close\r\n\r\n");
 		mg_printf(conn, "%s",buff);
-		free(data);
+		//free(buff);
+		//free(request_method);
+		//free(data);
 	} 
 	//not a POST
 	else{
@@ -166,7 +168,7 @@ static size_t url_decode(const char *src, size_t src_len, char *dst, size_t dst_
 					dst[j] = '%';
 				}
 				break;
-			case '+':dst[j] ='+';break;
+			case '+':dst[j] =' ';break;
 			default:
 				dst[j] = src[i];
 				break;

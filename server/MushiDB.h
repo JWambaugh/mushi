@@ -18,7 +18,8 @@ public:
 	void init();
 	sqlite3 *getHandle();
 	MushiDBResult * query(const std::string sql);
-	std::string json2update(Json::Value &val,std::vector<std::string>&columns,std::string where, std::string table);
+	static std::string json2update(Json::Value &val, std::vector<std::string>&columns, std::string where, std::string table);
+	static std::string json2insert(Json::Value &val, std::vector<std::string>&columns, std::string table);
 private:
 	sqlite3 *db;
 

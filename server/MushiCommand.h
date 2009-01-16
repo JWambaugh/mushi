@@ -9,14 +9,14 @@
 #include "../lib_json/json.h"
 #include "MushiDB.h"
 #include "MushiSession.h"
-
+#include "utils.h"
 
 #ifndef MUSHICOMMAND
 #define MUSHICOMMAND
 
 class MushiCommand{
 public:
-	virtual Json::Value run(MushiSession sess, Json::Value &command, Json::Value &ret)=0;
+	virtual Json::Value &run(MushiSession sess, Json::Value &command, Json::Value &ret)=0;
 
 };
 

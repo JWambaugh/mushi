@@ -11,7 +11,7 @@
 #include "FindTaskCommand.h"
 #include "MushiServer.h"
 
-Json::Value  FindTaskCommand::run(MushiSession sess, Json::Value &command, Json::Value &ret){
+Json::Value &FindTaskCommand::run(MushiSession sess, Json::Value &command, Json::Value &ret){
 	
 	
 	
@@ -22,15 +22,15 @@ Json::Value  FindTaskCommand::run(MushiSession sess, Json::Value &command, Json:
 		MushiDB *db = MushiServer::getInstance()->getDB();
 		
 		query	<< "SELECT t.id, t.title, t.description, t.percentComplete, t.estimate, t.createDate" 
-				<< " , t.reporterId as reporter_id, r.firstName as reporter_firstName, r.lastName as reporter_lastName, r.email as reporter_email "
-				<< " ,t.ownerId as owner_id, o.firstName as owner_firstName, o.lastName as owner_lastName, o.email as owner_email "
+				<< " , t.reporterId as reporterId, r.firstName as reporter_firstName, r.lastName as reporter_lastName, r.email as reporter_email "
+				<< " ,t.ownerId as ownerId, o.firstName as owner_firstName, o.lastName as owner_lastName, o.email as owner_email "
 				<< " ,s.name as status, s.isOpen as isOpen"
 				<< " FROM task t"
 				<< " LEFT JOIN user r on r.id = t.reporterId"
 				<< " LEFT JOIN user o on o.id = t.ownerId"
 				<< " LEFT JOIN status s on s.id = t.statusID"
 				<< " WHERE 1";
-		printf("%s\n",query.str().c_str());
+		//printf("%s\n",query.str().c_str());
 		r=db->query(query.str());
 		results=r->getNestedJson();
 		

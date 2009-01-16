@@ -34,7 +34,7 @@
 #include "mongoose.h"
 #include "AddTaskCommand.h"
 #include "FindTaskCommand.h"
-
+#include "EditTaskCommand.h"
 #include "MushiServer.h"
 #include "URLHandlers.h"
 #include "MushiDB.h"
@@ -58,6 +58,8 @@ MushiServer::MushiServer(){
 void MushiServer::installCommands(){
 	this->registerCommand(new AddTaskCommand);
 	this->registerCommand(new FindTaskCommand);
+	this->registerCommand(new EditTaskCommand);
+	
 }
 
 
@@ -142,9 +144,18 @@ void MushiServer::startup(int argc, char *argv[]){
     printf("Server started.\n");
 	
 	
+	/*
+	Json::Value test;
+	test["column1"]="This is a value";
+	test["column2"]="this is the value of 'column2'";
+	std::vector<std::string> columns;
+	columns.push_back("column1");
+	columns.push_back("column2");
 	
 	
-	
+	printf("%s\n",db->json2update(test,columns,"id = '23'","myTable").c_str());
+	printf("%s\n",db->json2insert(test,columns,"myTable").c_str());
+	*/
 	
 }	
 

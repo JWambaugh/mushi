@@ -48,7 +48,7 @@ void taskFinder::networkResponse(){
             item->taskValue = tickets[index];
             item->setText(0,item->taskValue.get("title","NULL").asCString());
             item->setText(1,item->taskValue.get("owner","").get("firstName","").asCString());
-            item->setText(2,html2plaintext(item->taskValue.get("description","NULL").asCString()));
+            item->setText(2,html2plaintext(item->taskValue.get("description","NULL").asCString()).left(100).replace("\n"," "));
             item->setText(3,item->taskValue.get("status","NULL").asCString());
             treeWidget->addTopLevelItem(item);
         }
@@ -70,5 +70,6 @@ void taskFinder::itemActivated(QTreeWidgetItem *item,int column){
     taskTreeWidgetItem *tItem = static_cast<taskTreeWidgetItem *> (item);
     TaskEditor *editor=new TaskEditor();
     editor->setStore(tItem->taskValue);
+    connect(editor,SIGNAL(saveComplete()),this,SLOT(search()));
     editor->show();
 }

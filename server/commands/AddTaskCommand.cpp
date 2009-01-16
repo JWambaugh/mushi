@@ -11,7 +11,7 @@
 #include "AddTaskCommand.h"
 #include "MushiServer.h"
 
-Json::Value  AddTaskCommand::run(MushiSession sess, Json::Value &command, Json::Value &ret){
+Json::Value  &AddTaskCommand::run(MushiSession sess, Json::Value &command, Json::Value &ret){
 	/*
 	//debug command
 	Json::Value::Members members;
