@@ -8,15 +8,12 @@
  */
 #ifndef MUSHIDB
 #define MUSHIDB
-
 #include <string>
 #include "MushiDBResult.h"
 #include "sqlite3.h"
 #include "../lib_json/json.h"
 #include <vector>
-
 class MushiDB {
-
 public:
 	void init();
 	sqlite3 *getHandle();
@@ -31,7 +28,7 @@ private:
 				 
 				 
  
-
+				 
 				 
 				 
 #endif

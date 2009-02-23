@@ -8,10 +8,8 @@
  */
 #ifndef MUSHIDB_RESULT
 #define MUSHIDB_RESULT
-
 #include "../lib_json/json.h"
-class MushiDBResult {
-
+class MushiDBResult{
 public:
 	~MushiDBResult();
 	MushiDBResult();
@@ -27,6 +25,4 @@ private:
 	int currentRow;
 	void setNestedJsonObjectValue(Json::Value &parent,std::string name,std::string);
 };
-
-
 #endif

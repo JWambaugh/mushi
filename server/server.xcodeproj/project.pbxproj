@@ -24,7 +24,6 @@
 		1795A9060EC536D00071BA83 /* utils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1795A9050EC536D00071BA83 /* utils.cpp */; };
 		17BF1DF80F1E78360072F8D1 /* EditTaskCommand.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 17BF1DF70F1E78360072F8D1 /* EditTaskCommand.cpp */; };
 		17E99AF20F0AC349003E2085 /* mongoose.c in Sources */ = {isa = PBXBuildFile; fileRef = 17E99AF00F0AC349003E2085 /* mongoose.c */; };
-		17ED78A60F2512F50001CCEE /* DeleteTaskCommand.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 17ED78A50F2512F50001CCEE /* DeleteTaskCommand.cpp */; };
 		8DD76F650486A84900D96B5E /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 08FB7796FE84155DC02AAC07 /* main.cpp */; settings = {ATTRIBUTES = (); }; };
 		8DD76F6A0486A84900D96B5E /* server.1 in CopyFiles */ = {isa = PBXBuildFile; fileRef = C6859E8B029090EE04C91782 /* server.1 */; };
 /* End PBXBuildFile section */
@@ -88,8 +87,6 @@
 		17BF1DF70F1E78360072F8D1 /* EditTaskCommand.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EditTaskCommand.cpp; sourceTree = "<group>"; };
 		17E99AF00F0AC349003E2085 /* mongoose.c */ = {isa = PBXFileReference; fileEncoding = 7; lastKnownFileType = sourcecode.c.c; path = mongoose.c; sourceTree = "<group>"; };
 		17E99AF10F0AC349003E2085 /* mongoose.h */ = {isa = PBXFileReference; fileEncoding = 7; lastKnownFileType = sourcecode.c.h; path = mongoose.h; sourceTree = "<group>"; };
-		17ED78A40F2512F50001CCEE /* DeleteTaskCommand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeleteTaskCommand.h; sourceTree = "<group>"; };
-		17ED78A50F2512F50001CCEE /* DeleteTaskCommand.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DeleteTaskCommand.cpp; sourceTree = "<group>"; };
 		8DD76F6C0486A84900D96B5E /* mushiServer */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = mushiServer; sourceTree = BUILT_PRODUCTS_DIR; };
 		C6859E8B029090EE04C91782 /* server.1 */ = {isa = PBXFileReference; lastKnownFileType = text.man; path = server.1; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -180,8 +177,6 @@
 				176750F20ED377CA00917CDC /* FindTaskCommand.cpp */,
 				17BF1DF60F1E78360072F8D1 /* EditTaskCommand.h */,
 				17BF1DF70F1E78360072F8D1 /* EditTaskCommand.cpp */,
-				17ED78A40F2512F50001CCEE /* DeleteTaskCommand.h */,
-				17ED78A50F2512F50001CCEE /* DeleteTaskCommand.cpp */,
 			);
 			path = commands;
 			sourceTree = "<group>";
@@ -263,7 +258,6 @@
 				176750F30ED377CA00917CDC /* FindTaskCommand.cpp in Sources */,
 				17E99AF20F0AC349003E2085 /* mongoose.c in Sources */,
 				17BF1DF80F1E78360072F8D1 /* EditTaskCommand.cpp in Sources */,
-				17ED78A60F2512F50001CCEE /* DeleteTaskCommand.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
