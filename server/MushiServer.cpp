@@ -32,9 +32,9 @@
 #include <string>
 #include <sstream>
 #include "mongoose.h"
-#include "commands/AddTaskCommand.h"
-#include "commands/FindTaskCommand.h"
-#include "commands/EditTaskCommand.h"
+#include "AddTaskCommand.h"
+#include "FindTaskCommand.h"
+#include "EditTaskCommand.h"
 #include "MushiServer.h"
 #include "URLHandlers.h"
 #include "MushiDB.h"

@@ -14,8 +14,6 @@
 #include "mongoose.h"
 #include "utils.h"
 #include "../lib_json/json.h"
-#include <QtScript>
-
 #ifndef JSON_WRITE_CLASS
 #define JSON_WRITE_CLASS Json::StyledWriter
 #endif
@@ -44,7 +42,7 @@ public:
 	Json::Value runCommand(Json::Value command);
 	
 	int registerCommand(MushiCommand *command);
-
+	
 private:
 	MushiServer();
 	mg_context	*ctx;

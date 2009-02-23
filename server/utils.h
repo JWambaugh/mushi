@@ -8,9 +8,6 @@
  */
 #ifndef UTILS_H
 #define UTILS_H
-#include <QString>
-#include <QFile>
-#include <QTextStream>
 
 std::string uID();
 
@@ -20,8 +17,5 @@ std::string replaceOnce(
 						const std::string& replaceWhat, 
 						const std::string& replaceWithWhat);
 std::string dbin(std::string str);
-
-QString getFileContents(QString filename);
-void precompileMJS(QString &script);
 
 #endif

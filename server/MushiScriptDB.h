@@ -4,8 +4,7 @@
 #include <QObject>
 
 
- QScriptValue MushiScriptDBSelect(QScriptContext *ctx, QScriptEngine *eng);
- QScriptValue MushiScriptDBNestedSelect(QScriptContext *ctx, QScriptEngine *eng);
-    QScriptValue MushiScriptDBExecute(QScriptContext *ctx, QScriptEngine *eng);
+ QScriptValue MushiScriptDBselect(QScriptContext *ctx, QScriptEngine *eng);
+   void execute(QString query);
 
 #endif // MUSHISCRIPTDB_H
