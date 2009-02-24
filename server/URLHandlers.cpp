@@ -39,6 +39,7 @@
 #include "MushiDB.h"
 #include "MushiScriptDB.h"
 #include "MushiScriptConn.h"
+#include "MushiScriptGlobal.h"
 #include "../lib_json/json.h"
 
 void MushiServer::defineHandlers(){
@@ -182,9 +183,14 @@ static void m_script(struct mg_connection *conn, const struct mg_request_info *r
     //globalObject.setProperty("_db", dbObjectValue);
 
     QScriptValue dbObject = engine.newObject();
-    dbObject.setProperty("select", engine.newFunction(MushiScriptDBselect));
+    dbObject.setProperty("select", engine.newFunction(MushiScriptDBSelect));
+    dbObject.setProperty("nestedSelect", engine.newFunction(MushiScriptDBNestedSelect));
+    dbObject.setProperty("exec", engine.newFunction(MushiScriptDBExecute));
     globalObject.setProperty("_db",dbObject);
 
+    //expose global functions
+
+    globalObject.setProperty("include",engine.newFunction(MushiScriptGlobalInclude));
 
     QString contents;
 
@@ -192,11 +198,13 @@ static void m_script(struct mg_connection *conn, const struct mg_request_info *r
 
 
     //load startup script
-    contents=getFileContents("Mushi.mjs");
+    contents=getFileContents("startup.mjs");
     engine.evaluate(contents);
 
     //Load and eval the called script
     contents= getFileContents(QString(fileName.str().c_str()));
+    precompileMJS(contents);
+    //printf("%s\n",contents.toStdString().c_str());
     engine.evaluate(contents,QString(fileName.str().c_str()));
 
     QStringList errors;
@@ -239,14 +247,5 @@ static size_t url_decode(const char *src, size_t src_len, char *dst, size_t dst_
 }
 
 
-static QString getFileContents(QString filename){
-    QFile scriptFile(filename);
-    if (!scriptFile.open(QIODevice::ReadOnly))
-         printf("error loading file\n");
-    QTextStream stream(&scriptFile);
-    QString contents = stream.readAll();
-    scriptFile.close();
-    return contents;
-}
 
 
