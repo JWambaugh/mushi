@@ -3,7 +3,6 @@
  *  server
  *
  *  Created by Jordan Wambaugh on 11/7/08.
- *  Copyright 2008 Solitex Networks. All rights reserved.
  *
  */
 #include <string>
@@ -55,6 +54,92 @@ std::string dbin(std::string str){
 		pos+=2;
 	}
 	return str;
+}
+
+
+
+QString getFileContents(QString filename){
+    QFile scriptFile(filename);
+    if (!scriptFile.open(QIODevice::ReadOnly))
+         printf("error loading file\n");
+    QTextStream stream(&scriptFile);
+    QString contents = stream.readAll();
+    scriptFile.close();
+    return contents;
+}
+
+
+/*
+  Takes a script of output/javascript mixed code and turns it all into javascript.
+  Single-pass.
+  Script code appears within <??> tags.
+  a print shortcut is also supported: <?=value?> [same as <?_conn.print(value)?>]
+
+  */
+void precompileMJS(QString &script){
+    QString buffer;
+    //QTextStream buffer(&bufferString);
+    bool inCode=false;
+    int startPos=0; //where the block started
+    buffer.append("_conn.print('");
+    QChar c;
+    QChar quoteChar;
+    bool inQuote=false;
+    bool printMode=false;
+    for(int pos =0;pos<script.length();pos++){
+        c=script.at(pos);
+
+        if(!inCode && c=='\''){
+            buffer.append( "\\'");
+        }else if(!inCode && c=='\n'){
+            buffer.append("\\n'+\n'");
+        }else if(c=='\\'){
+            buffer.append("\\\\");
+        }else if(inCode && c=='\'' || c== '"'){
+            if(inQuote){
+                if(c==quoteChar && script.at(pos-1)!='\\')
+                    inQuote=false;
+            }else{
+                inQuote=true;
+                quoteChar=c;
+            }
+            buffer.append(c);
+        }
+        else if(c=='\r'){//strip carriage returns. nothing but a headache.
+            continue;
+        }
+
+       else if( c=='<' && pos < script.length()-2 && !inCode  && script.at(pos+1)=='?' ){
+            printMode=false;
+
+           inCode = true;
+            //make any string we've come to so far to a print and send to buffer
+            buffer.append("');\n");
+            if(pos<script.length()-3 && script.at(pos+2) == '='){
+                printMode=true;
+                buffer.append("_conn.print(");
+                pos++;
+            }
+            pos+=1;
+
+        }else if(c=='?' && !inQuote && pos < script.length()-2 && inCode && script.at(pos+1)=='>' ){
+            if(printMode){
+                buffer.append(");");
+            }
+            buffer.append("\n_conn.print('");
+            inCode=false;
+            pos+=1;
+        }else {
+            buffer.append(c);
+        }
+
+    }
+    if(!inCode){
+        buffer.append(" ');\n");
+    }
+    script=buffer;
+
+
 }
 
 
