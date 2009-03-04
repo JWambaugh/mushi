@@ -11,7 +11,7 @@
 
 class AddTaskCommand: public MushiCommand {
 public:
-	Json::Value &run(MushiSession sess, Json::Value &command, Json::Value &ret);
+        Json::Value &run(MushiSession sess, Json::Value &command, Json::Value &ret, QScriptEngine &engine);
 
 	
 private:

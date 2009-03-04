@@ -5,6 +5,8 @@
  *  Created by Jordan Wambaugh on 11/6/08.
  *
  */
+#ifndef MUSHI_SERVER_H
+#define MUSHI_SERVER_H
 #include <vector>
 #include "sqlite3.h"
 #include "URLHandlers.h"
@@ -15,7 +17,7 @@
 #include "utils.h"
 #include "../lib_json/json.h"
 #include <QtScript>
-
+#include "ScriptEngine.h"
 #ifndef JSON_WRITE_CLASS
 #define JSON_WRITE_CLASS Json::StyledWriter
 #endif
@@ -41,7 +43,7 @@ public:
 	MushiDB *getDB();
 	static MushiServer *instance;
 	
-	Json::Value runCommand(Json::Value command);
+        Json::Value runCommand(Json::Value command,MushiScriptEngine &engine);
 	
 	int registerCommand(MushiCommand *command);
 
@@ -53,3 +55,4 @@ private:
 	void defineHandlers();
 	void installCommands();
 };
+#endif

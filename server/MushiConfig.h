@@ -6,14 +6,15 @@
  *  Copyright 2008 Solitex Networks. All rights reserved.
  *
  */
-
+#include <QObject>
 #ifndef MUSHICONFIG_H
 #define MUSHICONFIG_H
-class MushiConfig{
+class MushiConfig: public QObject{
+    Q_OBJECT
+public slots:
+        static QString getValue(QString key);
+        static int setValue(QString key, QString value);
 public:
-	static char *getValue(char *key);
-	static int setValue(char *key, char*value);
-	
 	static void setDefaults();
 };
 #endif

@@ -16,7 +16,7 @@
 #include "EditTaskCommand.h"
 
 
-Json::Value &EditTaskCommand::run(MushiSession sess, Json::Value &command, Json::Value &ret){
+Json::Value &EditTaskCommand::run(MushiSession sess, Json::Value &command, Json::Value &ret, QScriptEngine &engine){
 	/*
 	 //debug command
 	 Json::Value::Members members;

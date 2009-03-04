@@ -35,6 +35,7 @@
 #include "commands/AddTaskCommand.h"
 #include "commands/FindTaskCommand.h"
 #include "commands/EditTaskCommand.h"
+#include "commands/ScriptCommand.h"
 #include "MushiServer.h"
 #include "URLHandlers.h"
 #include "MushiDB.h"
@@ -42,6 +43,7 @@
 #include "MushiConfig.h"
 #include "MushiCommand.h"
 #include "MushiSession.h"
+#include "ScriptEngine.h"
 #include "../lib_json/json.h"
 #include "utils.h"
 
@@ -59,7 +61,17 @@ void MushiServer::installCommands(){
 	this->registerCommand(new AddTaskCommand);
 	this->registerCommand(new FindTaskCommand);
 	this->registerCommand(new EditTaskCommand);
-	
+        //install mjscript commands
+        QDir scriptDir(MushiConfig::getValue("commandDirectory"));
+        QFileInfoList files;
+        files=scriptDir.entryInfoList(QStringList("*.mjs"));
+        for(int  x=0;x<files.size();x++){
+            if(files.at(x).isFile()){
+                this->registerCommand(new ScriptCommand(files.at(x).absoluteFilePath()));
+            }
+        }
+
+
 }
 
 
@@ -86,7 +98,7 @@ int MushiServer::registerCommand(MushiCommand *command){
 
 
 
-Json::Value MushiServer::runCommand(Json::Value command){
+Json::Value MushiServer::runCommand(Json::Value command,MushiScriptEngine &engine){
 	
 	MushiSession session;
 	
@@ -106,7 +118,7 @@ Json::Value MushiServer::runCommand(Json::Value command){
 	//give the command to command handlers for handling
 	try{
 		for(int x=0;x<commands.size();x++){
-			ret = commands.at(x)->run(session, command, ret);
+                        ret = commands.at(x)->run(session, command, ret, engine.engine);
 		}
 	} catch (Json::Value val){
 			 return val;
@@ -132,9 +144,10 @@ void MushiServer::startup(int argc, char *argv[]){
 	
 	this->installCommands();
 	
-	ctx = mg_start();
-	mg_set_option(ctx, "ports", "8080"/*MushiConfig::getValue("listenPort")*/);
-	char *port = MushiConfig::getValue("listenPort");
+        ctx = mg_start();
+        mg_set_option(ctx, "root",MushiConfig::getValue("interfaceDirectory").toStdString().c_str() );  // Set document root
+        mg_set_option(ctx, "ports", MushiConfig::getValue("listenPort").toStdString().c_str());
+        char *port = (char *)MushiConfig::getValue("listenPort").toStdString().c_str();
 	printf("listening on port %s.\n",port);
 	free(port);
 	

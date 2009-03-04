@@ -11,7 +11,7 @@
 #include "AddTaskCommand.h"
 #include "MushiServer.h"
 
-Json::Value  &AddTaskCommand::run(MushiSession sess, Json::Value &command, Json::Value &ret){
+Json::Value  &AddTaskCommand::run(MushiSession sess, Json::Value &command, Json::Value &ret, QScriptEngine &engine){
 	/*
 	//debug command
 	Json::Value::Members members;
@@ -42,7 +42,7 @@ Json::Value  &AddTaskCommand::run(MushiSession sess, Json::Value &command, Json:
 					<<"','"<<dbin(command.get("estimate","").asString())
 					<<"','"<<dbin(command.get("categoryID","").asString())
 					<<"','"<<dbin(command.get("parentTaskID","").asString())
-		<<"','"<<dbin(command.get("statusID",MushiConfig::getValue("defaultStatusID")).asString())
+                <<"','"<<dbin(command.get("statusID",MushiConfig::getValue("defaultStatusID").toStdString().c_str()).asString())
 		
 					<< "')";
 		

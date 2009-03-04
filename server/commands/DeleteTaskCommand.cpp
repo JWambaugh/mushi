@@ -19,7 +19,7 @@
 #include "EditTaskCommand.h"
 
 
-Json::Value &DeleteTaskCommand::run(MushiSession sess, Json::Value &command, Json::Value &ret){
+Json::Value &DeleteTaskCommand::run(MushiSession sess, Json::Value &command, Json::Value &ret, QScriptEngine &engine){
 	/*
 	 //debug command
 	 Json::Value::Members members;

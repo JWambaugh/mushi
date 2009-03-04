@@ -37,9 +37,7 @@
 #include "MushiServer.h"
 #include "URLHandlers.h"
 #include "MushiDB.h"
-#include "MushiScriptDB.h"
-#include "MushiScriptConn.h"
-#include "MushiScriptGlobal.h"
+#include "ScriptEngine.h"
 #include "../lib_json/json.h"
 
 void MushiServer::defineHandlers(){
@@ -65,7 +63,8 @@ m_receiveCommand(struct mg_connection *conn, const struct mg_request_info *ri, v
 		return;
 	}
 	url_decode(data,strlen(data),data,strlen(data)+1 );
-	if (!strcmp(request_method, "POST")) {
+        if (!strcmp(request_method, "POST")) {
+                 MushiScriptEngine engine(conn,ri,user_data);
 		printf("Received POST: %s\n",data);
 		/* If not all data is POSTed, wait for the rest */
 		
@@ -79,7 +78,7 @@ m_receiveCommand(struct mg_connection *conn, const struct mg_request_info *ri, v
 		reader.parse(input, cmd);
 		
 		
-		char *buff = (char *)writer.write(MushiServer::getInstance()->runCommand(cmd)).c_str();
+                char *buff = (char *)writer.write(MushiServer::getInstance()->runCommand(cmd,engine)).c_str();
 		
 		mg_printf(conn, "%s",
 				  "HTTP/1.1 200 OK\r\n"
@@ -161,59 +160,27 @@ static void m_script(struct mg_connection *conn, const struct mg_request_info *r
     //mg_printf(conn,"Script called!");
 
     std::ostringstream fileName;
-    fileName << "." <<ri->uri;
+    fileName << MushiConfig::getValue("interfaceDirectory").toStdString() <<ri->uri;
    // mg_printf(conn,"%s",getFileContents(buffer.str()).c_str());
 
 
 
-    QScriptEngine engine;
 
-
-    //expose conn object to script userspace
-    MushiScriptConn *connObject = new MushiScriptConn(conn,ri,user_data);
-    QScriptValue connObjectValue= engine.newQObject(connObject,QScriptEngine::QtOwnership,0);
-    QScriptValue globalObject=engine.globalObject();
-    globalObject.setProperty("_conn", connObjectValue);
-
-
-    //expose MushiScriptDB to javascript!
-
-
-    //QScriptValue dbObjectValue= engine.newQObject(new MushiScriptDB(),QScriptEngine::QtOwnership,0);
-    //globalObject.setProperty("_db", dbObjectValue);
-
-    QScriptValue dbObject = engine.newObject();
-    dbObject.setProperty("select", engine.newFunction(MushiScriptDBSelect));
-    dbObject.setProperty("nestedSelect", engine.newFunction(MushiScriptDBNestedSelect));
-    dbObject.setProperty("exec", engine.newFunction(MushiScriptDBExecute));
-    globalObject.setProperty("_db",dbObject);
-
-    //expose global functions
-
-    globalObject.setProperty("include",engine.newFunction(MushiScriptGlobalInclude));
+    MushiScriptEngine engine(conn,ri,user_data);
 
     QString contents;
-
-
-
-
-    //load startup script
-    contents=getFileContents("startup.mjs");
-    engine.evaluate(contents);
-
     //Load and eval the called script
     contents= getFileContents(QString(fileName.str().c_str()));
     precompileMJS(contents);
     //printf("%s\n",contents.toStdString().c_str());
-    engine.evaluate(contents,QString(fileName.str().c_str()));
+    engine.engine.evaluate(contents,QString(fileName.str().c_str()));
 
     QStringList errors;
-    errors = engine.uncaughtExceptionBacktrace();
-    printf("%s\n",engine.uncaughtException().toString().toStdString().c_str());
+    errors = engine.engine.uncaughtExceptionBacktrace();
+    printf("%s\n",engine.engine.uncaughtException().toString().toStdString().c_str());
     for (int i = 0; i < errors.size(); ++i)
           printf("%s\n",errors.at(i).toLocal8Bit().constData());
 }
-
 
 
 static size_t url_decode(const char *src, size_t src_len, char *dst, size_t dst_len)

@@ -9,7 +9,7 @@
 #include "../lib_json/value.h"
 #include "MushiServer.h"
 #include "utils.h"
-
+#include "ScriptEngine.h"
 
 class ScriptCommand : public MushiCommand
 {
@@ -17,6 +17,7 @@ public:
     ScriptCommand(QString path);
     QString scriptPath;
     QString scriptCode;
+    Json::Value &run(MushiSession sess, Json::Value &command, Json::Value &ret, QScriptEngine &engine);
 };
 
 #endif // SCRIPTCOMMAND_H

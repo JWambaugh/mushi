@@ -79,14 +79,20 @@ QString getFileContents(QString filename){
 void precompileMJS(QString &script){
     QString buffer;
     //QTextStream buffer(&bufferString);
-    bool inCode=false;
-    int startPos=0; //where the block started
-    buffer.append("_conn.print('");
+    bool inCode=true;
+    int startPos=2; //where the block started
+
+    if(!(script.at(0)=='<' && script.at(1)=='?')){
+        buffer.append("_conn.print('");
+        inCode=false;
+        startPos=0;
+    }
+
     QChar c;
     QChar quoteChar;
     bool inQuote=false;
     bool printMode=false;
-    for(int pos =0;pos<script.length();pos++){
+    for(int pos =startPos;pos<script.length();pos++){
         c=script.at(pos);
 
         if(!inCode && c=='\''){

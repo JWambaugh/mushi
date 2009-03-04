@@ -11,7 +11,7 @@
 #include "FindTaskCommand.h"
 #include "MushiServer.h"
 
-Json::Value &FindTaskCommand::run(MushiSession sess, Json::Value &command, Json::Value &ret){
+Json::Value &FindTaskCommand::run(MushiSession sess, Json::Value &command, Json::Value &ret, QScriptEngine &engine){
 	
 	
 	

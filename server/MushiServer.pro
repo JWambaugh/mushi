@@ -4,7 +4,7 @@
 CONFIG += qt
 QT += script
 QT -= gui
-TARGET = bin/MushiServer
+TARGET = build//bin/MushiServer
 CONFIG += console
 CONFIG -= app_bundle
 TEMPLATE = app
@@ -30,7 +30,8 @@ SOURCES += utils.cpp \
     MushiScriptGlobal.cpp \
     MushiScriptConn.cpp \
     MushiScriptDB.cpp \
-    commands/ScriptCommand.cpp
+    commands/ScriptCommand.cpp \
+    ScriptEngine.cpp
 HEADERS += utils.h \
     URLHandlers.h \
     sqlite3.h \
@@ -57,4 +58,5 @@ HEADERS += utils.h \
     MushiScriptConn.h \
     MushiScriptDB.h \
     MushiScriptGlobal.h \
-    commands/ScriptCommand.h
+    commands/ScriptCommand.h \
+    ScriptEngine.h

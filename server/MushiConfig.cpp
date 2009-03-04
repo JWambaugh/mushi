@@ -13,37 +13,38 @@
 #include "MushiServer.h"
 #include "MushiConfig.h"
 
-char * MushiConfig::getValue(char *key){
+QString MushiConfig::getValue(QString key){
 	MushiDB *db = MushiServer::getInstance()->getDB();
 	MushiDBResult *r;
 	char query[1000];
-	char *cell;
-	sprintf(query,"select value from config where key = '%s'",key);
+        QString cell;
+        sprintf(query,"select value from config where key = '%s'",key.toStdString().c_str());
 	
 	r=db->query(query);
 	//free(query);
-	cell =(char *) malloc(1000);
-	strcpy( cell,r->getCell(1, 0));
+
+        cell = r->getCell(1, 0);
 	delete r;
-	return cell;
+
+        return cell;
 }
 
 
-int MushiConfig::setValue(char *key, char *value){
+int MushiConfig::setValue(QString key, QString value){
 	MushiDB *db = MushiServer::getInstance()->getDB();
 	MushiDBResult *r;
 	char query[1000];
 
 	//check to see if the key already exists
-	sprintf(query,"select * from config where key='%s'",value,key);
+        sprintf(query,"select * from config where key='%s'",value.toStdString().c_str(),key.toStdString().c_str());
 	
 	r=db->query(query);
 	delete r;
 	if(r->row>0){
-		sprintf(query,"update config set value='%s' where key='%s'",value,key);
+                sprintf(query,"update config set value='%s' where key='%s'",value.toStdString().c_str(),key.toStdString().c_str());
 		r=db->query(query);
 	} else {
-	sprintf(query,"insert into config (key,value) VALUES ('%s','%s')",key,value);
+        sprintf(query,"insert into config (key,value) VALUES ('%s','%s')",key.toStdString().c_str(),value.toStdString().c_str());
 		
 		r=db->query(query);
 		
@@ -67,7 +68,14 @@ void MushiConfig::setDefaults(){
 	setValue("membersOnly","1");
 	setValue("webAddess","http://www.example.com");
 	setValue("adminEmail","admin@example.com");
-	setValue("defaultStatusID","1");
+        setValue("defaultStatusID","1");
+
+        //default directory settings
+        setValue("interfaceDirectory","../interface");
+        setValue("binDirectory",".");
+        setValue("scriptDirectory","../script");
+        setValue("commandDirectory","../script/command");
+        setValue("databaseDirectory","../data");
 	
 	
 }	
