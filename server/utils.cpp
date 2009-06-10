@@ -13,7 +13,8 @@
 #include "time.h"
 #include <unistd.h>
 #include <string.h>
-
+#include <QDebug>
+#include <QScriptValueIterator>
 std::string uID(){
 	std::ostringstream str;
 	time_t t;
@@ -68,6 +69,53 @@ QString getFileContents(QString filename){
     return contents;
 }
 
+
+Json::Value scriptValue2Json(QScriptValue val){
+    Json::ValueType type;
+    type=Json::objectValue;
+    if(val.isArray())type=Json::arrayValue;
+
+    Json::Value jVal(type);
+
+
+    QScriptValueIterator it(val);
+    while (it.hasNext()) {
+        bool ok;
+        it.next();
+        if (it.flags() )
+         continue;
+
+        std::string name=it.name().toStdString();
+    //    qDebug() <<it.name()<<" "<<it.value().toString();
+        Json::Value newValue;
+        if(it.value().isError()){
+             newValue="Error";
+             return jVal;
+        }
+        else if(it.value().isObject()||it.value().isArray()){
+   //         qDebug()<<"start call";
+            newValue=scriptValue2Json(it.value());
+    //        qDebug()<<"end call";
+        }
+        else if (it.value().isFunction()){
+            continue;
+        }
+        else if(it.value().isString() || it.value().isNumber()||it.value().isBool()) {
+            newValue=it.value().toString().toStdString();
+        }
+
+        //arrays must be appended to
+        if(val.isArray()){
+      //      qDebug()<<"appending as array";
+            jVal.append(newValue);
+        }else{
+      //      qDebug()<<"appending as object";
+            jVal[name]=newValue;
+        }
+
+    }
+    return jVal;
+}
 
 /*
   Takes a script of output/javascript mixed code and turns it all into javascript.

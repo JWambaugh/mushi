@@ -67,6 +67,7 @@ void MushiServer::installCommands(){
         files=scriptDir.entryInfoList(QStringList("*.mjs"));
         for(int  x=0;x<files.size();x++){
             if(files.at(x).isFile()){
+               // qDebug()<<"Loading "<<files.at(x).absoluteFilePath();
                 this->registerCommand(new ScriptCommand(files.at(x).absoluteFilePath()));
             }
         }
@@ -114,16 +115,20 @@ Json::Value MushiServer::runCommand(Json::Value command,MushiScriptEngine &engin
 	
 
 		
-	Json::Value ret;
+        Json::Value ret;
+        ret["status"]="failure";
 	//give the command to command handlers for handling
 	try{
 		for(int x=0;x<commands.size();x++){
                         ret = commands.at(x)->run(session, command, ret, engine.engine);
 		}
 	} catch (Json::Value val){
-			 return val;
+            return val;
 	}
 	session.save();
+        if(ret.get("status","")=="failure" && ret.get("reason","")==""){
+            ret["reason"]="Command not found";
+        }
 	return ret;
 }
 
@@ -149,7 +154,7 @@ void MushiServer::startup(int argc, char *argv[]){
         mg_set_option(ctx, "ports", MushiConfig::getValue("listenPort").toStdString().c_str());
         char *port = (char *)MushiConfig::getValue("listenPort").toStdString().c_str();
 	printf("listening on port %s.\n",port);
-	free(port);
+        //free(port);
 	
 	
 	defineHandlers();

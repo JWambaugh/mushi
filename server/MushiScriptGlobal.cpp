@@ -16,3 +16,11 @@ QScriptValue MushiScriptGlobalInclude(QScriptContext *ctx, QScriptEngine *engine
 
     return val;
 }
+
+
+QScriptValue MushiScriptGlobalLog(QScriptContext *ctx, QScriptEngine *engine){
+   QScriptValue val;
+   qDebug()<<"Script Log: "<< ctx->argument(0).toString();
+
+    return val;
+}

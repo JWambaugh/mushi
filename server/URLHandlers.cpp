@@ -65,7 +65,7 @@ m_receiveCommand(struct mg_connection *conn, const struct mg_request_info *ri, v
 	url_decode(data,strlen(data),data,strlen(data)+1 );
         if (!strcmp(request_method, "POST")) {
                  MushiScriptEngine engine(conn,ri,user_data);
-		printf("Received POST: %s\n",data);
+                //printf("Received POST: %s\n",data);
 		/* If not all data is POSTed, wait for the rest */
 		
 		
@@ -177,10 +177,12 @@ static void m_script(struct mg_connection *conn, const struct mg_request_info *r
 
     QStringList errors;
     errors = engine.engine.uncaughtExceptionBacktrace();
-    printf("%s\n",engine.engine.uncaughtException().toString().toStdString().c_str());
-    for (int i = 0; i < errors.size(); ++i)
-          printf("%s\n",errors.at(i).toLocal8Bit().constData());
-}
+    if(errors.size()){
+        printf("%s\n",engine.engine.uncaughtException().toString().toStdString().c_str());
+        for (int i = 0; i < errors.size(); ++i)
+              printf("%s\n",errors.at(i).toLocal8Bit().constData());
+        }
+    }
 
 
 static size_t url_decode(const char *src, size_t src_len, char *dst, size_t dst_len)

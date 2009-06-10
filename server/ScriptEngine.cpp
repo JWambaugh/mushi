@@ -33,7 +33,7 @@ MushiScriptEngine::MushiScriptEngine(struct mg_connection *conn, const struct mg
     //expose global functions
 
     globalObject.setProperty("include",engine.newFunction(MushiScriptGlobalInclude));
-
+    globalObject.setProperty("_log",engine.newFunction(MushiScriptGlobalLog));
     QString contents;
 
 

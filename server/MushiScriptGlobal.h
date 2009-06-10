@@ -5,6 +5,6 @@
 #include "utils.h"
 
 QScriptValue MushiScriptGlobalInclude(QScriptContext *ctx, QScriptEngine *eng);
-
+QScriptValue MushiScriptGlobalLog(QScriptContext *ctx, QScriptEngine *eng);
 
 #endif // MUSHISCRIPTGLOBAL_H
