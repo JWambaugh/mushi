@@ -58,9 +58,13 @@ MushiServer::MushiServer(){
 
 
 void MushiServer::installCommands(){
-	this->registerCommand(new AddTaskCommand);
+
+        //built-in commands
+        this->registerCommand(new AddTaskCommand);
 	this->registerCommand(new FindTaskCommand);
 	this->registerCommand(new EditTaskCommand);
+
+
         //install mjscript commands
         QDir scriptDir(MushiConfig::getValue("commandDirectory"));
         QFileInfoList files;

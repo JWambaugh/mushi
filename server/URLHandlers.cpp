@@ -139,7 +139,7 @@ static void m_showIndex(struct mg_connection *conn, const struct mg_request_info
 	
 	mg_printf(conn, "%s",
 				  "HTTP/1.1 200 OK\r\nContent-Type: text/html\r\n\r\n"
-				  "<html><head><title>Mushi Server Status</title></head><body><h1>Mushi</h1>");
+                                  "<html><head><title>Mushi Server Status</title></head><body><img src='/mushiLogo.png'/><br>");
     mg_printf(conn, MUSHI_ABOUT
 				"<hr><table border='1'>"
 				"<tr><td>Server version: </td><td><strong>" MUSHI_SERVER_VERSION "</strong></td></tr>"
