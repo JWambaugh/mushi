@@ -12,7 +12,9 @@ HEADERS += qtMushi.h \
     taskFinder.h \
     tasktreewidgetitem.h \
     taskmanager.h \
-    taskeditor.h
+    taskeditor.h \
+    quicktasktask.h \
+    quicktask.h
 SOURCES += main.cpp \
     qtMushi.cpp \
     taskFinder.cpp \
@@ -21,7 +23,9 @@ SOURCES += main.cpp \
     ../../lib_json/json_reader.cpp \
     tasktreewidgetitem.cpp \
     taskmanager.cpp \
-    taskeditor.cpp
+    taskeditor.cpp \
+    quicktasktask.cpp \
+    quicktask.cpp
 RESOURCES += attach.qrc
 INCLUDEPATH += ../edit_html
 DEPENDPATH += ../edit_html
@@ -36,4 +40,5 @@ QT += sql
 QT += network
 QT += webkit
 FORMS += taskmanager.ui \
-    taskeditor.ui
+    taskeditor.ui \
+    quicktasktask.ui

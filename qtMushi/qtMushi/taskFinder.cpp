@@ -28,7 +28,7 @@ void taskFinder::search(){
         QNetworkRequest request(QUrl(SERVER_LOCATION "/command"));
         request.setRawHeader("Connection" ,"close");
 
-        reply = qtMushi::netManager->post(request, QByteArray("data=%7B%0D%0A%22command%22%3A%22findTask%22%0D%0A%0D%0A%7D" ) );
+        reply = qtMushi::netManager->post(request, QUrl::toPercentEncoding("data={\"command\":\"findTask\", \"title\":\"test\"}" ) );
         connect(this->reply, SIGNAL(finished()), this, SLOT(networkResponse()));
 }
 QString html2plaintext(QString string);

@@ -7,9 +7,11 @@
  */
 #include <stdio.h>
 #include <sstream>
+#include <QStringList>
 #include "../lib_json/value.h"
 #include "FindTaskCommand.h"
 #include "MushiServer.h"
+
 
 Json::Value &FindTaskCommand::run(MushiSession sess, Json::Value &command, Json::Value &ret, QScriptEngine &engine){
 	
@@ -28,9 +30,27 @@ Json::Value &FindTaskCommand::run(MushiSession sess, Json::Value &command, Json:
 				<< " FROM task t"
 				<< " LEFT JOIN user r on r.id = t.reporterId"
 				<< " LEFT JOIN user o on o.id = t.ownerId"
-				<< " LEFT JOIN status s on s.id = t.statusID"
-				<< " WHERE 1";
+                                << " LEFT JOIN status s on s.id = t.statusID";
+
 		//printf("%s\n",query.str().c_str());
+                QString operat(command.get("operator","AND").asString().c_str());
+                if(operat=="AND"){
+                    query <<" WHERE 1";
+                }
+
+                //query <<"WHERE 1=0";
+
+
+                QStringList params;
+                params.append("title");
+                for(int x=0; x<params.size();x++){
+                    QString paramVal(command.get(params.at(x).toStdString(),"").asString().c_str());
+                    if(paramVal!=""){
+
+                        query << " AND " << params.at(x).toStdString() << " like '%" << paramVal.toStdString() << "%'";
+                  }
+                }
+
 		r=db->query(query.str());
 		results=r->getNestedJson();
 		

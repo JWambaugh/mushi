@@ -27,3 +27,8 @@ void TaskManager::newTask(){
     connect(task,SIGNAL(saveComplete()),this->finder,SLOT(search()));
     task->show();
 }
+
+/*
+void TaskManager::quickSearch(){
+
+}*/

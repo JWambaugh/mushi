@@ -65,7 +65,7 @@ m_receiveCommand(struct mg_connection *conn, const struct mg_request_info *ri, v
 	url_decode(data,strlen(data),data,strlen(data)+1 );
         if (!strcmp(request_method, "POST")) {
                  MushiScriptEngine engine(conn,ri,user_data);
-                //printf("Received POST: %s\n",data);
+                printf("Received POST: %s\n",data);
 		/* If not all data is POSTed, wait for the rest */
 		
 		
