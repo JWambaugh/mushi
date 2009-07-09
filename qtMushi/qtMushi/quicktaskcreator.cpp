@@ -10,6 +10,7 @@ QuickTaskCreator::QuickTaskCreator(QWidget *parent) :
     connect(taskifyAction,SIGNAL(activated()),this,SLOT(taskify()));
     taskLayout = new QVBoxLayout();
     this->m_ui->toolBar->addAction(taskifyAction);
+    taskLayout->setMargin(2);
     this->m_ui->taskListWidget->setLayout(taskLayout);
 }
 
@@ -26,7 +27,8 @@ void QuickTaskCreator::taskify(){
     //loop through each line
     QString currentTask;
     QStringList tasks;
-    QRegExp newTask("^[ |\t|\s]*[-\*][ |\t|\s]*(.+)$");
+    QRegExp newTask("^[ |\t|\s]*([-\*]|[0-9]+\.)[ |\t|\s]*(.+)$");
+
     newTask.setMinimal(true);
     while ((pos = rx.indexIn(text, pos)) != -1) {
        if(rx.matchedLength()==0)pos++;
@@ -40,7 +42,7 @@ void QuickTaskCreator::taskify(){
                 tasks << currentTask;
             }
             currentTask="";
-            currentTask.append(newTask.cap(1));
+            currentTask.append(newTask.cap(2));
 
        }else {
            if(currentTask!="")currentTask.append("\n");

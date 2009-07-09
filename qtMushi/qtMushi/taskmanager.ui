@@ -14,7 +14,7 @@
    <cursorShape>ArrowCursor</cursorShape>
   </property>
   <property name="windowTitle">
-   <string>Form</string>
+   <string>Task Finder</string>
   </property>
   <layout class="QGridLayout" name="gridLayout_2">
    <property name="margin">
