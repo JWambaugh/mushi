@@ -4,7 +4,10 @@
 #include <QWidget>
 #include <QTextEdit>
 #include <QVBoxLayout>
+#include <QHBoxLayout>
 #include <QDebug>
+#include <QPushButton>
+#include "quicktasktask.h"
 
 class QuickTask : public QWidget
 {
@@ -15,9 +18,13 @@ public:
 private:
 
     QTextEdit editor;
-    QVBoxLayout layout;
+    QHBoxLayout mainLayout;
+    QVBoxLayout editorLayout;
+    QVBoxLayout taskLayout;
+    QPushButton taskifyButton;
 private slots:
-    void textChanged();
+    void taskify();
+    void taskify2();
 };
 
 #endif // QUICKTASK_H

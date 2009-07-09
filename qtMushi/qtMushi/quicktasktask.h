@@ -13,6 +13,10 @@ class QuickTaskTask : public QWidget {
 public:
     explicit QuickTaskTask(QWidget *parent = 0);
     virtual ~QuickTaskTask();
+    QString getDescription();
+    void setDescription(QString);
+    QString getTitle();
+    void setTitle(QString);
 
 protected:
     virtual void changeEvent(QEvent *e);

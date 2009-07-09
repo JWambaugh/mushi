@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading ui file 'quicktasktask.ui'
 **
-** Created: Tue Jun 16 15:33:01 2009
+** Created: Wed Jul 8 17:14:05 2009
 **      by: Qt User Interface Compiler version 4.5.0
 **
 ** WARNING! All changes made in this file will be lost when recompiling ui file!
@@ -29,8 +29,9 @@ class Ui_QuickTaskTask
 public:
     QVBoxLayout *verticalLayout;
     QHBoxLayout *horizontalLayout;
-    QToolButton *deleteButton;
     QLineEdit *title;
+    QToolButton *deleteButton;
+    QToolButton *saveButton;
     QTextEdit *description;
 
     void setupUi(QWidget *QuickTaskTask)
@@ -43,15 +44,20 @@ public:
         verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
         horizontalLayout = new QHBoxLayout();
         horizontalLayout->setObjectName(QString::fromUtf8("horizontalLayout"));
+        title = new QLineEdit(QuickTaskTask);
+        title->setObjectName(QString::fromUtf8("title"));
+
+        horizontalLayout->addWidget(title);
+
         deleteButton = new QToolButton(QuickTaskTask);
         deleteButton->setObjectName(QString::fromUtf8("deleteButton"));
 
         horizontalLayout->addWidget(deleteButton);
 
-        title = new QLineEdit(QuickTaskTask);
-        title->setObjectName(QString::fromUtf8("title"));
+        saveButton = new QToolButton(QuickTaskTask);
+        saveButton->setObjectName(QString::fromUtf8("saveButton"));
 
-        horizontalLayout->addWidget(title);
+        horizontalLayout->addWidget(saveButton);
 
 
         verticalLayout->addLayout(horizontalLayout);
@@ -75,6 +81,7 @@ public:
         deleteButton->setToolTip(QApplication::translate("QuickTaskTask", "Delete Task", 0, QApplication::UnicodeUTF8));
 #endif // QT_NO_TOOLTIP
         deleteButton->setText(QApplication::translate("QuickTaskTask", "X", 0, QApplication::UnicodeUTF8));
+        saveButton->setText(QApplication::translate("QuickTaskTask", "Save", 0, QApplication::UnicodeUTF8));
         Q_UNUSED(QuickTaskTask);
     } // retranslateUi
 
