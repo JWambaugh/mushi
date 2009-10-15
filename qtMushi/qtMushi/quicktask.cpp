@@ -15,7 +15,7 @@ QuickTask::QuickTask(QWidget *parent):QWidget(parent)
 
 void QuickTask::taskify(){
     QString text=this->editor.toPlainText();
-    QRegExp rx("((\n|^)?\s*[\*-].+(\n[-\*]?|$))");
+    QRegExp rx("((\n|^)?\\s*[\\*-].+(\n[-\\*]?|$))");
     rx.setMinimal(true);
 
     QStringList list;
@@ -55,7 +55,7 @@ void QuickTask::taskify2(){
     //loop through each line
     QString currentTask;
     QStringList tasks;
-    QRegExp newTask("^[ |\t|\s]*[-\*][ |\t|\s]*(.+)$");
+    QRegExp newTask("^[ |\t|\\s]*[-\\*][ |\t|\\s]*(.+)$");
     newTask.setMinimal(true);
     while ((pos = rx.indexIn(text, pos)) != -1) {
        if(rx.matchedLength()==0)pos++;
@@ -65,7 +65,7 @@ void QuickTask::taskify2(){
        if(newTask.exactMatch(line)||line==""){
             if(currentTask!=""){
 
-                currentTask.replace(QRegExp("^[ |\t|\s]+"),"");
+                currentTask.replace(QRegExp("^[ |\t|\\s]+"),"");
                 tasks << currentTask;
             }
             currentTask="";
@@ -83,7 +83,7 @@ void QuickTask::taskify2(){
    if(currentTask!="")currentTask.append("\n");
     currentTask.append(rx.cap(1));
     if(currentTask!=""){
-        currentTask.replace(QRegExp("^[ |\t|\s]+"),"");
+        currentTask.replace(QRegExp("^[ |\t|\\s]+"),"");
         tasks<<currentTask;
     }
      //this->layout.removeWidget(&this->editor);

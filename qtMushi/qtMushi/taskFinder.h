@@ -20,11 +20,12 @@ private:
     QNetworkReply *reply;
 public:	
 	taskFinder(QWidget *parent=0);
-
+        Json::Value getSelectedRecord();
         Json::Value tickets;
 public slots:
         void networkResponse();
         void search();
+        void search(QString text);
         void itemActivated(QTreeWidgetItem *item,int);
 
 };

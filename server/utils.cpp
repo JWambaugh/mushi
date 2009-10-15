@@ -147,7 +147,7 @@ void precompileMJS(QString &script){
             buffer.append( "\\'");
         }else if(!inCode && c=='\n'){
             buffer.append("\\n'+\n'");
-        }else if(c=='\\'){
+        }else if(!inCode&&c=='\\'){
             buffer.append("\\\\");
         }else if(inCode && c=='\'' || c== '"'){
             if(inQuote){
@@ -191,6 +191,7 @@ void precompileMJS(QString &script){
     if(!inCode){
         buffer.append(" ');\n");
     }
+    qDebug()<<buffer;
     script=buffer;
 
 

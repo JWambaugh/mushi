@@ -44,9 +44,11 @@ Json::Value &DeleteTaskCommand::run(MushiSession sess, Json::Value &command, Jso
 		
 		
 		std::ostringstream query;
-                //query << "id = '" << dbin(command["id"].asString()) << "'";
+                query << "delete from task where id = '" << dbin(command["id"].asString()) << "'";
 		
-                //db->query(MushiDB::json2update(command, columns,where.str(),"task"));
+
+
+                db->query(query.str());
 		
 		
 		ret["status"]="success";

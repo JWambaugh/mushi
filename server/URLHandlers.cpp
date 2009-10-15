@@ -119,10 +119,10 @@ static void m_showVersion(struct mg_connection *conn, const struct mg_request_in
 	val["version"] = MUSHI_SERVER_VERSION;
 	val["author"] = MUSHI_AUTHOR;
 	val["license"] = MUSHI_LICENSE;
-	val["about"] = MUSHI_ABOUT;
+
 	val["protocolVersion"] = MUSHI_PROTOCOL_VERSION;
 	val["name"] = MUSHI_SERVER_NAME;
-	
+        val["about"] = MUSHI_ABOUT;
 	mg_printf(conn, "%s",(char *)writer.write(val).c_str());
 }
 

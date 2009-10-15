@@ -1,10 +1,10 @@
 /********************************************************************************
-** Form generated from reading ui file 'taskeditor.ui'
+** Form generated from reading UI file 'taskeditor.ui'
 **
-** Created: Wed Jul 8 15:49:08 2009
-**      by: Qt User Interface Compiler version 4.5.0
+** Created: Thu Oct 8 14:35:10 2009
+**      by: Qt User Interface Compiler version 4.6.0-tp1
 **
-** WARNING! All changes made in this file will be lost when recompiling ui file!
+** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
 
 #ifndef UI_TASKEDITOR_H
@@ -78,7 +78,6 @@ public:
         label->setText(QApplication::translate("TaskEditor", "Title", 0, QApplication::UnicodeUTF8));
         label_2->setText(QApplication::translate("TaskEditor", "Description", 0, QApplication::UnicodeUTF8));
         saveButton->setText(QApplication::translate("TaskEditor", "Save", 0, QApplication::UnicodeUTF8));
-        Q_UNUSED(TaskEditor);
     } // retranslateUi
 
 };

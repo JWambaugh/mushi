@@ -35,6 +35,7 @@
 #include "commands/AddTaskCommand.h"
 #include "commands/FindTaskCommand.h"
 #include "commands/EditTaskCommand.h"
+#include "commands/DeleteTaskCommand.h"
 #include "commands/ScriptCommand.h"
 #include "MushiServer.h"
 #include "URLHandlers.h"
@@ -63,7 +64,7 @@ void MushiServer::installCommands(){
         this->registerCommand(new AddTaskCommand);
 	this->registerCommand(new FindTaskCommand);
 	this->registerCommand(new EditTaskCommand);
-
+        this->registerCommand(new DeleteTaskCommand);
 
         //install mjscript commands
         QDir scriptDir(MushiConfig::getValue("commandDirectory"));

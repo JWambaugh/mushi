@@ -27,7 +27,7 @@ void QuickTaskCreator::taskify(){
     //loop through each line
     QString currentTask;
     QStringList tasks;
-    QRegExp newTask("^[ |\t|\s]*([-\*]|[0-9]+\.)[ |\t|\s]*(.+)$");
+    QRegExp newTask("^[ |\t|\\s]*([-\\*]|[0-9]+\\.)[ |\t|\\s]*(.+)$");
 
     newTask.setMinimal(true);
     while ((pos = rx.indexIn(text, pos)) != -1) {
@@ -38,7 +38,7 @@ void QuickTaskCreator::taskify(){
        if(newTask.exactMatch(line)||line==""){
             if(currentTask!=""){
 
-                currentTask.replace(QRegExp("^[ |\t|\s]+"),"");
+                currentTask.replace(QRegExp("^[ |\t|\\s]+"),"");
                 tasks << currentTask;
             }
             currentTask="";
@@ -56,7 +56,7 @@ void QuickTaskCreator::taskify(){
    if(currentTask!="")currentTask.append("\n");
     currentTask.append(rx.cap(1));
     if(currentTask!=""){
-        currentTask.replace(QRegExp("^[ |\t|\s]+"),"");
+        currentTask.replace(QRegExp("^[ |\t|\\s]+"),"");
         tasks<<currentTask;
     }
      //this->layout.removeWidget(&this->editor);

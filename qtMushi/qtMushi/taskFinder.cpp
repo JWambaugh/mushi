@@ -28,9 +28,22 @@ void taskFinder::search(){
         QNetworkRequest request(QUrl(SERVER_LOCATION "/command"));
         request.setRawHeader("Connection" ,"close");
 
-        reply = qtMushi::netManager->post(request, QUrl::toPercentEncoding("data={\"command\":\"findTask\", \"title\":\"test\"}" ) );
+        reply = qtMushi::netManager->post(request, QUrl::toPercentEncoding("data={\"command\":\"findTask\"}" ) );
         connect(this->reply, SIGNAL(finished()), this, SLOT(networkResponse()));
 }
+
+
+void taskFinder::search(QString text){
+        //attempt to get all tickets
+        if(this->reply)return;
+        QNetworkRequest request(QUrl(SERVER_LOCATION "/command"));
+        request.setRawHeader("Connection" ,"close");
+        QStringList command;
+        command<<"data={\"command\":\"findTask\",\"title\":\""<< text <<"\"}";
+        reply = qtMushi::netManager->post(request, QUrl::toPercentEncoding(command.join("") ));
+        connect(this->reply, SIGNAL(finished()), this, SLOT(networkResponse()));
+}
+
 QString html2plaintext(QString string);
 
 void taskFinder::networkResponse(){
@@ -64,7 +77,10 @@ QString html2plaintext(QString string){
     return string;
 }
 
-
+Json::Value taskFinder::getSelectedRecord(){
+    taskTreeWidgetItem *item = static_cast<taskTreeWidgetItem *>(this->treeWidget->currentItem());
+    return item->taskValue;
+}
 
 void taskFinder::itemActivated(QTreeWidgetItem *item,int column){
     taskTreeWidgetItem *tItem = static_cast<taskTreeWidgetItem *> (item);

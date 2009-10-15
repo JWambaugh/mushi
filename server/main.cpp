@@ -27,7 +27,7 @@
 #include <stdlib.h>
 #include <assert.h>
 #include <string.h>
-
+#include <QCoreApplication>
 #include "../shttpd/shttpd.h"
 #include "mushiServer.h"
 
@@ -119,7 +119,7 @@ try_to_run_as_nt_service(void)
 
 int main(int argc, char *argv[])
 {
-	
+QCoreApplication application(argc,argv);
 #if defined(_WIN32)
 	(void) sprintf(service_name, "%s %s",MUSHI_SERVER_NAME, MUSHI_SERVER_VERSION);
 	try_to_run_as_nt_service();

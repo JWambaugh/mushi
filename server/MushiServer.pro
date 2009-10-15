@@ -3,6 +3,7 @@
 # ------------------------------------------------
 CONFIG += qt
 QT += script
+QT += network
 QT -= gui
 TARGET = build//bin/MushiServer
 CONFIG += console
@@ -31,7 +32,8 @@ SOURCES += utils.cpp \
     MushiScriptConn.cpp \
     MushiScriptDB.cpp \
     commands/ScriptCommand.cpp \
-    ScriptEngine.cpp
+    ScriptEngine.cpp \
+    smtp.cpp
 HEADERS += utils.h \
     URLHandlers.h \
     sqlite3.h \
@@ -59,4 +61,5 @@ HEADERS += utils.h \
     MushiScriptDB.h \
     MushiScriptGlobal.h \
     commands/ScriptCommand.h \
-    ScriptEngine.h
+    ScriptEngine.h \
+    smtp.h

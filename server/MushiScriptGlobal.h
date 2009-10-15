@@ -3,8 +3,9 @@
 #include <QTScript>
 #include <QScriptEngine>
 #include "utils.h"
+#include "smtp.h"
 
 QScriptValue MushiScriptGlobalInclude(QScriptContext *ctx, QScriptEngine *eng);
 QScriptValue MushiScriptGlobalLog(QScriptContext *ctx, QScriptEngine *eng);
-
+QScriptValue MushiScriptGlobalSendMail(QScriptContext *ctx, QScriptEngine *engine);
 #endif // MUSHISCRIPTGLOBAL_H

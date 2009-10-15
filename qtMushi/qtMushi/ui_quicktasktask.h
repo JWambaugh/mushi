@@ -1,10 +1,10 @@
 /********************************************************************************
-** Form generated from reading ui file 'quicktasktask.ui'
+** Form generated from reading UI file 'quicktasktask.ui'
 **
-** Created: Wed Jul 8 17:14:05 2009
-**      by: Qt User Interface Compiler version 4.5.0
+** Created: Thu Oct 8 14:35:10 2009
+**      by: Qt User Interface Compiler version 4.6.0-tp1
 **
-** WARNING! All changes made in this file will be lost when recompiling ui file!
+** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
 
 #ifndef UI_QUICKTASKTASK_H
@@ -40,7 +40,7 @@ public:
             QuickTaskTask->setObjectName(QString::fromUtf8("QuickTaskTask"));
         QuickTaskTask->resize(400, 136);
         verticalLayout = new QVBoxLayout(QuickTaskTask);
-        verticalLayout->setMargin(5);
+        verticalLayout->setContentsMargins(5, 5, 5, 5);
         verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
         horizontalLayout = new QHBoxLayout();
         horizontalLayout->setObjectName(QString::fromUtf8("horizontalLayout"));
@@ -82,7 +82,6 @@ public:
 #endif // QT_NO_TOOLTIP
         deleteButton->setText(QApplication::translate("QuickTaskTask", "X", 0, QApplication::UnicodeUTF8));
         saveButton->setText(QApplication::translate("QuickTaskTask", "Save", 0, QApplication::UnicodeUTF8));
-        Q_UNUSED(QuickTaskTask);
     } // retranslateUi
 
 };

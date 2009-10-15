@@ -3,6 +3,7 @@
 
 #include "ui_taskmanager.h"
 #include "taskFinder.h"
+#include "servercommand.h"
 class TaskManager : public QWidget, private Ui::TaskManager {
     Q_OBJECT
     Q_DISABLE_COPY(TaskManager)
@@ -15,6 +16,8 @@ protected:
 
 protected slots:
     void newTask();
+    void deleteTask();
+    void quickSearch();
 };
 
 #endif // TASKMANAGER_H

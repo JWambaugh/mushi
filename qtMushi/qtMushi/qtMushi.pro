@@ -16,7 +16,8 @@ HEADERS += qtMushi.h \
     quicktasktask.h \
     quicktask.h \
     quicktaskcreator.h \
-    taskmanagerwindow.h
+    taskmanagerwindow.h \
+    servercommand.h
 SOURCES += main.cpp \
     qtMushi.cpp \
     taskFinder.cpp \
@@ -29,7 +30,8 @@ SOURCES += main.cpp \
     quicktasktask.cpp \
     quicktask.cpp \
     quicktaskcreator.cpp \
-    taskmanagerwindow.cpp
+    taskmanagerwindow.cpp \
+     servercommand.cpp
 RESOURCES += attach.qrc
 INCLUDEPATH += ../edit_html
 DEPENDPATH += ../edit_html

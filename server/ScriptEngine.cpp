@@ -34,6 +34,7 @@ MushiScriptEngine::MushiScriptEngine(struct mg_connection *conn, const struct mg
 
     globalObject.setProperty("include",engine.newFunction(MushiScriptGlobalInclude));
     globalObject.setProperty("_log",engine.newFunction(MushiScriptGlobalLog));
+    globalObject.setProperty("sendMail",engine.newFunction(MushiScriptGlobalSendMail));
     QString contents;
 
 

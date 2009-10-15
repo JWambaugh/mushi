@@ -17,6 +17,7 @@
 #include "utils.h"
 #include "../lib_json/json.h"
 #include <QtScript>
+
 #include "ScriptEngine.h"
 #ifndef JSON_WRITE_CLASS
 #define JSON_WRITE_CLASS Json::StyledWriter
@@ -28,11 +29,11 @@
 #define MUSHI_PROTOCOL_VERSION "0.-1"
 #define MUSHI_AUTHOR "Jordan CM Wambaugh"
 #define MUSHI_LICENSE "Mushi - Server Copyright(C) 2008 Jordan CM Wambaugh. All rights reserved."
-#define MUSHI_ABOUT "Mushi - Server is the server behind Mushi. \\
-It is a completely stand-alone application that depends on no external libraries or services.\\
-The Mushi Server communicates with clients via JSON. JSON is a very \\
-simple format for passing data between applications. The use of this simple yet powerful format for transmitting data, and the fact that Mushi - Server is written in 100 percent c/c++ code allows Mushi to be very fast, simple, yet feature-rich.\\
-<br>\\
+#define MUSHI_ABOUT "Mushi - Server is the server behind Mushi. \
+It is a completely stand-alone application that depends on no external libraries or services.\
+The Mushi Server communicates with clients via JSON. JSON is a very \
+simple format for passing data between applications. The use of this simple yet powerful format for transmitting data, and the fact that Mushi - Server is written in 100 percent c/c++ code allows Mushi to be very fast, simple, yet feature-rich.\
+<br>\
 <em>This is a premortal version of Mushi - Server. It is unstable and should not be used where a reliable system is required.</em>"
 
 

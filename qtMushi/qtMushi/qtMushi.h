@@ -17,7 +17,10 @@
 class qtMushi : public QApplication{
 	Q_OBJECT
 public:
-	qtMushi( int &argc, char **argv ); 
+        qtMushi( int &argc, char **argv );
+        QString getServerLocation(){
+            return QString(SERVER_LOCATION);
+        }
 		
 
 

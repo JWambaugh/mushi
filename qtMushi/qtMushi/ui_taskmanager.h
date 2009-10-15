@@ -1,10 +1,10 @@
 /********************************************************************************
-** Form generated from reading ui file 'taskmanager.ui'
+** Form generated from reading UI file 'taskmanager.ui'
 **
-** Created: Wed Jul 8 15:49:08 2009
-**      by: Qt User Interface Compiler version 4.5.0
+** Created: Thu Oct 8 14:35:10 2009
+**      by: Qt User Interface Compiler version 4.6.0-tp1
 **
-** WARNING! All changes made in this file will be lost when recompiling ui file!
+** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
 
 #ifndef UI_TASKMANAGER_H
@@ -46,7 +46,7 @@ public:
         TaskManager->resize(724, 494);
         TaskManager->setCursor(QCursor(Qt::ArrowCursor));
         gridLayout_2 = new QGridLayout(TaskManager);
-        gridLayout_2->setMargin(5);
+        gridLayout_2->setContentsMargins(5, 5, 5, 5);
         gridLayout_2->setObjectName(QString::fromUtf8("gridLayout_2"));
         taskFinderLayout = new QVBoxLayout();
         taskFinderLayout->setObjectName(QString::fromUtf8("taskFinderLayout"));
@@ -58,7 +58,7 @@ public:
         frame_2->setFrameShape(QFrame::StyledPanel);
         frame_2->setFrameShadow(QFrame::Raised);
         horizontalLayout_3 = new QHBoxLayout(frame_2);
-        horizontalLayout_3->setMargin(5);
+        horizontalLayout_3->setContentsMargins(5, 5, 5, 5);
         horizontalLayout_3->setObjectName(QString::fromUtf8("horizontalLayout_3"));
         quickSearchEdit = new QLineEdit(frame_2);
         quickSearchEdit->setObjectName(QString::fromUtf8("quickSearchEdit"));
@@ -78,7 +78,7 @@ public:
         frame->setFrameShape(QFrame::StyledPanel);
         frame->setFrameShadow(QFrame::Raised);
         horizontalLayout_2 = new QHBoxLayout(frame);
-        horizontalLayout_2->setMargin(5);
+        horizontalLayout_2->setContentsMargins(5, 5, 5, 5);
         horizontalLayout_2->setObjectName(QString::fromUtf8("horizontalLayout_2"));
         newButton = new QToolButton(frame);
         newButton->setObjectName(QString::fromUtf8("newButton"));
@@ -101,11 +101,10 @@ public:
 
     void retranslateUi(QWidget *TaskManager)
     {
-        TaskManager->setWindowTitle(QApplication::translate("TaskManager", "Form", 0, QApplication::UnicodeUTF8));
+        TaskManager->setWindowTitle(QApplication::translate("TaskManager", "Task Finder", 0, QApplication::UnicodeUTF8));
         quickSearchButton->setText(QApplication::translate("TaskManager", "Search", 0, QApplication::UnicodeUTF8));
         newButton->setText(QApplication::translate("TaskManager", "New", 0, QApplication::UnicodeUTF8));
         deleteButton->setText(QApplication::translate("TaskManager", "Delete", 0, QApplication::UnicodeUTF8));
-        Q_UNUSED(TaskManager);
     } // retranslateUi
 
 };
