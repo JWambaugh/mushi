@@ -4,6 +4,7 @@
 TaskEditor::TaskEditor(QWidget *parent) :
     QWidget(parent){
     setupUi(this);
+    this->setAttribute(Qt::WA_DeleteOnClose);
 
     connect(this->saveButton,SIGNAL(clicked()),this,SLOT(save()));
 

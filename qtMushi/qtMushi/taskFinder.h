@@ -27,6 +27,8 @@ public slots:
         void search();
         void search(QString text);
         void itemActivated(QTreeWidgetItem *item,int);
+signals:
+        void taskSelected(Json::Value);
 
 };
 #endif

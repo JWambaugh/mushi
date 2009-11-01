@@ -6,7 +6,7 @@
 #include "quicktaskcreator.h"
 #include "quicktask.h"
 #include "taskManager.h"
-
+#include "taskmanagerwindow.h"
 QNetworkAccessManager * qtMushi::netManager = new QNetworkAccessManager();
 
 qtMushi::qtMushi( int &argc, char **argv )  : QApplication(argc, argv) {
@@ -20,8 +20,10 @@ qtMushi::qtMushi( int &argc, char **argv )  : QApplication(argc, argv) {
 
     //QuickTask *task=new QuickTask();
     //task->show();
-    TaskManager *manager = new TaskManager();
-    manager->show();
+    //TaskManager *manager = new TaskManager();
+    //manager->show();
+    TaskManagerWindow *managerWindow = new TaskManagerWindow();
+    managerWindow->show();
 
 }
 

@@ -7,10 +7,10 @@ taskFinder::taskFinder(QWidget *parent) : QWidget(parent){
 
         this->reply=0;
         treeWidget = new QTreeWidget(this);
-        treeWidget->setColumnCount(2);
+        treeWidget->setColumnCount(3);
         QStringList header;
 
-        header<<"Title"<<"Owner"<<"Description"<<"status";
+        header<<"Title"<<"Owner"<<"Status";
         treeWidget->setHeaderLabels(header);
 
         layout = new QVBoxLayout();
@@ -61,8 +61,8 @@ void taskFinder::networkResponse(){
             item->taskValue = tickets[index];
             item->setText(0,item->taskValue.get("title","NULL").asCString());
             item->setText(1,item->taskValue.get("owner","").get("firstName","").asCString());
-            item->setText(2,html2plaintext(item->taskValue.get("description","NULL").asCString()).left(100).replace("\n"," "));
-            item->setText(3,item->taskValue.get("status","NULL").asCString());
+           // item->setText(2,html2plaintext(item->taskValue.get("description","NULL").asCString()).left(100).replace("\n"," "));
+            item->setText(2,item->taskValue.get("status","NULL").asCString());
             treeWidget->addTopLevelItem(item);
         }
         delete this->reply;
@@ -84,8 +84,9 @@ Json::Value taskFinder::getSelectedRecord(){
 
 void taskFinder::itemActivated(QTreeWidgetItem *item,int column){
     taskTreeWidgetItem *tItem = static_cast<taskTreeWidgetItem *> (item);
-    TaskEditor *editor=new TaskEditor();
+    emit this->taskSelected(tItem->taskValue);
+   /* TaskEditor *editor=new TaskEditor();
     editor->setStore(tItem->taskValue);
     connect(editor,SIGNAL(saveComplete()),this,SLOT(search()));
-    editor->show();
+    editor->show();*/
 }

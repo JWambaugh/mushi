@@ -10,13 +10,13 @@ class TaskEditor : public QWidget, private Ui::TaskEditor {
     Q_DISABLE_COPY(TaskEditor)
 public:
     explicit TaskEditor(QWidget *parent = 0);
-
+    Json::Value store;
 protected:
     virtual void changeEvent(QEvent *e);
     QNetworkReply *reply;
 
 
-    Json::Value store;
+
 public slots:
     void save();
     void updateStore();
