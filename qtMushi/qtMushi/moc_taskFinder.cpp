@@ -1,8 +1,8 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'taskFinder.h'
 **
-** Created: Fri Dec 5 20:51:21 2008
-**      by: The Qt Meta Object Compiler version 59 (Qt 4.4.3)
+** Created: Fri Oct 23 16:45:41 2009
+**      by: The Qt Meta Object Compiler version 62 (Qt 4.6.0)
 **
 ** WARNING! All changes made in this file will be lost!
 *****************************************************************************/
@@ -10,8 +10,8 @@
 #include "taskFinder.h"
 #if !defined(Q_MOC_OUTPUT_REVISION)
 #error "The header file 'taskFinder.h' doesn't include <QObject>."
-#elif Q_MOC_OUTPUT_REVISION != 59
-#error "This file was generated using the moc from 4.4.3. It"
+#elif Q_MOC_OUTPUT_REVISION != 62
+#error "This file was generated using the moc from 4.6.0. It"
 #error "cannot be used with the include files from this version of Qt."
 #error "(The moc has changed too much.)"
 #endif
@@ -20,21 +20,33 @@ QT_BEGIN_MOC_NAMESPACE
 static const uint qt_meta_data_taskFinder[] = {
 
  // content:
-       1,       // revision
+       4,       // revision
        0,       // classname
        0,    0, // classinfo
-       1,   10, // methods
+       5,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
+       0,    0, // constructors
+       0,       // flags
+       1,       // signalCount
+
+ // signals: signature, parameters, type, tag, flags
+      12,   11,   11,   11, 0x05,
 
  // slots: signature, parameters, type, tag, flags
-      12,   11,   11,   11, 0x0a,
+      38,   11,   11,   11, 0x0a,
+      56,   11,   11,   11, 0x0a,
+      70,   65,   11,   11, 0x0a,
+      92,   86,   11,   11, 0x0a,
 
        0        // eod
 };
 
 static const char qt_meta_stringdata_taskFinder[] = {
-    "taskFinder\0\0networkResponse(QNetworkReply*)\0"
+    "taskFinder\0\0taskSelected(Json::Value)\0"
+    "networkResponse()\0search()\0text\0"
+    "search(QString)\0item,\0"
+    "itemActivated(QTreeWidgetItem*,int)\0"
 };
 
 const QMetaObject taskFinder::staticMetaObject = {
@@ -42,9 +54,13 @@ const QMetaObject taskFinder::staticMetaObject = {
       qt_meta_data_taskFinder, 0 }
 };
 
+#ifdef Q_NO_DATA_RELOCATION
+const QMetaObject &taskFinder::getStaticMetaObject() { return staticMetaObject; }
+#endif //Q_NO_DATA_RELOCATION
+
 const QMetaObject *taskFinder::metaObject() const
 {
-    return &staticMetaObject;
+    return QObject::d_ptr->metaObject ? QObject::d_ptr->metaObject : &staticMetaObject;
 }
 
 void *taskFinder::qt_metacast(const char *_clname)
@@ -62,10 +78,22 @@ int taskFinder::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
         switch (_id) {
-        case 0: networkResponse((*reinterpret_cast< QNetworkReply*(*)>(_a[1]))); break;
+        case 0: taskSelected((*reinterpret_cast< Json::Value(*)>(_a[1]))); break;
+        case 1: networkResponse(); break;
+        case 2: search(); break;
+        case 3: search((*reinterpret_cast< QString(*)>(_a[1]))); break;
+        case 4: itemActivated((*reinterpret_cast< QTreeWidgetItem*(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2]))); break;
+        default: ;
         }
-        _id -= 1;
+        _id -= 5;
     }
     return _id;
+}
+
+// SIGNAL 0
+void taskFinder::taskSelected(Json::Value _t1)
+{
+    void *_a[] = { 0, const_cast<void*>(reinterpret_cast<const void*>(&_t1)) };
+    QMetaObject::activate(this, &staticMetaObject, 0, _a);
 }
 QT_END_MOC_NAMESPACE
