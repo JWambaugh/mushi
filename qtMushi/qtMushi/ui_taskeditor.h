@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'taskeditor.ui'
 **
-** Created: Mon Nov 2 00:00:13 2009
+** Created: Thu Nov 5 00:22:24 2009
 **      by: Qt User Interface Compiler version 4.6.0
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
@@ -14,6 +14,7 @@
 #include <QtGui/QAction>
 #include <QtGui/QApplication>
 #include <QtGui/QButtonGroup>
+#include <QtGui/QComboBox>
 #include <QtGui/QGridLayout>
 #include <QtGui/QHeaderView>
 #include <QtGui/QLabel>
@@ -33,6 +34,8 @@ public:
     QTextEdit *description;
     QLabel *label_2;
     QPushButton *saveButton;
+    QComboBox *taskCombo;
+    QLabel *label_3;
 
     void setupUi(QWidget *TaskEditor)
     {
@@ -44,27 +47,37 @@ public:
         label = new QLabel(TaskEditor);
         label->setObjectName(QString::fromUtf8("label"));
 
-        gridLayout->addWidget(label, 0, 0, 1, 1);
+        gridLayout->addWidget(label, 2, 0, 1, 1);
 
         title = new QLineEdit(TaskEditor);
         title->setObjectName(QString::fromUtf8("title"));
 
-        gridLayout->addWidget(title, 0, 1, 1, 1);
+        gridLayout->addWidget(title, 2, 1, 1, 1);
 
         description = new QTextEdit(TaskEditor);
         description->setObjectName(QString::fromUtf8("description"));
 
-        gridLayout->addWidget(description, 1, 1, 1, 1);
+        gridLayout->addWidget(description, 3, 1, 1, 1);
 
         label_2 = new QLabel(TaskEditor);
         label_2->setObjectName(QString::fromUtf8("label_2"));
 
-        gridLayout->addWidget(label_2, 1, 0, 1, 1);
+        gridLayout->addWidget(label_2, 3, 0, 1, 1);
 
         saveButton = new QPushButton(TaskEditor);
         saveButton->setObjectName(QString::fromUtf8("saveButton"));
 
-        gridLayout->addWidget(saveButton, 2, 1, 1, 1);
+        gridLayout->addWidget(saveButton, 4, 1, 1, 1);
+
+        taskCombo = new QComboBox(TaskEditor);
+        taskCombo->setObjectName(QString::fromUtf8("taskCombo"));
+
+        gridLayout->addWidget(taskCombo, 1, 1, 1, 1);
+
+        label_3 = new QLabel(TaskEditor);
+        label_3->setObjectName(QString::fromUtf8("label_3"));
+
+        gridLayout->addWidget(label_3, 1, 0, 1, 1);
 
 
         retranslateUi(TaskEditor);
@@ -78,6 +91,7 @@ public:
         label->setText(QApplication::translate("TaskEditor", "Title", 0, QApplication::UnicodeUTF8));
         label_2->setText(QApplication::translate("TaskEditor", "Description", 0, QApplication::UnicodeUTF8));
         saveButton->setText(QApplication::translate("TaskEditor", "Save", 0, QApplication::UnicodeUTF8));
+        label_3->setText(QApplication::translate("TaskEditor", "Subtask Of", 0, QApplication::UnicodeUTF8));
     } // retranslateUi
 
 };

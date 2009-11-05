@@ -5,8 +5,12 @@ TaskEditor::TaskEditor(QWidget *parent) :
     QWidget(parent){
     setupUi(this);
     this->setAttribute(Qt::WA_DeleteOnClose);
-
+    this->taskCombo->addItem("");
     connect(this->saveButton,SIGNAL(clicked()),this,SLOT(save()));
+    QList<Json::Value>*tasks=static_cast <qtMushi *>(qApp)->taskDirectory.getAllTasks();
+    for(int x=0;x<tasks->count();x++){
+        this->taskCombo->addItem(tasks->at(x).get("title","").asString().c_str(),QVariant(tasks->at(x).get("id","").asCString()));
+    }
 
 
 }
@@ -59,6 +63,7 @@ void TaskEditor::updateStore(){
 
     this->store["title"]=this->title->text().toStdString();
     this->store["description"]=this->description->toHtml().toStdString();
+    this->store["parentTaskID"]=this->taskCombo->itemData(this->taskCombo->currentIndex()).toString().toStdString();
 }
 
 
@@ -71,6 +76,11 @@ void TaskEditor::networkResponse(){
 void TaskEditor::updateFromStore(){
     this->title->setText(this->store["title"].asString().c_str());
     this->description->setHtml(this->store["description"].asString().c_str());
+    for(int x=0;x<this->taskCombo->count();x++){
+        if(this->taskCombo->itemData(x).toString().toStdString()==this->store["parentTaskID"].asString()){
+            this->taskCombo->setCurrentIndex(x);
+        }
+    }
 }
 
 

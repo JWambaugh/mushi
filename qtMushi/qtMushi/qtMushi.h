@@ -12,7 +12,7 @@
 #endif
 
 
-
+#include "taskdirectory.h"
 #include "../edit_html/edit_html.h"
 class qtMushi : public QApplication{
 	Q_OBJECT
@@ -21,6 +21,7 @@ public:
         QString getServerLocation(){
             return QString(SERVER_LOCATION);
         }
+        TaskDirectory taskDirectory;
 		
 
 

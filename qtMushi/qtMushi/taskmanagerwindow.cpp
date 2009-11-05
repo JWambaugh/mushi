@@ -7,9 +7,12 @@ TaskManagerWindow::TaskManagerWindow(QWidget *parent) :
 {
     m_ui->setupUi(this);
     QVBoxLayout *taskListLayout=new QVBoxLayout;
+    taskListLayout->setContentsMargins(1,1,1,1);
+
     this->finder=new taskFinder(this);
     taskListLayout->addWidget(this->finder);
     this->m_ui->dockWidgetContents->setLayout(taskListLayout);
+
 
     this->centralTabWidget=new QTabWidget();
     this->centralTabWidget->setTabsClosable(true);

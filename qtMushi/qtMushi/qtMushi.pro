@@ -19,7 +19,8 @@ HEADERS += qtMushi.h \
     taskmanagerwindow.h \
     servercommand.h \
     homepage.h \
-    taskcomment.h
+    taskcomment.h \
+    taskdirectory.h
 SOURCES += main.cpp \
     qtMushi.cpp \
     taskFinder.cpp \
@@ -35,7 +36,8 @@ SOURCES += main.cpp \
     taskmanagerwindow.cpp \
     servercommand.cpp \
     homepage.cpp \
-    taskcomment.cpp
+    taskcomment.cpp \
+    taskdirectory.cpp
 RESOURCES += attach.qrc
 INCLUDEPATH += ../edit_html
 DEPENDPATH += ../edit_html

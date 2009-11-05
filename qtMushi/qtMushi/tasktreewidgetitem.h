@@ -9,6 +9,7 @@ class taskTreeWidgetItem : public QObject, public QTreeWidgetItem
     Q_OBJECT
 public:
     taskTreeWidgetItem( QTreeWidget * parent);
+    taskTreeWidgetItem();
     Json::Value taskValue;
 private:
 

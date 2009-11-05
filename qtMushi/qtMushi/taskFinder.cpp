@@ -1,6 +1,6 @@
 
 #include "taskFinder.h"
-#include "tasktreewidgetitem.h"
+
 #include "taskeditor.h"
 taskFinder::taskFinder(QWidget *parent) : QWidget(parent){
 
@@ -18,56 +18,57 @@ taskFinder::taskFinder(QWidget *parent) : QWidget(parent){
         this->setLayout(layout);
         search();
         connect(treeWidget,SIGNAL(itemActivated(QTreeWidgetItem*,int)),this,SLOT(itemActivated(QTreeWidgetItem*,int)));
-
+        connect(&static_cast <qtMushi *>(qApp)->taskDirectory,SIGNAL(updated()),this,SLOT(networkResponse()));
 
 }
 
 void taskFinder::search(){
         //attempt to get all tickets
-        if(this->reply)return;
-        QNetworkRequest request(QUrl(SERVER_LOCATION "/command"));
-        request.setRawHeader("Connection" ,"close");
-
-        reply = qtMushi::netManager->post(request, QUrl::toPercentEncoding("data={\"command\":\"findTask\"}" ) );
-        connect(this->reply, SIGNAL(finished()), this, SLOT(networkResponse()));
+        static_cast <qtMushi *>(qApp)->taskDirectory.refresh();
 }
 
 
 void taskFinder::search(QString text){
-        //attempt to get all tickets
-        if(this->reply)return;
-        QNetworkRequest request(QUrl(SERVER_LOCATION "/command"));
-        request.setRawHeader("Connection" ,"close");
-        QStringList command;
-        command<<"data={\"command\":\"findTask\",\"title\":\""<< text <<"\"}";
-        reply = qtMushi::netManager->post(request, QUrl::toPercentEncoding(command.join("") ));
-        connect(this->reply, SIGNAL(finished()), this, SLOT(networkResponse()));
+        static_cast <qtMushi *>(qApp)->taskDirectory.refresh();
 }
 
 QString html2plaintext(QString string);
 
 void taskFinder::networkResponse(){
-        QString r = reply->readAll();
-        qDebug() << r;
-        Json::Reader reader;
-        Json::Value root;
-        reader.parse(r.toStdString(),root);
-        tickets = root["results"];
-
+        QList<Json::Value> *list;
+        list=static_cast <qtMushi *>(qApp)->taskDirectory.getTopLevelTasks();
         treeWidget->clear();
         taskTreeWidgetItem *item;
-        for(int index=0;index<tickets.size();++index){
+        for(int index=0;index<list->size();index++){
             item =  new taskTreeWidgetItem(treeWidget);
-            item->taskValue = tickets[index];
+            item->taskValue = list->at(index);
             item->setText(0,item->taskValue.get("title","NULL").asCString());
             item->setText(1,item->taskValue.get("owner","").get("firstName","").asCString());
            // item->setText(2,html2plaintext(item->taskValue.get("description","NULL").asCString()).left(100).replace("\n"," "));
             item->setText(2,item->taskValue.get("status","NULL").asCString());
             treeWidget->addTopLevelItem(item);
+            this->addChildrenToTree(item);
         }
-        delete this->reply;
-        this->reply=0;
+
 }
+
+void taskFinder::addChildrenToTree(taskTreeWidgetItem *parent){
+    QList<Json::Value> *list;
+    list=static_cast <qtMushi *>(qApp)->taskDirectory.getChildrenOfTask(parent->taskValue);
+    taskTreeWidgetItem *item;
+    for(int x=0;x<list->count();x++){
+        parent->setExpanded(true);
+        item =  new taskTreeWidgetItem();
+        item->taskValue = list->at(x);
+        item->setText(0,item->taskValue.get("title","NULL").asCString());
+        item->setText(1,item->taskValue.get("owner","").get("firstName","").asCString());
+       // item->setText(2,html2plaintext(item->taskValue.get("description","NULL").asCString()).left(100).replace("\n"," "));
+        item->setText(2,item->taskValue.get("status","NULL").asCString());
+        parent->addChild(item);
+        this->addChildrenToTree(item);
+    }
+}
+
 
 QString html2plaintext(QString string){
     QTextEdit *editor=new QTextEdit();
