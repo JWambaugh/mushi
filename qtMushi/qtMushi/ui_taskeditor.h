@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'taskeditor.ui'
 **
-** Created: Thu Nov 5 00:22:24 2009
+** Created: Wed Nov 11 23:01:43 2009
 **      by: Qt User Interface Compiler version 4.6.0
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
@@ -20,6 +20,7 @@
 #include <QtGui/QLabel>
 #include <QtGui/QLineEdit>
 #include <QtGui/QPushButton>
+#include <QtGui/QSpinBox>
 #include <QtGui/QTextEdit>
 #include <QtGui/QWidget>
 
@@ -32,10 +33,19 @@ public:
     QLabel *label;
     QLineEdit *title;
     QTextEdit *description;
-    QLabel *label_2;
     QPushButton *saveButton;
-    QComboBox *taskCombo;
+    QSpinBox *percentComplete;
+    QLabel *label_4;
     QLabel *label_3;
+    QLabel *label_2;
+    QSpinBox *originalEstimate;
+    QLabel *label_5;
+    QSpinBox *currentEstimate;
+    QComboBox *taskCombo;
+    QComboBox *statusCombo;
+    QLabel *label_6;
+    QLabel *label_7;
+    QComboBox *authorCombo;
 
     void setupUi(QWidget *TaskEditor)
     {
@@ -46,38 +56,91 @@ public:
         gridLayout->setObjectName(QString::fromUtf8("gridLayout"));
         label = new QLabel(TaskEditor);
         label->setObjectName(QString::fromUtf8("label"));
+        label->setAlignment(Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter);
 
         gridLayout->addWidget(label, 2, 0, 1, 1);
 
         title = new QLineEdit(TaskEditor);
         title->setObjectName(QString::fromUtf8("title"));
 
-        gridLayout->addWidget(title, 2, 1, 1, 1);
+        gridLayout->addWidget(title, 2, 1, 1, 6);
 
         description = new QTextEdit(TaskEditor);
         description->setObjectName(QString::fromUtf8("description"));
 
-        gridLayout->addWidget(description, 3, 1, 1, 1);
-
-        label_2 = new QLabel(TaskEditor);
-        label_2->setObjectName(QString::fromUtf8("label_2"));
-
-        gridLayout->addWidget(label_2, 3, 0, 1, 1);
+        gridLayout->addWidget(description, 8, 0, 1, 7);
 
         saveButton = new QPushButton(TaskEditor);
         saveButton->setObjectName(QString::fromUtf8("saveButton"));
 
-        gridLayout->addWidget(saveButton, 4, 1, 1, 1);
+        gridLayout->addWidget(saveButton, 9, 1, 1, 1);
+
+        percentComplete = new QSpinBox(TaskEditor);
+        percentComplete->setObjectName(QString::fromUtf8("percentComplete"));
+        percentComplete->setMaximum(100);
+
+        gridLayout->addWidget(percentComplete, 3, 1, 1, 1);
+
+        label_4 = new QLabel(TaskEditor);
+        label_4->setObjectName(QString::fromUtf8("label_4"));
+        label_4->setAlignment(Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter);
+
+        gridLayout->addWidget(label_4, 3, 0, 1, 1);
+
+        label_3 = new QLabel(TaskEditor);
+        label_3->setObjectName(QString::fromUtf8("label_3"));
+        label_3->setAlignment(Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter);
+
+        gridLayout->addWidget(label_3, 6, 0, 1, 1);
+
+        label_2 = new QLabel(TaskEditor);
+        label_2->setObjectName(QString::fromUtf8("label_2"));
+        label_2->setAlignment(Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter);
+
+        gridLayout->addWidget(label_2, 3, 5, 1, 1);
+
+        originalEstimate = new QSpinBox(TaskEditor);
+        originalEstimate->setObjectName(QString::fromUtf8("originalEstimate"));
+
+        gridLayout->addWidget(originalEstimate, 3, 6, 1, 1);
+
+        label_5 = new QLabel(TaskEditor);
+        label_5->setObjectName(QString::fromUtf8("label_5"));
+        label_5->setAlignment(Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter);
+
+        gridLayout->addWidget(label_5, 3, 3, 1, 1);
+
+        currentEstimate = new QSpinBox(TaskEditor);
+        currentEstimate->setObjectName(QString::fromUtf8("currentEstimate"));
+
+        gridLayout->addWidget(currentEstimate, 3, 4, 1, 1);
 
         taskCombo = new QComboBox(TaskEditor);
         taskCombo->setObjectName(QString::fromUtf8("taskCombo"));
 
-        gridLayout->addWidget(taskCombo, 1, 1, 1, 1);
+        gridLayout->addWidget(taskCombo, 6, 1, 1, 6);
 
-        label_3 = new QLabel(TaskEditor);
-        label_3->setObjectName(QString::fromUtf8("label_3"));
+        statusCombo = new QComboBox(TaskEditor);
+        statusCombo->setObjectName(QString::fromUtf8("statusCombo"));
 
-        gridLayout->addWidget(label_3, 1, 0, 1, 1);
+        gridLayout->addWidget(statusCombo, 7, 1, 1, 3);
+
+        label_6 = new QLabel(TaskEditor);
+        label_6->setObjectName(QString::fromUtf8("label_6"));
+        label_6->setAlignment(Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter);
+
+        gridLayout->addWidget(label_6, 7, 0, 1, 1);
+
+        label_7 = new QLabel(TaskEditor);
+        label_7->setObjectName(QString::fromUtf8("label_7"));
+        label_7->setAlignment(Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter);
+
+        gridLayout->addWidget(label_7, 7, 4, 1, 1);
+
+        authorCombo = new QComboBox(TaskEditor);
+        authorCombo->setObjectName(QString::fromUtf8("authorCombo"));
+
+        gridLayout->addWidget(authorCombo, 7, 5, 1, 2);
 
 
         retranslateUi(TaskEditor);
@@ -89,9 +152,16 @@ public:
     {
         TaskEditor->setWindowTitle(QApplication::translate("TaskEditor", "Form", 0, QApplication::UnicodeUTF8));
         label->setText(QApplication::translate("TaskEditor", "Title", 0, QApplication::UnicodeUTF8));
-        label_2->setText(QApplication::translate("TaskEditor", "Description", 0, QApplication::UnicodeUTF8));
         saveButton->setText(QApplication::translate("TaskEditor", "Save", 0, QApplication::UnicodeUTF8));
+        percentComplete->setSuffix(QApplication::translate("TaskEditor", "%", 0, QApplication::UnicodeUTF8));
+        label_4->setText(QApplication::translate("TaskEditor", "Complete", 0, QApplication::UnicodeUTF8));
         label_3->setText(QApplication::translate("TaskEditor", "Subtask Of", 0, QApplication::UnicodeUTF8));
+        label_2->setText(QApplication::translate("TaskEditor", "Original Est.", 0, QApplication::UnicodeUTF8));
+        originalEstimate->setSuffix(QApplication::translate("TaskEditor", " Hrs.", 0, QApplication::UnicodeUTF8));
+        label_5->setText(QApplication::translate("TaskEditor", "Current Est.", 0, QApplication::UnicodeUTF8));
+        currentEstimate->setSuffix(QApplication::translate("TaskEditor", " Hrs.", 0, QApplication::UnicodeUTF8));
+        label_6->setText(QApplication::translate("TaskEditor", "Status", 0, QApplication::UnicodeUTF8));
+        label_7->setText(QApplication::translate("TaskEditor", "Author", 0, QApplication::UnicodeUTF8));
     } // retranslateUi
 
 };

@@ -12,7 +12,7 @@ taskFinder::taskFinder(QWidget *parent) : QWidget(parent){
 
         header<<"Title"<<"Owner"<<"Status";
         treeWidget->setHeaderLabels(header);
-
+        treeWidget->setColumnWidth(0,500);
         layout = new QVBoxLayout();
         layout->addWidget(treeWidget);
         this->setLayout(layout);

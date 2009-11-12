@@ -64,6 +64,9 @@ void TaskEditor::updateStore(){
     this->store["title"]=this->title->text().toStdString();
     this->store["description"]=this->description->toHtml().toStdString();
     this->store["parentTaskID"]=this->taskCombo->itemData(this->taskCombo->currentIndex()).toString().toStdString();
+    this->store["percentComplete"]=this->percentComplete->value();
+    this->store["estimate"]=this->currentEstimate->value();
+    this->store["originalEstimate"]=this->originalEstimate->value();
 }
 
 
@@ -76,6 +79,9 @@ void TaskEditor::networkResponse(){
 void TaskEditor::updateFromStore(){
     this->title->setText(this->store["title"].asString().c_str());
     this->description->setHtml(this->store["description"].asString().c_str());
+    this->percentComplete->setValue(this->store.get("percentComplete","0").asInt());
+    this->currentEstimate->setValue(this->store.get("estimate","0").asInt());
+    this->originalEstimate->setValue(this->store.get("originalEstimate","0").asInt());
     for(int x=0;x<this->taskCombo->count();x++){
         if(this->taskCombo->itemData(x).toString().toStdString()==this->store["parentTaskID"].asString()){
             this->taskCombo->setCurrentIndex(x);

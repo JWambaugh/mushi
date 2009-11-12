@@ -108,6 +108,7 @@ int MushiSetup::createTables(){
 				",ownerID"
 				",projectID"
 				",estimate"
+                                ",originalEstimate"
 				",statusID"
 				",categoryID REFERENCES category(id)"
 				",parentTaskID integer REFERENCES task(id)"
@@ -119,6 +120,7 @@ int MushiSetup::createTables(){
 				"id integer PRIMARY KEY AUTOINCREMENT"
 				",someID int"
 				",tableName"  //the name of the table to which it should be joined to
+                                ",timeSpent" //amouunt of time spent on the task
 				",authorID REFERENCES user(id)"
 				",createDate datetime DEFAULT (datetime('NOW'))"
 				")");

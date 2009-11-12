@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'taskmanagerwindow.ui'
 **
-** Created: Mon Nov 2 13:22:34 2009
+** Created: Wed Nov 11 21:52:29 2009
 **      by: Qt User Interface Compiler version 4.6.0
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
@@ -70,7 +70,7 @@ public:
         dockWidgetContents = new QWidget();
         dockWidgetContents->setObjectName(QString::fromUtf8("dockWidgetContents"));
         TaskTreeContainer->setWidget(dockWidgetContents);
-        TaskManagerWindow->addDockWidget(static_cast<Qt::DockWidgetArea>(1), TaskTreeContainer);
+        TaskManagerWindow->addDockWidget(static_cast<Qt::DockWidgetArea>(4), TaskTreeContainer);
         toolBar = new QToolBar(TaskManagerWindow);
         toolBar->setObjectName(QString::fromUtf8("toolBar"));
         toolBar->setToolButtonStyle(Qt::ToolButtonTextBesideIcon);
