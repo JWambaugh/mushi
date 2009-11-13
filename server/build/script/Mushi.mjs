@@ -17,6 +17,14 @@ Mushi.getTasks = function(){
 };
 
 
+
+Mushi.getStatuses = function(){
+	var query="SELECT * from status" 
+			+ " WHERE 1";
+	return _db.nestedSelect(query);
+}
+
+
 Mushi.newTask=function(title,description){
 	var q="insert into task (title,description) values ('"+title+"','"+description+"')";
 	return _db.exec(q);

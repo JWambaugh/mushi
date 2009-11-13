@@ -13,6 +13,7 @@
 
 
 #include "taskdirectory.h"
+#include "statusdirectory.h"
 #include "../edit_html/edit_html.h"
 class qtMushi : public QApplication{
 	Q_OBJECT
@@ -22,6 +23,7 @@ public:
             return QString(SERVER_LOCATION);
         }
         TaskDirectory taskDirectory;
+        StatusDirectory statusDirectory;
 		
 
 

@@ -33,7 +33,8 @@ SOURCES += utils.cpp \
     MushiScriptDB.cpp \
     commands/ScriptCommand.cpp \
     ScriptEngine.cpp \
-    smtp.cpp
+    smtp.cpp \
+    commands/GetStatusesCommand.cpp
 HEADERS += utils.h \
     URLHandlers.h \
     sqlite3.h \
@@ -62,4 +63,5 @@ HEADERS += utils.h \
     MushiScriptGlobal.h \
     commands/ScriptCommand.h \
     ScriptEngine.h \
-    smtp.h
+    smtp.h \
+    commands/GetStatusesCommand.h

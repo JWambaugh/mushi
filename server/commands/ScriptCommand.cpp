@@ -15,14 +15,28 @@ ScriptCommand::ScriptCommand(QString path)
 Json::Value & ScriptCommand::run(MushiSession sess, Json::Value &command, Json::Value &ret, QScriptEngine &engine){
    // qDebug()<<this->scriptCode;
     JSON_WRITE_CLASS writer;
-    QScriptValue object=engine.evaluate(this->scriptCode,this->scriptPath);
-
+    QScriptValue object;
+    engine.evaluate(this->scriptCode,this->scriptPath);
+    object=engine.globalObject().property("Mushi").property("runCommand");
     QStringList errors;
 
-    //qDebug() << object.toString();
+    qDebug()<<"Mushi.runCommand: " << object.toString();
 
-    if(!object.isFunction()){
-      //  qDebug() << "Run function not found in command " <<this->scriptPath<< " run has value of:  "<<runFunction.toString()<<" Skipping...";
+    if(object.isError()){
+        qDebug() << "Error running script " <<this->scriptPath;
+        errors = engine.uncaughtExceptionBacktrace();
+        //if there are any errors, don't use the ret value.
+        QString errMsg;
+        for (int i = 0; i < errors.size(); ++i){
+            errMsg.append(errors.at(i));
+        }
+
+        qDebug()<<errMsg;
+        ret["reason"]="Script error occured.";
+        return ret;
+    }
+    else if(!object.isFunction()){
+        qDebug() << "Run function not found in command " <<this->scriptPath<<" Skipping...";
         ret["reason"]="Script error occured. Function not found.";
         return ret;
     }
@@ -36,7 +50,7 @@ Json::Value & ScriptCommand::run(MushiSession sess, Json::Value &command, Json::
     QScriptValue retObject=engine.evaluate(QString(writer.write(ret).c_str()));
     if(retObject.isError()){
         qDebug()<< "RetObject:"<< retObject.toString();
-        ret["reason"]="Script error occured.";
+        ret["reason"]="Script error occured while evaluating response.";
         return ret;
     }
 

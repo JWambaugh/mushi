@@ -1,7 +1,7 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'taskFinder.h'
 **
-** Created: Fri Oct 23 16:45:41 2009
+** Created: Thu Nov 12 13:28:38 2009
 **      by: The Qt Meta Object Compiler version 62 (Qt 4.6.0)
 **
 ** WARNING! All changes made in this file will be lost!

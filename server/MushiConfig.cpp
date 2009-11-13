@@ -36,7 +36,7 @@ int MushiConfig::setValue(QString key, QString value){
 	char query[1000];
 
 	//check to see if the key already exists
-        sprintf(query,"select * from config where key='%s'",value.toStdString().c_str(),key.toStdString().c_str());
+        sprintf(query,"select * from config where key='%s'",key.toStdString().c_str());
 	
 	r=db->query(query);
 	delete r;

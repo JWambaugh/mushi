@@ -39,6 +39,7 @@ Json::Value &EditTaskCommand::run(MushiSession sess, Json::Value &command, Json:
 		
 		std::vector<std::string> columns;
 		columns.push_back("title");
+                columns.push_back("originalEstimate");
 		columns.push_back("description");
 		columns.push_back("percentComplete");
 		columns.push_back("reporterId");

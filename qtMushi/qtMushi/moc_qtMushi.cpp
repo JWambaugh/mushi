@@ -1,7 +1,7 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'qtMushi.h'
 **
-** Created: Fri Oct 23 16:45:36 2009
+** Created: Thu Nov 12 13:28:32 2009
 **      by: The Qt Meta Object Compiler version 62 (Qt 4.6.0)
 **
 ** WARNING! All changes made in this file will be lost!

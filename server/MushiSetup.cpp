@@ -145,14 +145,14 @@ int MushiSetup::createTables(){
 			  ")");
 	
 	db->query("create table if not exists session ("
-				"id PRIMARY KEY"
+                                "id PRIMARY KEY"
 				",data"
 				",lastSeen datetime"
 				",createDate datetime DEFAULT (datetime('NOW'))"
 				")");
 	
 	db->query("create table if not exists status ("
-			  "id PRIMARY KEY"
+                          "id integer PRIMARY KEY AUTOINCREMENT"
 			  ",name"
 			  ",isOpen"
 			  ",createDate datetime DEFAULT (datetime('NOW'))"

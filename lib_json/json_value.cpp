@@ -714,6 +714,7 @@ Value::asInt() const
    case booleanValue:
       return value_.bool_ ? 1 : 0;
    case stringValue:
+      return atoi(value_.string_);
    case arrayValue:
    case objectValue:
       JSON_ASSERT_MESSAGE( false, "Type is not convertible to int" );

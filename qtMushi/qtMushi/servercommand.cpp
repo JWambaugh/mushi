@@ -41,7 +41,7 @@ void ServerCommand::saveComplete(QNetworkReply *reply){
     Json::Reader reader;
     Json::Value root;
     QString r = reply->readAll();
-    qDebug()<<r;
+    qDebug()<<"Server Response: "<<r;
     reader.parse(r.toStdString(),root);
     emit saveComplete(root);
 }

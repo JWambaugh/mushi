@@ -45,7 +45,9 @@ void taskFinder::networkResponse(){
             item->setText(0,item->taskValue.get("title","NULL").asCString());
             item->setText(1,item->taskValue.get("owner","").get("firstName","").asCString());
            // item->setText(2,html2plaintext(item->taskValue.get("description","NULL").asCString()).left(100).replace("\n"," "));
-            item->setText(2,item->taskValue.get("status","NULL").asCString());
+
+            item->setText(2,item->taskValue.get("status","NULL").get("name","null").asCString());
+
             treeWidget->addTopLevelItem(item);
             this->addChildrenToTree(item);
         }
@@ -63,7 +65,7 @@ void taskFinder::addChildrenToTree(taskTreeWidgetItem *parent){
         item->setText(0,item->taskValue.get("title","NULL").asCString());
         item->setText(1,item->taskValue.get("owner","").get("firstName","").asCString());
        // item->setText(2,html2plaintext(item->taskValue.get("description","NULL").asCString()).left(100).replace("\n"," "));
-        item->setText(2,item->taskValue.get("status","NULL").asCString());
+        item->setText(2,item->taskValue.get("status","NULL").get("name","null").asCString());
         parent->addChild(item);
         this->addChildrenToTree(item);
     }
