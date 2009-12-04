@@ -121,7 +121,7 @@ Json::Value scriptValue2Json(QScriptValue val){
   Takes a script of output/javascript mixed code and turns it all into javascript.
   Single-pass.
   Script code appears within <??> tags.
-  a print shortcut is also supported: <?=value?> [same as <?_conn.print(value)?>]
+  a print shortcut is also supported: <?=value?> [same as <?Mushi.conn.print(value)?>]
 
   */
 void precompileMJS(QString &script){
@@ -131,7 +131,7 @@ void precompileMJS(QString &script){
     int startPos=2; //where the block started
 
     if(!(script.at(0)=='<' && script.at(1)=='?')){
-        buffer.append("_conn.print('");
+        buffer.append("Mushi.conn.print('");
         inCode=false;
         startPos=0;
     }
@@ -171,7 +171,7 @@ void precompileMJS(QString &script){
             buffer.append("');\n");
             if(pos<script.length()-3 && script.at(pos+2) == '='){
                 printMode=true;
-                buffer.append("_conn.print(");
+                buffer.append("Mushi.conn.print(");
                 pos++;
             }
             pos+=1;
@@ -180,7 +180,7 @@ void precompileMJS(QString &script){
             if(printMode){
                 buffer.append(");");
             }
-            buffer.append("\n_conn.print('");
+            buffer.append("\nMushi.conn.print('");
             inCode=false;
             pos+=1;
         }else {
@@ -191,7 +191,7 @@ void precompileMJS(QString &script){
     if(!inCode){
         buffer.append(" ');\n");
     }
-    qDebug()<<buffer;
+    //qDebug()<<buffer;
     script=buffer;
 
 

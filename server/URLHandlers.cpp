@@ -1,4 +1,4 @@
-/*
+ /*
  *  URLHandlers.cpp
  *  server
  *
@@ -32,6 +32,7 @@
 #include <iostream>
 #include <fstream>
 #include <sstream>
+#include <QTime>
 #include "mongoose.h"
 #include "utils.h"
 #include "MushiServer.h"
@@ -52,6 +53,7 @@ void MushiServer::defineHandlers(){
 static void
 m_receiveCommand(struct mg_connection *conn, const struct mg_request_info *ri, void *user_data)
 {
+        QTime timer;
 	Json::Reader reader;
 	JSON_WRITE_CLASS writer;
 	Json::Value cmd;
@@ -64,9 +66,11 @@ m_receiveCommand(struct mg_connection *conn, const struct mg_request_info *ri, v
 	}
 	url_decode(data,strlen(data),data,strlen(data)+1 );
         if (!strcmp(request_method, "POST")) {
-                 MushiScriptEngine engine(conn,ri,user_data);
+                timer.start();
+                MushiScriptEngine engine(conn,ri,user_data);
+                qDebug()<<"Time to initialize engine: "<<timer.elapsed();
                 printf("Received POST: %s\n",data);
-		/* If not all data is POSTed, wait for the rest */
+
 		
 		
 		std::string input =data;
@@ -156,6 +160,8 @@ static void m_showIndex(struct mg_connection *conn, const struct mg_request_info
 Javascript handler
 */
 static void m_script(struct mg_connection *conn, const struct mg_request_info *ri,void *user_data){
+    QTime timer;
+    timer.start();
     mg_printf(conn, "%s", "HTTP/1.1 200 OK\r\nContent-Type: text/html\r\n\r\n");
     //mg_printf(conn,"Script called!");
 
@@ -182,7 +188,8 @@ static void m_script(struct mg_connection *conn, const struct mg_request_info *r
         for (int i = 0; i < errors.size(); ++i)
               printf("%s\n",errors.at(i).toLocal8Bit().constData());
         }
-    }
+    qDebug()<<"time elapsed to run script: "<<timer.elapsed();
+}
 
 
 static size_t url_decode(const char *src, size_t src_len, char *dst, size_t dst_len)

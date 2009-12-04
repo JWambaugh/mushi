@@ -33,10 +33,6 @@ QScriptValue MushiScriptDBNestedSelect(QScriptContext *ctx, QScriptEngine *eng){
 
     QScriptValue val;
     val = eng->evaluate(QString(writer.write(r->getNestedJson()).c_str()));
-
-
-
-
     delete r;
     return val;
 }
@@ -52,5 +48,11 @@ QScriptValue MushiScriptDBNestedSelect(QScriptContext *ctx, QScriptEngine *eng){
     MushiDB *db = MushiServer::getInstance()->getDB();
     db->query(ctx->argument(0).toString().toStdString());
     QScriptValue val;
+    return val;
+}
+
+ QScriptValue MushiScriptDBEscapeQuotes(QScriptContext *ctx, QScriptEngine *eng){
+    MushiDB *db = MushiServer::getInstance()->getDB();
+    QScriptValue val(eng,db->escapeQuotes(ctx->argument(0).toString()));
     return val;
 }

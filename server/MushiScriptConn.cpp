@@ -1,5 +1,5 @@
 #include "MushiScriptConn.h"
-
+#include <QDebug>
 MushiScriptConn::MushiScriptConn(struct mg_connection *conn, const struct mg_request_info *ri, void *user_data):QObject(0)
 {
     _conn=conn;
@@ -10,8 +10,9 @@ MushiScriptConn::MushiScriptConn(struct mg_connection *conn, const struct mg_req
 
 
 void MushiScriptConn::print(QString string){
-    mg_printf(_conn,string.toStdString().c_str());
-   //0 printf("Print:%s\n",string.toStdString().c_str());
+    mg_printf(_conn,"%s",string.toStdString().c_str());
+    qDebug() <<"Printing:" <<string;
+    //0 printf("Print:%s\n",string.toStdString().c_str());
 }
 
 QString MushiScriptConn::userData(){

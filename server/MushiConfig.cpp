@@ -18,7 +18,7 @@ QString MushiConfig::getValue(QString key){
 	MushiDBResult *r;
 	char query[1000];
         QString cell;
-        sprintf(query,"select value from config where key = '%s'",key.toStdString().c_str());
+        sprintf(query,"select value from config where key = '%s'",db->escapeQuotes(key).toStdString().c_str());
 	
 	r=db->query(query);
 	//free(query);
@@ -30,7 +30,7 @@ QString MushiConfig::getValue(QString key){
 }
 
 
-int MushiConfig::setValue(QString key, QString value){
+int MushiConfig::setValue(QString key, QString value, QString description){
 	MushiDB *db = MushiServer::getInstance()->getDB();
 	MushiDBResult *r;
 	char query[1000];
@@ -41,13 +41,11 @@ int MushiConfig::setValue(QString key, QString value){
 	r=db->query(query);
 	delete r;
 	if(r->row>0){
-                sprintf(query,"update config set value='%s' where key='%s'",value.toStdString().c_str(),key.toStdString().c_str());
+                sprintf(query,"update config set value='%s' where key='%s'",db->escapeQuotes(value).toStdString().c_str(),db->escapeQuotes(key).toStdString().c_str());
 		r=db->query(query);
 	} else {
-        sprintf(query,"insert into config (key,value) VALUES ('%s','%s')",key.toStdString().c_str(),value.toStdString().c_str());
-		
+        sprintf(query,"insert into config (key,value,description) VALUES ('%s','%s','%s')",db->escapeQuotes(key).toStdString().c_str(),db->escapeQuotes(value).toStdString().c_str(),db->escapeQuotes(description).toStdString().c_str());
 		r=db->query(query);
-		
 	}
 	
 	
@@ -63,11 +61,11 @@ int MushiConfig::setValue(QString key, QString value){
 
 
 void MushiConfig::setDefaults(){
-	setValue("listenPort","8080");
-	setValue("trackerName","Mushi");
-	setValue("membersOnly","1");
-	setValue("webAddess","http://www.example.com");
-	setValue("adminEmail","admin@example.com");
+        setValue("listenPort","8080","The port that Mushi will listen for requests");
+        setValue("trackerName","Mushi","The name of your system");
+        setValue("membersOnly","1","If set to 1, then only members who authenticate can access the system");
+        setValue("webAddess","http://www.example.com","The web address of the system");
+        setValue("adminEmail","admin@example.com","The administrators email address");
         setValue("defaultStatusID","1");
 
         //default directory settings
@@ -76,6 +74,7 @@ void MushiConfig::setDefaults(){
         setValue("scriptDirectory","../script");
         setValue("commandDirectory","../script/command");
         setValue("databaseDirectory","../data");
+        setValue("SMTPServer","");
 	
 	
 }	

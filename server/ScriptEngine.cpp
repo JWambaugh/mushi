@@ -2,42 +2,49 @@
 #include "MushiConfig.h"
 MushiScriptEngine::MushiScriptEngine(struct mg_connection *conn, const struct mg_request_info *ri,void *user_data)
 {
+
+    //create global Mushi object
+    QScriptValue mushiObject = engine.newObject();
     //expose conn object to script userspace
     MushiScriptConn *connObject = new MushiScriptConn(conn,ri,user_data);
     QScriptValue connObjectValue= engine.newQObject(connObject,QScriptEngine::QtOwnership,0);
 
     QScriptValue globalObject=engine.globalObject();
-    globalObject.setProperty("_conn", connObjectValue);
+    mushiObject.setProperty("conn", connObjectValue);
 
 
 
-    //expose MushiScriptDB to javascript!
 
 
-    //QScriptValue dbObjectValue= engine.newQObject(new MushiScriptDB(),QScriptEngine::QtOwnership,0);
-    //globalObject.setProperty("_db", dbObjectValue);
 
+
+
+
+
+     //expose MushiScriptDB to javascript!
     QScriptValue dbObject = engine.newObject();
     dbObject.setProperty("select", engine.newFunction(MushiScriptDBSelect));
     dbObject.setProperty("nestedSelect", engine.newFunction(MushiScriptDBNestedSelect));
     dbObject.setProperty("exec", engine.newFunction(MushiScriptDBExecute));
-    globalObject.setProperty("_db",dbObject);
+    dbObject.setProperty("escapeQuotes",engine.newFunction(MushiScriptDBEscapeQuotes));
+
+    mushiObject.setProperty("db",dbObject);
 
 
     QScriptValue configObject = engine.newQObject(new MushiConfig);
 
 
-    globalObject.setProperty("_config",configObject);
+    mushiObject.setProperty("config",configObject);
 
 
     //expose global functions
 
-    globalObject.setProperty("include",engine.newFunction(MushiScriptGlobalInclude));
-    globalObject.setProperty("_log",engine.newFunction(MushiScriptGlobalLog));
-    globalObject.setProperty("sendMail",engine.newFunction(MushiScriptGlobalSendMail));
+    mushiObject.setProperty("include",engine.newFunction(MushiScriptGlobalInclude));
+    mushiObject.setProperty("log",engine.newFunction(MushiScriptGlobalLog));
+    mushiObject.setProperty("sendMail",engine.newFunction(MushiScriptGlobalSendMail));
     QString contents;
 
-
+    globalObject.setProperty("Mushi",mushiObject);
 
 
     //load startup script

@@ -21,7 +21,9 @@ HEADERS += qtMushi.h \
     homepage.h \
     taskcomment.h \
     taskdirectory.h \
-    statusdirectory.h
+    statusdirectory.h \
+    authordirectory.h \
+    userDirectory.h
 SOURCES += main.cpp \
     qtMushi.cpp \
     taskFinder.cpp \
@@ -39,7 +41,8 @@ SOURCES += main.cpp \
     homepage.cpp \
     taskcomment.cpp \
     taskdirectory.cpp \
-    statusdirectory.cpp
+    statusdirectory.cpp \
+    userDirectory.cpp
 RESOURCES += attach.qrc
 INCLUDEPATH += ../edit_html
 DEPENDPATH += ../edit_html

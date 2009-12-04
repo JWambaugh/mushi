@@ -1,7 +1,10 @@
 <?
 
+/*
+supplimental methods to the Mushi global object
 
-var Mushi={}; //global Mushi object
+
+*/
 
 Mushi.getTasks = function(){
 	var query="SELECT t.id, t.title, t.description, t.percentComplete, t.estimate, t.createDate" 
@@ -13,7 +16,7 @@ Mushi.getTasks = function(){
 				+ " LEFT JOIN user o on o.id = t.ownerId"
 				+ " LEFT JOIN status s on s.id = t.statusID"
 				+ " WHERE 1";
-	return _db.nestedSelect(query);
+	return this.db.nestedSelect(query);
 };
 
 
@@ -21,16 +24,17 @@ Mushi.getTasks = function(){
 Mushi.getStatuses = function(){
 	var query="SELECT * from status" 
 			+ " WHERE 1";
-	return _db.nestedSelect(query);
+	return this.db.nestedSelect(query);
 }
 
 
 Mushi.newTask=function(title,description){
 	var q="insert into task (title,description) values ('"+title+"','"+description+"')";
-	return _db.exec(q);
+	return this.db.exec(q);
 };
 
-//make sure mushi is in the global scope
-getGlobalObject().Mushi=Mushi;
 
-
+/*
+ Set up a shortcut to Mushi.conn.print()
+*/
+Mushi.print=Mushi.conn.print;

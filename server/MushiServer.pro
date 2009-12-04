@@ -34,7 +34,8 @@ SOURCES += utils.cpp \
     commands/ScriptCommand.cpp \
     ScriptEngine.cpp \
     smtp.cpp \
-    commands/GetStatusesCommand.cpp
+    commands/GetStatusesCommand.cpp \
+    commands/GetAuthorsCommand.cpp
 HEADERS += utils.h \
     URLHandlers.h \
     sqlite3.h \
@@ -64,4 +65,5 @@ HEADERS += utils.h \
     commands/ScriptCommand.h \
     ScriptEngine.h \
     smtp.h \
-    commands/GetStatusesCommand.h
+    commands/GetStatusesCommand.h \
+    commands/GetAuthorsCommand.h

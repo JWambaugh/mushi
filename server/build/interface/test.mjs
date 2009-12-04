@@ -1,5 +1,6 @@
 
-
+<head>
+<link href="/extjs2.2.1/ext-all.css" rel="stylesheet" type="text/css">
 <script type="text/javascript" src="/extjs2.2.1/ext-base.js"></script>
 <script type="text/javascript" src="/extjs2.2.1/ext-all-debug.js"></script>
 
@@ -57,6 +58,7 @@ Ext.grid.TableGrid = function(table, config) {
 
   var cm = new Ext.grid.ColumnModel(cols);
 
+
   if (config.width || config.height) {
     ct.setSize(config.width || 'auto', config.height || 'auto');
   } else {
@@ -75,23 +77,35 @@ Ext.grid.TableGrid = function(table, config) {
     autoWidth: false
   });
   Ext.grid.TableGrid.superclass.constructor.call(this, ct, {});
+
+
+
 };
 
+
+var panel=new Ext.grid.GridPanel({
+	renderTo:'ticketGrid'
+	
+});
+	
 Ext.extend(Ext.grid.TableGrid, Ext.grid.GridPanel);
 Ext.onReady(function(){
-var grid= new Ext.grid.TableGrid('tickets');
-grid.render();
+panel.render();
+	
+	//var grid= new Ext.grid.TableGrid('tickets');
+	//grid.render();
 });
 </script>
 
-
+</head>
+<body>
 
 <img src="/mushiLogo.png" /><br>
 <?
 
-include(_config.getValue("scriptDirectory")+'/Mushi.mjs'); //Load the Mushi javascript api
+Mushi.include(Mushi.config.getValue("scriptDirectory")+'/Mushi.mjs'); //Load the Mushi javascript api
 
-include(_config.getValue("scriptDirectory")+'/JSON.mjs'); //Load the JSON api
+Mushi.include(Mushi.config.getValue("scriptDirectory")+'/JSON.mjs'); //Load the JSON api
 ?>
 
 <h1>Current tickets in the system:</h1>
@@ -100,15 +114,20 @@ include(_config.getValue("scriptDirectory")+'/JSON.mjs'); //Load the JSON api
 
 var res = Mushi.getTasks();
 
+
+
 ?>
 
-<table border=1 id="tickets" width="400">
+
+<div id='ticketGrid'></div>
+
+<table border=1 id="tickets" >
 <?
 for (i in res){
     var row=res[i];
 ?>
     <tr>
-    <td><?=row.title?></td>
+    <td width='100'><?=row.title?></td>
     <td><?=htmlentities(row.description)?></td>
     
     
@@ -126,7 +145,7 @@ for (i in res){
 <table border="1">
 
 <?
-var tables = _db.select("select * from sqlite_master where type='table' order by type, name");
+var tables = Mushi.db.select("select * from sqlite_master where type='table' order by type, name");
 
 
 
@@ -138,4 +157,4 @@ for (i in tables){
 <?}?>
 </table>
 
-
+</body>

@@ -17,6 +17,10 @@ TaskEditor::TaskEditor(QWidget *parent) :
         this->statusCombo->addItem(statuses->at(x).get("name","").asString().c_str(),QVariant(statuses->at(x).get("id","").asCString()));
     }
 
+    QList<Json::Value>*users=static_cast <qtMushi *>(qApp)->userDirectory.getAllUsers();
+    for(int x=0;x<users->count();x++){
+        this->ownerCombo->addItem(users->at(x).get("firstName","").asString().append(" ").append(users->at(x).get("lastName","").asString()).c_str(),QVariant(users->at(x).get("id","").asCString()));
+    }
 
 }
 
@@ -75,6 +79,8 @@ void TaskEditor::updateStore(){
     //update status
     this->store["statusID"]=this->statusCombo->itemData(this->statusCombo->currentIndex()).toString().toStdString();
     this->store["status"]=static_cast <qtMushi *>(qApp)->statusDirectory.getStatusByID(this->statusCombo->itemData(this->statusCombo->currentIndex()).toString());
+    //update owner
+    this->store["ownerID"]=this->ownerCombo->itemData(this->ownerCombo->currentIndex()).toString().toStdString();
 }
 
 
@@ -102,6 +108,12 @@ void TaskEditor::updateFromStore(){
     for(int x=0;x<this->statusCombo->count();x++){
         if(this->statusCombo->itemData(x).toString().toStdString()==this->store.get("status","").get("id","").asString()){
             this->statusCombo->setCurrentIndex(x);
+        }
+    }
+
+    for(int x=0;x<this->ownerCombo->count();x++){
+        if(this->ownerCombo->itemData(x).toString().toStdString()==this->store.get("ownerID","").asString()){
+            this->ownerCombo->setCurrentIndex(x);
         }
     }
 }

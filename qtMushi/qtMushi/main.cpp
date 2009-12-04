@@ -5,6 +5,7 @@
 #include <QDir>
 #include "../edit_html/edit_html.h"
 #include "qtMushi.h"
+#include <QTableWidget>
 
 
 static inline bool is_file(QString fullFileName)

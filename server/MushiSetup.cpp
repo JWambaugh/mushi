@@ -46,6 +46,7 @@ int MushiSetup::createTables(){
 				"id integer PRIMARY KEY AUTOINCREMENT"
 				",key"
 				",value"
+                                ",description"
 				",createDate datetime DEFAULT (datetime('NOW'))"
 				
 				")");

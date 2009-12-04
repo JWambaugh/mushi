@@ -14,6 +14,7 @@
 
 #include "taskdirectory.h"
 #include "statusdirectory.h"
+#include "userDirectory.h"
 #include "../edit_html/edit_html.h"
 class qtMushi : public QApplication{
 	Q_OBJECT
@@ -24,7 +25,7 @@ public:
         }
         TaskDirectory taskDirectory;
         StatusDirectory statusDirectory;
-		
+        UserDirectory userDirectory;
 
 
 	static QNetworkAccessManager *netManager;

@@ -13,7 +13,7 @@
   <property name="windowTitle">
    <string>Form</string>
   </property>
-  <layout class="QGridLayout" name="gridLayout" columnstretch="0,1,1,1,1,1,0,0" columnminimumwidth="0,0,0,0,0,0,0,0">
+  <layout class="QGridLayout" name="gridLayout" columnstretch="0,1,1,1,1,1" columnminimumwidth="0,0,0,0,0,0">
    <item row="1" column="0">
     <widget class="QLabel" name="label">
      <property name="layoutDirection">
@@ -43,21 +43,11 @@
    <item row="5" column="1" colspan="5">
     <widget class="QComboBox" name="taskCombo"/>
    </item>
-   <item row="6" column="1" colspan="3">
+   <item row="6" column="1" colspan="2">
     <widget class="QComboBox" name="statusCombo"/>
    </item>
-   <item row="6" column="4">
-    <widget class="QLabel" name="label_7">
-     <property name="text">
-      <string>Author</string>
-     </property>
-     <property name="alignment">
-      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-     </property>
-    </widget>
-   </item>
-   <item row="6" column="5">
-    <widget class="QComboBox" name="authorCombo"/>
+   <item row="6" column="4" colspan="2">
+    <widget class="QComboBox" name="ownerCombo"/>
    </item>
    <item row="9" column="0" colspan="6">
     <widget class="QTextEdit" name="description"/>
@@ -94,6 +84,9 @@
    </item>
    <item row="7" column="3">
     <widget class="QDoubleSpinBox" name="originalEstimate">
+     <property name="suffix">
+      <string> Hrs.</string>
+     </property>
      <property name="decimals">
       <number>1</number>
      </property>
@@ -117,6 +110,9 @@
    </item>
    <item row="7" column="5">
     <widget class="QDoubleSpinBox" name="currentEstimate">
+     <property name="suffix">
+      <string> Hrs.</string>
+     </property>
      <property name="decimals">
       <number>1</number>
      </property>
@@ -136,6 +132,16 @@
     <widget class="QLabel" name="label_6">
      <property name="text">
       <string>Status</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+     </property>
+    </widget>
+   </item>
+   <item row="6" column="3">
+    <widget class="QLabel" name="label_7">
+     <property name="text">
+      <string>Owner</string>
      </property>
      <property name="alignment">
       <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>

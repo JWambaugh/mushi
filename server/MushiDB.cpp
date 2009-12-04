@@ -42,6 +42,10 @@ MushiDBResult* MushiDB::query(const std::string sql){
 	return r;
 }
 
+QString MushiDB::escapeQuotes(QString value){
+    return value.replace("'","''");
+}
+
 
 /**
  * Creates an update statement from a json value

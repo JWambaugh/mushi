@@ -30,7 +30,7 @@ QScriptValue MushiScriptGlobalLog(QScriptContext *ctx, QScriptEngine *engine){
 QScriptValue MushiScriptGlobalSendMail(QScriptContext *ctx, QScriptEngine *engine){
     QScriptValue val;
    qDebug()<<"Sending mail";
-   Smtp *newMail  = new Smtp(ctx->argument(0).toString(),ctx->argument(1).toString(),ctx->argument(2).toString(),ctx->argument(3).toString(),"am4.am.net",ctx->argument(4).toString(),25);
+   Smtp *newMail  = new Smtp(ctx->argument(0).toString(),ctx->argument(1).toString(),ctx->argument(2).toString(),ctx->argument(3).toString(),MushiConfig::getValue("SMTPServer").toStdString().c_str(),ctx->argument(4).toString(),25);
   // delete newMail;
 
     return val;
