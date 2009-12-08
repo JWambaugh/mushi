@@ -29,9 +29,28 @@ Mushi.getStatuses = function(){
 
 
 Mushi.newTask=function(title,description){
-	var q="insert into task (title,description) values ('"+title+"','"+description+"')";
+	var q="insert into task (title,description) values ('"+this.db.escapeQuotes(title)+"','"+this.db.escapeQuotes(description)+"')";
 	return this.db.exec(q);
 };
+
+/**
+ * Returns an array of task objects that belong to a particular task
+ **/
+Mushi.getTaskNotes=function(taskID){
+    var tasks=this.db.select("select * from notes where tableName='task' and someID='"+this.db.escapeQuotes(taskID)+"'");
+    return tasks;
+}
+
+Mushi.db.getInsertRowID=function(){
+    var id=this.select("select last_insert_rowid() as rowid");
+    return id[0].rowid;
+}
+
+Mushi.addNoteToTask=function(taskID,note,timeSpent,authorID){
+    this.db.exec("insert into note (someID,tableName,timeSpent,authorID) values ('"+taskID+"','task','"+this.db.escapeQuotes(timeSpent)+"','"+this.db.escapeQuotes(authorID)+"')");
+    var id=Mushi.db.getInsertRowID()
+    this.db.exec("insert into textHistory (someID,tableName,text) values ('"+id+"','note','"+note+"')");
+}
 
 
 /*
