@@ -1,5 +1,5 @@
 #include "ScriptCommand.h"
-#include "ScriptEngine.h"
+#include "../ScriptEngine.h"
 #include <QScriptValueList>
 #include <QTime>
 ScriptCommand::ScriptCommand(QString path)

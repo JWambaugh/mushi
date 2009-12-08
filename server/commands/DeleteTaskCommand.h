@@ -6,8 +6,8 @@
  *
  */
 
-#include "MushiCommand.h"
-#include "MushiSession.h"
+#include "../MushiCommand.h"
+#include "../MushiSession.h"
 
 class DeleteTaskCommand: public MushiCommand {
 public:

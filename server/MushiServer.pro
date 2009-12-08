@@ -5,7 +5,7 @@ CONFIG += qt
 QT += script
 QT += network
 QT -= gui
-TARGET = build//bin/MushiServer
+TARGET = build/bin/MushiServer
 CONFIG += console
 CONFIG -= app_bundle
 TEMPLATE = app
@@ -67,3 +67,7 @@ HEADERS += utils.h \
     smtp.h \
     commands/GetStatusesCommand.h \
     commands/GetAuthorsCommand.h
+
+win32{
+LIBS += -lws2_32
+}

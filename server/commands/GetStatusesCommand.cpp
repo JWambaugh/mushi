@@ -8,9 +8,9 @@
 #include <stdio.h>
 #include <sstream>
 #include <QStringList>
-#include "../lib_json/value.h"
+#include "../../lib_json/value.h"
 #include "GetStatusesCommand.h"
-#include "MushiServer.h"
+#include "../MushiServer.h"
 
 
 Json::Value &GetStatusesCommand::run(MushiSession sess, Json::Value &command, Json::Value &ret, QScriptEngine &engine){

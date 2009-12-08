@@ -7,9 +7,9 @@
  */
 #include <stdio.h>
 #include <sstream>
-#include "../lib_json/value.h"
+#include "../../lib_json/value.h"
 #include "AddTaskCommand.h"
-#include "MushiServer.h"
+#include "../MushiServer.h"
 
 Json::Value  &AddTaskCommand::run(MushiSession sess, Json::Value &command, Json::Value &ret, QScriptEngine &engine){
 	/*

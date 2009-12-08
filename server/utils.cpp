@@ -19,7 +19,7 @@ std::string uID(){
 	std::ostringstream str;
 	time_t t;
 	t=time(&t);
-	str << t << random();
+        str << t << rand();
 	return str.str();
 }
 

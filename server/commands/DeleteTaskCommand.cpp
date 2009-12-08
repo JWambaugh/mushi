@@ -13,9 +13,9 @@
 #include <stdio.h>
 #include <sstream>
 #include <vector>
-#include "../lib_json/value.h"
+#include "../../lib_json/value.h"
 
-#include "MushiServer.h"
+#include "../MushiServer.h"
 #include "EditTaskCommand.h"
 
 

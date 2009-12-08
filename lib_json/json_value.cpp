@@ -8,6 +8,9 @@
 # include <cpptl/conststring.h>
 #endif
 #include <stddef.h>    // size_t
+#include <stdio.h>
+#include <string.h>
+#include <memory.h>
 #ifndef JSON_USE_SIMPLE_INTERNAL_ALLOCATOR
 # include "json_batchallocator.h"
 #endif // #ifndef JSON_USE_SIMPLE_INTERNAL_ALLOCATOR

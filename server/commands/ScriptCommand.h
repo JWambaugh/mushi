@@ -2,15 +2,15 @@
 #define SCRIPTCOMMAND_H
 
 
-#include "MushiCommand.h"
-#include "MushiSession.h"
+#include "../MushiCommand.h"
+#include "../MushiSession.h"
 #include <stdio.h>
 #include <sstream>
 #include <qmutex>
-#include "../lib_json/value.h"
-#include "MushiServer.h"
-#include "utils.h"
-#include "ScriptEngine.h"
+#include "../../lib_json/value.h"
+#include "../MushiServer.h"
+#include "../utils.h"
+#include "../ScriptEngine.h"
 
 class ScriptCommand : public MushiCommand
 {
