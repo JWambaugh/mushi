@@ -42,11 +42,11 @@
 #include "../lib_json/json.h"
 
 void MushiServer::defineHandlers(){
-	mg_bind_to_uri(ctx, "/", &m_showIndex,NULL);
-	mg_bind_to_uri(ctx, "/version", &m_showVersion,NULL);
-	mg_bind_to_uri(ctx, "/config", &m_showConfig,NULL);
-        mg_bind_to_uri(ctx, "*.mjs", &m_script,NULL);
-	mg_bind_to_uri(ctx, "/command", &m_receiveCommand,NULL);
+        mg_set_uri_callback(ctx, "/", &m_showIndex,NULL);
+        mg_set_uri_callback(ctx, "/version", &m_showVersion,NULL);
+        mg_set_uri_callback(ctx, "/config", &m_showConfig,NULL);
+        mg_set_uri_callback(ctx, "*.mjs", &m_script,NULL);
+        mg_set_uri_callback(ctx, "/command", &m_receiveCommand,NULL);
 }
 
 
@@ -82,14 +82,18 @@ m_receiveCommand(struct mg_connection *conn, const struct mg_request_info *ri, v
 		reader.parse(input, cmd);
 		
 		
-                char *buff = (char *)writer.write(MushiServer::getInstance()->runCommand(cmd,engine)).c_str();
-		
-		mg_printf(conn, "%s",
-				  "HTTP/1.1 200 OK\r\n"
-				  "Content-Type: text/html\r\n"
-				  "Connection: close\r\n\r\n");
-		mg_printf(conn, "%s",buff);
-		//free(buff);
+               // char *buff = (char *)writer.write(MushiServer::getInstance()->runCommand(cmd,engine)).c_str();
+                std::string response;
+
+                response.append("HTTP/1.1 200 OK\r\n"
+                                "Content-Type: text/html\r\n"
+                                "Connection: close\r\n\r\n");
+
+                response.append(writer.write(MushiServer::getInstance()->runCommand(cmd,engine)));
+                //mg_printf(conn, "%s",buff);
+                mg_write(conn, response.c_str(),response.length());
+
+                                  //free(buff);
 		//free(request_method);
 		//free(data);
 	} 

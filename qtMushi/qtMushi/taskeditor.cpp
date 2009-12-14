@@ -85,7 +85,7 @@ void TaskEditor::updateStore(){
 
 
 void TaskEditor::networkResponse(){
-    this->close();
+    //this->close();
     emit saveComplete();
 }
 

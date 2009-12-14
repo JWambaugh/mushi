@@ -29,6 +29,7 @@ private slots:
     void newTask();
     void deleteTask();
     void removeCentralTab(QObject *page);
+  //  void setCentralWidgetFocus(QWidget widget);
 };
 
 #endif // TASKMANAGERWINDOW_H

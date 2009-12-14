@@ -14,13 +14,13 @@ TaskManagerWindow::TaskManagerWindow(QWidget *parent) :
     this->m_ui->dockWidgetContents->setLayout(taskListLayout);
 
 
-    this->centralTabWidget=new QTabWidget();
-    this->centralTabWidget->setTabsClosable(true);
+   // this->centralTabWidget=new QTabWidget();
+    //this->centralTabWidget->setTabsClosable(true);
 
 
     HomePage *page = new HomePage();
-    this->centralTabWidget->addTab(page,"Home");
-    this->m_ui->centralWidgetLayout->addWidget(this->centralTabWidget);
+    //this->centralTabWidget->addTab(page,"Home");
+    this->setCentralWidget(page);
     //this->centralWidgetLayout->addWidget(this->centralTabWidget);
     //this->m_ui->centralwidget->setLayout(this->centralWidgetLayout);
 
@@ -28,7 +28,7 @@ TaskManagerWindow::TaskManagerWindow(QWidget *parent) :
     //make connections
     connect(finder,SIGNAL(taskSelected(Json::Value)),this,SLOT(openTask(Json::Value))); //connect finder activating opening an editor
 
-    connect(this->centralTabWidget,SIGNAL(tabCloseRequested(int)),this,SLOT(closeCentralTab(int)));
+    //connect(this->centralTabWidget,SIGNAL(tabCloseRequested(int)),this,SLOT(closeCentralTab(int)));
     connect(this->m_ui->actionNew,SIGNAL(triggered()),this,SLOT(newTask()));
     connect(this->m_ui->actionDelete,SIGNAL(triggered()),this,SLOT(deleteTask()));
 
@@ -41,31 +41,25 @@ TaskManagerWindow::~TaskManagerWindow()
 
 
 void TaskManagerWindow::openTask(Json::Value value){
+
+
+
     TaskEditor* editor;
-    //first look for an already open tab
-    for(int x=0;x<this->centralTabWidget->count();x++){
-        editor=dynamic_cast<TaskEditor*>(this->centralTabWidget->widget(x));
-        if(editor!=NULL){
-            if(editor->store==value){
-                this->centralTabWidget->setCurrentWidget(editor);
-                return;
-            }
-        }
-    }
+
     editor=new TaskEditor();
     editor->setStore(value);
     connect(editor,SIGNAL(saveComplete()),this->finder,SLOT(search()));
     //editor->show();
-    this->centralTabWidget->addTab(editor,value.get("title","").asString().c_str());
-    this->centralTabWidget->setCurrentWidget(editor);
 
-    connect(editor,SIGNAL(destroyed(QObject*)),this,SLOT(removeCentralTab(QObject*)));
+    //this->m_ui->centralWidgetLayout->addWidget(editor);
+    this->setCentralWidget(editor);
+    //connect(editor,SIGNAL(destroyed(QObject*)),this,SLOT(removeCentralTab(QObject*)));
 }
 
 
 void TaskManagerWindow::removeCentralTab(QObject *page){
 
-    this->centralTabWidget->removeTab(this->centralTabWidget->indexOf(static_cast<QWidget *>(page)));
+   // this->centralTabWidget->removeTab(this->centralTabWidget->indexOf(static_cast<QWidget *>(page)));
 
 }
 
@@ -74,19 +68,18 @@ void TaskManagerWindow::removeCentralTab(QObject *page){
 
 void TaskManagerWindow::closeCentralTab(int index){
     QWidget *page;
-    page=this->centralTabWidget->widget(index);
-    this->centralTabWidget->removeTab(index);
-    page->deleteLater();
+    //page=this->centralTabWidget->widget(index);
+    //this->centralTabWidget->removeTab(index);
+    //page->deleteLater();
 }
 
 
 void TaskManagerWindow::newTask(){
-    TaskEditor* task = new TaskEditor();
-    connect(task,SIGNAL(saveComplete()),this->finder,SLOT(search()));
-    this->centralTabWidget->addTab(task,"New Task");
-    this->centralTabWidget->setCurrentWidget(task);
 
-    connect(task,SIGNAL(destroyed(QObject*)),this,SLOT(removeCentralTab(QObject*)));
+    TaskEditor *task = new TaskEditor();
+    connect(task,SIGNAL(saveComplete()),this->finder,SLOT(search()));
+
+    this->setCentralWidget(task);
 }
 
 
@@ -101,12 +94,13 @@ void TaskManagerWindow::deleteTask(){
     connect(command,SIGNAL(saveComplete(Json::Value)),command,SLOT(deleteLater()));
     //find and close any editors of the deleted task
     TaskEditor* editor;
-    for(int x=0;x<this->centralTabWidget->count();x++){
+   /* for(int x=0;x<this->centralTabWidget->count();x++){
         editor=dynamic_cast<TaskEditor*>(this->centralTabWidget->widget(x));
         if(editor!=NULL){
             if(editor->store==task){
                 editor->deleteLater();
             }
         }
-    }
+    }*/
 }
+

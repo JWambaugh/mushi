@@ -17,7 +17,7 @@ taskFinder::taskFinder(QWidget *parent) : QWidget(parent){
         layout->addWidget(treeWidget);
         this->setLayout(layout);
         search();
-        connect(treeWidget,SIGNAL(itemActivated(QTreeWidgetItem*,int)),this,SLOT(itemActivated(QTreeWidgetItem*,int)));
+        connect(treeWidget,SIGNAL(itemClicked(QTreeWidgetItem*,int)),this,SLOT(itemActivated(QTreeWidgetItem*,int)));
         connect(&static_cast <qtMushi *>(qApp)->taskDirectory,SIGNAL(updated()),this,SLOT(networkResponse()));
 
 }
