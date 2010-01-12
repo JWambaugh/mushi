@@ -42,7 +42,7 @@ Json::Value &EditTaskCommand::run(MushiSession sess, Json::Value &command, Json:
                 columns.push_back("originalEstimate");
 		columns.push_back("description");
 		columns.push_back("percentComplete");
-		columns.push_back("reporterId");
+                columns.push_back("reporterID");
 		columns.push_back("ownerID");
 		columns.push_back("projectID");
 		columns.push_back("estimate");

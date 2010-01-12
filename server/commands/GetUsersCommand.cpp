@@ -1,5 +1,5 @@
 /*
- *  GetAuthorsCommand.cpp
+ *  GetUsersCommand.cpp
  *  server
  *
  *  Created by Jordan Wambaugh on 11/10/08.
@@ -9,11 +9,11 @@
 #include <sstream>
 #include <QStringList>
 #include "../../lib_json/value.h"
-#include "GetAuthorsCommand.h"
+#include "GetUsersCommand.h"
 #include "../MushiServer.h"
 
 
-Json::Value &GetAuthorsCommand::run(MushiSession sess, Json::Value &command, Json::Value &ret, QScriptEngine &engine){
+Json::Value &GetUsersCommand::run(MushiSession sess, Json::Value &command, Json::Value &ret, QScriptEngine &engine){
 
 
 
