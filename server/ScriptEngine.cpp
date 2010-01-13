@@ -20,14 +20,14 @@ MushiScriptEngine::MushiScriptEngine(struct mg_connection *conn, const struct mg
 
 
 
-
+    scriptDB = new MushiScriptDB();
      //expose MushiScriptDB to javascript!
-    QScriptValue dbObject = engine.newObject();
-    dbObject.setProperty("select", engine.newFunction(MushiScriptDBSelect));
+    QScriptValue dbObject = engine.newQObject(scriptDB);
+    /*dbObject.setProperty("select", engine.newFunction(MushiScriptDBSelect));
     dbObject.setProperty("nestedSelect", engine.newFunction(MushiScriptDBNestedSelect));
     dbObject.setProperty("exec", engine.newFunction(MushiScriptDBExecute));
     dbObject.setProperty("escapeQuotes",engine.newFunction(MushiScriptDBEscapeQuotes));
-
+*/
     mushiObject.setProperty("db",dbObject);
 
 
@@ -52,4 +52,9 @@ MushiScriptEngine::MushiScriptEngine(struct mg_connection *conn, const struct mg
     startupFileName.append("/startup.mjs");
     contents=getFileContents(startupFileName);
     engine.evaluate(contents);
+}
+
+
+MushiScriptEngine::~MushiScriptEngine(){
+    delete this->scriptDB;
 }

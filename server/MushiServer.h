@@ -44,7 +44,7 @@ public:
 	MushiDB *getDB();
 	static MushiServer *instance;
 	
-        Json::Value runCommand(Json::Value command,MushiScriptEngine &engine);
+        Json::Value runCommand(Json::Value command,MushiScriptEngine &engine, MushiDB &db);
 	
 	int registerCommand(MushiCommand *command);
 

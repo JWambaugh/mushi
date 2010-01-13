@@ -107,7 +107,7 @@ int MushiServer::registerCommand(MushiCommand *command){
 
 
 
-Json::Value MushiServer::runCommand(Json::Value command,MushiScriptEngine &engine){
+Json::Value MushiServer::runCommand(Json::Value command,MushiScriptEngine &engine, MushiDB &db){
 	
 	MushiSession session;
 	
@@ -128,7 +128,7 @@ Json::Value MushiServer::runCommand(Json::Value command,MushiScriptEngine &engin
 	//give the command to command handlers for handling
 	try{
 		for(int x=0;x<commands.size();x++){
-                        ret = commands.at(x)->run(session, command, ret, engine.engine);
+                        ret = commands.at(x)->run(session, command, ret, engine.engine,db);
 		}
 	} catch (Json::Value val){
             return val;

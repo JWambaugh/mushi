@@ -13,7 +13,7 @@
 #include "../MushiServer.h"
 
 
-Json::Value &GetUsersCommand::run(MushiSession sess, Json::Value &command, Json::Value &ret, QScriptEngine &engine){
+Json::Value &GetUsersCommand::run(MushiSession sess, Json::Value &command, Json::Value &ret, QScriptEngine &engine, MushiDB &db){
 
 
 
@@ -21,12 +21,12 @@ Json::Value &GetUsersCommand::run(MushiSession sess, Json::Value &command, Json:
                 Json::Value results(Json::arrayValue);
                 std::ostringstream query;
                 MushiDBResult *r;
-                MushiDB *db = MushiServer::getInstance()->getDB();
+
 
                 query	<< "SELECT * from user";
 
 
-                r=db->query(query.str());
+                r=db.query(query.str());
                 results=r->getNestedJson();
 
                 ret["status"]="success";

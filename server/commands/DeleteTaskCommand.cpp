@@ -19,7 +19,7 @@
 #include "EditTaskCommand.h"
 
 
-Json::Value &DeleteTaskCommand::run(MushiSession sess, Json::Value &command, Json::Value &ret, QScriptEngine &engine){
+Json::Value &DeleteTaskCommand::run(MushiSession sess, Json::Value &command, Json::Value &ret, QScriptEngine &engine, MushiDB &db){
 	/*
 	 //debug command
 	 Json::Value::Members members;
@@ -38,7 +38,7 @@ Json::Value &DeleteTaskCommand::run(MushiSession sess, Json::Value &command, Jso
 			throw ret;
 		}
 		//std::string query;
-		MushiDB *db = MushiServer::getInstance()->getDB();
+
 		
 		
 		
@@ -48,7 +48,7 @@ Json::Value &DeleteTaskCommand::run(MushiSession sess, Json::Value &command, Jso
 		
 
 
-                db->query(query.str());
+                db.query(query.str());
 		
 		
 		ret["status"]="success";

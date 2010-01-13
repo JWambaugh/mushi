@@ -3,10 +3,22 @@
 #include <QtScript>
 #include <QObject>
 
+#include <QScriptable>
+#include "MushiDB.h"
 
- QScriptValue MushiScriptDBSelect(QScriptContext *ctx, QScriptEngine *eng);
- QScriptValue MushiScriptDBNestedSelect(QScriptContext *ctx, QScriptEngine *eng);
- QScriptValue MushiScriptDBExecute(QScriptContext *ctx, QScriptEngine *eng);
- QScriptValue MushiScriptDBEscapeQuotes(QScriptContext *ctx, QScriptEngine *eng);
+class MushiScriptDB :public QObject, protected QScriptable{
+    Q_OBJECT
+private:
+    MushiDB db;
+public:
+     MushiScriptDB();
+public slots:
+    QScriptValue select(QString);
+    QScriptValue nestedSelect(QString);
+    QScriptValue execute(QString);
+    QScriptValue escapeQuotes(QString);
+};
+
+
 
 #endif // MUSHISCRIPTDB_H

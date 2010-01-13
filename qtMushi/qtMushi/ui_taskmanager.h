@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'taskmanager.ui'
 **
-** Created: Fri Dec 4 13:34:26 2009
+** Created: Tue Jan 12 15:54:41 2010
 **      by: Qt User Interface Compiler version 4.6.0
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!

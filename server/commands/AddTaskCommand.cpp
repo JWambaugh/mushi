@@ -11,7 +11,7 @@
 #include "AddTaskCommand.h"
 #include "../MushiServer.h"
 
-Json::Value  &AddTaskCommand::run(MushiSession sess, Json::Value &command, Json::Value &ret, QScriptEngine &engine){
+Json::Value  &AddTaskCommand::run(MushiSession sess, Json::Value &command, Json::Value &ret, QScriptEngine &engine, MushiDB &db){
 	/*
 	//debug command
 	Json::Value::Members members;
@@ -30,7 +30,7 @@ Json::Value  &AddTaskCommand::run(MushiSession sess, Json::Value &command, Json:
 			throw ret;
 		}
 		std::ostringstream query;
-		MushiDB *db = MushiServer::getInstance()->getDB();
+
 
 		query << "insert into task (title,description,percentComplete,reporterID, ownerID, projectID,estimate,categoryID,parentTaskID, statusID ) VALUES("
 					"'"<<dbin(command.get("title","").asString())
@@ -46,7 +46,7 @@ Json::Value  &AddTaskCommand::run(MushiSession sess, Json::Value &command, Json:
 		
 					<< "')";
 		
-		db->query(query.str());
+                db.query(query.str());
 		
 		
 		ret["status"]="success";

@@ -60,6 +60,8 @@ m_receiveCommand(struct mg_connection *conn, const struct mg_request_info *ri, v
 	char	 *request_method;
 	char *data= ri->post_data;
 	request_method = ri->request_method;
+
+
 	if(data==0){
 		mg_printf(conn,"data wasn't posted.");
 		return;
@@ -67,6 +69,10 @@ m_receiveCommand(struct mg_connection *conn, const struct mg_request_info *ri, v
 	url_decode(data,strlen(data),data,strlen(data)+1 );
         if (!strcmp(request_method, "POST")) {
                 timer.start();
+                //get a database handle
+                MushiDB db;
+                db.init();
+                //init a script engine
                 MushiScriptEngine engine(conn,ri,user_data);
                 qDebug()<<"Time to initialize engine: "<<timer.elapsed();
                 printf("Received POST: %s\n",data);
@@ -89,7 +95,7 @@ m_receiveCommand(struct mg_connection *conn, const struct mg_request_info *ri, v
                                 "Content-Type: text/html\r\n"
                                 "Connection: close\r\n\r\n");
 
-                response.append(writer.write(MushiServer::getInstance()->runCommand(cmd,engine)));
+                response.append(writer.write(MushiServer::getInstance()->runCommand(cmd,engine,db)));
                 //mg_printf(conn, "%s",buff);
                 mg_write(conn, response.c_str(),response.length());
 

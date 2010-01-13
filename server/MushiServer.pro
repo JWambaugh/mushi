@@ -35,7 +35,8 @@ SOURCES += utils.cpp \
     ScriptEngine.cpp \
     smtp.cpp \
     commands/GetStatusesCommand.cpp \
-    commands/GetUsersCommand.cpp
+    commands/GetUsersCommand.cpp \
+    commands/AddUserCommand.cpp
 HEADERS += utils.h \
     URLHandlers.h \
     sqlite3.h \
@@ -66,8 +67,6 @@ HEADERS += utils.h \
     ScriptEngine.h \
     smtp.h \
     commands/GetStatusesCommand.h \
-    commands/GetUsersCommand.h
-
-win32{
-LIBS += -lws2_32
-}
+    commands/GetUsersCommand.h \
+    commands/AddUserCommand.h
+win32:LIBS += -lws2_32
