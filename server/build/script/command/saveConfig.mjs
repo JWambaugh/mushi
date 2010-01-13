@@ -1,7 +1,7 @@
 <?
 	//"saveConfig" command. saves a specific config parameter.
 	(function(command,ret){
-		//only do somthig if our command was called
+		//only do somthing if our command was called
 		if(command.command=="saveConfig"){
 			//Mushi.include(Mushi.config.getValue("scriptDirectory")+'/Mushi.mjs'); //Load the Mushi javascript api
             var db = Mushi.db;

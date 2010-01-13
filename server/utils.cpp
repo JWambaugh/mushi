@@ -29,9 +29,9 @@ std::string uID(){
  **/
 char *getPostBody(char *search){
 	char* found;
-	printf("%s\n",search);
+        //printf("%s\n",search);
 	found=strstr(search, "\r\n");
-	printf("%d", found);
+        //printf("%d", found);
 	return search + 4;
 }
 

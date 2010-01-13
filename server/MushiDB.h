@@ -25,6 +25,7 @@ public:
 	static std::string json2update(Json::Value &val, std::vector<std::string>&columns, std::string where, std::string table);
 	static std::string json2insert(Json::Value &val, std::vector<std::string>&columns, std::string table);
         QString escapeQuotes(QString value);
+        ~MushiDB();
 private:
 	sqlite3 *db;
 

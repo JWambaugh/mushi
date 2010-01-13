@@ -47,7 +47,7 @@ QScriptValue MushiScriptDB::nestedSelect(QString query){
      return ctx->thisObject().property(name);
  }
 
- QScriptValue MushiScriptDB::execute(QString query){
+ QScriptValue MushiScriptDB::exec(QString query){
     //MushiDB *db = MushiServer::getInstance()->getDB();
     db.query(query.toStdString());
     QScriptValue val;

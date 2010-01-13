@@ -15,11 +15,6 @@ MushiScriptEngine::MushiScriptEngine(struct mg_connection *conn, const struct mg
 
 
 
-
-
-
-
-
     scriptDB = new MushiScriptDB();
      //expose MushiScriptDB to javascript!
     QScriptValue dbObject = engine.newQObject(scriptDB);

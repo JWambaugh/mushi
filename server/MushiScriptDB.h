@@ -15,7 +15,7 @@ public:
 public slots:
     QScriptValue select(QString);
     QScriptValue nestedSelect(QString);
-    QScriptValue execute(QString);
+    QScriptValue exec(QString);
     QScriptValue escapeQuotes(QString);
 };
 

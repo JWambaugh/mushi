@@ -74,7 +74,7 @@ m_receiveCommand(struct mg_connection *conn, const struct mg_request_info *ri, v
                 db.init();
                 //init a script engine
                 MushiScriptEngine engine(conn,ri,user_data);
-                qDebug()<<"Time to initialize engine: "<<timer.elapsed();
+                //qDebug()<<"Time to initialize engine: "<<timer.elapsed();
                 printf("Received POST: %s\n",data);
 
 		
@@ -198,7 +198,7 @@ static void m_script(struct mg_connection *conn, const struct mg_request_info *r
         for (int i = 0; i < errors.size(); ++i)
               printf("%s\n",errors.at(i).toLocal8Bit().constData());
         }
-    qDebug()<<"time elapsed to run script: "<<timer.elapsed();
+    //qDebug()<<"time elapsed to run script: "<<timer.elapsed();
 }
 
 

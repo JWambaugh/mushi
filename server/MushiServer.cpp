@@ -75,7 +75,7 @@ void MushiServer::installCommands(){
         files=scriptDir.entryInfoList(QStringList("*.mjs"));
         for(int  x=0;x<files.size();x++){
             if(files.at(x).isFile()){
-               // qDebug()<<"Loading "<<files.at(x).absoluteFilePath();
+                qDebug()<<"Loading "<<files.at(x).absoluteFilePath();
                 this->registerCommand(new ScriptCommand(files.at(x).absoluteFilePath()));
             }
         }

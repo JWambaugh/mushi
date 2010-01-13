@@ -31,7 +31,7 @@ void MushiDB::init(){
 }
 	
 MushiDBResult* MushiDB::query(const std::string sql){
-        printf("%s\n",sql.c_str());
+       // printf("%s\n",sql.c_str());
 	MushiDBResult *r = new MushiDBResult;
 	r->sql=(char *)sql.c_str();
 	
@@ -94,3 +94,7 @@ std::string  MushiDB::json2insert(Json::Value &val, std::vector<std::string> &co
 	return query.str();
 }
 
+MushiDB::~MushiDB(){
+    //close the database connection
+    sqlite3_close(this->db);
+}
