@@ -157,4 +157,20 @@ for (i in tables){
 <?}?>
 </table>
 
+
+<h2>
+Run command test
+</h2>
+<?
+var result = Mushi.runCommand({
+    command:"findTask"
+    
+    });
+Mushi.conn.print(debug(result));
+?>
+
+
+
+
+
 </body>

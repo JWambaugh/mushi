@@ -9,8 +9,9 @@
 class MushiScriptDB :public QObject, protected QScriptable{
     Q_OBJECT
 private:
-    MushiDB db;
+
 public:
+     MushiDB db;
      MushiScriptDB();
 public slots:
     QScriptValue select(QString);

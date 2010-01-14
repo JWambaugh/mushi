@@ -38,3 +38,5 @@ QScriptValue MushiScriptGlobalSendMail(QScriptContext *ctx, QScriptEngine *engin
 
     return val;
 }
+
+

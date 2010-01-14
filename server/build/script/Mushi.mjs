@@ -74,6 +74,10 @@ Mushi.escapeQuotes=function(val){
     return this.db.escapeQuotes(this.und(val));
 }
 
+
+Mushi.runCommand = Mushi.engine.runCommand;
+
+
 /*
  Set up a shortcut to Mushi.conn.print()
 */

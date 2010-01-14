@@ -1,5 +1,8 @@
 #include "ScriptEngine.h"
 #include "MushiConfig.h"
+#ifndef MUSHI_SERVER_H
+#include "MushiServer.h"
+#endif
 MushiScriptEngine::MushiScriptEngine(struct mg_connection *conn, const struct mg_request_info *ri,void *user_data)
 {
 
@@ -24,6 +27,11 @@ MushiScriptEngine::MushiScriptEngine(struct mg_connection *conn, const struct mg
     dbObject.setProperty("escapeQuotes",engine.newFunction(MushiScriptDBEscapeQuotes));
 */
     mushiObject.setProperty("db",dbObject);
+
+
+    //add script engine to script space
+    QScriptValue engineObject =engine.newQObject(this);
+    mushiObject.setProperty("engine",engineObject);
 
 
     QScriptValue configObject = engine.newQObject(new MushiConfig);
@@ -53,3 +61,18 @@ MushiScriptEngine::MushiScriptEngine(struct mg_connection *conn, const struct mg
 MushiScriptEngine::~MushiScriptEngine(){
     delete this->scriptDB;
 }
+
+
+
+QScriptValue MushiScriptEngine::runCommand(QScriptValue command){
+    Json::Value response;
+    QScriptValue val;
+    JSON_WRITE_CLASS writer;
+    response= MushiServer::getInstance()->runCommand(scriptValue2Json(command), *this, this->scriptDB->db);
+   // qDebug()<<"here"<<writer.write(response).c_str();
+    val=this->engine.evaluate(QString(writer.write(response).c_str()).prepend("(").append(")"));
+    return val;
+}
+
+
+

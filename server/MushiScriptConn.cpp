@@ -10,7 +10,8 @@ MushiScriptConn::MushiScriptConn(struct mg_connection *conn, const struct mg_req
 
 
 void MushiScriptConn::print(QString string){
-    mg_printf(_conn,"%s",string.toStdString().c_str());
+    //mg_printf(_conn,"%s",string.toStdString().c_str());
+    mg_write(_conn,string.toStdString().c_str(),string.length());
     //qDebug() <<"Printing:" <<string;
     //0 printf("Print:%s\n",string.toStdString().c_str());
 }

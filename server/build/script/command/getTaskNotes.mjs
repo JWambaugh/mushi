@@ -4,7 +4,7 @@ Mushi.include(Mushi.config.getValue("scriptDirectory")+'/Mushi.mjs'); //Load the
     with (Mushi) {
 
 	//"getStatuses" command - returns all registered statuses.
-        log("Command: "+command.taskID);
+        
 		//only do somthig if our command was called
 		if(command.command=="getTaskNotes"){
            // Mushi.log(command)

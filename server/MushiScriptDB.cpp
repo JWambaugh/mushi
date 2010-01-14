@@ -41,20 +41,19 @@ QScriptValue MushiScriptDB::nestedSelect(QString query){
 }
 
 
- QScriptValue getProperty(QScriptContext *ctx, QScriptEngine *eng)
- {
+QScriptValue getProperty(QScriptContext *ctx, QScriptEngine *eng){
      QString name = ctx->argument(0).toString();
      return ctx->thisObject().property(name);
- }
+}
 
- QScriptValue MushiScriptDB::exec(QString query){
+QScriptValue MushiScriptDB::exec(QString query){
     //MushiDB *db = MushiServer::getInstance()->getDB();
     db.query(query.toStdString());
     QScriptValue val;
     return val;
 }
 
- QScriptValue MushiScriptDB::escapeQuotes(QString value){
+QScriptValue MushiScriptDB::escapeQuotes(QString value){
   //  MushiDB *db = MushiServer::getInstance()->getDB();
     QScriptValue val(this->engine(),db.escapeQuotes(value));
     return val;

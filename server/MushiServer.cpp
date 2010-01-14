@@ -107,7 +107,7 @@ int MushiServer::registerCommand(MushiCommand *command){
 
 
 
-Json::Value MushiServer::runCommand(Json::Value command,MushiScriptEngine &engine, MushiDB &db){
+Json::Value MushiServer::runCommand(Json::Value command, MushiScriptEngine &engine, MushiDB &db){
 	
 	MushiSession session;
 	
