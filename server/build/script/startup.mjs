@@ -8,15 +8,15 @@
 /**
  * wrapper to _conn.print
 **/
-var print = _conn.print;
+var print = Mushi.conn.print;
 
-var _p=_conn.print;
+var _p=Mushi.conn.print;
 
 /**
  * Another wrapper to _conn.print for  compatibility with browser .js
  */
 var document={};
-document.write=_conn.print;
+document.write=Mushi.conn.print;
 
 
 function get_html_translation_table(table, quote_style) {
@@ -237,4 +237,5 @@ return this;
 }).call(null);
 }
 
+Mushi.include(Mushi.config.getValue("scriptDirectory")+'/Mushi.mjs'); //Load the Mushi javascript api
 

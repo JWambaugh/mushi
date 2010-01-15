@@ -166,7 +166,7 @@ var result = Mushi.runCommand({
     command:"findTask"
     
     });
-Mushi.conn.print(debug(result));
+Mushi.conn.print("<pre>"+debug(result)+"</pre>");
 ?>
 
 

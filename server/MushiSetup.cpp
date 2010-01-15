@@ -79,8 +79,8 @@ int MushiSetup::createTables(){
 
         db->query("create table if not exists roleRight ("
                                 "id integer PRIMARY KEY AUTOINCREMENT"
-                                "rightID integer REFERENCES right(id)"
-                                "roleID integer REFERENCES role(id)"
+                                ",rightID integer REFERENCES right(id)"
+                                ",roleID integer REFERENCES role(id)"
                                 ",createDate datetime DEFAULT (datetime('NOW'))"
                                 ")");
 
@@ -192,9 +192,9 @@ void MushiSetup::insertDefaults(){
 	db->query("insert into user (firstName, lastName, password, email) values ('Jordan', 'Wambaugh', 'password', 'jordan@wambaugh.org')");
 
 	//insert roles
-	db->query("insert into role (name, description, isAdmin, createTask, modifyTask, deleteTask, modifyProject, deleteProject) values ('System Administrator','One who administers the system and thus requires full access to all', 1,1, 1, 1, 1, 1);"
-			  "insert into role (name, description, isAdmin, createTask, modifyTask, deleteTask, modifyProject, deleteProject) values ('Developer','A regular developer, can''t delete projects', 0, 1, 1, 1, 1, 0);"
-			  //template//  "('','', 1,1, 1, 1, 1, 1)	
+        db->query("insert into role (name, description, isAdmin) values ('System Administrator','One who administers the system and thus requires full access to all', 1);"
+                          "insert into role (name, description, isAdmin) values ('Developer','A regular developer, can''t delete projects', 0);"
+                          //template//  "('','', 1)
 	);
 }
 

@@ -55,6 +55,13 @@ MushiScriptEngine::MushiScriptEngine(struct mg_connection *conn, const struct mg
     startupFileName.append("/startup.mjs");
     contents=getFileContents(startupFileName);
     engine.evaluate(contents);
+    QStringList errors;
+    errors = engine.uncaughtExceptionBacktrace();
+    if(errors.size()){
+        printf("%s\n",engine.uncaughtException().toString().toStdString().c_str());
+        for (int i = 0; i < errors.size(); ++i)
+             qDebug()<<errors.at(i);
+    }
 }
 
 

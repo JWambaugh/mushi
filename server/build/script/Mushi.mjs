@@ -44,11 +44,52 @@ Mushi.getTaskNotes=function(taskID){
     return tasks;
 }
 
+
+/**
+ * Mushi.db additional helper functions
+ */
+
+/**
+ * Returns the ID of the last insert
+ */
 Mushi.db.getInsertRowID=function(){
     var id=this.select("select last_insert_rowid() as rowid");
     Mushi.log(id)
     return id[0].rowid;
 }
+
+
+/**
+ * Builds an insert statement from an object
+ */
+Mushi.db.object2Insert=function(obj,columns,table){
+   var buffer="INSERT INTO "+table+" ("+columns.join(", ")+") VALUES (";
+   for (var x=0;x<columns.length;x++){
+        if(x>0)buffer=buffer+", "
+        buffer=buffer+"'"+Mushi.escapeQuotes(obj[columns[x]])+"'";
+   }
+   buffer=buffer+")";
+   return buffer;
+}
+
+/**
+ * Builds an update statement from an object
+ */
+Mushi.db.object2Update=function(obj,columns,where,table){
+   var buffer="UPDATE "+table+" SET ";
+   for (var x=0;x<columns.length;x++){
+        if(x>0)buffer=buffer+", "
+        buffer=buffer+columns[x]+" = '"+Mushi.escapeQuotes(obj[columns[x]])+"'";
+   }
+   buffer=buffer+" WHERE "+where;
+   return buffer;
+}
+
+
+
+
+
+
 
 /**
  * Adds a note to a task

@@ -1,5 +1,4 @@
 <?
-Mushi.include(Mushi.config.getValue("scriptDirectory")+'/Mushi.mjs'); //Load the Mushi javascript api
 (function(command,ret){
     with(Mushi){
 		//only do somthig if our command was called
