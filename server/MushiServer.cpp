@@ -121,17 +121,19 @@ Json::Value MushiServer::runCommand(Json::Value command, MushiScriptEngine &engi
 		
 		session.load(command["sessionID"].asString());
 	}
-	
-	
 
-		
         Json::Value ret;
         ret["status"]="failure";
 	//give the command to command handlers for handling
 	try{
 		for(int x=0;x<commands.size();x++){
                         ret = commands.at(x)->run(session, command, ret, engine.engine,db);
-		}
+
+                        //quit processing attempts if there is an error
+                        if(ret.get("status","") == "error"){
+                            break;
+                        }
+                    }
 	} catch (Json::Value val){
             return val;
 	}

@@ -4,10 +4,7 @@
 		//only do somthing if our command was called
 		if(command.command=="addRole"){
         
-            //make sure all required params are given
-            if(Mushi.und(command.name)==''){
-                ret.status='error';
-                ret.message='Name not specified when adding role.';
+            if(validate.required(command,ret, ['name','projectID'])){
                 return ret;
             }
             
@@ -19,7 +16,7 @@
                 return ret;
             }
         
-			Mushi.db.exec(Mushi.db.object2Insert(command,['name','description'],"role"));
+			Mushi.db.exec(Mushi.db.object2Insert(command,['name','description','projectID'],"role"));
 			ret.status='success';
 		}
 		return ret; //always return the ret value.

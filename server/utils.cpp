@@ -61,8 +61,10 @@ std::string dbin(std::string str){
 
 QString getFileContents(QString filename){
     QFile scriptFile(filename);
-    if (!scriptFile.open(QIODevice::ReadOnly))
+    if (!scriptFile.open(QIODevice::ReadOnly)){
          printf("error loading file\n");
+         return "";
+     }
     QTextStream stream(&scriptFile);
     QString contents = stream.readAll();
     scriptFile.close();

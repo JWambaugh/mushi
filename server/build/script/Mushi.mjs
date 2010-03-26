@@ -45,6 +45,28 @@ Mushi.getTaskNotes=function(taskID){
 }
 
 
+
+
+Mushi.getRoles = function(projectID){
+    var query = "select * from role where projectID ='"+Mushi.escapeQuotes(Mushi.und(projectID))+"'";
+    Mushi.log(query)
+    return this.db.nestedSelect(query);
+}
+
+Mushi.getRights = function(roleId){
+    var where = '1'
+    if(this.und(roleId)!=''){
+        where =roleId;
+    }
+    var query = "select * from right where " + where;
+    return this.db.nestedSelect(query);
+}
+
+
+
+
+
+
 /**
  * Mushi.db additional helper functions
  */
@@ -91,6 +113,7 @@ Mushi.db.object2Update=function(obj,columns,where,table){
 
 
 
+
 /**
  * Adds a note to a task
  */
@@ -114,6 +137,24 @@ Mushi.und=function(val){
 Mushi.escapeQuotes=function(val){
     return this.db.escapeQuotes(this.und(val));
 }
+
+
+
+Mushi.validate={
+    required:function(command,ret,fields){
+        for(var field in fields){
+            if (Mushi.und(command[fields[field]])==''){
+                ret.message='Required field '+fields[field]+' was not specified.';
+                ret.status='error';
+                return 1;
+            }
+        }
+        return 0;
+    }
+    
+    
+}
+
 
 
 Mushi.runCommand = Mushi.engine.runCommand;

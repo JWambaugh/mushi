@@ -11,7 +11,7 @@
                 return ret;
             }
             
-            //make sure there isn't already a project with this name
+            //make sure there isn't already a right with this name
             var results = Mushi.db.select("select * from right where name = '"+Mushi.escapeQuotes(command.name)+"'");
             if(results.length>0){
                 ret.status='error';

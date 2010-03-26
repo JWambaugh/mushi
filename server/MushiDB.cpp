@@ -26,7 +26,7 @@ void MushiDB::init(){
         if(sqlite3_open("../data/mushiServer.data", &db) != SQLITE_OK){
 		printf("An error occured while loading the database: %s\n",sqlite3_errmsg(db));
 	} else{
-		printf("Successfully loaded database.\n");
+                //printf("Successfully loaded database.\n");
 	}
 }
 	
