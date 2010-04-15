@@ -10,7 +10,7 @@
 
 
 
-Json::Value  &AddUserCommand::run(MushiSession sess, Json::Value &command, Json::Value &ret, QScriptEngine &engine, MushiDB &db){
+Json::Value  &AddUserCommand::run(MushiSession &sess, Json::Value &command, Json::Value &ret, QScriptEngine &engine, MushiDB &db){
 
 
         if(command["command"].asString()=="addUser"){

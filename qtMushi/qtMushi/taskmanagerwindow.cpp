@@ -5,6 +5,7 @@ TaskManagerWindow::TaskManagerWindow(QWidget *parent) :
     QMainWindow(parent),
     m_ui(new Ui::TaskManagerWindow)
 {
+    this->currentActiveCentralWidget=0;
     m_ui->setupUi(this);
     QVBoxLayout *taskListLayout=new QVBoxLayout;
     taskListLayout->setContentsMargins(1,1,1,1);
@@ -20,7 +21,8 @@ TaskManagerWindow::TaskManagerWindow(QWidget *parent) :
 
     HomePage *page = new HomePage();
     //this->centralTabWidget->addTab(page,"Home");
-    this->setCentralWidget(page);
+    this->setActiveCentralWidget(page);
+    //this->setCentralWidget(page);
     //this->centralWidgetLayout->addWidget(this->centralTabWidget);
     //this->m_ui->centralwidget->setLayout(this->centralWidgetLayout);
 
@@ -50,9 +52,9 @@ void TaskManagerWindow::openTask(Json::Value value){
     editor->setStore(value);
     connect(editor,SIGNAL(saveComplete()),this->finder,SLOT(search()));
     //editor->show();
-
+    this->setActiveCentralWidget(editor);
     //this->m_ui->centralWidgetLayout->addWidget(editor);
-    this->setCentralWidget(editor);
+    //this->setCentralWidget(editor);
     //connect(editor,SIGNAL(destroyed(QObject*)),this,SLOT(removeCentralTab(QObject*)));
 }
 
@@ -79,9 +81,25 @@ void TaskManagerWindow::newTask(){
     TaskEditor *task = new TaskEditor();
     connect(task,SIGNAL(saveComplete()),this->finder,SLOT(search()));
 
-    this->setCentralWidget(task);
+    //this->setCentralWidget(task);
+    this->setActiveCentralWidget(task);
 }
 
+/**
+ * Sets the  current active main widget.
+ Automatically deletes previous widget, if there was one.
+*/
+void TaskManagerWindow::setActiveCentralWidget(QWidget *widget){
+
+
+    if(this->currentActiveCentralWidget){
+       this->m_ui->centerWidgetLayout->removeWidget(this->currentActiveCentralWidget);
+       this->currentActiveCentralWidget->deleteLater();
+    }
+
+    this->currentActiveCentralWidget=widget;
+    this->m_ui->centerWidgetLayout->addWidget(widget);
+}
 
 void TaskManagerWindow::deleteTask(){
     ServerCommand *command = new ServerCommand(this);

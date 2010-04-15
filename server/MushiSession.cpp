@@ -14,15 +14,15 @@
 #include "MushiSession.h"
 #include "MushiServer.h"
 
-void MushiSession::load(std::string id){
+void MushiSession::load(QString id){
 	char query[200];
 	MushiDBResult *r;
 	
-	sprintf(query,"select * from session where id ='%s'", id.c_str());
+        sprintf(query,"select * from session where id ='%s'", id.toStdString().c_str());
 	r=MushiServer::getInstance()->getDB()->query(query);
 	if(r->row > 0){
 		
-		sprintf(query,"update session set lastSeen=datetime('NOW') where id ='%s'", id.c_str());
+                sprintf(query,"update session set lastSeen=datetime('NOW') where id ='%s'", id.toStdString().c_str());
 		
 		MushiServer::getInstance()->getDB()->query(query);
 		
@@ -31,9 +31,9 @@ void MushiSession::load(std::string id){
 			Json::Reader reader;
 			reader.parse(r->getCell(1,1), this->data);
 		} catch (std::exception& e) {
-			printf("Error loading session data for session %s", id.c_str());
+                        printf("Error loading session data for session %s", id.toStdString().c_str());
 		}
-		data["sessionID"]=id;
+                data["sessionID"]=id.toStdString();
 		
 	}else{	//invalid session id
 		this->load();
@@ -49,7 +49,7 @@ void MushiSession::load(){
 	sprintf(query,"insert into session (id, data, lastSeen) VALUES ('%s','{}',datetime('NOW'))",id.c_str());
 	MushiServer::getInstance()->getDB()->query(query);
 	
-	this->load(id);
+        this->load(QString(id.c_str()));
 }
 
 
@@ -64,10 +64,22 @@ void MushiSession::save(){
 
 
 
-MushiSession::MushiSession(std::string id){
+MushiSession::MushiSession(QString id){
 	load(id);
 }
 
-MushiSession::MushiSession(){
+MushiSession::MushiSession(QObject *parent) :QObject(parent){
 	load();
 }
+
+
+
+QString MushiSession::get(QString key){
+    return this->data.get(key.toStdString(),"");
+}
+
+void MushiSession::set(QString key, QString value){
+    this->data[key]=value.toStdString();
+}
+
+

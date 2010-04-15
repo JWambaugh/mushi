@@ -1,8 +1,8 @@
 /********************************************************************************
 ** Form generated from reading UI file 'taskmanagerwindow.ui'
 **
-** Created: Tue Jan 12 15:54:42 2010
-**      by: Qt User Interface Compiler version 4.6.0
+** Created: Sat Apr 10 11:10:03 2010
+**      by: Qt User Interface Compiler version 4.6.2
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
@@ -31,8 +31,8 @@ class Ui_TaskManagerWindow
 public:
     QAction *actionNew;
     QAction *actionDelete;
-    QWidget *centralwidget;
-    QVBoxLayout *centralWidgetLayout;
+    QWidget *centerWidget;
+    QVBoxLayout *centerWidgetLayout;
     QMenuBar *menubar;
     QMenu *menuTask;
     QStatusBar *statusbar;
@@ -49,11 +49,11 @@ public:
         actionNew->setObjectName(QString::fromUtf8("actionNew"));
         actionDelete = new QAction(TaskManagerWindow);
         actionDelete->setObjectName(QString::fromUtf8("actionDelete"));
-        centralwidget = new QWidget(TaskManagerWindow);
-        centralwidget->setObjectName(QString::fromUtf8("centralwidget"));
-        centralWidgetLayout = new QVBoxLayout(centralwidget);
-        centralWidgetLayout->setObjectName(QString::fromUtf8("centralWidgetLayout"));
-        TaskManagerWindow->setCentralWidget(centralwidget);
+        centerWidget = new QWidget(TaskManagerWindow);
+        centerWidget->setObjectName(QString::fromUtf8("centerWidget"));
+        centerWidgetLayout = new QVBoxLayout(centerWidget);
+        centerWidgetLayout->setObjectName(QString::fromUtf8("centerWidgetLayout"));
+        TaskManagerWindow->setCentralWidget(centerWidget);
         menubar = new QMenuBar(TaskManagerWindow);
         menubar->setObjectName(QString::fromUtf8("menubar"));
         menubar->setGeometry(QRect(0, 0, 800, 22));

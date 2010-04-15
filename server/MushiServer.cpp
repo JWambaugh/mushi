@@ -119,8 +119,12 @@ Json::Value MushiServer::runCommand(Json::Value command, MushiScriptEngine &engi
 		session.load();
 	}else{
 		
-		session.load(command["sessionID"].asString());
+                session.load(QString(command["sessionID"].asString().c_str()));
 	}
+
+
+
+
 
         Json::Value ret;
         ret["status"]="failure";

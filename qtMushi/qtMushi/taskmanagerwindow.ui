@@ -13,8 +13,8 @@
   <property name="windowTitle">
    <string>Mushi</string>
   </property>
-  <widget class="QWidget" name="centralwidget">
-   <layout class="QVBoxLayout" name="centralWidgetLayout"/>
+  <widget class="QWidget" name="centerWidget">
+   <layout class="QVBoxLayout" name="centerWidgetLayout"/>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">

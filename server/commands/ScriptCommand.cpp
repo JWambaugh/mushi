@@ -14,7 +14,7 @@ ScriptCommand::ScriptCommand(QString path)
 
 
 //TODO: Find a better way of converting objects between Json:Vlues and QSCriptValues (evaling JSON ATM)
-Json::Value & ScriptCommand::run(MushiSession sess, Json::Value &command, Json::Value &ret, QScriptEngine &engine, MushiDB &db){
+Json::Value & ScriptCommand::run(MushiSession &sess, Json::Value &command, Json::Value &ret, QScriptEngine &engine, MushiDB &db){
 
     QTime timer;
     this->mutex.lock(); //get exclusive lock on this command object (can't run a program twice on different engines)

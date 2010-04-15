@@ -22,8 +22,10 @@ private:
     QTabWidget *centralTabWidget;
     taskFinder *finder;
     Ui::TaskManagerWindow *m_ui;
+    QWidget *currentActiveCentralWidget;
 
 private slots:
+    void setActiveCentralWidget(QWidget *widget);
     void closeCentralTab(int index);
     void openTask(Json::Value);
     void newTask();

@@ -13,7 +13,7 @@
 #include "../MushiServer.h"
 
 
-Json::Value &GetStatusesCommand::run(MushiSession sess, Json::Value &command, Json::Value &ret, QScriptEngine &engine, MushiDB &db){
+Json::Value &GetStatusesCommand::run(MushiSession &sess, Json::Value &command, Json::Value &ret, QScriptEngine &engine, MushiDB &db){
 
 
 
