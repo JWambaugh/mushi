@@ -81,6 +81,11 @@ QString html2plaintext(QString string){
 }
 
 Json::Value taskFinder::getSelectedRecord(){
+    // if there isn't a selected item, return a blank value
+    if(!this->treeWidget->currentItem()){
+        Json::Value blankVal;
+        return blankVal;
+    }
     taskTreeWidgetItem *item = static_cast<taskTreeWidgetItem *>(this->treeWidget->currentItem());
     return item->taskValue;
 }

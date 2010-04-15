@@ -1,6 +1,6 @@
 #include "quicktaskcreator.h"
 #include "ui_quicktaskcreator.h"
-
+#include "quicktaskcreatordefaults.h"
 QuickTaskCreator::QuickTaskCreator(QWidget *parent) :
     QMainWindow(parent),
     m_ui(new Ui::QuickTaskCreator)
@@ -12,6 +12,8 @@ QuickTaskCreator::QuickTaskCreator(QWidget *parent) :
     this->m_ui->toolBar->addAction(taskifyAction);
     taskLayout->setMargin(2);
     this->m_ui->taskListWidget->setLayout(taskLayout);
+
+    this->m_ui->defaultsArea->setWidget(new QuickTaskCreatorDefaults);
 }
 
 QuickTaskCreator::~QuickTaskCreator()
@@ -52,7 +54,7 @@ void QuickTaskCreator::taskify(){
 
 
    }
-    //hanlde final task.
+    //handle final task.
    if(currentTask!="")currentTask.append("\n");
     currentTask.append(rx.cap(1));
     if(currentTask!=""){

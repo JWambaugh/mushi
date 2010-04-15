@@ -7,6 +7,7 @@
 #include "homepage.h"
 #include "taskeditor.h"
 #include "servercommand.h"
+#include "quicktaskcreator.h"
 namespace Ui {
     class TaskManagerWindow;
 }
@@ -31,6 +32,7 @@ private slots:
     void newTask();
     void deleteTask();
     void removeCentralTab(QObject *page);
+    void showQuickTaskCreator();
   //  void setCentralWidgetFocus(QWidget widget);
 };
 

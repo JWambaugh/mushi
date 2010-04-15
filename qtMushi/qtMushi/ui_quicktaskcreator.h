@@ -1,8 +1,8 @@
 /********************************************************************************
 ** Form generated from reading UI file 'quicktaskcreator.ui'
 **
-** Created: Tue Jan 12 15:54:42 2010
-**      by: Qt User Interface Compiler version 4.6.0
+** Created: Thu Apr 15 16:28:32 2010
+**      by: Qt User Interface Compiler version 4.6.2
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
@@ -48,8 +48,8 @@ public:
     QDockWidget *defaultsWindow;
     QWidget *dockWidgetContents_2;
     QVBoxLayout *verticalLayout_3;
-    QScrollArea *scrollArea_2;
-    QWidget *scrollAreaWidgetContents;
+    QScrollArea *defaultsArea;
+    QWidget *widget;
 
     void setupUi(QMainWindow *QuickTaskCreator)
     {
@@ -100,7 +100,7 @@ public:
         scrollArea->setWidgetResizable(true);
         taskListWidget = new QWidget();
         taskListWidget->setObjectName(QString::fromUtf8("taskListWidget"));
-        taskListWidget->setGeometry(QRect(0, 0, 342, 364));
+        taskListWidget->setGeometry(QRect(0, 0, 342, 378));
         scrollArea->setWidget(taskListWidget);
 
         verticalLayout_2->addWidget(scrollArea);
@@ -118,15 +118,15 @@ public:
         dockWidgetContents_2->setObjectName(QString::fromUtf8("dockWidgetContents_2"));
         verticalLayout_3 = new QVBoxLayout(dockWidgetContents_2);
         verticalLayout_3->setObjectName(QString::fromUtf8("verticalLayout_3"));
-        scrollArea_2 = new QScrollArea(dockWidgetContents_2);
-        scrollArea_2->setObjectName(QString::fromUtf8("scrollArea_2"));
-        scrollArea_2->setWidgetResizable(true);
-        scrollAreaWidgetContents = new QWidget();
-        scrollAreaWidgetContents->setObjectName(QString::fromUtf8("scrollAreaWidgetContents"));
-        scrollAreaWidgetContents->setGeometry(QRect(0, 0, 772, 76));
-        scrollArea_2->setWidget(scrollAreaWidgetContents);
+        defaultsArea = new QScrollArea(dockWidgetContents_2);
+        defaultsArea->setObjectName(QString::fromUtf8("defaultsArea"));
+        defaultsArea->setWidgetResizable(true);
+        widget = new QWidget();
+        widget->setObjectName(QString::fromUtf8("widget"));
+        widget->setGeometry(QRect(0, 0, 772, 76));
+        defaultsArea->setWidget(widget);
 
-        verticalLayout_3->addWidget(scrollArea_2);
+        verticalLayout_3->addWidget(defaultsArea);
 
         defaultsWindow->setWidget(dockWidgetContents_2);
         QuickTaskCreator->addDockWidget(static_cast<Qt::DockWidgetArea>(8), defaultsWindow);

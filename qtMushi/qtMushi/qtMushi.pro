@@ -23,7 +23,8 @@ HEADERS += qtMushi.h \
     taskdirectory.h \
     statusdirectory.h \
     authordirectory.h \
-    userDirectory.h
+    userDirectory.h \
+    quicktaskcreatordefaults.h
 SOURCES += main.cpp \
     qtMushi.cpp \
     taskFinder.cpp \
@@ -42,7 +43,8 @@ SOURCES += main.cpp \
     taskcomment.cpp \
     taskdirectory.cpp \
     statusdirectory.cpp \
-    userDirectory.cpp
+    userDirectory.cpp \
+    quicktaskcreatordefaults.cpp
 RESOURCES += attach.qrc
 INCLUDEPATH += ../edit_html
 DEPENDPATH += ../edit_html
@@ -62,4 +64,5 @@ FORMS += taskmanager.ui \
     quicktaskcreator.ui \
     taskmanagerwindow.ui \
     homepage.ui \
-    taskcomment.ui
+    taskcomment.ui \
+    quicktaskcreatordefaults.ui

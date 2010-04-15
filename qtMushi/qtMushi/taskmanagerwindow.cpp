@@ -33,7 +33,7 @@ TaskManagerWindow::TaskManagerWindow(QWidget *parent) :
     //connect(this->centralTabWidget,SIGNAL(tabCloseRequested(int)),this,SLOT(closeCentralTab(int)));
     connect(this->m_ui->actionNew,SIGNAL(triggered()),this,SLOT(newTask()));
     connect(this->m_ui->actionDelete,SIGNAL(triggered()),this,SLOT(deleteTask()));
-
+    connect(this->m_ui->actionQuickTaskCreator,SIGNAL(triggered()),this,SLOT(showQuickTaskCreator()));
 }
 
 TaskManagerWindow::~TaskManagerWindow()
@@ -65,7 +65,11 @@ void TaskManagerWindow::removeCentralTab(QObject *page){
 
 }
 
-
+void TaskManagerWindow::showQuickTaskCreator(){
+    QuickTaskCreator *creator;
+    creator = new QuickTaskCreator;
+    creator->show();
+}
 
 
 void TaskManagerWindow::closeCentralTab(int index){
@@ -87,8 +91,8 @@ void TaskManagerWindow::newTask(){
 
 /**
  * Sets the  current active main widget.
- Automatically deletes previous widget, if there was one.
-*/
+ * Automatically deletes previous widget, if there was one.
+ */
 void TaskManagerWindow::setActiveCentralWidget(QWidget *widget){
 
 
@@ -104,6 +108,8 @@ void TaskManagerWindow::setActiveCentralWidget(QWidget *widget){
 void TaskManagerWindow::deleteTask(){
     ServerCommand *command = new ServerCommand(this);
     Json::Value task = this->finder->getSelectedRecord();
+    //if the task doesn't have an id, it can't be deleted. don't worry about it.
+    if (task.get("id","")=="")return;
 
     command->set("command","deleteTask");
     command->set("id",task.get("id","").asString().c_str());
