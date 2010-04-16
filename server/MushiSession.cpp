@@ -75,11 +75,13 @@ MushiSession::MushiSession(QObject *parent) :QObject(parent){
 
 
 QString MushiSession::get(QString key){
-    return this->data.get(key.toStdString(),"");
+    return QString(this->data.get(key.toStdString(),"").asCString());
 }
 
 void MushiSession::set(QString key, QString value){
-    this->data[key]=value.toStdString();
+    this->data[key.toStdString().c_str()]=value.toStdString();
 }
+QString MushiSession::getID(){
 
+}
 

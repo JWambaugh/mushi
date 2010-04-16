@@ -8,6 +8,7 @@ QuickTaskCreatorDefaults::QuickTaskCreatorDefaults(QWidget *parent) :
 
     ui->setupUi(this);
     QList<Json::Value>*tasks=static_cast <qtMushi *>(qApp)->taskDirectory.getAllTasks();
+    this->ui->taskCombo->addItem("",QVariant(""));
     for(int x=0;x<tasks->count();x++){
         this->ui->taskCombo->addItem(tasks->at(x).get("title","").asString().c_str(),QVariant(tasks->at(x).get("id","").asCString()));
     }
@@ -22,6 +23,19 @@ QuickTaskCreatorDefaults::QuickTaskCreatorDefaults(QWidget *parent) :
         this->ui->ownerCombo->addItem(users->at(x).get("firstName","").asString().append(" ").append(users->at(x).get("lastName","").asString()).c_str(),QVariant(users->at(x).get("id","").asCString()));
     }
 }
+
+QString QuickTaskCreatorDefaults::getParent(){
+    return this->ui->taskCombo->itemData(this->ui->taskCombo->currentIndex()).toString();
+}
+
+QString QuickTaskCreatorDefaults::getStatus(){
+    return this->ui->statusCombo->itemData(this->ui->statusCombo->currentIndex()).toString();
+}
+
+QString QuickTaskCreatorDefaults::getOwner(){
+    return this->ui->ownerCombo->itemData(this->ui->ownerCombo->currentIndex()).toString();
+}
+
 
 QuickTaskCreatorDefaults::~QuickTaskCreatorDefaults()
 {

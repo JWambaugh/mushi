@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'quicktaskcreator.ui'
 **
-** Created: Thu Apr 15 16:28:32 2010
+** Created: Thu Apr 15 16:37:02 2010
 **      by: Qt User Interface Compiler version 4.6.2
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
@@ -55,7 +55,7 @@ public:
     {
         if (QuickTaskCreator->objectName().isEmpty())
             QuickTaskCreator->setObjectName(QString::fromUtf8("QuickTaskCreator"));
-        QuickTaskCreator->resize(800, 600);
+        QuickTaskCreator->resize(817, 684);
         centralwidget = new QWidget(QuickTaskCreator);
         centralwidget->setObjectName(QString::fromUtf8("centralwidget"));
         verticalLayout = new QVBoxLayout(centralwidget);
@@ -100,7 +100,7 @@ public:
         scrollArea->setWidgetResizable(true);
         taskListWidget = new QWidget();
         taskListWidget->setObjectName(QString::fromUtf8("taskListWidget"));
-        taskListWidget->setGeometry(QRect(0, 0, 342, 378));
+        taskListWidget->setGeometry(QRect(0, 0, 342, 386));
         scrollArea->setWidget(taskListWidget);
 
         verticalLayout_2->addWidget(scrollArea);
@@ -113,6 +113,7 @@ public:
         QuickTaskCreator->addToolBar(Qt::TopToolBarArea, toolBar);
         defaultsWindow = new QDockWidget(QuickTaskCreator);
         defaultsWindow->setObjectName(QString::fromUtf8("defaultsWindow"));
+        defaultsWindow->setMinimumSize(QSize(104, 160));
         defaultsWindow->setFeatures(QDockWidget::DockWidgetFloatable|QDockWidget::DockWidgetMovable);
         dockWidgetContents_2 = new QWidget();
         dockWidgetContents_2->setObjectName(QString::fromUtf8("dockWidgetContents_2"));
@@ -123,7 +124,7 @@ public:
         defaultsArea->setWidgetResizable(true);
         widget = new QWidget();
         widget->setObjectName(QString::fromUtf8("widget"));
-        widget->setGeometry(QRect(0, 0, 772, 76));
+        widget->setGeometry(QRect(0, 0, 789, 152));
         defaultsArea->setWidget(widget);
 
         verticalLayout_3->addWidget(defaultsArea);

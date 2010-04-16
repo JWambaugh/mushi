@@ -34,6 +34,8 @@ TaskManagerWindow::TaskManagerWindow(QWidget *parent) :
     connect(this->m_ui->actionNew,SIGNAL(triggered()),this,SLOT(newTask()));
     connect(this->m_ui->actionDelete,SIGNAL(triggered()),this,SLOT(deleteTask()));
     connect(this->m_ui->actionQuickTaskCreator,SIGNAL(triggered()),this,SLOT(showQuickTaskCreator()));
+    connect(this->m_ui->actionRefresh,SIGNAL(triggered()),this->finder,SLOT(search()));
+
 }
 
 TaskManagerWindow::~TaskManagerWindow()

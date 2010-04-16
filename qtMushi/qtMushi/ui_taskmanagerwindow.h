@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'taskmanagerwindow.ui'
 **
-** Created: Thu Apr 15 15:49:55 2010
+** Created: Fri Apr 16 10:19:33 2010
 **      by: Qt User Interface Compiler version 4.6.2
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
@@ -32,6 +32,7 @@ public:
     QAction *actionNew;
     QAction *actionDelete;
     QAction *actionQuickTaskCreator;
+    QAction *actionRefresh;
     QWidget *centerWidget;
     QVBoxLayout *centerWidgetLayout;
     QMenuBar *menubar;
@@ -52,6 +53,8 @@ public:
         actionDelete->setObjectName(QString::fromUtf8("actionDelete"));
         actionQuickTaskCreator = new QAction(TaskManagerWindow);
         actionQuickTaskCreator->setObjectName(QString::fromUtf8("actionQuickTaskCreator"));
+        actionRefresh = new QAction(TaskManagerWindow);
+        actionRefresh->setObjectName(QString::fromUtf8("actionRefresh"));
         centerWidget = new QWidget(TaskManagerWindow);
         centerWidget->setObjectName(QString::fromUtf8("centerWidget"));
         centerWidgetLayout = new QVBoxLayout(centerWidget);
@@ -85,6 +88,7 @@ public:
         toolBar->addAction(actionNew);
         toolBar->addAction(actionDelete);
         toolBar->addAction(actionQuickTaskCreator);
+        toolBar->addAction(actionRefresh);
 
         retranslateUi(TaskManagerWindow);
 
@@ -100,6 +104,7 @@ public:
 #ifndef QT_NO_TOOLTIP
         actionQuickTaskCreator->setToolTip(QApplication::translate("TaskManagerWindow", "Quick Task", 0, QApplication::UnicodeUTF8));
 #endif // QT_NO_TOOLTIP
+        actionRefresh->setText(QApplication::translate("TaskManagerWindow", "refresh", 0, QApplication::UnicodeUTF8));
         menuTask->setTitle(QApplication::translate("TaskManagerWindow", "Task", 0, QApplication::UnicodeUTF8));
         TaskTreeContainer->setWindowTitle(QApplication::translate("TaskManagerWindow", "Tasks", 0, QApplication::UnicodeUTF8));
         toolBar->setWindowTitle(QApplication::translate("TaskManagerWindow", "toolBar", 0, QApplication::UnicodeUTF8));

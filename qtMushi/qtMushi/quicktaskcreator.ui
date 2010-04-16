@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>800</width>
-    <height>600</height>
+    <width>817</width>
+    <height>684</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -96,7 +96,7 @@
           <x>0</x>
           <y>0</y>
           <width>342</width>
-          <height>378</height>
+          <height>386</height>
          </rect>
         </property>
        </widget>
@@ -123,6 +123,12 @@
    </attribute>
   </widget>
   <widget class="QDockWidget" name="defaultsWindow">
+   <property name="minimumSize">
+    <size>
+     <width>104</width>
+     <height>160</height>
+    </size>
+   </property>
    <property name="features">
     <set>QDockWidget::DockWidgetFloatable|QDockWidget::DockWidgetMovable</set>
    </property>
@@ -144,8 +150,8 @@
          <rect>
           <x>0</x>
           <y>0</y>
-          <width>772</width>
-          <height>76</height>
+          <width>789</width>
+          <height>152</height>
          </rect>
         </property>
        </widget>

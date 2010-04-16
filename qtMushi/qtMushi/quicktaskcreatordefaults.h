@@ -12,7 +12,9 @@ class QuickTaskCreatorDefaults : public QWidget {
 public:
     QuickTaskCreatorDefaults(QWidget *parent = 0);
     ~QuickTaskCreatorDefaults();
-
+    QString getParent();
+    QString getStatus();
+    QString getOwner();
 private:
     Ui::QuickTaskCreatorDefaults *ui;
 };

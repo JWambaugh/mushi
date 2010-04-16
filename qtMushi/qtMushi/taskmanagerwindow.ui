@@ -69,6 +69,7 @@
    <addaction name="actionNew"/>
    <addaction name="actionDelete"/>
    <addaction name="actionQuickTaskCreator"/>
+   <addaction name="actionRefresh"/>
   </widget>
   <action name="actionNew">
    <property name="text">
@@ -86,6 +87,11 @@
    </property>
    <property name="toolTip">
     <string>Quick Task</string>
+   </property>
+  </action>
+  <action name="actionRefresh">
+   <property name="text">
+    <string>refresh</string>
    </property>
   </action>
  </widget>

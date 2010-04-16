@@ -1,6 +1,6 @@
 #include "quicktaskcreator.h"
 #include "ui_quicktaskcreator.h"
-#include "quicktaskcreatordefaults.h"
+
 QuickTaskCreator::QuickTaskCreator(QWidget *parent) :
     QMainWindow(parent),
     m_ui(new Ui::QuickTaskCreator)
@@ -12,8 +12,11 @@ QuickTaskCreator::QuickTaskCreator(QWidget *parent) :
     this->m_ui->toolBar->addAction(taskifyAction);
     taskLayout->setMargin(2);
     this->m_ui->taskListWidget->setLayout(taskLayout);
+    this->defaultsWidget=new QuickTaskCreatorDefaults;
+    this->m_ui->defaultsArea->setWidget(this->defaultsWidget);
+//    this->connect(this->m_ui->editor,SIGNAL(textChanged()),this,SLOT(taskify()));
 
-    this->m_ui->defaultsArea->setWidget(new QuickTaskCreatorDefaults);
+    this->connect(this->m_ui->saveAllButton,SIGNAL(clicked()),this,SLOT(saveAll()));
 }
 
 QuickTaskCreator::~QuickTaskCreator()
@@ -61,16 +64,37 @@ void QuickTaskCreator::taskify(){
         currentTask.replace(QRegExp("^[ |\t|\\s]+"),"");
         tasks<<currentTask;
     }
-     //this->layout.removeWidget(&this->editor);
+
+    //remove all widgets if we already have some
+    while (this->taskWidgets.count()){
+        QuickTaskTask *task;
+        task = this->taskWidgets.takeFirst();
+        this->taskLayout->removeWidget(task);
+        task->deleteLater();
+    }
+    //add new widgets
     for(int x=0;x<tasks.length();x++){
         qDebug()<<"Task: "<<tasks.at(x);
         QuickTaskTask *task=new QuickTaskTask(this);
             task->setDescription(tasks.at(x));
 
-
+            task->val["parentTaskID"]=this->defaultsWidget->getParent().toStdString();
+            task->val["statusID"]=this->defaultsWidget->getStatus().toStdString();
+            task->val["ownerID"]=this->defaultsWidget->getOwner().toStdString();
             this->taskLayout->addWidget(task);
-
+            this->taskWidgets.append(task);
     }
     //this->layout.addWidget(&this->editor);
     this->m_ui->editor->moveCursor(QTextCursor::End);
+}
+
+
+void QuickTaskCreator::saveAll(){
+    for(int x=0; x<this->taskWidgets.count();x++){
+        QuickTaskTask *task;
+        //task = static_cast<QuickTaskTask>(this->taskWidgets.at(x));
+        task=this->taskWidgets.at(x);
+        task->save();
+    }
+
 }

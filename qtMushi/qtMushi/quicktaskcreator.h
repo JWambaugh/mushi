@@ -5,6 +5,7 @@
 #include <QVBoxLayout>
 #include <QDebug>
 #include "quicktasktask.h"
+#include "quicktaskcreatordefaults.h"
 namespace Ui {
     class QuickTaskCreator;
 }
@@ -19,8 +20,11 @@ private:
     QVBoxLayout *taskLayout;
     Ui::QuickTaskCreator *m_ui;
     QAction *taskifyAction;
+    QList<QuickTaskTask*> taskWidgets;
+    QuickTaskCreatorDefaults *defaultsWidget;
 private slots:
     void taskify();
+    void saveAll();
 };
 
 #endif // QUICKTASKCREATOR_H
