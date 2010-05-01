@@ -6,6 +6,7 @@ QuickTaskTask::QuickTaskTask(QWidget *parent) :
     m_ui(new Ui::QuickTaskTask)
 {
     m_ui->setupUi(this);
+    this->connect(this->m_ui->saveButton,SIGNAL(clicked()),this,SLOT(save()));
 }
 
 QuickTaskTask::~QuickTaskTask()

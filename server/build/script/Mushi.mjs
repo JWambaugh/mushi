@@ -38,7 +38,7 @@ Mushi.newTask=function(title,description){
  * Returns an array of task objects that belong to a particular task
  **/
 Mushi.getTaskNotes=function(taskID){
-    var tasks=this.db.select("select n.id as noteID, timeSpent, authorID,n.createDate as noteCreateDate,th.id as historyID, text from note n"
+    var tasks=this.db.select("select n.id as id, timeSpent, authorID,n.createDate as noteCreateDate,th.id as historyID, text from note n"
                             +" join textHistory th on th.someID=n.id and th.tableName='note' and th.id= (select max(id) from textHistory sth where sth.someID=n.id and sth.tableName='note')"
                             +" where n.tableName='task' and n.someID='"+this.db.escapeQuotes(taskID)+"'");
     return tasks;

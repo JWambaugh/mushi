@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'quicktaskcreator.ui'
 **
-** Created: Thu Apr 15 16:37:02 2010
+** Created: Fri Apr 30 12:35:12 2010
 **      by: Qt User Interface Compiler version 4.6.2
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
@@ -100,7 +100,7 @@ public:
         scrollArea->setWidgetResizable(true);
         taskListWidget = new QWidget();
         taskListWidget->setObjectName(QString::fromUtf8("taskListWidget"));
-        taskListWidget->setGeometry(QRect(0, 0, 342, 386));
+        taskListWidget->setGeometry(QRect(0, 0, 342, 426));
         scrollArea->setWidget(taskListWidget);
 
         verticalLayout_2->addWidget(scrollArea);
@@ -124,7 +124,7 @@ public:
         defaultsArea->setWidgetResizable(true);
         widget = new QWidget();
         widget->setObjectName(QString::fromUtf8("widget"));
-        widget->setGeometry(QRect(0, 0, 789, 152));
+        widget->setGeometry(QRect(0, 0, 789, 112));
         defaultsArea->setWidget(widget);
 
         verticalLayout_3->addWidget(defaultsArea);

@@ -1,4 +1,5 @@
 #include "taskeditor.h"
+#include "servercommand.h"
 #include <QDebug>
 #include <string>
 TaskEditor::TaskEditor(QWidget *parent) :
@@ -21,6 +22,8 @@ TaskEditor::TaskEditor(QWidget *parent) :
     for(int x=0;x<users->count();x++){
         this->ownerCombo->addItem(users->at(x).get("firstName","").asString().append(" ").append(users->at(x).get("lastName","").asString()).c_str(),QVariant(users->at(x).get("id","").asCString()));
     }
+
+    this->connect(this->addNoteButton,SIGNAL(clicked()),this,SLOT(addNote()));
 
 }
 
@@ -46,24 +49,10 @@ void TaskEditor::save(){
     }else{
         this->store["command"]="editTask";
     }
+    ServerCommand *command = new ServerCommand(this->store,this);
+    command->send();
 
-    QNetworkRequest request(QUrl(SERVER_LOCATION "/command"));
-    request.setRawHeader("Connection" ,"close");
-    JSON_WRITE_CLASS writer;
-
-    std::string output="data=";
-    std::string buff = writer.write(this->store);
-    QByteArray encodedValue=QUrl::toPercentEncoding(QString(buff.c_str()));
-
-    output.append(encodedValue);
-
-
-    qDebug() << output.c_str();
-
-
-    reply=qtMushi::netManager->post(request, QByteArray( output.c_str()) );
-
-    connect(this->reply, SIGNAL(finished()), this, SLOT(networkResponse()));
+    connect(command, SIGNAL(saveComplete(Json::Value)), this, SLOT(saveCompleted(Json::Value)));
     qDebug()<<"saved.";
 }
 
@@ -84,8 +73,12 @@ void TaskEditor::updateStore(){
 }
 
 
-void TaskEditor::networkResponse(){
+void TaskEditor::saveCompleted(Json::Value val){
     //this->close();
+    if(val.get("taskID","")!=""){
+        this->store["id"]=val.get("taskID","");
+    }
+    this->saveNotes();
     emit saveComplete();
 }
 
@@ -121,5 +114,46 @@ void TaskEditor::updateFromStore(){
 
 void TaskEditor::setStore(Json::Value &s){
     this->store=s;
+    //remove all notes
+    while(this->notes.length()){
+        this->notes.takeFirst()->deleteLater();
+    }
+    if(this->store.get("id","")!=""){
+        ServerCommand *command =new ServerCommand(this);
+        command->set("command","getTaskNotes");
+        command->set("taskID",this->store.get("id","").asCString());
+        this->connect(command,SIGNAL(saveComplete(Json::Value)),this,SLOT(getNotesResponse(Json::Value)));
+        command->send();
+    }
     this->updateFromStore();
 }
+
+void TaskEditor::addNote(){
+    TaskComment *note = new TaskComment;
+    this->notes.append(note);
+    note->store["taskID"]=this->store.get("id","");
+    this->noteSplitter->addWidget(note);
+}
+
+void TaskEditor::getNotesResponse(Json::Value val){
+    Json::Value data=val.get("data","");
+    if(data.isArray()){
+        for ( int index = 0; index < data.size(); ++index ){
+            TaskComment *note = new TaskComment;
+            note->store=data[index];
+            note->updateFromStore();
+            this->notes.append(note);
+            note->store["taskID"]=this->store.get("id","");
+            this->noteSplitter->addWidget(note);
+        }
+    }
+
+}
+
+void TaskEditor::saveNotes(){
+    for(int x=0;x<notes.length();x++){
+        this->notes.at(x)->setParentTaskID(this->store.get("id","").asInt());
+        this->notes.at(x)->save();
+    }
+}
+

@@ -47,8 +47,8 @@ Json::Value  &AddTaskCommand::run(MushiSession &sess, Json::Value &command, Json
 					<< "')";
 		
                 db.query(query.str());
-		
-		
+                MushiDBResult *res = db.query("SELECT last_insert_rowid()");
+                ret["taskID"]=res->getCell(1,0);
 		ret["status"]="success";
 	}
 	return ret;

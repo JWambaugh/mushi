@@ -15,10 +15,14 @@
 Mushi.include(Mushi.config.getValue("scriptDirectory")+'/Mushi.mjs'); //Load the Mushi javascript api
 
 Mushi.include(Mushi.config.getValue("scriptDirectory")+'/JSON.mjs'); //Load the JSON api
+
+var tasks = Mushi.getTasks();
+
 ?>
+<br>
+Tasks in the system: <?=tasks.length?>
 
-
-
+<a href='http://google.com'>google</a>
 
 
 

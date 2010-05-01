@@ -3,7 +3,28 @@
 
 #include "taskeditor.h"
 taskFinder::taskFinder(QWidget *parent) : QWidget(parent){
+        this->setStyleSheet("QTreeView::branch:has-siblings:!adjoins-item {"
+                            "border-image: url(:img/stylesheet-vline.png) 0;"
+        "}"
+        "QTreeView::branch:has-siblings:adjoins-item {"
+        " border-image: url(:img/stylesheet-branch-more.png) 0;"
+        "}"
 
+        "QTreeView::branch:!has-children:!has-siblings:adjoins-item {"
+        "border-image: url(:img/stylesheet-branch-end.png) 0;"
+        "}"
+
+        "QTreeView::branch:has-children:!has-siblings:closed,"
+        "QTreeView::branch:closed:has-children:has-siblings {"
+                "border-image: none;"
+                "image: url(:img/stylesheet-branch-closed.png);"
+        "}"
+
+        "QTreeView::branch:open:has-children:!has-siblings,"
+        "QTreeView::branch:open:has-children:has-siblings  {"
+                "border-image: none;"
+                "image: url(:img/stylesheet-branch-open.png);"
+        "}");
 
         this->reply=0;
         treeWidget = new QTreeWidget(this);
