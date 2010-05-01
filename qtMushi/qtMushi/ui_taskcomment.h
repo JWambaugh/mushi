@@ -1,8 +1,8 @@
 /********************************************************************************
 ** Form generated from reading UI file 'taskcomment.ui'
 **
-** Created: Fri Dec 4 13:34:26 2009
-**      by: Qt User Interface Compiler version 4.6.0
+** Created: Fri Apr 30 14:51:40 2010
+**      by: Qt User Interface Compiler version 4.6.2
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
@@ -15,11 +15,11 @@
 #include <QtGui/QApplication>
 #include <QtGui/QButtonGroup>
 #include <QtGui/QGridLayout>
-#include <QtGui/QHBoxLayout>
+#include <QtGui/QGroupBox>
 #include <QtGui/QHeaderView>
 #include <QtGui/QLabel>
 #include <QtGui/QTextEdit>
-#include <QtGui/QToolButton>
+#include <QtGui/QVBoxLayout>
 #include <QtGui/QWidget>
 
 QT_BEGIN_NAMESPACE
@@ -27,45 +27,46 @@ QT_BEGIN_NAMESPACE
 class Ui_TaskComment
 {
 public:
+    QVBoxLayout *verticalLayout;
+    QGroupBox *dateBox;
     QGridLayout *gridLayout;
-    QTextEdit *textEdit;
     QLabel *authorLabel;
-    QLabel *dateLabel;
-    QHBoxLayout *horizontalLayout;
-    QToolButton *toolButton;
+    QTextEdit *note;
 
     void setupUi(QWidget *TaskComment)
     {
         if (TaskComment->objectName().isEmpty())
             TaskComment->setObjectName(QString::fromUtf8("TaskComment"));
-        TaskComment->resize(400, 300);
-        gridLayout = new QGridLayout(TaskComment);
+        TaskComment->resize(676, 150);
+        QSizePolicy sizePolicy(QSizePolicy::Preferred, QSizePolicy::MinimumExpanding);
+        sizePolicy.setHorizontalStretch(0);
+        sizePolicy.setVerticalStretch(150);
+        sizePolicy.setHeightForWidth(TaskComment->sizePolicy().hasHeightForWidth());
+        TaskComment->setSizePolicy(sizePolicy);
+        TaskComment->setMinimumSize(QSize(100, 150));
+        TaskComment->setBaseSize(QSize(0, 200));
+        verticalLayout = new QVBoxLayout(TaskComment);
+        verticalLayout->setContentsMargins(1, 1, 1, 1);
+        verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
+        dateBox = new QGroupBox(TaskComment);
+        dateBox->setObjectName(QString::fromUtf8("dateBox"));
+        gridLayout = new QGridLayout(dateBox);
+        gridLayout->setContentsMargins(1, 1, 1, 1);
         gridLayout->setObjectName(QString::fromUtf8("gridLayout"));
-        textEdit = new QTextEdit(TaskComment);
-        textEdit->setObjectName(QString::fromUtf8("textEdit"));
-
-        gridLayout->addWidget(textEdit, 3, 1, 1, 2);
-
-        authorLabel = new QLabel(TaskComment);
+        authorLabel = new QLabel(dateBox);
         authorLabel->setObjectName(QString::fromUtf8("authorLabel"));
 
-        gridLayout->addWidget(authorLabel, 1, 1, 1, 1);
+        gridLayout->addWidget(authorLabel, 0, 0, 1, 1);
 
-        dateLabel = new QLabel(TaskComment);
-        dateLabel->setObjectName(QString::fromUtf8("dateLabel"));
-        dateLabel->setAlignment(Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter);
+        note = new QTextEdit(dateBox);
+        note->setObjectName(QString::fromUtf8("note"));
+        note->setMinimumSize(QSize(0, 50));
+        note->setVerticalScrollBarPolicy(Qt::ScrollBarAsNeeded);
 
-        gridLayout->addWidget(dateLabel, 1, 2, 1, 1);
-
-        horizontalLayout = new QHBoxLayout();
-        horizontalLayout->setObjectName(QString::fromUtf8("horizontalLayout"));
-        toolButton = new QToolButton(TaskComment);
-        toolButton->setObjectName(QString::fromUtf8("toolButton"));
-
-        horizontalLayout->addWidget(toolButton);
+        gridLayout->addWidget(note, 1, 0, 1, 2);
 
 
-        gridLayout->addLayout(horizontalLayout, 2, 1, 1, 2);
+        verticalLayout->addWidget(dateBox);
 
 
         retranslateUi(TaskComment);
@@ -76,9 +77,8 @@ public:
     void retranslateUi(QWidget *TaskComment)
     {
         TaskComment->setWindowTitle(QApplication::translate("TaskComment", "Form", 0, QApplication::UnicodeUTF8));
-        authorLabel->setText(QApplication::translate("TaskComment", "Author", 0, QApplication::UnicodeUTF8));
-        dateLabel->setText(QApplication::translate("TaskComment", "Date", 0, QApplication::UnicodeUTF8));
-        toolButton->setText(QApplication::translate("TaskComment", "...", 0, QApplication::UnicodeUTF8));
+        dateBox->setTitle(QString());
+        authorLabel->setText(QApplication::translate("TaskComment", "Author - Date", 0, QApplication::UnicodeUTF8));
     } // retranslateUi
 
 };

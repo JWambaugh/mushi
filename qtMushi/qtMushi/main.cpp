@@ -6,7 +6,7 @@
 #include "../edit_html/edit_html.h"
 #include "qtMushi.h"
 #include <QTableWidget>
-
+#include "manhattanstyle.h"
 
 static inline bool is_file(QString fullFileName)
 {
@@ -53,6 +53,6 @@ static inline bool fwriteutf8(QString fullFileName,QString xml)
 int main(int argc, char *argv[])
 {
 	qtMushi *app = new qtMushi(argc, argv);
-
+        app->setStyle(new ManhattanStyle(app->style()->objectName()));
 	return app->exec();
 }

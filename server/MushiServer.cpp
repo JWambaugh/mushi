@@ -38,7 +38,8 @@
 #include "commands/DeleteTaskCommand.h"
 #include "commands/ScriptCommand.h"
 #include "commands/GetStatusesCommand.h"
-#include "commands/GetAuthorsCommand.h"
+#include "commands/GetUsersCommand.h"
+#include "commands/AddUserCommand.h"
 #include "MushiServer.h"
 #include "URLHandlers.h"
 #include "MushiDB.h"
@@ -68,14 +69,15 @@ void MushiServer::installCommands(){
 	this->registerCommand(new EditTaskCommand);
         this->registerCommand(new DeleteTaskCommand);
         this->registerCommand(new GetStatusesCommand);
-        this->registerCommand(new GetAuthorsCommand);
+        this->registerCommand(new GetUsersCommand);
+        this->registerCommand(new AddUserCommand);
         //install mjscript commands
         QDir scriptDir(MushiConfig::getValue("commandDirectory"));
         QFileInfoList files;
         files=scriptDir.entryInfoList(QStringList("*.mjs"));
         for(int  x=0;x<files.size();x++){
             if(files.at(x).isFile()){
-               // qDebug()<<"Loading "<<files.at(x).absoluteFilePath();
+                qDebug()<<"Loading "<<files.at(x).absoluteFilePath();
                 this->registerCommand(new ScriptCommand(files.at(x).absoluteFilePath()));
             }
         }
@@ -107,7 +109,7 @@ int MushiServer::registerCommand(MushiCommand *command){
 
 
 
-Json::Value MushiServer::runCommand(Json::Value command,MushiScriptEngine &engine){
+Json::Value MushiServer::runCommand(Json::Value command, MushiScriptEngine &engine, MushiDB &db){
 	
 	MushiSession session;
 	
@@ -117,19 +119,25 @@ Json::Value MushiServer::runCommand(Json::Value command,MushiScriptEngine &engin
 		session.load();
 	}else{
 		
-		session.load(command["sessionID"].asString());
+                session.load(QString(command["sessionID"].asString().c_str()));
 	}
-	
-	
 
-		
+
+
+
+
         Json::Value ret;
         ret["status"]="failure";
 	//give the command to command handlers for handling
 	try{
 		for(int x=0;x<commands.size();x++){
-                        ret = commands.at(x)->run(session, command, ret, engine.engine);
-		}
+                        ret = commands.at(x)->run(session, command, ret, engine.engine,db);
+
+                        //quit processing attempts if there is an error
+                        if(ret.get("status","") == "error"){
+                            break;
+                        }
+                    }
 	} catch (Json::Value val){
             return val;
 	}

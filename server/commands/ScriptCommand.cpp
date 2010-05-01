@@ -14,7 +14,7 @@ ScriptCommand::ScriptCommand(QString path)
 
 
 //TODO: Find a better way of converting objects between Json:Vlues and QSCriptValues (evaling JSON ATM)
-Json::Value & ScriptCommand::run(MushiSession sess, Json::Value &command, Json::Value &ret, QScriptEngine &engine){
+Json::Value & ScriptCommand::run(MushiSession &sess, Json::Value &command, Json::Value &ret, QScriptEngine &engine, MushiDB &db){
 
     QTime timer;
     this->mutex.lock(); //get exclusive lock on this command object (can't run a program twice on different engines)
@@ -23,9 +23,9 @@ Json::Value & ScriptCommand::run(MushiSession sess, Json::Value &command, Json::
     QScriptValue object;
    // qDebug()<<"before eval";
 
-    timer.start();
-    object=engine.evaluate(this->scriptCode);
-    qDebug()<<"time taken to evaluate " <<this->scriptPath <<":"<<timer.elapsed();
+   // timer.start();
+    object=engine.evaluate(this->scriptCode,this->scriptPath);
+    //qDebug()<<"time taken to evaluate " <<this->scriptPath <<":"<<timer.elapsed();
 
 
     //qDebug()<<"after eval";
@@ -54,13 +54,13 @@ Json::Value & ScriptCommand::run(MushiSession sess, Json::Value &command, Json::
     //Get arguments object
     QScriptValue commandObject = engine.evaluate(QString(writer.write(command).c_str()).prepend("(").append(")"));
     if(commandObject.isError()){
-        qDebug()<<"Command Object:"<< commandObject.toString();
+        //qDebug()<<"Command Object:"<< commandObject.toString();
         ret["reason"]="Script error occured.";
         return ret;
     }
     QScriptValue retObject=engine.evaluate(QString(writer.write(ret).c_str()).prepend("(").append(")"));
     if(retObject.isError()){
-        qDebug()<< "RetObject:"<< retObject.toString();
+        //qDebug()<< "RetObject:"<< retObject.toString();
         ret["reason"]="Script error occured while evaluating response.";
         return ret;
     }

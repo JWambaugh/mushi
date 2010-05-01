@@ -4,17 +4,20 @@
 
 
 
+MushiScriptDB::MushiScriptDB(){
 
+    this->db.init();
+}
 
-QScriptValue MushiScriptDBSelect(QScriptContext *ctx, QScriptEngine *eng){
+QScriptValue MushiScriptDB::select(QString query){
     JSON_WRITE_CLASS writer;
-    QString query =ctx->argument(0).toString();
+   
     MushiDBResult *r;
-    MushiDB *db = MushiServer::getInstance()->getDB();
-    r=db->query(query.toStdString());
+    //MushiDB *db = MushiServer::getInstance()->getDB();
+    r=db.query(query.toStdString());
 
     QScriptValue val;
-    val = eng->evaluate(QString(writer.write(r->getJson()).c_str()));
+    val = this->engine()->evaluate(QString(writer.write(r->getJson()).c_str()));
 
 
 
@@ -24,35 +27,34 @@ QScriptValue MushiScriptDBSelect(QScriptContext *ctx, QScriptEngine *eng){
 }
 
 
-QScriptValue MushiScriptDBNestedSelect(QScriptContext *ctx, QScriptEngine *eng){
+QScriptValue MushiScriptDB::nestedSelect(QString query){
     JSON_WRITE_CLASS writer;
-    QString query =ctx->argument(0).toString();
+    
     MushiDBResult *r;
-    MushiDB *db = MushiServer::getInstance()->getDB();
-    r=db->query(query.toStdString());
+  //  MushiDB *db = MushiServer::getInstance()->getDB();
+    r=db.query(query.toStdString());
 
     QScriptValue val;
-    val = eng->evaluate(QString(writer.write(r->getNestedJson()).c_str()));
+    val = this->engine()->evaluate(QString(writer.write(r->getNestedJson()).c_str()));
     delete r;
     return val;
 }
 
 
- QScriptValue getProperty(QScriptContext *ctx, QScriptEngine *eng)
- {
+QScriptValue getProperty(QScriptContext *ctx, QScriptEngine *eng){
      QString name = ctx->argument(0).toString();
      return ctx->thisObject().property(name);
- }
+}
 
- QScriptValue MushiScriptDBExecute(QScriptContext *ctx, QScriptEngine *eng){
-    MushiDB *db = MushiServer::getInstance()->getDB();
-    db->query(ctx->argument(0).toString().toStdString());
+QScriptValue MushiScriptDB::exec(QString query){
+    //MushiDB *db = MushiServer::getInstance()->getDB();
+    db.query(query.toStdString());
     QScriptValue val;
     return val;
 }
 
- QScriptValue MushiScriptDBEscapeQuotes(QScriptContext *ctx, QScriptEngine *eng){
-    MushiDB *db = MushiServer::getInstance()->getDB();
-    QScriptValue val(eng,db->escapeQuotes(ctx->argument(0).toString()));
+QScriptValue MushiScriptDB::escapeQuotes(QString value){
+  //  MushiDB *db = MushiServer::getInstance()->getDB();
+    QScriptValue val(this->engine(),db.escapeQuotes(value));
     return val;
 }

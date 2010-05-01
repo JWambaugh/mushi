@@ -42,11 +42,11 @@
 #include "../lib_json/json.h"
 
 void MushiServer::defineHandlers(){
-	mg_bind_to_uri(ctx, "/", &m_showIndex,NULL);
-	mg_bind_to_uri(ctx, "/version", &m_showVersion,NULL);
-	mg_bind_to_uri(ctx, "/config", &m_showConfig,NULL);
-        mg_bind_to_uri(ctx, "*.mjs", &m_script,NULL);
-	mg_bind_to_uri(ctx, "/command", &m_receiveCommand,NULL);
+        mg_set_uri_callback(ctx, "/", &m_showIndex,NULL);
+        mg_set_uri_callback(ctx, "/version", &m_showVersion,NULL);
+        mg_set_uri_callback(ctx, "/config", &m_showConfig,NULL);
+        mg_set_uri_callback(ctx, "*.mjs", &m_script,NULL);
+        mg_set_uri_callback(ctx, "/command", &m_receiveCommand,NULL);
 }
 
 
@@ -60,6 +60,8 @@ m_receiveCommand(struct mg_connection *conn, const struct mg_request_info *ri, v
 	char	 *request_method;
 	char *data= ri->post_data;
 	request_method = ri->request_method;
+
+
 	if(data==0){
 		mg_printf(conn,"data wasn't posted.");
 		return;
@@ -67,8 +69,12 @@ m_receiveCommand(struct mg_connection *conn, const struct mg_request_info *ri, v
 	url_decode(data,strlen(data),data,strlen(data)+1 );
         if (!strcmp(request_method, "POST")) {
                 timer.start();
+                //get a database handle
+                MushiDB db;
+                db.init();
+                //init a script engine
                 MushiScriptEngine engine(conn,ri,user_data);
-                qDebug()<<"Time to initialize engine: "<<timer.elapsed();
+                //qDebug()<<"Time to initialize engine: "<<timer.elapsed();
                 printf("Received POST: %s\n",data);
 
 		
@@ -82,14 +88,18 @@ m_receiveCommand(struct mg_connection *conn, const struct mg_request_info *ri, v
 		reader.parse(input, cmd);
 		
 		
-                char *buff = (char *)writer.write(MushiServer::getInstance()->runCommand(cmd,engine)).c_str();
-		
-		mg_printf(conn, "%s",
-				  "HTTP/1.1 200 OK\r\n"
-				  "Content-Type: text/html\r\n"
-				  "Connection: close\r\n\r\n");
-		mg_printf(conn, "%s",buff);
-		//free(buff);
+               // char *buff = (char *)writer.write(MushiServer::getInstance()->runCommand(cmd,engine)).c_str();
+                std::string response;
+
+                response.append("HTTP/1.1 200 OK\r\n"
+                                "Content-Type: text/html\r\n"
+                                "Connection: close\r\n\r\n");
+
+                response.append(writer.write(MushiServer::getInstance()->runCommand(cmd,engine,db)));
+                //mg_printf(conn, "%s",buff);
+                mg_write(conn, response.c_str(),response.length());
+
+                                  //free(buff);
 		//free(request_method);
 		//free(data);
 	} 
@@ -135,25 +145,8 @@ static void m_showVersion(struct mg_connection *conn, const struct mg_request_in
  * Handler for the / (root) of the server
  */
 static void m_showIndex(struct mg_connection *conn, const struct mg_request_info *ri, void *user_data){
-	
-	MushiDBResult *r;
-	MushiDB *db = MushiServer::getInstance()->getDB();
-	
-	r=db->query("select count(*) from task");
-	
-	mg_printf(conn, "%s",
-				  "HTTP/1.1 200 OK\r\nContent-Type: text/html\r\n\r\n"
-                                  "<html><head><title>Mushi Server Status</title></head><body><img src='/mushiLogo.png'/><br>");
-    mg_printf(conn, MUSHI_ABOUT
-				"<hr><table border='1'>"
-				"<tr><td>Server version: </td><td><strong>" MUSHI_SERVER_VERSION "</strong></td></tr>"
-				"<tr><td>Mushi Protocol Version: </td><td><strong>" MUSHI_PROTOCOL_VERSION "</strong></td></tr>"
-				"<tr><td>Server status:</td><td> <strong>OK</strong></td></tr>"
-				"<tr><td>Number of tasks in database:</td><td> <strong>%s</strong></td></tr>"
-				"</table><br />The server is running correctly", r->getCell(1, 0));
-	
-	delete r;
-	mg_printf(conn, "%s", "</body></html>");
+    mg_printf(conn, "%s", "HTTP/1.1 301 Moved Permanently\r\nLocation: /index.mjs\r\n\r\n");
+
 }
 
 /**
@@ -162,7 +155,7 @@ Javascript handler
 static void m_script(struct mg_connection *conn, const struct mg_request_info *ri,void *user_data){
     QTime timer;
     timer.start();
-    mg_printf(conn, "%s", "HTTP/1.1 200 OK\r\nContent-Type: text/html\r\n\r\n");
+
     //mg_printf(conn,"Script called!");
 
     std::ostringstream fileName;
@@ -177,6 +170,11 @@ static void m_script(struct mg_connection *conn, const struct mg_request_info *r
     QString contents;
     //Load and eval the called script
     contents= getFileContents(QString(fileName.str().c_str()));
+    if(contents==""){
+        mg_printf(conn, "%s", "HTTP/1.1 404 FILE NOT FOUND\r\nContent-Type: text/html\r\n\r\nThe file at this location cannot be found.");
+        return;
+    }
+    mg_printf(conn, "%s", "HTTP/1.1 200 OK\r\nContent-Type: text/html\r\n\r\n");
     precompileMJS(contents);
     //printf("%s\n",contents.toStdString().c_str());
     engine.engine.evaluate(contents,QString(fileName.str().c_str()));
@@ -188,7 +186,7 @@ static void m_script(struct mg_connection *conn, const struct mg_request_info *r
         for (int i = 0; i < errors.size(); ++i)
               printf("%s\n",errors.at(i).toLocal8Bit().constData());
         }
-    qDebug()<<"time elapsed to run script: "<<timer.elapsed();
+    //qDebug()<<"time elapsed to run script: "<<timer.elapsed();
 }
 
 

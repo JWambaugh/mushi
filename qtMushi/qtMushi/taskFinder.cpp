@@ -3,7 +3,28 @@
 
 #include "taskeditor.h"
 taskFinder::taskFinder(QWidget *parent) : QWidget(parent){
+        this->setStyleSheet("QTreeView::branch:has-siblings:!adjoins-item {"
+                            "border-image: url(:img/stylesheet-vline.png) 0;"
+        "}"
+        "QTreeView::branch:has-siblings:adjoins-item {"
+        " border-image: url(:img/stylesheet-branch-more.png) 0;"
+        "}"
 
+        "QTreeView::branch:!has-children:!has-siblings:adjoins-item {"
+        "border-image: url(:img/stylesheet-branch-end.png) 0;"
+        "}"
+
+        "QTreeView::branch:has-children:!has-siblings:closed,"
+        "QTreeView::branch:closed:has-children:has-siblings {"
+                "border-image: none;"
+                "image: url(:img/stylesheet-branch-closed.png);"
+        "}"
+
+        "QTreeView::branch:open:has-children:!has-siblings,"
+        "QTreeView::branch:open:has-children:has-siblings  {"
+                "border-image: none;"
+                "image: url(:img/stylesheet-branch-open.png);"
+        "}");
 
         this->reply=0;
         treeWidget = new QTreeWidget(this);
@@ -17,7 +38,7 @@ taskFinder::taskFinder(QWidget *parent) : QWidget(parent){
         layout->addWidget(treeWidget);
         this->setLayout(layout);
         search();
-        connect(treeWidget,SIGNAL(itemActivated(QTreeWidgetItem*,int)),this,SLOT(itemActivated(QTreeWidgetItem*,int)));
+        connect(treeWidget,SIGNAL(itemClicked(QTreeWidgetItem*,int)),this,SLOT(itemActivated(QTreeWidgetItem*,int)));
         connect(&static_cast <qtMushi *>(qApp)->taskDirectory,SIGNAL(updated()),this,SLOT(networkResponse()));
 
 }
@@ -81,6 +102,11 @@ QString html2plaintext(QString string){
 }
 
 Json::Value taskFinder::getSelectedRecord(){
+    // if there isn't a selected item, return a blank value
+    if(!this->treeWidget->currentItem()){
+        Json::Value blankVal;
+        return blankVal;
+    }
     taskTreeWidgetItem *item = static_cast<taskTreeWidgetItem *>(this->treeWidget->currentItem());
     return item->taskValue;
 }

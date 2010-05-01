@@ -13,7 +13,7 @@
 #include "../MushiServer.h"
 
 
-Json::Value &FindTaskCommand::run(MushiSession sess, Json::Value &command, Json::Value &ret, QScriptEngine &engine){
+Json::Value &FindTaskCommand::run(MushiSession &sess, Json::Value &command, Json::Value &ret, QScriptEngine &engine, MushiDB &db){
 	
 	
 	
@@ -21,10 +21,10 @@ Json::Value &FindTaskCommand::run(MushiSession sess, Json::Value &command, Json:
 		Json::Value results(Json::arrayValue);
 		std::ostringstream query;
 		MushiDBResult *r;
-		MushiDB *db = MushiServer::getInstance()->getDB();
+
 		
                 query	<< "SELECT t.id, t.title, t.description, t.percentComplete, t.estimate, t.createDate, t.originalEstimate"
-                                << " , t.reporterId as reporterID, r.firstName as reporter_firstName, r.lastName as reporter_lastName, r.email as reporter_email "
+                                << " , t.reporterID, r.firstName as reporter_firstName, r.lastName as reporter_lastName, r.email as reporter_email "
                                 << " ,t.ownerId as ownerID, t.parentTaskID, o.firstName as owner_firstName, o.lastName as owner_lastName, o.email as owner_email "
                                 << " ,s.name as status_name, s.isOpen as status_isOpen, s.id as status_id"
 				<< " FROM task t"
@@ -51,7 +51,7 @@ Json::Value &FindTaskCommand::run(MushiSession sess, Json::Value &command, Json:
                   }
                 }
 
-		r=db->query(query.str());
+                r=db.query(query.str());
 		results=r->getNestedJson();
 		
 		ret["status"]="success";

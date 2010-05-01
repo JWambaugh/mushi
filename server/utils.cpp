@@ -29,9 +29,9 @@ std::string uID(){
  **/
 char *getPostBody(char *search){
 	char* found;
-	printf("%s\n",search);
+        //printf("%s\n",search);
 	found=strstr(search, "\r\n");
-	printf("%d", found);
+        //printf("%d", found);
 	return search + 4;
 }
 
@@ -61,8 +61,10 @@ std::string dbin(std::string str){
 
 QString getFileContents(QString filename){
     QFile scriptFile(filename);
-    if (!scriptFile.open(QIODevice::ReadOnly))
+    if (!scriptFile.open(QIODevice::ReadOnly)){
          printf("error loading file\n");
+         return "";
+     }
     QTextStream stream(&scriptFile);
     QString contents = stream.readAll();
     scriptFile.close();

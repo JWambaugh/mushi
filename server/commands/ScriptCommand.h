@@ -20,7 +20,7 @@ public:
     QString scriptPath;
     QString scriptCode;
     QScriptProgram *program;
-    Json::Value &run(MushiSession sess, Json::Value &command, Json::Value &ret, QScriptEngine &engine);
+    Json::Value &run(MushiSession &sess, Json::Value &command, Json::Value &ret, QScriptEngine &engine, MushiDB &db);
 };
 
 #endif // SCRIPTCOMMAND_H

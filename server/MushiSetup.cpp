@@ -59,22 +59,32 @@ int MushiSetup::createTables(){
 				  ",password"
 				  ",email"
 				  ",createDate datetime DEFAULT (datetime('NOW'))"
-				
 				  ")");
+
 	db->query("create table if not exists role ("
 				"id integer PRIMARY KEY AUTOINCREMENT"
 				",name"
 				",description"
+                                ",projectID"
 				",isAdmin bit DEFAULT 0"
-				",createTask bit DEFAULT 0"
-				",modifyTask bit DEFAULT 0"
-				",deleteTask bit DEFAULT 0"
-				",modifyProject bit DEFAULT 0"
-				",deleteProject bit DEFAULT 0"
 				",createDate datetime DEFAULT (datetime('NOW'))"
 				")");
-	
-	
+
+
+        db->query("create table if not exists right ("
+                                "id integer PRIMARY KEY AUTOINCREMENT"
+                                ",name"
+                                ",description"
+                                ",createDate datetime DEFAULT (datetime('NOW'))"
+                                ")");
+
+        db->query("create table if not exists roleRight ("
+                                "id integer PRIMARY KEY AUTOINCREMENT"
+                                ",rightID integer REFERENCES right(id)"
+                                ",roleID integer REFERENCES role(id)"
+                                ",createDate datetime DEFAULT (datetime('NOW'))"
+                                ")");
+
 	db->query("create table if not exists category ("
 				"id integer PRIMARY KEY AUTOINCREMENT"
 				",name"
@@ -105,7 +115,7 @@ int MushiSetup::createTables(){
 				",title"
 				",description"
 				",percentComplete"
-				",reporterId"
+                                ",reporterID"
 				",ownerID"
 				",projectID"
 				",estimate"
@@ -183,9 +193,9 @@ void MushiSetup::insertDefaults(){
 	db->query("insert into user (firstName, lastName, password, email) values ('Jordan', 'Wambaugh', 'password', 'jordan@wambaugh.org')");
 
 	//insert roles
-	db->query("insert into role (name, description, isAdmin, createTask, modifyTask, deleteTask, modifyProject, deleteProject) values ('System Administrator','One who administers the system and thus requires full access to all', 1,1, 1, 1, 1, 1);"
-			  "insert into role (name, description, isAdmin, createTask, modifyTask, deleteTask, modifyProject, deleteProject) values ('Developer','A regular developer, can''t delete projects', 0, 1, 1, 1, 1, 0);"
-			  //template//  "('','', 1,1, 1, 1, 1, 1)	
+        db->query("insert into role (name, description, isAdmin) values ('System Administrator','One who administers the system and thus requires full access to all', 1);"
+                          "insert into role (name, description, isAdmin) values ('Developer','A regular developer, can''t delete projects', 0);"
+                          //template//  "('','', 1)
 	);
 }
 

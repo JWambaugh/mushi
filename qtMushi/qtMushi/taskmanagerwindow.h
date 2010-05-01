@@ -7,6 +7,7 @@
 #include "homepage.h"
 #include "taskeditor.h"
 #include "servercommand.h"
+#include "quicktaskcreator.h"
 namespace Ui {
     class TaskManagerWindow;
 }
@@ -22,13 +23,17 @@ private:
     QTabWidget *centralTabWidget;
     taskFinder *finder;
     Ui::TaskManagerWindow *m_ui;
+    QWidget *currentActiveCentralWidget;
 
 private slots:
+    void setActiveCentralWidget(QWidget *widget);
     void closeCentralTab(int index);
     void openTask(Json::Value);
     void newTask();
     void deleteTask();
     void removeCentralTab(QObject *page);
+    void showQuickTaskCreator();
+  //  void setCentralWidgetFocus(QWidget widget);
 };
 
 #endif // TASKMANAGERWINDOW_H

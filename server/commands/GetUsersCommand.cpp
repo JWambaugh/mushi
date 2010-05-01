@@ -1,5 +1,5 @@
 /*
- *  GetAuthorsCommand.cpp
+ *  GetUsersCommand.cpp
  *  server
  *
  *  Created by Jordan Wambaugh on 11/10/08.
@@ -9,11 +9,11 @@
 #include <sstream>
 #include <QStringList>
 #include "../../lib_json/value.h"
-#include "GetAuthorsCommand.h"
+#include "GetUsersCommand.h"
 #include "../MushiServer.h"
 
 
-Json::Value &GetAuthorsCommand::run(MushiSession sess, Json::Value &command, Json::Value &ret, QScriptEngine &engine){
+Json::Value &GetUsersCommand::run(MushiSession &sess, Json::Value &command, Json::Value &ret, QScriptEngine &engine, MushiDB &db){
 
 
 
@@ -21,12 +21,12 @@ Json::Value &GetAuthorsCommand::run(MushiSession sess, Json::Value &command, Jso
                 Json::Value results(Json::arrayValue);
                 std::ostringstream query;
                 MushiDBResult *r;
-                MushiDB *db = MushiServer::getInstance()->getDB();
+
 
                 query	<< "SELECT * from user";
 
 
-                r=db->query(query.str());
+                r=db.query(query.str());
                 results=r->getNestedJson();
 
                 ret["status"]="success";

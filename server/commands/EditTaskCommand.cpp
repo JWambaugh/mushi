@@ -16,7 +16,7 @@
 #include "EditTaskCommand.h"
 
 
-Json::Value &EditTaskCommand::run(MushiSession sess, Json::Value &command, Json::Value &ret, QScriptEngine &engine){
+Json::Value &EditTaskCommand::run(MushiSession &sess, Json::Value &command, Json::Value &ret, QScriptEngine &engine, MushiDB &db){
 	/*
 	 //debug command
 	 Json::Value::Members members;
@@ -35,14 +35,14 @@ Json::Value &EditTaskCommand::run(MushiSession sess, Json::Value &command, Json:
 			throw ret;
 		}
 		//std::string query;
-		MushiDB *db = MushiServer::getInstance()->getDB();
+
 		
 		std::vector<std::string> columns;
 		columns.push_back("title");
                 columns.push_back("originalEstimate");
 		columns.push_back("description");
 		columns.push_back("percentComplete");
-		columns.push_back("reporterId");
+                columns.push_back("reporterID");
 		columns.push_back("ownerID");
 		columns.push_back("projectID");
 		columns.push_back("estimate");
@@ -53,7 +53,7 @@ Json::Value &EditTaskCommand::run(MushiSession sess, Json::Value &command, Json:
 		std::ostringstream where;
 		where << "id = '" << dbin(command["id"].asString()) << "'";
 				
-		db->query(MushiDB::json2update(command, columns,where.str(),"task"));
+                db.query(MushiDB::json2update(command, columns,where.str(),"task"));
 		
 		
 		ret["status"]="success";

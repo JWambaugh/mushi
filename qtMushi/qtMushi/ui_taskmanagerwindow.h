@@ -1,8 +1,8 @@
 /********************************************************************************
 ** Form generated from reading UI file 'taskmanagerwindow.ui'
 **
-** Created: Fri Dec 4 21:28:06 2009
-**      by: Qt User Interface Compiler version 4.6.0
+** Created: Fri Apr 30 14:06:41 2010
+**      by: Qt User Interface Compiler version 4.6.2
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
@@ -31,8 +31,10 @@ class Ui_TaskManagerWindow
 public:
     QAction *actionNew;
     QAction *actionDelete;
-    QWidget *centralwidget;
-    QVBoxLayout *centralWidgetLayout;
+    QAction *actionQuickTaskCreator;
+    QAction *actionRefresh;
+    QWidget *centerWidget;
+    QVBoxLayout *centerWidgetLayout;
     QMenuBar *menubar;
     QMenu *menuTask;
     QStatusBar *statusbar;
@@ -47,13 +49,30 @@ public:
         TaskManagerWindow->resize(800, 600);
         actionNew = new QAction(TaskManagerWindow);
         actionNew->setObjectName(QString::fromUtf8("actionNew"));
+        QIcon icon;
+        icon.addFile(QString::fromUtf8(":/images/filenew.png"), QSize(), QIcon::Normal, QIcon::Off);
+        actionNew->setIcon(icon);
         actionDelete = new QAction(TaskManagerWindow);
         actionDelete->setObjectName(QString::fromUtf8("actionDelete"));
-        centralwidget = new QWidget(TaskManagerWindow);
-        centralwidget->setObjectName(QString::fromUtf8("centralwidget"));
-        centralWidgetLayout = new QVBoxLayout(centralwidget);
-        centralWidgetLayout->setObjectName(QString::fromUtf8("centralWidgetLayout"));
-        TaskManagerWindow->setCentralWidget(centralwidget);
+        QIcon icon1;
+        icon1.addFile(QString::fromUtf8(":/images/clear.png"), QSize(), QIcon::Normal, QIcon::Off);
+        actionDelete->setIcon(icon1);
+        actionQuickTaskCreator = new QAction(TaskManagerWindow);
+        actionQuickTaskCreator->setObjectName(QString::fromUtf8("actionQuickTaskCreator"));
+        QIcon icon2;
+        icon2.addFile(QString::fromUtf8(":/images/mode_Reference.png"), QSize(), QIcon::Normal, QIcon::Off);
+        actionQuickTaskCreator->setIcon(icon2);
+        actionRefresh = new QAction(TaskManagerWindow);
+        actionRefresh->setObjectName(QString::fromUtf8("actionRefresh"));
+        QIcon icon3;
+        icon3.addFile(QString::fromUtf8(":/images/redo.png"), QSize(), QIcon::Normal, QIcon::Off);
+        actionRefresh->setIcon(icon3);
+        centerWidget = new QWidget(TaskManagerWindow);
+        centerWidget->setObjectName(QString::fromUtf8("centerWidget"));
+        centerWidgetLayout = new QVBoxLayout(centerWidget);
+        centerWidgetLayout->setContentsMargins(0, 0, 0, 0);
+        centerWidgetLayout->setObjectName(QString::fromUtf8("centerWidgetLayout"));
+        TaskManagerWindow->setCentralWidget(centerWidget);
         menubar = new QMenuBar(TaskManagerWindow);
         menubar->setObjectName(QString::fromUtf8("menubar"));
         menubar->setGeometry(QRect(0, 0, 800, 22));
@@ -65,7 +84,7 @@ public:
         TaskManagerWindow->setStatusBar(statusbar);
         TaskTreeContainer = new QDockWidget(TaskManagerWindow);
         TaskTreeContainer->setObjectName(QString::fromUtf8("TaskTreeContainer"));
-        TaskTreeContainer->setMinimumSize(QSize(250, 42));
+        TaskTreeContainer->setMinimumSize(QSize(250, 60));
         TaskTreeContainer->setFeatures(QDockWidget::DockWidgetFloatable|QDockWidget::DockWidgetMovable);
         dockWidgetContents = new QWidget();
         dockWidgetContents->setObjectName(QString::fromUtf8("dockWidgetContents"));
@@ -73,7 +92,8 @@ public:
         TaskManagerWindow->addDockWidget(static_cast<Qt::DockWidgetArea>(4), TaskTreeContainer);
         toolBar = new QToolBar(TaskManagerWindow);
         toolBar->setObjectName(QString::fromUtf8("toolBar"));
-        toolBar->setToolButtonStyle(Qt::ToolButtonTextBesideIcon);
+        toolBar->setIconSize(QSize(24, 24));
+        toolBar->setToolButtonStyle(Qt::ToolButtonIconOnly);
         TaskManagerWindow->addToolBar(Qt::TopToolBarArea, toolBar);
 
         menubar->addAction(menuTask->menuAction());
@@ -81,6 +101,8 @@ public:
         menuTask->addAction(actionDelete);
         toolBar->addAction(actionNew);
         toolBar->addAction(actionDelete);
+        toolBar->addAction(actionQuickTaskCreator);
+        toolBar->addAction(actionRefresh);
 
         retranslateUi(TaskManagerWindow);
 
@@ -92,6 +114,11 @@ public:
         TaskManagerWindow->setWindowTitle(QApplication::translate("TaskManagerWindow", "Mushi", 0, QApplication::UnicodeUTF8));
         actionNew->setText(QApplication::translate("TaskManagerWindow", "New", 0, QApplication::UnicodeUTF8));
         actionDelete->setText(QApplication::translate("TaskManagerWindow", "Delete", 0, QApplication::UnicodeUTF8));
+        actionQuickTaskCreator->setText(QApplication::translate("TaskManagerWindow", "QuickTask", 0, QApplication::UnicodeUTF8));
+#ifndef QT_NO_TOOLTIP
+        actionQuickTaskCreator->setToolTip(QApplication::translate("TaskManagerWindow", "Quick Task", 0, QApplication::UnicodeUTF8));
+#endif // QT_NO_TOOLTIP
+        actionRefresh->setText(QApplication::translate("TaskManagerWindow", "refresh", 0, QApplication::UnicodeUTF8));
         menuTask->setTitle(QApplication::translate("TaskManagerWindow", "Task", 0, QApplication::UnicodeUTF8));
         TaskTreeContainer->setWindowTitle(QApplication::translate("TaskManagerWindow", "Tasks", 0, QApplication::UnicodeUTF8));
         toolBar->setWindowTitle(QApplication::translate("TaskManagerWindow", "toolBar", 0, QApplication::UnicodeUTF8));

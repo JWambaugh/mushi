@@ -6,6 +6,7 @@ QuickTaskTask::QuickTaskTask(QWidget *parent) :
     m_ui(new Ui::QuickTaskTask)
 {
     m_ui->setupUi(this);
+    this->connect(this->m_ui->saveButton,SIGNAL(clicked()),this,SLOT(save()));
 }
 
 QuickTaskTask::~QuickTaskTask()
@@ -47,4 +48,26 @@ void QuickTaskTask::changeEvent(QEvent *e)
     default:
         break;
     }
+}
+
+
+void QuickTaskTask::updateStore(){
+
+    this->val["title"]=this->m_ui->title->text().toStdString();
+    this->val["description"]=this->m_ui->description->toHtml().toStdString();
+}
+
+
+void QuickTaskTask::save(){
+    this->updateStore();
+    qDebug()<<"saving task";
+    //this->val["command"]="editTask";
+
+    ServerCommand *command= new ServerCommand(val,this);
+    command->connect(command,SIGNAL(saveComplete(Json::Value)),command,SLOT(deleteLater()));
+    command->connect(command,SIGNAL(saveComplete(Json::Value)),this,SLOT(deleteLater()));
+    command->connect(command,SIGNAL(saveComplete(Json::Value)),&static_cast <qtMushi *>(qApp)->taskDirectory,SLOT(refresh()));
+
+    command->set("command","addTask");
+    command->send();
 }

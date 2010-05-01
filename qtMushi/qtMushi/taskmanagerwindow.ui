@@ -13,8 +13,12 @@
   <property name="windowTitle">
    <string>Mushi</string>
   </property>
-  <widget class="QWidget" name="centralwidget">
-   <layout class="QVBoxLayout" name="centralWidgetLayout"/>
+  <widget class="QWidget" name="centerWidget">
+   <layout class="QVBoxLayout" name="centerWidgetLayout">
+    <property name="margin">
+     <number>0</number>
+    </property>
+   </layout>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
@@ -39,7 +43,7 @@
    <property name="minimumSize">
     <size>
      <width>250</width>
-     <height>42</height>
+     <height>60</height>
     </size>
    </property>
    <property name="features">
@@ -57,8 +61,14 @@
    <property name="windowTitle">
     <string>toolBar</string>
    </property>
+   <property name="iconSize">
+    <size>
+     <width>24</width>
+     <height>24</height>
+    </size>
+   </property>
    <property name="toolButtonStyle">
-    <enum>Qt::ToolButtonTextBesideIcon</enum>
+    <enum>Qt::ToolButtonIconOnly</enum>
    </property>
    <attribute name="toolBarArea">
     <enum>TopToolBarArea</enum>
@@ -68,18 +78,51 @@
    </attribute>
    <addaction name="actionNew"/>
    <addaction name="actionDelete"/>
+   <addaction name="actionQuickTaskCreator"/>
+   <addaction name="actionRefresh"/>
   </widget>
   <action name="actionNew">
+   <property name="icon">
+    <iconset resource="attach.qrc">
+     <normaloff>:/images/filenew.png</normaloff>:/images/filenew.png</iconset>
+   </property>
    <property name="text">
     <string>New</string>
    </property>
   </action>
   <action name="actionDelete">
+   <property name="icon">
+    <iconset resource="attach.qrc">
+     <normaloff>:/images/clear.png</normaloff>:/images/clear.png</iconset>
+   </property>
    <property name="text">
     <string>Delete</string>
    </property>
   </action>
+  <action name="actionQuickTaskCreator">
+   <property name="icon">
+    <iconset resource="attach.qrc">
+     <normaloff>:/images/mode_Reference.png</normaloff>:/images/mode_Reference.png</iconset>
+   </property>
+   <property name="text">
+    <string>QuickTask</string>
+   </property>
+   <property name="toolTip">
+    <string>Quick Task</string>
+   </property>
+  </action>
+  <action name="actionRefresh">
+   <property name="icon">
+    <iconset resource="attach.qrc">
+     <normaloff>:/images/redo.png</normaloff>:/images/redo.png</iconset>
+   </property>
+   <property name="text">
+    <string>refresh</string>
+   </property>
+  </action>
  </widget>
- <resources/>
+ <resources>
+  <include location="attach.qrc"/>
+ </resources>
  <connections/>
 </ui>

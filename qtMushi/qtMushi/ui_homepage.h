@@ -1,8 +1,8 @@
 /********************************************************************************
 ** Form generated from reading UI file 'homepage.ui'
 **
-** Created: Fri Dec 4 13:34:26 2009
-**      by: Qt User Interface Compiler version 4.6.0
+** Created: Fri Apr 30 12:35:12 2010
+**      by: Qt User Interface Compiler version 4.6.2
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
@@ -16,9 +16,8 @@
 #include <QtGui/QButtonGroup>
 #include <QtGui/QGridLayout>
 #include <QtGui/QHeaderView>
-#include <QtGui/QLabel>
-#include <QtGui/QLineEdit>
 #include <QtGui/QWidget>
+#include <QtWebKit/QWebView>
 
 QT_BEGIN_NAMESPACE
 
@@ -26,8 +25,7 @@ class Ui_HomePage
 {
 public:
     QGridLayout *gridLayout;
-    QLabel *label;
-    QLineEdit *lineEdit;
+    QWebView *webView;
 
     void setupUi(QWidget *HomePage)
     {
@@ -36,15 +34,11 @@ public:
         HomePage->resize(400, 300);
         gridLayout = new QGridLayout(HomePage);
         gridLayout->setObjectName(QString::fromUtf8("gridLayout"));
-        label = new QLabel(HomePage);
-        label->setObjectName(QString::fromUtf8("label"));
+        webView = new QWebView(HomePage);
+        webView->setObjectName(QString::fromUtf8("webView"));
+        webView->setUrl(QUrl("http://localhost:8080/index.mjs"));
 
-        gridLayout->addWidget(label, 0, 0, 1, 1);
-
-        lineEdit = new QLineEdit(HomePage);
-        lineEdit->setObjectName(QString::fromUtf8("lineEdit"));
-
-        gridLayout->addWidget(lineEdit, 1, 0, 1, 1);
+        gridLayout->addWidget(webView, 0, 0, 1, 1);
 
 
         retranslateUi(HomePage);
@@ -55,7 +49,6 @@ public:
     void retranslateUi(QWidget *HomePage)
     {
         HomePage->setWindowTitle(QApplication::translate("HomePage", "Form", 0, QApplication::UnicodeUTF8));
-        label->setText(QApplication::translate("HomePage", "Home", 0, QApplication::UnicodeUTF8));
     } // retranslateUi
 
 };

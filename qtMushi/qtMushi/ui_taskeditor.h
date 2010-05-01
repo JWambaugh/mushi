@@ -1,8 +1,8 @@
 /********************************************************************************
 ** Form generated from reading UI file 'taskeditor.ui'
 **
-** Created: Fri Dec 4 13:34:26 2009
-**      by: Qt User Interface Compiler version 4.6.0
+** Created: Fri Apr 30 14:21:13 2010
+**      by: Qt User Interface Compiler version 4.6.2
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
@@ -17,12 +17,17 @@
 #include <QtGui/QComboBox>
 #include <QtGui/QDoubleSpinBox>
 #include <QtGui/QGridLayout>
+#include <QtGui/QHBoxLayout>
 #include <QtGui/QHeaderView>
 #include <QtGui/QLabel>
 #include <QtGui/QLineEdit>
 #include <QtGui/QPushButton>
+#include <QtGui/QScrollArea>
+#include <QtGui/QSpacerItem>
 #include <QtGui/QSpinBox>
+#include <QtGui/QSplitter>
 #include <QtGui/QTextEdit>
+#include <QtGui/QVBoxLayout>
 #include <QtGui/QWidget>
 
 QT_BEGIN_NAMESPACE
@@ -31,129 +36,200 @@ class Ui_TaskEditor
 {
 public:
     QGridLayout *gridLayout;
+    QScrollArea *scrollArea;
+    QWidget *scrollAreaWidgetContents;
+    QGridLayout *gridLayout_2;
     QLabel *label;
     QLineEdit *title;
     QLabel *label_3;
     QComboBox *taskCombo;
+    QLabel *label_6;
     QComboBox *statusCombo;
+    QLabel *label_7;
     QComboBox *ownerCombo;
-    QTextEdit *description;
     QLabel *label_4;
+    QHBoxLayout *horizontalLayout_2;
     QSpinBox *percentComplete;
     QLabel *label_2;
     QDoubleSpinBox *originalEstimate;
     QLabel *label_5;
     QDoubleSpinBox *currentEstimate;
+    QSpacerItem *horizontalSpacer;
+    QSpacerItem *horizontalSpacer_2;
+    QWidget *widget;
+    QVBoxLayout *verticalLayout;
+    QSplitter *noteSplitter;
+    QTextEdit *description;
     QPushButton *saveButton;
-    QLabel *label_6;
-    QLabel *label_7;
+    QPushButton *addNoteButton;
+    QSpacerItem *horizontalSpacer_3;
 
     void setupUi(QWidget *TaskEditor)
     {
         if (TaskEditor->objectName().isEmpty())
             TaskEditor->setObjectName(QString::fromUtf8("TaskEditor"));
-        TaskEditor->resize(833, 499);
+        TaskEditor->resize(833, 584);
+        TaskEditor->setStyleSheet(QString::fromUtf8("QWidget#TaskEditor, QWidget#scrollAreaWidgetContents {\n"
+"background-color: #fff;\n"
+"}"));
         gridLayout = new QGridLayout(TaskEditor);
         gridLayout->setObjectName(QString::fromUtf8("gridLayout"));
-        label = new QLabel(TaskEditor);
+        scrollArea = new QScrollArea(TaskEditor);
+        scrollArea->setObjectName(QString::fromUtf8("scrollArea"));
+        scrollArea->setWidgetResizable(true);
+        scrollAreaWidgetContents = new QWidget();
+        scrollAreaWidgetContents->setObjectName(QString::fromUtf8("scrollAreaWidgetContents"));
+        scrollAreaWidgetContents->setGeometry(QRect(0, 0, 805, 522));
+        gridLayout_2 = new QGridLayout(scrollAreaWidgetContents);
+        gridLayout_2->setObjectName(QString::fromUtf8("gridLayout_2"));
+        label = new QLabel(scrollAreaWidgetContents);
         label->setObjectName(QString::fromUtf8("label"));
+        QSizePolicy sizePolicy(QSizePolicy::Minimum, QSizePolicy::Preferred);
+        sizePolicy.setHorizontalStretch(0);
+        sizePolicy.setVerticalStretch(0);
+        sizePolicy.setHeightForWidth(label->sizePolicy().hasHeightForWidth());
+        label->setSizePolicy(sizePolicy);
         label->setLayoutDirection(Qt::LeftToRight);
         label->setAlignment(Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter);
 
-        gridLayout->addWidget(label, 1, 0, 1, 1);
+        gridLayout_2->addWidget(label, 0, 0, 1, 1);
 
-        title = new QLineEdit(TaskEditor);
+        title = new QLineEdit(scrollAreaWidgetContents);
         title->setObjectName(QString::fromUtf8("title"));
 
-        gridLayout->addWidget(title, 1, 1, 1, 5);
+        gridLayout_2->addWidget(title, 0, 1, 1, 4);
 
-        label_3 = new QLabel(TaskEditor);
+        label_3 = new QLabel(scrollAreaWidgetContents);
         label_3->setObjectName(QString::fromUtf8("label_3"));
+        sizePolicy.setHeightForWidth(label_3->sizePolicy().hasHeightForWidth());
+        label_3->setSizePolicy(sizePolicy);
         label_3->setAlignment(Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter);
 
-        gridLayout->addWidget(label_3, 5, 0, 1, 1);
+        gridLayout_2->addWidget(label_3, 1, 0, 1, 1);
 
-        taskCombo = new QComboBox(TaskEditor);
+        taskCombo = new QComboBox(scrollAreaWidgetContents);
         taskCombo->setObjectName(QString::fromUtf8("taskCombo"));
 
-        gridLayout->addWidget(taskCombo, 5, 1, 1, 5);
+        gridLayout_2->addWidget(taskCombo, 1, 1, 1, 4);
 
-        statusCombo = new QComboBox(TaskEditor);
+        label_6 = new QLabel(scrollAreaWidgetContents);
+        label_6->setObjectName(QString::fromUtf8("label_6"));
+        sizePolicy.setHeightForWidth(label_6->sizePolicy().hasHeightForWidth());
+        label_6->setSizePolicy(sizePolicy);
+        label_6->setAlignment(Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter);
+
+        gridLayout_2->addWidget(label_6, 2, 0, 1, 1);
+
+        statusCombo = new QComboBox(scrollAreaWidgetContents);
         statusCombo->setObjectName(QString::fromUtf8("statusCombo"));
 
-        gridLayout->addWidget(statusCombo, 6, 1, 1, 2);
+        gridLayout_2->addWidget(statusCombo, 2, 1, 1, 1);
 
-        ownerCombo = new QComboBox(TaskEditor);
+        label_7 = new QLabel(scrollAreaWidgetContents);
+        label_7->setObjectName(QString::fromUtf8("label_7"));
+        label_7->setAlignment(Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter);
+
+        gridLayout_2->addWidget(label_7, 2, 2, 1, 1);
+
+        ownerCombo = new QComboBox(scrollAreaWidgetContents);
         ownerCombo->setObjectName(QString::fromUtf8("ownerCombo"));
 
-        gridLayout->addWidget(ownerCombo, 6, 4, 1, 2);
+        gridLayout_2->addWidget(ownerCombo, 2, 3, 1, 2);
 
-        description = new QTextEdit(TaskEditor);
-        description->setObjectName(QString::fromUtf8("description"));
-
-        gridLayout->addWidget(description, 9, 0, 1, 6);
-
-        label_4 = new QLabel(TaskEditor);
+        label_4 = new QLabel(scrollAreaWidgetContents);
         label_4->setObjectName(QString::fromUtf8("label_4"));
         label_4->setAlignment(Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter);
 
-        gridLayout->addWidget(label_4, 7, 0, 1, 1);
+        gridLayout_2->addWidget(label_4, 3, 0, 1, 1);
 
-        percentComplete = new QSpinBox(TaskEditor);
+        horizontalLayout_2 = new QHBoxLayout();
+        horizontalLayout_2->setObjectName(QString::fromUtf8("horizontalLayout_2"));
+        percentComplete = new QSpinBox(scrollAreaWidgetContents);
         percentComplete->setObjectName(QString::fromUtf8("percentComplete"));
         percentComplete->setMaximum(100);
 
-        gridLayout->addWidget(percentComplete, 7, 1, 1, 1);
+        horizontalLayout_2->addWidget(percentComplete);
 
-        label_2 = new QLabel(TaskEditor);
+        label_2 = new QLabel(scrollAreaWidgetContents);
         label_2->setObjectName(QString::fromUtf8("label_2"));
         label_2->setAlignment(Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter);
 
-        gridLayout->addWidget(label_2, 7, 2, 1, 1);
+        horizontalLayout_2->addWidget(label_2);
 
-        originalEstimate = new QDoubleSpinBox(TaskEditor);
+        originalEstimate = new QDoubleSpinBox(scrollAreaWidgetContents);
         originalEstimate->setObjectName(QString::fromUtf8("originalEstimate"));
         originalEstimate->setDecimals(1);
         originalEstimate->setMaximum(100);
         originalEstimate->setSingleStep(0.5);
 
-        gridLayout->addWidget(originalEstimate, 7, 3, 1, 1);
+        horizontalLayout_2->addWidget(originalEstimate);
 
-        label_5 = new QLabel(TaskEditor);
+        label_5 = new QLabel(scrollAreaWidgetContents);
         label_5->setObjectName(QString::fromUtf8("label_5"));
         label_5->setAlignment(Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter);
 
-        gridLayout->addWidget(label_5, 7, 4, 1, 1);
+        horizontalLayout_2->addWidget(label_5);
 
-        currentEstimate = new QDoubleSpinBox(TaskEditor);
+        currentEstimate = new QDoubleSpinBox(scrollAreaWidgetContents);
         currentEstimate->setObjectName(QString::fromUtf8("currentEstimate"));
         currentEstimate->setDecimals(1);
         currentEstimate->setSingleStep(0.5);
 
-        gridLayout->addWidget(currentEstimate, 7, 5, 1, 1);
+        horizontalLayout_2->addWidget(currentEstimate);
+
+        horizontalSpacer = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
+
+        horizontalLayout_2->addItem(horizontalSpacer);
+
+
+        gridLayout_2->addLayout(horizontalLayout_2, 3, 1, 1, 4);
+
+        horizontalSpacer_2 = new QSpacerItem(381, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
+
+        gridLayout_2->addItem(horizontalSpacer_2, 6, 3, 1, 1);
+
+        widget = new QWidget(scrollAreaWidgetContents);
+        widget->setObjectName(QString::fromUtf8("widget"));
+        verticalLayout = new QVBoxLayout(widget);
+        verticalLayout->setContentsMargins(0, 0, 0, 0);
+        verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
+        noteSplitter = new QSplitter(widget);
+        noteSplitter->setObjectName(QString::fromUtf8("noteSplitter"));
+        noteSplitter->setOrientation(Qt::Vertical);
+        noteSplitter->setOpaqueResize(true);
+        description = new QTextEdit(noteSplitter);
+        description->setObjectName(QString::fromUtf8("description"));
+        QSizePolicy sizePolicy1(QSizePolicy::Expanding, QSizePolicy::Expanding);
+        sizePolicy1.setHorizontalStretch(0);
+        sizePolicy1.setVerticalStretch(0);
+        sizePolicy1.setHeightForWidth(description->sizePolicy().hasHeightForWidth());
+        description->setSizePolicy(sizePolicy1);
+        description->setMinimumSize(QSize(0, 200));
+        noteSplitter->addWidget(description);
+
+        verticalLayout->addWidget(noteSplitter);
+
+
+        gridLayout_2->addWidget(widget, 4, 0, 1, 5);
+
+        scrollArea->setWidget(scrollAreaWidgetContents);
+
+        gridLayout->addWidget(scrollArea, 0, 0, 1, 3);
 
         saveButton = new QPushButton(TaskEditor);
         saveButton->setObjectName(QString::fromUtf8("saveButton"));
 
-        gridLayout->addWidget(saveButton, 10, 0, 1, 1);
+        gridLayout->addWidget(saveButton, 1, 0, 1, 1);
 
-        label_6 = new QLabel(TaskEditor);
-        label_6->setObjectName(QString::fromUtf8("label_6"));
-        label_6->setAlignment(Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter);
+        addNoteButton = new QPushButton(TaskEditor);
+        addNoteButton->setObjectName(QString::fromUtf8("addNoteButton"));
 
-        gridLayout->addWidget(label_6, 6, 0, 1, 1);
+        gridLayout->addWidget(addNoteButton, 1, 2, 1, 1);
 
-        label_7 = new QLabel(TaskEditor);
-        label_7->setObjectName(QString::fromUtf8("label_7"));
-        label_7->setAlignment(Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter);
+        horizontalSpacer_3 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
 
-        gridLayout->addWidget(label_7, 6, 3, 1, 1);
+        gridLayout->addItem(horizontalSpacer_3, 1, 1, 1, 1);
 
-        gridLayout->setColumnStretch(1, 1);
-        gridLayout->setColumnStretch(2, 1);
-        gridLayout->setColumnStretch(3, 1);
-        gridLayout->setColumnStretch(4, 1);
-        gridLayout->setColumnStretch(5, 1);
 
         retranslateUi(TaskEditor);
 
@@ -165,6 +241,8 @@ public:
         TaskEditor->setWindowTitle(QApplication::translate("TaskEditor", "Form", 0, QApplication::UnicodeUTF8));
         label->setText(QApplication::translate("TaskEditor", "Title", 0, QApplication::UnicodeUTF8));
         label_3->setText(QApplication::translate("TaskEditor", "Subtask Of", 0, QApplication::UnicodeUTF8));
+        label_6->setText(QApplication::translate("TaskEditor", "Status", 0, QApplication::UnicodeUTF8));
+        label_7->setText(QApplication::translate("TaskEditor", "Owner", 0, QApplication::UnicodeUTF8));
         label_4->setText(QApplication::translate("TaskEditor", "Complete", 0, QApplication::UnicodeUTF8));
         percentComplete->setSuffix(QApplication::translate("TaskEditor", "%", 0, QApplication::UnicodeUTF8));
         label_2->setText(QApplication::translate("TaskEditor", "Original Est.", 0, QApplication::UnicodeUTF8));
@@ -172,8 +250,7 @@ public:
         label_5->setText(QApplication::translate("TaskEditor", "Remaining Est.", 0, QApplication::UnicodeUTF8));
         currentEstimate->setSuffix(QApplication::translate("TaskEditor", " Hrs.", 0, QApplication::UnicodeUTF8));
         saveButton->setText(QApplication::translate("TaskEditor", "Save", 0, QApplication::UnicodeUTF8));
-        label_6->setText(QApplication::translate("TaskEditor", "Status", 0, QApplication::UnicodeUTF8));
-        label_7->setText(QApplication::translate("TaskEditor", "Owner", 0, QApplication::UnicodeUTF8));
+        addNoteButton->setText(QApplication::translate("TaskEditor", "Add Comment", 0, QApplication::UnicodeUTF8));
     } // retranslateUi
 
 };

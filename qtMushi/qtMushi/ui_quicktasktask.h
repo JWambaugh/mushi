@@ -1,8 +1,8 @@
 /********************************************************************************
 ** Form generated from reading UI file 'quicktasktask.ui'
 **
-** Created: Fri Dec 4 13:34:26 2009
-**      by: Qt User Interface Compiler version 4.6.0
+** Created: Fri Apr 30 12:35:12 2010
+**      by: Qt User Interface Compiler version 4.6.2
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/

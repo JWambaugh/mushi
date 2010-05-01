@@ -5,6 +5,7 @@ TEMPLATE = app
 TARGET = 
 DEPENDPATH += .
 INCLUDEPATH += .
+INCLUDEPATH += ../utils
 macx:CONFIG += x86
 
 # Input
@@ -23,7 +24,13 @@ HEADERS += qtMushi.h \
     taskdirectory.h \
     statusdirectory.h \
     authordirectory.h \
-    userDirectory.h
+    userDirectory.h \
+    quicktaskcreatordefaults.h \
+    styleanimator.h \
+    manhattanstyle.h \
+    core_global.h \
+    ../utils/stylehelper.h \
+    ../utils/qtcassert.h
 SOURCES += main.cpp \
     qtMushi.cpp \
     taskFinder.cpp \
@@ -42,7 +49,11 @@ SOURCES += main.cpp \
     taskcomment.cpp \
     taskdirectory.cpp \
     statusdirectory.cpp \
-    userDirectory.cpp
+    userDirectory.cpp \
+    quicktaskcreatordefaults.cpp \
+    styleanimator.cpp \
+    manhattanstyle.cpp \
+    ../utils/stylehelper.cpp
 RESOURCES += attach.qrc
 INCLUDEPATH += ../edit_html
 DEPENDPATH += ../edit_html
@@ -62,4 +73,5 @@ FORMS += taskmanager.ui \
     quicktaskcreator.ui \
     taskmanagerwindow.ui \
     homepage.ui \
-    taskcomment.ui
+    taskcomment.ui \
+    quicktaskcreatordefaults.ui

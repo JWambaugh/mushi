@@ -1,4 +1,4 @@
-/*
+ /*
  *  MushiDB.cpp
  *  server
  *
@@ -22,16 +22,20 @@ sqlite3 * MushiDB::getHandle(){
 
 
 void MushiDB::init(){
-	//load the database
+        //set a timeout for cennecting to the database
+
+        //load the database
         if(sqlite3_open("../data/mushiServer.data", &db) != SQLITE_OK){
 		printf("An error occured while loading the database: %s\n",sqlite3_errmsg(db));
 	} else{
-		printf("Successfully loaded database.\n");
+              sqlite3_busy_timeout(db, 30000);
+                //printf("Successfully loaded database.\n");
+
 	}
 }
 	
 MushiDBResult* MushiDB::query(const std::string sql){
-        printf("%s\n",sql.c_str());
+       // printf("%s\n",sql.c_str());
 	MushiDBResult *r = new MushiDBResult;
 	r->sql=(char *)sql.c_str();
 	
@@ -94,3 +98,7 @@ std::string  MushiDB::json2insert(Json::Value &val, std::vector<std::string> &co
 	return query.str();
 }
 
+MushiDB::~MushiDB(){
+    //close the database connection
+    sqlite3_close(this->db);
+}

@@ -2,7 +2,9 @@
 #define QUICKTASKTASK_H
 
 #include <QtGui/QWidget>
-
+#include "../../lib_json/value.h"
+#include "../../lib_json/writer.h"
+#include "qtMushi.h"
 namespace Ui {
     class QuickTaskTask;
 }
@@ -17,7 +19,11 @@ public:
     void setDescription(QString);
     QString getTitle();
     void setTitle(QString);
+    Json::Value val;
+    void updateStore();
 
+public slots:
+    void save();
 protected:
     virtual void changeEvent(QEvent *e);
 

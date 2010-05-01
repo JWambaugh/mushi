@@ -19,7 +19,7 @@
 
 class MushiCommand{
 public:
-        virtual Json::Value &run(MushiSession sess, Json::Value &command, Json::Value &ret, QScriptEngine &engine)=0;
+        virtual Json::Value &run(MushiSession &sess, Json::Value &command, Json::Value &ret, QScriptEngine &engine, MushiDB &db)=0;
 
 };
 
