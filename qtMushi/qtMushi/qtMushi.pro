@@ -25,12 +25,12 @@ HEADERS += qtMushi.h \
     statusdirectory.h \
     authordirectory.h \
     userDirectory.h \
-    quicktaskcreatordefaults.h \
-    styleanimator.h \
-    manhattanstyle.h \
-    core_global.h \
-    ../utils/stylehelper.h \
-    ../utils/qtcassert.h
+    quicktaskcreatordefaults.h
+   # styleanimator.h \
+#    manhattanstyle.h \
+   # core_global.h \
+ #   ../utils/stylehelper.h \
+ #   ../utils/qtcassert.h
 SOURCES += main.cpp \
     qtMushi.cpp \
     taskFinder.cpp \
@@ -50,10 +50,10 @@ SOURCES += main.cpp \
     taskdirectory.cpp \
     statusdirectory.cpp \
     userDirectory.cpp \
-    quicktaskcreatordefaults.cpp \
-    styleanimator.cpp \
-    manhattanstyle.cpp \
-    ../utils/stylehelper.cpp
+    quicktaskcreatordefaults.cpp
+  # styleanimator.cpp
+ #   manhattanstyle.cpp \
+ #   ../utils/stylehelper.cpp
 RESOURCES += attach.qrc
 INCLUDEPATH += ../edit_html
 DEPENDPATH += ../edit_html

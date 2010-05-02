@@ -126,8 +126,9 @@ typedef long off_t;
 typedef HANDLE pthread_mutex_t;
 typedef HANDLE pthread_cond_t;
 typedef DWORD pthread_t;
+#ifndef  WIN32
 typedef HANDLE pid_t;
-
+#endif
 struct timespec {
 	long tv_nsec;
 	long tv_sec;
@@ -144,8 +145,10 @@ typedef unsigned short		uint16_t;
 #if _MSC_VER > 1200
 typedef unsigned __int64	uint64_t;
 #else
+#ifndef WIN32
 /* VC6 cannot cast double to unsigned __int64, needed by print_dir_entry() */
 typedef __int64	uint64_t;
+#endif /*win32*/
 #endif /* _MSC_VER */
 #endif /* HAVE_STDINT */
 

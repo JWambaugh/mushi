@@ -7,7 +7,7 @@
 
 <?
 
-Mushi.include(Mushi.config.getValue("scriptDirectory")+'/Mushi.mjs'); //Load the supplimental Mushi javascript api
+//Mushi.include(Mushi.config.getValue("scriptDirectory")+'/Mushi.mjs'); //Load the supplimental Mushi javascript api
 
 ?>
 Ext.onReady(function(){
@@ -115,6 +115,8 @@ var writer = new Ext.data.JsonWriter({
 </head>
 <body>
 <img src="/mushiLogo.png" /><br>
+
+<?Mushi.include(Mushi.config.getValue("interfaceDirectory")+'/admin/adminMenu.mjs');?>
 Configuration
 
 <div id='grid'>

@@ -88,9 +88,9 @@ QColor StyleHelper::panelTextColor()
     //qApp->palette().highlightedText().color();
     return Qt::white;
 }
-
+#ifndef WIN32
 QColor StyleHelper::m_baseColor(0x666666);
-
+#endif
 QColor StyleHelper::baseColor()
 {
     return m_baseColor;

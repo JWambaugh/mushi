@@ -92,7 +92,8 @@ int MushiSetup::createTables(){
 				",defaultOwnerID integer REFERENCES user(id)"
 				",createDate datetime DEFAULT (datetime('NOW'))"
 				")");
-	
+
+
 	db->query("create table if not exists project ("
 				"id integer PRIMARY KEY AUTOINCREMENT"
 				",name"
@@ -109,7 +110,15 @@ int MushiSetup::createTables(){
 				",createDate datetime DEFAULT (datetime('NOW'))"
 				")");
 	
-	
+        db->query("create table if not exists priority ("
+                                "id integer PRIMARY KEY AUTOINCREMENT"
+                                ",name"
+                                ",description"
+                                ",orderBy"
+                                ",projectID integer REFERENCES project(id)"
+                                ",createDate datetime DEFAULT (datetime('NOW'))"
+                                ")");
+
 	db->query("create table if not exists task ("
 				"id integer PRIMARY KEY AUTOINCREMENT"
 				",title"
@@ -121,11 +130,21 @@ int MushiSetup::createTables(){
 				",estimate"
                                 ",originalEstimate"
 				",statusID"
+                                ",priorityID REFERENCES priority(id)"
 				",categoryID REFERENCES category(id)"
 				",parentTaskID integer REFERENCES task(id)"
 				",createDate datetime DEFAULT (datetime('NOW'))"
 				")");
-	
+
+
+        //allows many to many relationship between tasks and prerequisite tasks.
+        db->query("create table if not exists taskPrerequisite ("
+                                "id integer PRIMARY KEY AUTOINCREMENT"
+                                ",taskID REFERENCES task(id)"
+                                ",requiredTaskID REFERENCES task(id)"
+                                ",createDate datetime DEFAULT (datetime('NOW'))"
+                                ")");
+
 	
 	db->query("create table if not exists note ("
 				"id integer PRIMARY KEY AUTOINCREMENT"
@@ -166,6 +185,7 @@ int MushiSetup::createTables(){
                           "id integer PRIMARY KEY AUTOINCREMENT"
 			  ",name"
 			  ",isOpen"
+                          "projectID REFERENCES project(id)"
 			  ",createDate datetime DEFAULT (datetime('NOW'))"
 			  ")");
 	return 0;
