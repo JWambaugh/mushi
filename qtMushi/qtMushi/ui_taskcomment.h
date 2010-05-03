@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'taskcomment.ui'
 **
-** Created: Sun May 2 20:11:19 2010
+** Created: Mon May 3 10:16:15 2010
 **      by: Qt User Interface Compiler version 4.6.2
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
@@ -37,13 +37,13 @@ public:
     {
         if (TaskComment->objectName().isEmpty())
             TaskComment->setObjectName(QString::fromUtf8("TaskComment"));
-        TaskComment->resize(676, 150);
+        TaskComment->resize(676, 65);
         QSizePolicy sizePolicy(QSizePolicy::Preferred, QSizePolicy::MinimumExpanding);
         sizePolicy.setHorizontalStretch(0);
         sizePolicy.setVerticalStretch(150);
         sizePolicy.setHeightForWidth(TaskComment->sizePolicy().hasHeightForWidth());
         TaskComment->setSizePolicy(sizePolicy);
-        TaskComment->setMinimumSize(QSize(100, 150));
+        TaskComment->setMinimumSize(QSize(100, 65));
         TaskComment->setBaseSize(QSize(0, 200));
         verticalLayout = new QVBoxLayout(TaskComment);
         verticalLayout->setContentsMargins(1, 1, 1, 1);
@@ -60,7 +60,7 @@ public:
 
         note = new QTextEdit(dateBox);
         note->setObjectName(QString::fromUtf8("note"));
-        note->setMinimumSize(QSize(0, 50));
+        note->setMinimumSize(QSize(0, 20));
         note->setVerticalScrollBarPolicy(Qt::ScrollBarAsNeeded);
 
         gridLayout->addWidget(note, 1, 0, 1, 2);

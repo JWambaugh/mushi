@@ -33,6 +33,7 @@ private slots:
     void deleteTask();
     void removeCentralTab(QObject *page);
     void showQuickTaskCreator();
+    void showHome();
   //  void setCentralWidgetFocus(QWidget widget);
 };
 

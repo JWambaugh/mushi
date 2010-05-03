@@ -19,6 +19,7 @@ public:
     void updateFromStore();
 public slots:
     void save();
+    void setReadOnly(bool readOnly);
     void updateStore();
     void sizeToContents();
 private:

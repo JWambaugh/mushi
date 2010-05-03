@@ -17,11 +17,10 @@ Smtp::Smtp( const QString &from, const QString &to, const QString &subject, cons
     message = "To: " + to + "\n";
     message.append("From: " + from + "\n");
     message.append("Subject: " + subject + "\n");
-    message.append(headers);
+    message.append(headers+"\n\n");
     message.append(body);
     message.replace( QString::fromLatin1( "\n" ), QString::fromLatin1( "\r\n" ) );
-    message.replace( QString::fromLatin1( "\r\n.\r\n" ),
-    QString::fromLatin1( "\r\n..\r\n" ) );
+    message.replace( QString::fromLatin1( "\r\n.\r\n" ), QString::fromLatin1( "\r\n..\r\n" ) );
     this->from = from;
     rcpt = to;
     state = Init;

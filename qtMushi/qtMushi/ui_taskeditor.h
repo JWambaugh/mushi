@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'taskeditor.ui'
 **
-** Created: Sun May 2 20:11:19 2010
+** Created: Mon May 3 12:52:37 2010
 **      by: Qt User Interface Compiler version 4.6.2
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
@@ -60,6 +60,9 @@ public:
     QVBoxLayout *verticalLayout;
     QSplitter *noteSplitter;
     QTextEdit *description;
+    QSpacerItem *horizontalSpacer_4;
+    QSpacerItem *horizontalSpacer_5;
+    QSpacerItem *horizontalSpacer_6;
     QPushButton *saveButton;
     QPushButton *addNoteButton;
     QSpacerItem *horizontalSpacer_3;
@@ -182,7 +185,7 @@ public:
         horizontalLayout_2->addItem(horizontalSpacer);
 
 
-        gridLayout_2->addLayout(horizontalLayout_2, 3, 1, 1, 4);
+        gridLayout_2->addLayout(horizontalLayout_2, 3, 1, 1, 5);
 
         horizontalSpacer_2 = new QSpacerItem(381, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
 
@@ -197,6 +200,7 @@ public:
         noteSplitter->setObjectName(QString::fromUtf8("noteSplitter"));
         noteSplitter->setOrientation(Qt::Vertical);
         noteSplitter->setOpaqueResize(true);
+        noteSplitter->setChildrenCollapsible(false);
         description = new QTextEdit(noteSplitter);
         description->setObjectName(QString::fromUtf8("description"));
         QSizePolicy sizePolicy1(QSizePolicy::Expanding, QSizePolicy::Expanding);
@@ -204,14 +208,27 @@ public:
         sizePolicy1.setVerticalStretch(0);
         sizePolicy1.setHeightForWidth(description->sizePolicy().hasHeightForWidth());
         description->setSizePolicy(sizePolicy1);
-        description->setMinimumSize(QSize(0, 200));
+        description->setMinimumSize(QSize(0, 100));
         noteSplitter->addWidget(description);
 
         verticalLayout->addWidget(noteSplitter);
 
 
-        gridLayout_2->addWidget(widget, 4, 0, 1, 5);
+        gridLayout_2->addWidget(widget, 4, 0, 1, 6);
 
+        horizontalSpacer_4 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
+
+        gridLayout_2->addItem(horizontalSpacer_4, 2, 5, 1, 1);
+
+        horizontalSpacer_5 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
+
+        gridLayout_2->addItem(horizontalSpacer_5, 1, 5, 1, 1);
+
+        horizontalSpacer_6 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
+
+        gridLayout_2->addItem(horizontalSpacer_6, 0, 5, 1, 1);
+
+        gridLayout_2->setColumnStretch(5, 1);
         scrollArea->setWidget(scrollAreaWidgetContents);
 
         gridLayout->addWidget(scrollArea, 0, 0, 1, 3);

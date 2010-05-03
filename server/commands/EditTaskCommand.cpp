@@ -14,7 +14,7 @@
 
 #include "../MushiServer.h"
 #include "EditTaskCommand.h"
-
+#include "FindTaskCommand.h"
 
 Json::Value &EditTaskCommand::run(MushiSession &sess, Json::Value &command, Json::Value &ret, QScriptEngine &engine, MushiDB &db){
 	/*
@@ -24,7 +24,10 @@ Json::Value &EditTaskCommand::run(MushiSession &sess, Json::Value &command, Json
 	 for(int x=0;x<members.size();x++){
 	 printf(":%s\n",members.at(x).c_str());
 	 }*/
+
+
 	
+
 	if(command["command"].asString()=="editTask"){
 		
 		
@@ -35,8 +38,18 @@ Json::Value &EditTaskCommand::run(MushiSession &sess, Json::Value &command, Json
 			throw ret;
 		}
 		//std::string query;
+                try{
+                    //save copy of  task before changes in command for addons
+                    FindTaskCommand finder;
+                    Json::Value findRet;
+                    Json::Value findCommand;
+                    findCommand["command"]="findTask";
+                    findCommand["t.id"]=command.get("id","");
+                    findRet=finder.run(sess,findCommand,findRet,engine,db);
+                    command["originalTask"]=findRet;
+                } catch(int err){}
 
-		
+
 		std::vector<std::string> columns;
 		columns.push_back("title");
                 columns.push_back("originalEstimate");

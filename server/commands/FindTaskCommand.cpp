@@ -43,6 +43,7 @@ Json::Value &FindTaskCommand::run(MushiSession &sess, Json::Value &command, Json
 
                 QStringList params;
                 params.append("title");
+                params.append("t.id");
                 for(int x=0; x<params.size();x++){
                     QString paramVal(command.get(params.at(x).toStdString(),"").asString().c_str());
                     if(paramVal!=""){
@@ -50,7 +51,7 @@ Json::Value &FindTaskCommand::run(MushiSession &sess, Json::Value &command, Json
                         query << " AND " << params.at(x).toStdString() << " like '%" << paramVal.toStdString() << "%'";
                   }
                 }
-
+                query<<" ORDER BY t.createDate ASC";
                 r=db.query(query.str());
 		results=r->getNestedJson();
 		

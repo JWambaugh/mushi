@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'taskmanagerwindow.ui'
 **
-** Created: Sun May 2 20:11:19 2010
+** Created: Mon May 3 13:58:50 2010
 **      by: Qt User Interface Compiler version 4.6.2
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
@@ -33,6 +33,7 @@ public:
     QAction *actionDelete;
     QAction *actionQuickTaskCreator;
     QAction *actionRefresh;
+    QAction *actionHome;
     QWidget *centerWidget;
     QVBoxLayout *centerWidgetLayout;
     QMenuBar *menubar;
@@ -55,7 +56,7 @@ public:
         actionDelete = new QAction(TaskManagerWindow);
         actionDelete->setObjectName(QString::fromUtf8("actionDelete"));
         QIcon icon1;
-        icon1.addFile(QString::fromUtf8(":/images/clear.png"), QSize(), QIcon::Normal, QIcon::Off);
+        icon1.addFile(QString::fromUtf8(":/img/error.png"), QSize(), QIcon::Normal, QIcon::Off);
         actionDelete->setIcon(icon1);
         actionQuickTaskCreator = new QAction(TaskManagerWindow);
         actionQuickTaskCreator->setObjectName(QString::fromUtf8("actionQuickTaskCreator"));
@@ -67,6 +68,11 @@ public:
         QIcon icon3;
         icon3.addFile(QString::fromUtf8(":/images/redo.png"), QSize(), QIcon::Normal, QIcon::Off);
         actionRefresh->setIcon(icon3);
+        actionHome = new QAction(TaskManagerWindow);
+        actionHome->setObjectName(QString::fromUtf8("actionHome"));
+        QIcon icon4;
+        icon4.addFile(QString::fromUtf8(":/images/mode_Output.png"), QSize(), QIcon::Normal, QIcon::Off);
+        actionHome->setIcon(icon4);
         centerWidget = new QWidget(TaskManagerWindow);
         centerWidget->setObjectName(QString::fromUtf8("centerWidget"));
         centerWidgetLayout = new QVBoxLayout(centerWidget);
@@ -101,6 +107,7 @@ public:
         menuTask->addAction(actionDelete);
         toolBar->addAction(actionNew);
         toolBar->addAction(actionDelete);
+        toolBar->addAction(actionHome);
         toolBar->addAction(actionQuickTaskCreator);
         toolBar->addAction(actionRefresh);
 
@@ -119,6 +126,7 @@ public:
         actionQuickTaskCreator->setToolTip(QApplication::translate("TaskManagerWindow", "Quick Task", 0, QApplication::UnicodeUTF8));
 #endif // QT_NO_TOOLTIP
         actionRefresh->setText(QApplication::translate("TaskManagerWindow", "refresh", 0, QApplication::UnicodeUTF8));
+        actionHome->setText(QApplication::translate("TaskManagerWindow", "Home", 0, QApplication::UnicodeUTF8));
         menuTask->setTitle(QApplication::translate("TaskManagerWindow", "Task", 0, QApplication::UnicodeUTF8));
         TaskTreeContainer->setWindowTitle(QApplication::translate("TaskManagerWindow", "Tasks", 0, QApplication::UnicodeUTF8));
         toolBar->setWindowTitle(QApplication::translate("TaskManagerWindow", "toolBar", 0, QApplication::UnicodeUTF8));

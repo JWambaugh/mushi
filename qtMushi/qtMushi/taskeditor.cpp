@@ -80,6 +80,7 @@ void TaskEditor::saveCompleted(Json::Value val){
     }
     this->saveNotes();
     emit saveComplete();
+    this->refreshFromServer();
 }
 
 
@@ -123,6 +124,7 @@ void TaskEditor::setStore(Json::Value &s){
         command->set("command","getTaskNotes");
         command->set("taskID",this->store.get("id","").asCString());
         this->connect(command,SIGNAL(saveComplete(Json::Value)),this,SLOT(getNotesResponse(Json::Value)));
+        this->connect(command,SIGNAL(saveComplete(Json::Value)),command,SLOT(deleteLater()));
         command->send();
     }
     this->updateFromStore();
@@ -141,7 +143,9 @@ void TaskEditor::getNotesResponse(Json::Value val){
         for ( int index = 0; index < data.size(); ++index ){
             TaskComment *note = new TaskComment;
             note->store=data[index];
+
             note->updateFromStore();
+            note->setReadOnly(1);
             this->notes.append(note);
             note->store["taskID"]=this->store.get("id","");
             this->noteSplitter->addWidget(note);
@@ -157,3 +161,18 @@ void TaskEditor::saveNotes(){
     }
 }
 
+
+void TaskEditor::refreshFromServer(){
+    ServerCommand *command =new ServerCommand(this);
+    command->set("command","findTask");
+    command->set("t.id",this->store.get("id","").asCString());
+    this->connect(command,SIGNAL(saveComplete(Json::Value)),this,SLOT(refreshFromServerComplete(Json::Value)));
+    this->connect(command,SIGNAL(saveComplete(Json::Value)),command,SLOT(deleteLater()));
+    command->send();
+}
+
+
+void TaskEditor::refreshFromServerComplete(Json::Value response){
+    int index =0;
+    this->setStore(response.get("results","")[index]);
+}

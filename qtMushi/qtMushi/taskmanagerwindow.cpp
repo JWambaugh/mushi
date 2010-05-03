@@ -35,6 +35,7 @@ TaskManagerWindow::TaskManagerWindow(QWidget *parent) :
     connect(this->m_ui->actionDelete,SIGNAL(triggered()),this,SLOT(deleteTask()));
     connect(this->m_ui->actionQuickTaskCreator,SIGNAL(triggered()),this,SLOT(showQuickTaskCreator()));
     connect(this->m_ui->actionRefresh,SIGNAL(triggered()),this->finder,SLOT(search()));
+    connect(this->m_ui->actionHome,SIGNAL(triggered()),this,SLOT(showHome()));
 
 }
 
@@ -130,3 +131,8 @@ void TaskManagerWindow::deleteTask(){
     }*/
 }
 
+
+void TaskManagerWindow::showHome(){
+    HomePage *page = new HomePage();
+    this->setActiveCentralWidget(page);
+}

@@ -33,7 +33,7 @@ background-color: #fff;
         <height>522</height>
        </rect>
       </property>
-      <layout class="QGridLayout" name="gridLayout_2">
+      <layout class="QGridLayout" name="gridLayout_2" columnstretch="0,0,0,0,0,1">
        <item row="0" column="0">
         <widget class="QLabel" name="label">
          <property name="sizePolicy">
@@ -117,7 +117,7 @@ background-color: #fff;
          </property>
         </widget>
        </item>
-       <item row="3" column="1" colspan="4">
+       <item row="3" column="1" colspan="5">
         <layout class="QHBoxLayout" name="horizontalLayout_2">
          <item>
           <widget class="QSpinBox" name="percentComplete">
@@ -206,7 +206,7 @@ background-color: #fff;
          </property>
         </spacer>
        </item>
-       <item row="4" column="0" colspan="5">
+       <item row="4" column="0" colspan="6">
         <widget class="QWidget" name="widget" native="true">
          <layout class="QVBoxLayout" name="verticalLayout">
           <property name="margin">
@@ -220,6 +220,9 @@ background-color: #fff;
             <property name="opaqueResize">
              <bool>true</bool>
             </property>
+            <property name="childrenCollapsible">
+             <bool>false</bool>
+            </property>
             <widget class="QTextEdit" name="description">
              <property name="sizePolicy">
               <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
@@ -230,7 +233,7 @@ background-color: #fff;
              <property name="minimumSize">
               <size>
                <width>0</width>
-               <height>200</height>
+               <height>100</height>
               </size>
              </property>
             </widget>
@@ -238,6 +241,45 @@ background-color: #fff;
           </item>
          </layout>
         </widget>
+       </item>
+       <item row="2" column="5">
+        <spacer name="horizontalSpacer_4">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>40</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item row="1" column="5">
+        <spacer name="horizontalSpacer_5">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>40</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item row="0" column="5">
+        <spacer name="horizontalSpacer_6">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>40</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
        </item>
       </layout>
      </widget>

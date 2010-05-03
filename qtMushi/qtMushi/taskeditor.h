@@ -28,6 +28,8 @@ public slots:
     void addNote();
     void saveNotes();
     void getNotesResponse(Json::Value);
+    void refreshFromServer();
+    void refreshFromServerComplete(Json::Value);
 signals:
      void saveComplete();
 

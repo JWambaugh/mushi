@@ -26,7 +26,9 @@ QScriptValue MushiScriptGlobalLog(QScriptContext *ctx, QScriptEngine *engine){
 }
 
 
-
+/**
+ * sendMail(from,to,subject,body,headers)
+ */
 QScriptValue MushiScriptGlobalSendMail(QScriptContext *ctx, QScriptEngine *engine){
     QScriptValue val;
    qDebug()<<"Sending mail";

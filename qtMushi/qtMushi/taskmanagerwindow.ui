@@ -78,12 +78,13 @@
    </attribute>
    <addaction name="actionNew"/>
    <addaction name="actionDelete"/>
+   <addaction name="actionHome"/>
    <addaction name="actionQuickTaskCreator"/>
    <addaction name="actionRefresh"/>
   </widget>
   <action name="actionNew">
    <property name="icon">
-    <iconset resource="attach.qrc">
+    <iconset>
      <normaloff>:/images/filenew.png</normaloff>:/images/filenew.png</iconset>
    </property>
    <property name="text">
@@ -92,8 +93,8 @@
   </action>
   <action name="actionDelete">
    <property name="icon">
-    <iconset resource="attach.qrc">
-     <normaloff>:/images/clear.png</normaloff>:/images/clear.png</iconset>
+    <iconset>
+     <normaloff>:/img/error.png</normaloff>:/img/error.png</iconset>
    </property>
    <property name="text">
     <string>Delete</string>
@@ -101,7 +102,7 @@
   </action>
   <action name="actionQuickTaskCreator">
    <property name="icon">
-    <iconset resource="attach.qrc">
+    <iconset>
      <normaloff>:/images/mode_Reference.png</normaloff>:/images/mode_Reference.png</iconset>
    </property>
    <property name="text">
@@ -113,16 +114,23 @@
   </action>
   <action name="actionRefresh">
    <property name="icon">
-    <iconset resource="attach.qrc">
+    <iconset>
      <normaloff>:/images/redo.png</normaloff>:/images/redo.png</iconset>
    </property>
    <property name="text">
     <string>refresh</string>
    </property>
   </action>
+  <action name="actionHome">
+   <property name="icon">
+    <iconset>
+     <normaloff>:/images/mode_Output.png</normaloff>:/images/mode_Output.png</iconset>
+   </property>
+   <property name="text">
+    <string>Home</string>
+   </property>
+  </action>
  </widget>
- <resources>
-  <include location="attach.qrc"/>
- </resources>
+ <resources/>
  <connections/>
 </ui>

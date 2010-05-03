@@ -39,15 +39,20 @@ Json::Value &DeleteTaskCommand::run(MushiSession &sess, Json::Value &command, Js
 		}
 		//std::string query;
 
+                std::ostringstream query;
+                query="";
+                query << "delete from textHistory where tableName='note' and someID in (select id from note where tableName='task' and someId = 33" << dbin(command["id"].asString()) << ")";
+                db.query(query.str());
+
+                query="";
+                query << "delete from note where tableName='task' and someId = " << dbin(command["id"].asString()) ;
+                db.query(query.str());
 		
 		
 		
-		
-		std::ostringstream query;
+
+                query="";
                 query << "delete from task where id = '" << dbin(command["id"].asString()) << "'";
-		
-
-
                 db.query(query.str());
 		
 		

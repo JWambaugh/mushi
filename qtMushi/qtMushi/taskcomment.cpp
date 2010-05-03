@@ -6,7 +6,8 @@ TaskComment::TaskComment(QWidget *parent) :
     ui(new Ui::TaskComment)
 {
     ui->setupUi(this);
-    this->connect(this->ui->note,SIGNAL(textChanged()),this,SLOT(sizeToContents()));
+    //this->connect(this->ui->note->document(),SIGNAL(contentsChanged()),this,SLOT(sizeToContents()));
+    this->connect(this->ui->note->document()->documentLayout(),SIGNAL(documentSizeChanged(QSizeF)),this,SLOT(sizeToContents()));
 }
 
 TaskComment::~TaskComment()
@@ -22,7 +23,7 @@ void TaskComment::updateStore(){
 }
 void TaskComment::updateFromStore(){
     this->ui->note->setHtml(this->store.get("text","").asCString());
-
+    this->ui->authorLabel->setText(this->store.get("noteCreateDate","").asCString());
 }
 
 void TaskComment::setParentTaskID(int taskID){
@@ -53,7 +54,16 @@ void TaskComment::save(){
 
 void TaskComment::sizeToContents(){
     int height = this->ui->note->document()->documentLayout()->documentSize().height();
-    if (height<100)return;
-    this->setMinimumHeight(height);
+   // qDebug()<<height;
+    if (height<10)return;
 
+    this->setMinimumHeight(height+40);
+
+}
+
+
+
+
+void TaskComment::setReadOnly(bool readOnly){
+    this->ui->note->setReadOnly(readOnly);
 }
