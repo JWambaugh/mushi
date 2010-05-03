@@ -44,7 +44,7 @@ MushiDBResult* MushiDB::query(const std::string sql){
 	
 	sqlite3_get_table(db,r->sql,&r->result,&r->row,&r->column,&r->errMsg);
 	if(r->errMsg && strlen(r->errMsg) > 0){
-		printf("db error: %s\n",r->errMsg);
+                printf("db error: '%s' While executing %s",r->errMsg,sql.c_str());
 	}
         //qDebug() << "Took "<< timer.elapsed() <<"ms to execute query \"" << QString(sql.c_str()) <<"\"";
 	return r;

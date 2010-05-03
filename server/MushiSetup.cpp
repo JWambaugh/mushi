@@ -185,7 +185,7 @@ int MushiSetup::createTables(){
                           "id integer PRIMARY KEY AUTOINCREMENT"
 			  ",name"
 			  ",isOpen"
-                          "projectID REFERENCES project(id)"
+                          ",projectID REFERENCES project(id)"
 			  ",createDate datetime DEFAULT (datetime('NOW'))"
 			  ")");
 
