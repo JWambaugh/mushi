@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'taskeditor.ui'
 **
-** Created: Sun May 2 14:42:00 2010
+** Created: Sun May 2 20:11:19 2010
 **      by: Qt User Interface Compiler version 4.6.2
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!

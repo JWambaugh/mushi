@@ -15,6 +15,7 @@
 #include <vector>
 #include <sstream>
 #include "utils.h"
+#include <QTime>
 sqlite3 * MushiDB::getHandle(){
 	return db;
 }
@@ -35,6 +36,8 @@ void MushiDB::init(){
 }
 	
 MushiDBResult* MushiDB::query(const std::string sql){
+        //QTime timer;
+        //timer.start();
        // printf("%s\n",sql.c_str());
 	MushiDBResult *r = new MushiDBResult;
 	r->sql=(char *)sql.c_str();
@@ -43,6 +46,7 @@ MushiDBResult* MushiDB::query(const std::string sql){
 	if(r->errMsg && strlen(r->errMsg) > 0){
 		printf("db error: %s\n",r->errMsg);
 	}
+        //qDebug() << "Took "<< timer.elapsed() <<"ms to execute query \"" << QString(sql.c_str()) <<"\"";
 	return r;
 }
 

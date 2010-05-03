@@ -111,15 +111,15 @@ int MushiServer::registerCommand(MushiCommand *command){
 
 Json::Value MushiServer::runCommand(Json::Value command, MushiScriptEngine &engine, MushiDB &db){
 	
-	MushiSession session;
+        MushiSession session;
 	
 
 	//check for a session id
 	if(!command["sessionID"]){
-		session.load();
+                //session.load();
 	}else{
 		
-                session.load(QString(command["sessionID"].asString().c_str()));
+              //  session.load(QString(command["sessionID"].asString().c_str()));
 	}
 
 
@@ -141,7 +141,7 @@ Json::Value MushiServer::runCommand(Json::Value command, MushiScriptEngine &engi
 	} catch (Json::Value val){
             return val;
 	}
-	session.save();
+        //session.save();
         if(ret.get("status","")=="failure" && ret.get("reason","")==""){
             ret["reason"]="Command not found";
         }

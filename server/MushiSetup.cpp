@@ -188,6 +188,10 @@ int MushiSetup::createTables(){
                           "projectID REFERENCES project(id)"
 			  ",createDate datetime DEFAULT (datetime('NOW'))"
 			  ")");
+
+        db->query("create index if not exists session_id on session ("
+                          "id"
+                        ")");
 	return 0;
 }
 

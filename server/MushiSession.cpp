@@ -15,7 +15,7 @@
 #include "MushiServer.h"
 
 void MushiSession::load(QString id){
-	char query[200];
+        char query[200];
 	MushiDBResult *r;
 	
         sprintf(query,"select * from session where id ='%s'", id.toStdString().c_str());
@@ -24,7 +24,7 @@ void MushiSession::load(QString id){
 		
                 sprintf(query,"update session set lastSeen=datetime('NOW') where id ='%s'", id.toStdString().c_str());
 		
-		MushiServer::getInstance()->getDB()->query(query);
+                MushiServer::getInstance()->getDB()->query(query);
 		
 		
 	try {
@@ -47,7 +47,7 @@ void MushiSession::load(){
 	id=uID();
 	char query[300];
 	sprintf(query,"insert into session (id, data, lastSeen) VALUES ('%s','{}',datetime('NOW'))",id.c_str());
-	MushiServer::getInstance()->getDB()->query(query);
+        MushiServer::getInstance()->getDB()->query(query);
 	
         this->load(QString(id.c_str()));
 }
@@ -65,11 +65,11 @@ void MushiSession::save(){
 
 
 MushiSession::MushiSession(QString id){
-	load(id);
+        //load(id);
 }
 
 MushiSession::MushiSession(QObject *parent) :QObject(parent){
-	load();
+        //load();
 }
 
 
