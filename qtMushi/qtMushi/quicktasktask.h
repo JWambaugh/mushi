@@ -24,6 +24,10 @@ public:
 
 public slots:
     void save();
+private slots:
+    void saveResponse();
+signals:
+    void saveCompleted();
 protected:
     virtual void changeEvent(QEvent *e);
 

@@ -90,10 +90,13 @@ void QuickTaskCreator::taskify(){
 
 
 void QuickTaskCreator::saveAll(){
-    for(int x=0; x<this->taskWidgets.count();x++){
-        QuickTaskTask *task;
-        //task = static_cast<QuickTaskTask>(this->taskWidgets.at(x));
-        task=this->taskWidgets.at(x);
+    QuickTaskTask *task;
+    //task = static_cast<QuickTaskTask>(this->taskWidgets.at(x));
+    if(this->taskWidgets.count())
+        task=this->taskWidgets.takeFirst();
+    else return;
+    if(task){
+        connect(task,SIGNAL(saveCompleted()),this,SLOT(saveAll()));
         task->save();
     }
 

@@ -65,9 +65,16 @@ void QuickTaskTask::save(){
 
     ServerCommand *command= new ServerCommand(val,this);
     command->connect(command,SIGNAL(saveComplete(Json::Value)),command,SLOT(deleteLater()));
-    command->connect(command,SIGNAL(saveComplete(Json::Value)),this,SLOT(deleteLater()));
+    command->connect(command,SIGNAL(saveComplete(Json::Value)),this,SLOT(saveResponse()));
     command->connect(command,SIGNAL(saveComplete(Json::Value)),&static_cast <qtMushi *>(qApp)->taskDirectory,SLOT(refresh()));
 
     command->set("command","addTask");
     command->send();
+
 }
+
+void QuickTaskTask::saveResponse(){
+    emit saveCompleted();
+    this->deleteLater();
+}
+
