@@ -62,6 +62,33 @@ MushiScriptEngine::MushiScriptEngine(struct mg_connection *conn, const struct mg
         for (int i = 0; i < errors.size(); ++i)
              qDebug()<<errors.at(i);
     }
+
+    //load plugins
+
+    QDir scriptDir(MushiConfig::getValue("pluginsDirectory","../script/plugin"));
+    QFileInfoList files;
+    //qDebug()<<scriptDir.absolutePath();
+    files=scriptDir.entryInfoList(QStringList("*.mjs"));
+   // qDebug()<<files.size();
+    for(int  x=0;x<files.size();x++){
+        if(files.at(x).isFile()){
+            //qDebug()<<"loading"<<files.at(x).absoluteFilePath();
+            contents=getFileContents(files.at(x).absoluteFilePath());
+            precompileMJS(contents);
+            //qDebug()<<contents;
+            engine.evaluate(contents);
+            errors = engine.uncaughtExceptionBacktrace();
+            if(errors.size()){
+                printf("%s\n",engine.uncaughtException().toString().toStdString().c_str());
+                for (int i = 0; i < errors.size(); ++i)
+                     qDebug()<<errors.at(i);
+                qDebug()<<contents;
+            }
+        }
+    }
+
+
+
 }
 
 

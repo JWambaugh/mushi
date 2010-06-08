@@ -12,7 +12,7 @@
 class MushiConfig: public QObject{
     Q_OBJECT
 public slots:
-        static QString getValue(QString key);
+        static QString getValue(QString key,QString def="");
         static int setValue(QString key, QString value,QString description="");
 public:
 	static void setDefaults();

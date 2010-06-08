@@ -23,11 +23,11 @@ Json::Value &FindTaskCommand::run(MushiSession &sess, Json::Value &command, Json
 		MushiDBResult *r;
 
 		
-                query	<< "SELECT t.id, t.title, t.description, t.percentComplete, t.estimate, t.createDate, t.originalEstimate"
-                                << " , t.reporterID, r.firstName as reporter_firstName, r.lastName as reporter_lastName, r.email as reporter_email "
-                                << " ,t.ownerId as ownerID, t.parentTaskID, o.firstName as owner_firstName, o.lastName as owner_lastName, o.email as owner_email "
+                query	<< "SELECT t.id, t.title, t.percentComplete, t.estimate, t.createDate"
+                                << " , t.reporterID, r.firstName as reporter_firstName, r.lastName as reporter_lastName"
+                                << " ,t.ownerId as ownerID, t.parentTaskID, o.firstName as owner_firstName, o.lastName as owner_lastName"
                                 << " ,s.name as status_name, s.isOpen as status_isOpen, s.id as status_id"
-				<< " FROM task t"
+                                << " FROM task t"
                                 << " LEFT JOIN user r on r.id = t.reporterID"
                                 << " LEFT JOIN user o on o.id = t.ownerID"
                                 << " LEFT JOIN status s on s.id = t.statusID";
@@ -53,7 +53,7 @@ Json::Value &FindTaskCommand::run(MushiSession &sess, Json::Value &command, Json
                 }
                 query<<" ORDER BY t.createDate ASC";
                 r=db.query(query.str());
-		results=r->getNestedJson();
+                results=r->getNestedJson();
 		
 		ret["status"]="success";
 	

@@ -36,7 +36,9 @@ SOURCES += utils.cpp \
     smtp.cpp \
     commands/GetStatusesCommand.cpp \
     commands/GetUsersCommand.cpp \
-    commands/AddUserCommand.cpp
+    commands/AddUserCommand.cpp \
+    commands/GetTaskCommand.cpp \
+    commands/PluginCommand.cpp
 HEADERS += utils.h \
     URLHandlers.h \
     sqlite3.h \
@@ -68,5 +70,7 @@ HEADERS += utils.h \
     smtp.h \
     commands/GetStatusesCommand.h \
     commands/GetUsersCommand.h \
-    commands/AddUserCommand.h
+    commands/GetTaskCommand.h \
+    commands/AddUserCommand.h \
+    commands/PluginCommand.h
 win32:LIBS += -lws2_32

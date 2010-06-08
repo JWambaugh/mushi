@@ -75,8 +75,8 @@ m_receiveCommand(struct mg_connection *conn, const struct mg_request_info *ri, v
                 db.init();
                 //init a script engine
                 MushiScriptEngine engine(conn,ri,user_data);
-                qDebug()<<"Time to initialize engine: "<<timer.elapsed();
-                printf("Received POST: %s\n",data);
+                //qDebug()<<"Time to initialize engine: "<<timer.elapsed();
+               // printf("Received POST: %s\n",data);
 
 		
 		
@@ -87,7 +87,7 @@ m_receiveCommand(struct mg_connection *conn, const struct mg_request_info *ri, v
 		
 		
 		reader.parse(input, cmd);
-                 qDebug()<<"completed parse at: "<<timer.elapsed();
+                // qDebug()<<"completed parse at: "<<timer.elapsed();
 		
                // char *buff = (char *)writer.write(MushiServer::getInstance()->runCommand(cmd,engine)).c_str();
                 std::string response;
@@ -97,10 +97,10 @@ m_receiveCommand(struct mg_connection *conn, const struct mg_request_info *ri, v
                                 "Connection: close\r\n\r\n");
 
                 response.append(writer.write(MushiServer::getInstance()->runCommand(cmd,engine,db)));
-                qDebug()<<"completed commands at: "<<timer.elapsed();
+              //  qDebug()<<"completed commands at: "<<timer.elapsed();
                 //mg_printf(conn, "%s",buff);
                 mg_write(conn, response.c_str(),response.length());
-                qDebug()<<"Time to complete command request: "<<timer.elapsed();
+               // qDebug()<<"Time to complete command request: "<<timer.elapsed();
 
                                   //free(buff);
 		//free(request_method);

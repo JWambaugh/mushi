@@ -13,7 +13,7 @@
 #include "MushiServer.h"
 #include "MushiConfig.h"
 
-QString MushiConfig::getValue(QString key){
+QString MushiConfig::getValue(QString key, QString def){
 	MushiDB *db = MushiServer::getInstance()->getDB();
 	MushiDBResult *r;
 	char query[1000];
@@ -25,6 +25,9 @@ QString MushiConfig::getValue(QString key){
 
         cell = r->getCell(1, 0);
 	delete r;
+        if(cell==""){
+            cell=def;
+        }
 
         return cell;
 }

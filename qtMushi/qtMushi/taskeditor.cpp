@@ -113,13 +113,13 @@ void TaskEditor::updateFromStore(){
 }
 
 
-void TaskEditor::setStore(Json::Value &s){
+void TaskEditor::setStore(Json::Value &s, bool getNotes){
     this->store=s;
     //remove all notes
     while(this->notes.length()){
         this->notes.takeFirst()->deleteLater();
     }
-    if(this->store.get("id","")!=""){
+    if(this->store.get("id","")!="" && getNotes){
         ServerCommand *command =new ServerCommand(this);
         command->set("command","getTaskNotes");
         command->set("taskID",this->store.get("id","").asCString());
@@ -164,8 +164,8 @@ void TaskEditor::saveNotes(){
 
 void TaskEditor::refreshFromServer(){
     ServerCommand *command =new ServerCommand(this);
-    command->set("command","findTask");
-    command->set("t.id",this->store.get("id","").asCString());
+    command->set("command","getTask");
+    command->set("taskID",this->store.get("id","").asCString());
     this->connect(command,SIGNAL(saveComplete(Json::Value)),this,SLOT(refreshFromServerComplete(Json::Value)));
     this->connect(command,SIGNAL(saveComplete(Json::Value)),command,SLOT(deleteLater()));
     command->send();

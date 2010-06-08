@@ -40,6 +40,8 @@
 #include "commands/GetStatusesCommand.h"
 #include "commands/GetUsersCommand.h"
 #include "commands/AddUserCommand.h"
+#include "commands/GetTaskCommand.h"
+#include "commands/PluginCommand.h"
 #include "MushiServer.h"
 #include "URLHandlers.h"
 #include "MushiDB.h"
@@ -71,6 +73,8 @@ void MushiServer::installCommands(){
         this->registerCommand(new GetStatusesCommand);
         this->registerCommand(new GetUsersCommand);
         this->registerCommand(new AddUserCommand);
+        this->registerCommand(new GetTaskCommand);
+        this->registerCommand(new PluginCommand);
         //install mjscript commands
         QDir scriptDir(MushiConfig::getValue("commandDirectory"));
         QFileInfoList files;
@@ -121,9 +125,6 @@ Json::Value MushiServer::runCommand(Json::Value command, MushiScriptEngine &engi
 		
               //  session.load(QString(command["sessionID"].asString().c_str()));
 	}
-
-
-
 
 
         Json::Value ret;

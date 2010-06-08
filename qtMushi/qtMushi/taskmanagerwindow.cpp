@@ -52,10 +52,12 @@ void TaskManagerWindow::openTask(Json::Value value){
     TaskEditor* editor;
 
     editor=new TaskEditor();
-    editor->setStore(value);
+    editor->setStore(value,0);
     connect(editor,SIGNAL(saveComplete()),this->finder,SLOT(search()));
     //editor->show();
+    editor->refreshFromServer();
     this->setActiveCentralWidget(editor);
+
     //this->m_ui->centralWidgetLayout->addWidget(editor);
     //this->setCentralWidget(editor);
     //connect(editor,SIGNAL(destroyed(QObject*)),this,SLOT(removeCentralTab(QObject*)));

@@ -24,7 +24,7 @@ public slots:
     void updateStore();
     void updateFromStore();
     void saveCompleted(Json::Value);
-    void setStore(Json::Value &);
+    void setStore(Json::Value &, bool getNotes= 1);
     void addNote();
     void saveNotes();
     void getNotesResponse(Json::Value);

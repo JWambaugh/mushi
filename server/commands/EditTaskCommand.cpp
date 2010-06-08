@@ -43,8 +43,8 @@ Json::Value &EditTaskCommand::run(MushiSession &sess, Json::Value &command, Json
                     FindTaskCommand finder;
                     Json::Value findRet;
                     Json::Value findCommand;
-                    findCommand["command"]="findTask";
-                    findCommand["t.id"]=command.get("id","");
+                    findCommand["command"]="getTask";
+                    findCommand["taskID"]=command.get("id","");
                     findRet=finder.run(sess,findCommand,findRet,engine,db);
                     command["originalTask"]=findRet;
                 } catch(int err){}

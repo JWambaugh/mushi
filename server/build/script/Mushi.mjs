@@ -123,6 +123,55 @@ Mushi.addNoteToTask=function(taskID,note,timeSpent,authorID){
     this.db.exec("insert into textHistory (someID,tableName,text) values ('"+id+"','note','"+this.escapeQuotes(note)+"')");
 }
 
+
+
+
+/**
+ *Simple command validation API
+ */
+Mushi.validate={
+    required:function(command,ret,fields){
+        for(var field in fields){
+            if (Mushi.und(command[fields[field]])==''){
+                ret.message='Required field '+fields[field]+' was not specified.';
+                ret.status='error';
+                return 1;
+            }
+        }
+        return 0;
+    }
+    
+    
+}
+
+
+
+
+
+/***
+ * Plugins API
+ */
+
+
+Mushi.Plugin={
+	registeredPlugins:[]
+	,add : function(pluginObject){
+		pluginObject._construct();
+		this.registeredPlugins.unshift(pluginObject);
+	}
+}
+
+
+
+
+
+
+
+/**
+ *UTILITIES
+ */
+
+
 /**
  * Returns an emtpy string if val is undefined. Otherwise returns val.
  */
@@ -140,22 +189,20 @@ Mushi.escapeQuotes=function(val){
 
 
 
-Mushi.validate={
-    required:function(command,ret,fields){
-        for(var field in fields){
-            if (Mushi.und(command[fields[field]])==''){
-                ret.message='Required field '+fields[field]+' was not specified.';
-                ret.status='error';
-                return 1;
-            }
-        }
-        return 0;
-    }
-    
-    
+/**
+ * Clones an object
+ **/
+Mushi.clone = function(obj) {
+    // A clone of an object is an empty object 
+    // with a prototype reference to the original.
+
+    // a private constructor, used only by this one clone.
+            function Clone() { } 
+    Clone.prototype = obj;
+    var c = new Clone();
+            c.constructor = Clone;
+            return c;
 }
-
-
 
 Mushi.runCommand = Mushi.engine.runCommand;
 

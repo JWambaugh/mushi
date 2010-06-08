@@ -119,23 +119,70 @@ int MushiSetup::createTables(){
                                 ",createDate datetime DEFAULT (datetime('NOW'))"
                                 ")");
 
+        db->query("create table if not exists type ("
+                                "id integer PRIMARY KEY AUTOINCREMENT"
+                                ",name"
+                                ",description"
+                                ",orderBy"
+                                ",projectID integer REFERENCES project(id)"
+                                ",createDate datetime DEFAULT (datetime('NOW'))"
+                                ")");
+
+        // support for arbitrary user-defined fields
+        db->query("create table if not exists field ("
+                                "id integer PRIMARY KEY AUTOINCREMENT"
+                                ",name"
+                                ",description"
+                                ",orderBy"
+                                ",type"
+                                ",projectID integer REFERENCES project(id)"
+                                ",createDate datetime DEFAULT (datetime('NOW'))"
+                                ")");
+
+        db->query("create table if not exists fieldOptions ("
+                                "id integer PRIMARY KEY AUTOINCREMENT"
+                                ",value"
+                                ",description"
+                                ",orderBy"
+                                ",fieldID REFERENCES field(id)"
+                                ",createDate datetime DEFAULT (datetime('NOW'))"
+                                ")");
+
+
+        db->query("create table if not exists status ("
+                          "id integer PRIMARY KEY AUTOINCREMENT"
+                          ",name"
+                          ",isOpen"
+                          ",projectID REFERENCES project(id)"
+                          ",createDate datetime DEFAULT (datetime('NOW'))"
+                          ")");
+
 	db->query("create table if not exists task ("
 				"id integer PRIMARY KEY AUTOINCREMENT"
 				",title"
 				",description"
 				",percentComplete"
-                                ",reporterID"
-				",ownerID"
-				",projectID"
+                                ",reporterID REFERENCES user(id)"
+                                ",ownerID REFERENCES user(id)"
+                                ",projectID REFERENCES project(id)"
 				",estimate"
                                 ",originalEstimate"
-				",statusID"
+                                ",statusID REFERENCES status(id)"
                                 ",priorityID REFERENCES priority(id)"
+                                ",typeID REFERENCES priority(id)"
 				",categoryID REFERENCES category(id)"
 				",parentTaskID integer REFERENCES task(id)"
+                                ",dueDate datetime"
 				",createDate datetime DEFAULT (datetime('NOW'))"
 				")");
 
+        db->query("create table if not exists taskField ("
+                                "id integer PRIMARY KEY AUTOINCREMENT"
+                                ",taskID REFERENCES task(id)"
+                                ",fieldID REFERENCES field(id)"
+                                ",value"
+                                ",createDate datetime DEFAULT (datetime('NOW'))"
+                                ")");
 
         //allows many to many relationship between tasks and prerequisite tasks.
         db->query("create table if not exists taskPrerequisite ("
@@ -181,13 +228,7 @@ int MushiSetup::createTables(){
 				",createDate datetime DEFAULT (datetime('NOW'))"
 				")");
 	
-	db->query("create table if not exists status ("
-                          "id integer PRIMARY KEY AUTOINCREMENT"
-			  ",name"
-			  ",isOpen"
-                          ",projectID REFERENCES project(id)"
-			  ",createDate datetime DEFAULT (datetime('NOW'))"
-			  ")");
+
 
         db->query("create index if not exists session_id on session ("
                           "id"
@@ -199,26 +240,41 @@ int MushiSetup::createTables(){
 
 void MushiSetup::insertDefaults(){
 	MushiDB *db = MushiServer::getInstance()->getDB();
-	
+        db->query("insert into project (name) VALUES ('default');");
 	//add statuses
-	db->query("insert into status (name, isOpen) VALUES ('New',1);"
-			  "insert into status (name, isOpen) VALUES ('Accepted',1);"
-			  "insert into status (name, isOpen) VALUES ('In Development',1);"
-			  "insert into status (name, isOpen) VALUES ('Dev. Completed',1);"
-			  "insert into status (name, isOpen) VALUES ('QA Testing',1);"
-			  "insert into status (name, isOpen) VALUES ('QA Completed',1);"
-			  "insert into status (name, isOpen) VALUES ('Closed',0);"
-			  "insert into status (name, isOpen) VALUES ('Duplicate',0);"
-			  "insert into status (name, isOpen) VALUES ('Rejected',0);"
-			  "insert into status (name, isOpen) VALUES ('Won''t Fix',0);"
-			  "insert into status (name, isOpen) VALUES ('Cannot Duplicate',0);");
+        db->query("insert into status (name, isOpen, projectID) VALUES ('New',1,1);"
+                          "insert into status (name, isOpen, projectID) VALUES ('Accepted',1,1);"
+                          "insert into status (name, isOpen, projectID) VALUES ('In Development',1,1);"
+                          "insert into status (name, isOpen, projectID) VALUES ('Dev. Completed',1,1);"
+                          "insert into status (name, isOpen, projectID) VALUES ('QA Testing',1,1);"
+                          "insert into status (name, isOpen, projectID) VALUES ('QA Completed',1,1);"
+                          "insert into status (name, isOpen, projectID) VALUES ('Closed',0,1);"
+                          "insert into status (name, isOpen, projectID) VALUES ('Duplicate',0,1);"
+                          "insert into status (name, isOpen, projectID) VALUES ('Rejected',0,1);"
+                          "insert into status (name, isOpen, projectID) VALUES ('Won''t Fix',0,1);"
+                          "insert into status (name, isOpen, projectID) VALUES ('Cannot Duplicate',0,1);");
+
+        //add types
+        db->query("insert into type (name,projectID) VALUES ('Bug',1);"
+                  "insert into type (name,projectID) VALUES ('Feature',1);"
+                  "insert into type (name,projectID) VALUES ('TODO',1);"
+                  "insert into type (name,projectID) VALUES ('Category',1);"
+                  );
+
+        //add priorities
+        //add types
+        db->query("insert into priority (name,projectID) VALUES ('Immediate',1);"
+                  "insert into priority (name,projectID) VALUES ('High',1);"
+                  "insert into priority (name,projectID) VALUES ('Medium',1);"
+                  "insert into priority (name,projectID) VALUES ('Low',1);"
+                  );
 	
 	//temp user
 	db->query("insert into user (firstName, lastName, password, email) values ('Jordan', 'Wambaugh', 'password', 'jordan@wambaugh.org')");
 
 	//insert roles
-        db->query("insert into role (name, description, isAdmin) values ('System Administrator','One who administers the system and thus requires full access to all', 1);"
-                          "insert into role (name, description, isAdmin) values ('Developer','A regular developer, can''t delete projects', 0);"
+        db->query("insert into role (name, description, isAdmin, projectID) values ('System Administrator','One who administers the system and thus requires full access to all', 1, 1);"
+                          "insert into role (name, description, isAdmin,projectID) values ('Developer','A regular developer, can''t delete projects', 0,1);"
                           //template//  "('','', 1)
 	);
 }
