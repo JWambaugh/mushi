@@ -3,17 +3,23 @@
 #ifndef MUSHI_SERVER_H
 #include "MushiServer.h"
 #endif
-MushiScriptEngine::MushiScriptEngine(struct mg_connection *conn, const struct mg_request_info *ri,void *user_data)
+
+
+
+MushiScriptEngine::MushiScriptEngine()
 {
 
+
+    this->init();
+    this->initScripts();
+
+}
+
+
+void MushiScriptEngine::init(){
     //create global Mushi object
     QScriptValue mushiObject = engine.newObject();
-    //expose conn object to script userspace
-    MushiScriptConn *connObject = new MushiScriptConn(conn,ri,user_data);
-    QScriptValue connObjectValue= engine.newQObject(connObject,QScriptEngine::QtOwnership,0);
-
     QScriptValue globalObject=engine.globalObject();
-    mushiObject.setProperty("conn", connObjectValue);
 
 
 
@@ -21,11 +27,7 @@ MushiScriptEngine::MushiScriptEngine(struct mg_connection *conn, const struct mg
     scriptDB = new MushiScriptDB();
      //expose MushiScriptDB to javascript!
     QScriptValue dbObject = engine.newQObject(scriptDB);
-    /*dbObject.setProperty("select", engine.newFunction(MushiScriptDBSelect));
-    dbObject.setProperty("nestedSelect", engine.newFunction(MushiScriptDBNestedSelect));
-    dbObject.setProperty("exec", engine.newFunction(MushiScriptDBExecute));
-    dbObject.setProperty("escapeQuotes",engine.newFunction(MushiScriptDBEscapeQuotes));
-*/
+
     mushiObject.setProperty("db",dbObject);
 
 
@@ -45,11 +47,37 @@ MushiScriptEngine::MushiScriptEngine(struct mg_connection *conn, const struct mg
     mushiObject.setProperty("include",engine.newFunction(MushiScriptGlobalInclude));
     mushiObject.setProperty("log",engine.newFunction(MushiScriptGlobalLog));
     mushiObject.setProperty("sendMail",engine.newFunction(MushiScriptGlobalSendMail));
-    QString contents;
+
 
     globalObject.setProperty("Mushi",mushiObject);
 
 
+
+
+}
+
+MushiScriptEngine::MushiScriptEngine(struct mg_connection *conn, const struct mg_request_info *ri,void *user_data){
+    this->init();
+    this->setConnData(conn,ri,user_data);
+    this->initScripts();
+}
+
+void MushiScriptEngine::setConnData(struct mg_connection *conn, const struct mg_request_info *ri,void *user_data){
+    QScriptValue globalObject=engine.globalObject();
+
+    //get global Mushi object
+    QScriptValue mushiObject = globalObject.property("Mushi");
+    //expose conn object to script userspace
+    MushiScriptConn *connObject = new MushiScriptConn(conn,ri,user_data);
+    QScriptValue connObjectValue= engine.newQObject(connObject,QScriptEngine::QtOwnership,0);
+    mushiObject.setProperty("conn", connObjectValue);
+
+
+}
+
+
+void MushiScriptEngine::initScripts(){
+     QString contents;
     //load startup script
     QString startupFileName=MushiConfig::getValue("scriptDirectory");
     startupFileName.append("/startup.mjs");
@@ -86,10 +114,11 @@ MushiScriptEngine::MushiScriptEngine(struct mg_connection *conn, const struct mg
             }
         }
     }
-
-
-
 }
+
+
+
+
 
 
 MushiScriptEngine::~MushiScriptEngine(){

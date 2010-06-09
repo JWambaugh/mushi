@@ -156,8 +156,20 @@ Mushi.validate={
 Mushi.Plugin={
 	registeredPlugins:[]
 	,add : function(pluginObject){
-		pluginObject._construct();
+		if(typeof(pluginObject._construct)=='function'){
+			pluginObject._construct();
+		}
 		this.registeredPlugins.unshift(pluginObject);
+	}
+	
+	,systemInit: function(){
+		//Mushi.log("systemInit called. Total plugins loaded: "+this.registeredPlugins.length);
+		for(var x=0;x<this.registeredPlugins.length;x++){
+			if(typeof(this.registeredPlugins[x]._systemInit)=='function'){
+				this.registeredPlugins[x]._systemInit();
+			}
+			
+		}
 	}
 }
 
@@ -206,8 +218,11 @@ Mushi.clone = function(obj) {
 
 Mushi.runCommand = Mushi.engine.runCommand;
 
-
-/*
- Set up a shortcut to Mushi.conn.print()
-*/
-Mushi.print=Mushi.conn.print;
+if(Mushi.conn){
+	/*
+	 Set up a shortcut to Mushi.conn.print()
+	*/
+	Mushi.print=Mushi.conn.print;
+}else{
+	Mushi.print=Mushi.log;
+}

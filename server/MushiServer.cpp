@@ -165,6 +165,26 @@ void MushiServer::startup(int argc, char *argv[]){
 	MushiSetup::checkStatus();	
 	
 	this->installCommands();
+
+        //run plugin init scripts
+        MushiScriptEngine engine;
+        QScriptValue initFunction = engine.engine.globalObject().property("Mushi").property("Plugin").property("systemInit");
+        if(initFunction.isFunction()){
+            initFunction.call(engine.engine.globalObject().property("Mushi").property("Plugin"));
+            QStringList errors = engine.engine.uncaughtExceptionBacktrace();
+            //if there are any errors, don't use the ret value.
+            if(errors.size()){
+               QString errMsg;
+                for (int i = 0; i < errors.size(); ++i){
+                      errMsg.append(errors.at(i));
+                      errMsg.append(engine.engine.uncaughtException().toString());
+                }
+
+
+                qDebug()<<errMsg;
+
+            }
+        }
 	
         ctx = mg_start();
         mg_set_option(ctx, "root",MushiConfig::getValue("interfaceDirectory").toStdString().c_str() );  // Set document root
@@ -176,7 +196,7 @@ void MushiServer::startup(int argc, char *argv[]){
 	
 	defineHandlers();
 	
-    printf("Server started.\n");
+        printf("Server started.\n");
 	
 	
 	/*

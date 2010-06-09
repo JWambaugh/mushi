@@ -5,19 +5,32 @@
  * Called before a mjs file is loaded. Sets up js environment
  */
 
-/**
- * wrapper to _conn.print
-**/
-var print = Mushi.conn.print;
 
-var _p=Mushi.conn.print;
 
-/**
- * Another wrapper to _conn.print for  compatibility with browser .js
- */
 var document={};
-document.write=Mushi.conn.print;
-
+/**
+ *Mushi.conn does not always exist.
+ */
+if(Mushi.conn){
+    /**
+     * wrapper to _conn.print
+    **/
+    var print = Mushi.conn.print;
+    
+    var _p=Mushi.conn.print;
+    
+    /**
+     * Another wrapper to _conn.print for  compatibility with browser .js
+     */
+    
+    document.write=Mushi.conn.print;
+}else{
+    document.write=Mushi.log;
+    var print = Mushi.log;
+    
+    var _p=Mushi.log;
+    
+}
 
 function get_html_translation_table(table, quote_style) {
     // http://kevin.vanzonneveld.net

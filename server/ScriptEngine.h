@@ -16,8 +16,13 @@ class MushiScriptEngine : public QObject, protected QScriptable
     Q_OBJECT
 private:
     MushiScriptDB *scriptDB;
+    void setConnData(struct mg_connection *conn, const struct mg_request_info *ri,void *user_data);
+    void init();
+    void initScripts();
 public:
     MushiScriptEngine(struct mg_connection *conn, const struct mg_request_info *ri,void *user_data);
+    MushiScriptEngine();
+
     ~MushiScriptEngine();
     QScriptEngine engine;
 

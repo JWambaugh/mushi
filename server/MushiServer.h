@@ -24,11 +24,11 @@
 #endif
 
 
-#define MUSHI_SERVER_VERSION "0.-1.6"
+#define MUSHI_SERVER_VERSION "0.2.0"
 #define MUSHI_SERVER_NAME "Mushi - Server (Premortal)"
 #define MUSHI_PROTOCOL_VERSION "0.-1"
 #define MUSHI_AUTHOR "Jordan CM Wambaugh"
-#define MUSHI_LICENSE "Mushi - Server Copyright(C) 2008 Jordan CM Wambaugh. All rights reserved."
+#define MUSHI_LICENSE "Mushi - Server Copyright(C) 2008-2010 Jordan CM Wambaugh. All rights reserved."
 #define MUSHI_ABOUT "Mushi - Server is the server behind Mushi. \
 It is a completely stand-alone application that depends on no external libraries or services.\
 The Mushi Server communicates with clients via JSON. JSON is a very \
