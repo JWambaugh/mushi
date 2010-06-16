@@ -30,7 +30,6 @@ Mushi.getStatuses = function(){
 
 Mushi.newTask=function(title,description){
 	var q="insert into task (title,description) values ('"+this.db.escapeQuotes(title)+"','"+this.db.escapeQuotes(description)+"')";
-    
 	return this.db.exec(q);
 };
 
@@ -140,8 +139,6 @@ Mushi.validate={
         }
         return 0;
     }
-    
-    
 }
 
 
@@ -168,7 +165,6 @@ Mushi.Plugin={
 			if(typeof(this.registeredPlugins[x]._systemInit)=='function'){
 				this.registeredPlugins[x]._systemInit();
 			}
-			
 		}
 	}
 }
@@ -199,6 +195,10 @@ Mushi.escapeQuotes=function(val){
     return this.db.escapeQuotes(this.und(val));
 }
 
+Mushi.coalesce = function(value,ifnull){
+    if(!Mushi.und(value))return(ifnull);
+    return(ifnull);
+}
 
 
 /**

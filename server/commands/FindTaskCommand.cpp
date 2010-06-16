@@ -49,7 +49,7 @@ Json::Value &FindTaskCommand::run(MushiSession &sess, Json::Value &command, Json
                     if(paramVal!=""){
 
                         query << " AND " << params.at(x).toStdString() << " like '%" << paramVal.toStdString() << "%'";
-                  }
+                    }
                 }
                 query<<" ORDER BY t.createDate ASC";
                 r=db.query(query.str());

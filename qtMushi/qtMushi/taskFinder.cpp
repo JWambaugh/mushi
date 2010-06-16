@@ -35,12 +35,27 @@ taskFinder::taskFinder(QWidget *parent) : QWidget(parent){
         treeWidget->setHeaderLabels(header);
         treeWidget->setColumnWidth(0,500);
         layout = new QVBoxLayout();
+        QToolBar *toolbar=new QToolBar(this);
+        this->hideClosed = new QAction(this);
+        hideClosed->setCheckable(true);
+        hideClosed->setText("Hide Closed");
+        hideClosed->setChecked(true);
+        toolbar->addAction(hideClosed);
+        toolbar->setToolButtonStyle(Qt::ToolButtonTextOnly);
+        layout->addWidget(toolbar);
+
+
+
         layout->addWidget(treeWidget);
+
+
+
+
         this->setLayout(layout);
         search();
         connect(treeWidget,SIGNAL(itemClicked(QTreeWidgetItem*,int)),this,SLOT(itemActivated(QTreeWidgetItem*,int)));
         connect(&static_cast <qtMushi *>(qApp)->taskDirectory,SIGNAL(updated()),this,SLOT(networkResponse()));
-
+        connect(hideClosed,SIGNAL(toggled(bool)),this,SLOT(networkResponse()));
 }
 
 void taskFinder::search(){
@@ -61,6 +76,11 @@ void taskFinder::networkResponse(){
         treeWidget->clear();
         taskTreeWidgetItem *item;
         for(int index=0;index<list->size();index++){
+            qDebug()<<list->at(index).get("isOpen","").asString().c_str();
+            //if we are filtering closed tickets and this is closed, don't show it.
+            if(this->hideClosed->isChecked() && list->at(index).get("status","").get("isOpen","").asString()!="1" ){
+                continue;
+            }
             item =  new taskTreeWidgetItem(treeWidget);
             item->taskValue = list->at(index);
             item->setText(0,item->taskValue.get("title","NULL").asCString());
@@ -72,7 +92,6 @@ void taskFinder::networkResponse(){
             treeWidget->addTopLevelItem(item);
             this->addChildrenToTree(item);
         }
-
 }
 
 void taskFinder::addChildrenToTree(taskTreeWidgetItem *parent){
@@ -80,6 +99,11 @@ void taskFinder::addChildrenToTree(taskTreeWidgetItem *parent){
     list=static_cast <qtMushi *>(qApp)->taskDirectory.getChildrenOfTask(parent->taskValue);
     taskTreeWidgetItem *item;
     for(int x=0;x<list->count();x++){
+        //if we are filtering closed tickets and this is closed, don't show it.
+
+        if(this->hideClosed->isChecked() && list->at(x).get("status","").get("isOpen","").asString()!="1" ){
+            continue;
+        }
         parent->setExpanded(true);
         item =  new taskTreeWidgetItem();
         item->taskValue = list->at(x);
@@ -119,3 +143,5 @@ void taskFinder::itemActivated(QTreeWidgetItem *item,int column){
     connect(editor,SIGNAL(saveComplete()),this,SLOT(search()));
     editor->show();*/
 }
+
+

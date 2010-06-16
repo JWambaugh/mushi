@@ -25,12 +25,15 @@ HEADERS += qtMushi.h \
     statusdirectory.h \
     authordirectory.h \
     userDirectory.h \
-    quicktaskcreatordefaults.h
-   # styleanimator.h \
-#    manhattanstyle.h \
-   # core_global.h \
- #   ../utils/stylehelper.h \
- #   ../utils/qtcassert.h
+    quicktaskcreatordefaults.h \
+    taskfilter.h \
+    taskfilter_hideclosed.h
+
+# styleanimator.h \
+# manhattanstyle.h \
+# core_global.h \
+# ../utils/stylehelper.h \
+# ../utils/qtcassert.h
 SOURCES += main.cpp \
     qtMushi.cpp \
     taskFinder.cpp \
@@ -50,10 +53,13 @@ SOURCES += main.cpp \
     taskdirectory.cpp \
     statusdirectory.cpp \
     userDirectory.cpp \
-    quicktaskcreatordefaults.cpp
-  # styleanimator.cpp
- #   manhattanstyle.cpp \
- #   ../utils/stylehelper.cpp
+    quicktaskcreatordefaults.cpp \
+    taskfilter.cpp \
+    taskfilter_hideclosed.cpp
+
+# styleanimator.cpp
+# manhattanstyle.cpp \
+# ../utils/stylehelper.cpp
 RESOURCES += attach.qrc
 INCLUDEPATH += ../edit_html
 DEPENDPATH += ../edit_html
@@ -61,8 +67,9 @@ INCLUDEPATH += ../libhtml
 DEPENDPATH += ../libhtml
 INCLUDEPATH += ../libhtml/include
 DEPENDPATH += ../libhtml/include
-#LIBS += ../all_os_libs/libtidy.a
-#LIBS += ../edit_html/libEdithtml.a
+
+# LIBS += ../all_os_libs/libtidy.a
+# LIBS += ../edit_html/libEdithtml.a
 QT += xml
 QT += sql
 QT += network

@@ -1,5 +1,4 @@
 <?
-Mushi.log("Loading MyPlugin");
 
 /**
  * Mushi sample plugin
@@ -24,8 +23,8 @@ Mushi.Plugin.add({
      * MUST return ret object!
      */
     ,_commandHandler:function(command,ret){
-        Mushi.log(debug(command));
-        Mushi.log(debug(ret));
+       /* Mushi.log(debug(command));
+        Mushi.log(debug(ret));*/
         return ret;
     }
     

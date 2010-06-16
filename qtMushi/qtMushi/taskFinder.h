@@ -24,11 +24,14 @@ public:
 	taskFinder(QWidget *parent=0);
         Json::Value getSelectedRecord();
         Json::Value tickets;
+        QAction *hideClosed;
 public slots:
         void networkResponse();
         void search();
         void search(QString text);
         void itemActivated(QTreeWidgetItem *item,int);
+    private slots:
+       // void hideClosedToggled(bool checked);
 signals:
         void taskSelected(Json::Value);
 
