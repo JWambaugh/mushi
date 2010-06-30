@@ -12,7 +12,7 @@ public:
     TaskDirectory();
     QList<Json::Value> *getAllTasks();
     QList<Json::Value> *getTopLevelTasks();
-    QList<Json::Value> *getChildrenOfTask(Json::Value &task);
+    QList<Json::Value> *getChildrenOfTask(Json::Value task);
     Json::Value getTaskById(int id);
 public slots:
     void refresh();

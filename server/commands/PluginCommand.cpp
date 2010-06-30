@@ -61,7 +61,7 @@ Json::Value &PluginCommand::run(MushiSession &sess, Json::Value &command, Json::
         pluginIterator.next();
         QScriptValue cmd = pluginIterator.value().property("_commandHandler");
         if(!cmd.isFunction()){
-            qDebug()<<"PluginCommand warning: _commandHandler is not a function in plugin " << pluginIterator.value().property("_name").toString()<<". Skipping...";
+           // qDebug()<<"PluginCommand warning: _commandHandler is not a function in plugin " << pluginIterator.value().property("_name").toString()<<". Skipping...";
             continue;
         }
         QScriptValueList args;

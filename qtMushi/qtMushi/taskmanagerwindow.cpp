@@ -104,6 +104,7 @@ void TaskManagerWindow::setActiveCentralWidget(QWidget *widget){
     if(this->currentActiveCentralWidget){
        this->m_ui->centerWidgetLayout->removeWidget(this->currentActiveCentralWidget);
        this->currentActiveCentralWidget->deleteLater();
+
     }
 
     this->currentActiveCentralWidget=widget;

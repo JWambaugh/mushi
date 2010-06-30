@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'taskeditor.ui'
 **
-** Created: Tue Jun 15 23:44:54 2010
+** Created: Mon Jun 28 12:11:09 2010
 **      by: Qt User Interface Compiler version 4.6.3
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
@@ -15,6 +15,7 @@
 #include <QtGui/QApplication>
 #include <QtGui/QButtonGroup>
 #include <QtGui/QComboBox>
+#include <QtGui/QDateEdit>
 #include <QtGui/QDoubleSpinBox>
 #include <QtGui/QGridLayout>
 #include <QtGui/QHBoxLayout>
@@ -63,6 +64,8 @@ public:
     QSpacerItem *horizontalSpacer_4;
     QSpacerItem *horizontalSpacer_5;
     QSpacerItem *horizontalSpacer_6;
+    QLabel *label_8;
+    QDateEdit *dueDate;
     QPushButton *saveButton;
     QPushButton *addNoteButton;
     QSpacerItem *horizontalSpacer_3;
@@ -100,7 +103,7 @@ public:
         title = new QLineEdit(scrollAreaWidgetContents);
         title->setObjectName(QString::fromUtf8("title"));
 
-        gridLayout_2->addWidget(title, 0, 1, 1, 4);
+        gridLayout_2->addWidget(title, 0, 1, 1, 7);
 
         label_3 = new QLabel(scrollAreaWidgetContents);
         label_3->setObjectName(QString::fromUtf8("label_3"));
@@ -113,7 +116,7 @@ public:
         taskCombo = new QComboBox(scrollAreaWidgetContents);
         taskCombo->setObjectName(QString::fromUtf8("taskCombo"));
 
-        gridLayout_2->addWidget(taskCombo, 1, 1, 1, 4);
+        gridLayout_2->addWidget(taskCombo, 1, 1, 1, 7);
 
         label_6 = new QLabel(scrollAreaWidgetContents);
         label_6->setObjectName(QString::fromUtf8("label_6"));
@@ -136,8 +139,9 @@ public:
 
         ownerCombo = new QComboBox(scrollAreaWidgetContents);
         ownerCombo->setObjectName(QString::fromUtf8("ownerCombo"));
+        ownerCombo->setEnabled(true);
 
-        gridLayout_2->addWidget(ownerCombo, 2, 3, 1, 2);
+        gridLayout_2->addWidget(ownerCombo, 2, 3, 1, 1);
 
         label_4 = new QLabel(scrollAreaWidgetContents);
         label_4->setObjectName(QString::fromUtf8("label_4"));
@@ -185,7 +189,7 @@ public:
         horizontalLayout_2->addItem(horizontalSpacer);
 
 
-        gridLayout_2->addLayout(horizontalLayout_2, 3, 1, 1, 5);
+        gridLayout_2->addLayout(horizontalLayout_2, 3, 1, 1, 8);
 
         horizontalSpacer_2 = new QSpacerItem(381, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
 
@@ -214,21 +218,31 @@ public:
         verticalLayout->addWidget(noteSplitter);
 
 
-        gridLayout_2->addWidget(widget, 4, 0, 1, 6);
+        gridLayout_2->addWidget(widget, 4, 0, 1, 9);
 
         horizontalSpacer_4 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
 
-        gridLayout_2->addItem(horizontalSpacer_4, 2, 5, 1, 1);
+        gridLayout_2->addItem(horizontalSpacer_4, 2, 8, 1, 1);
 
         horizontalSpacer_5 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
 
-        gridLayout_2->addItem(horizontalSpacer_5, 1, 5, 1, 1);
+        gridLayout_2->addItem(horizontalSpacer_5, 1, 8, 1, 1);
 
         horizontalSpacer_6 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
 
-        gridLayout_2->addItem(horizontalSpacer_6, 0, 5, 1, 1);
+        gridLayout_2->addItem(horizontalSpacer_6, 0, 8, 1, 1);
 
-        gridLayout_2->setColumnStretch(5, 1);
+        label_8 = new QLabel(scrollAreaWidgetContents);
+        label_8->setObjectName(QString::fromUtf8("label_8"));
+
+        gridLayout_2->addWidget(label_8, 2, 5, 1, 1);
+
+        dueDate = new QDateEdit(scrollAreaWidgetContents);
+        dueDate->setObjectName(QString::fromUtf8("dueDate"));
+        dueDate->setCalendarPopup(true);
+
+        gridLayout_2->addWidget(dueDate, 2, 6, 1, 1);
+
         scrollArea->setWidget(scrollAreaWidgetContents);
 
         gridLayout->addWidget(scrollArea, 0, 0, 1, 3);
@@ -266,6 +280,7 @@ public:
         originalEstimate->setSuffix(QApplication::translate("TaskEditor", " Hrs.", 0, QApplication::UnicodeUTF8));
         label_5->setText(QApplication::translate("TaskEditor", "Remaining Est.", 0, QApplication::UnicodeUTF8));
         currentEstimate->setSuffix(QApplication::translate("TaskEditor", " Hrs.", 0, QApplication::UnicodeUTF8));
+        label_8->setText(QApplication::translate("TaskEditor", "Due Date:", 0, QApplication::UnicodeUTF8));
         saveButton->setText(QApplication::translate("TaskEditor", "Save", 0, QApplication::UnicodeUTF8));
         addNoteButton->setText(QApplication::translate("TaskEditor", "Add Comment", 0, QApplication::UnicodeUTF8));
     } // retranslateUi

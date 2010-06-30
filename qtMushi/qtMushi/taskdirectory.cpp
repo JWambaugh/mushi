@@ -43,7 +43,7 @@ QList<Json::Value> *TaskDirectory::getTopLevelTasks(){
     return found;
 }
 
-QList<Json::Value> *TaskDirectory::getChildrenOfTask(Json::Value &task){
+QList<Json::Value> *TaskDirectory::getChildrenOfTask(Json::Value task){
     QList<Json::Value> *found=new QList<Json::Value>;
     for(int i =0; i<this->tasks.count();i++){
         if(this->tasks.at(i).get("parentTaskID","").asString()==task.get("id","").asString()){

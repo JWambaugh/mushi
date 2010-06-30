@@ -1,7 +1,8 @@
 #include "MushiScriptDB.h"
 #include "MushiServer.h"
 #include "MushiDB.h"
-
+#include <vector>
+#include <string>
 
 
 MushiScriptDB::MushiScriptDB(){
@@ -50,6 +51,42 @@ QScriptValue MushiScriptDB::exec(QString query){
     //MushiDB *db = MushiServer::getInstance()->getDB();
     db.query(query.toStdString());
     QScriptValue val;
+    return val;
+}
+
+QScriptValue MushiScriptDB::json2Update(QScriptValue cmd,QScriptValue cols, QString where,QString table ){
+  //  MushiDB *db = MushiServer::getInstance()->getDB();
+    Json::Value command = scriptValue2Json(cmd);
+
+    std::vector<std::string> columns;
+    QScriptValueIterator it(cols);
+    while(it.hasNext()){
+        it.next();
+        columns.push_back(it.value().toString().toStdString());
+    }
+
+    std::string _where = where.toStdString();
+    std::string _table = table.toStdString();
+
+    QScriptValue val(this->engine(),QString( db.json2update(command,columns,_where,_table).c_str()));
+    return val;
+}
+
+QScriptValue MushiScriptDB::json2Insert(QScriptValue cmd,QScriptValue cols, QString table ){
+  //  MushiDB *db = MushiServer::getInstance()->getDB();
+    Json::Value command = scriptValue2Json(cmd);
+
+    std::vector<std::string> columns;
+    QScriptValueIterator it(cols);
+    while(it.hasNext()){
+        it.next();
+        columns.push_back(it.value().toString().toStdString());
+    }
+
+
+    std::string _table = table.toStdString();
+
+    QScriptValue val(this->engine(),QString( db.json2insert(command,columns,_table).c_str()));
     return val;
 }
 

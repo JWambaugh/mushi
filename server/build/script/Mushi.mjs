@@ -152,6 +152,9 @@ Mushi.validate={
 
 Mushi.Plugin={
 	registeredPlugins:[]
+    
+    ,registeredEventHandlers:[]
+    
 	,add : function(pluginObject){
 		if(typeof(pluginObject._construct)=='function'){
 			pluginObject._construct();
@@ -167,6 +170,36 @@ Mushi.Plugin={
 			}
 		}
 	}
+    
+    /**
+     * Adds an event handler to the system.
+     * Plugins may define their own event handlers using this function.
+     * Each handler should be an object with the following properties:
+     *      name - The name of the event to handle
+     *      handler - the function to be executed when the event is triggered
+     */
+    ,addEventHandler:function(handler){
+        if(!Mushi.und(handler.name) || !Mushi.und(handler.handler)){
+            return null;
+        }
+        this.registeredEventHandlers.unshift(handler);
+    }
+    
+    /**
+     * runs all handlers with handlerName, passing args to the registered handlers lambdas.
+     * Plugins may define their own events by simply calling this function with a unique eventName
+     * returns an array of returned values from each handler
+     */
+    ,triggerEvent:function(eventName,args){
+        var retVal=[];
+        for(var x=0;x<this.registeredEventHandlers.length;x++){
+            var handler = this.registeredEventHandlers[x];
+            if(handler.name==eventName){
+                retVal.unshift(handler.handler(args));
+            }
+        }
+        return retVal;
+    }
 }
 
 
@@ -218,6 +251,21 @@ Mushi.clone = function(obj) {
 
 Mushi.runCommand = Mushi.engine.runCommand;
 
+
+Mushi.logd=function(data){
+    this.log(debug(data));
+}
+
+
+
+Mushi.stripTags=function(str,config){
+    if(config.removeHead)
+        str=str.replace(/<head>[^]*<\/head>/gim,'');
+    str=str.replace(/<\w+(\s+("[^"]*"|'[^']*'|[^>])+)?>|<\/\w+>/gi, '');
+    return str;
+}
+
+
 if(Mushi.conn){
 	/*
 	 Set up a shortcut to Mushi.conn.print()
@@ -226,3 +274,28 @@ if(Mushi.conn){
 }else{
 	Mushi.print=Mushi.log;
 }
+
+
+
+String.prototype.replaceAll = function(
+    strTarget, // The substring you want to replace
+    strSubString // The string you want to replace in.
+    ){
+    var strText = this;
+    var intIndexOfMatch = strText.indexOf( strTarget );
+     
+    // Keep looping while an instance of the target string
+    // still exists in the string.
+    while (intIndexOfMatch != -1){
+    // Relace out the current instance.
+    strText = strText.replace( strTarget, strSubString )
+     
+    // Get the index of any next matching substring.
+    intIndexOfMatch = strText.indexOf( strTarget );
+    }
+     
+    // Return the updated string with ALL the target strings
+    // replaced out with the new substring.
+    return( strText );
+}
+

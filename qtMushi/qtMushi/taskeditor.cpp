@@ -25,6 +25,14 @@ TaskEditor::TaskEditor(QWidget *parent) :
 
     this->connect(this->addNoteButton,SIGNAL(clicked()),this,SLOT(addNote()));
 
+
+}
+
+
+TaskEditor::~TaskEditor(){
+
+
+    this->save();
 }
 
 void TaskEditor::changeEvent(QEvent *e)
@@ -49,9 +57,9 @@ void TaskEditor::save(){
     }else{
         this->store["command"]="editTask";
     }
-    ServerCommand *command = new ServerCommand(this->store,this);
+    ServerCommand *command = new ServerCommand(this->store,0);
+    connect(command, SIGNAL(saveComplete(Json::Value)), command, SLOT(deleteLater()));
     command->send();
-
     connect(command, SIGNAL(saveComplete(Json::Value)), this, SLOT(saveCompleted(Json::Value)));
     qDebug()<<"saved.";
 }
@@ -70,6 +78,7 @@ void TaskEditor::updateStore(){
     this->store["status"]=static_cast <qtMushi *>(qApp)->statusDirectory.getStatusByID(this->statusCombo->itemData(this->statusCombo->currentIndex()).toString());
     //update owner
     this->store["ownerID"]=this->ownerCombo->itemData(this->ownerCombo->currentIndex()).toString().toStdString();
+    this->store["dueDate"]=this->dueDate->date().toString("yyyy-MM-dd").toStdString();
 }
 
 
@@ -109,6 +118,11 @@ void TaskEditor::updateFromStore(){
         if(this->ownerCombo->itemData(x).toString().toStdString()==this->store.get("ownerID","").asString()){
             this->ownerCombo->setCurrentIndex(x);
         }
+    }
+    if(this->store.get("dueDate","")!=""){
+        this->dueDate->setDate(QDate::fromString(QString(this->store.get("dueDate","").asString().c_str()),"yyyy-MM-dd"));
+    } else {
+        this->dueDate->setDate(QDate::currentDate());
     }
 }
 
@@ -176,3 +190,5 @@ void TaskEditor::refreshFromServerComplete(Json::Value response){
     int index =0;
     this->setStore(response.get("results","")[index]);
 }
+
+

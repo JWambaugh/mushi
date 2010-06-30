@@ -18,6 +18,8 @@ public slots:
     QScriptValue nestedSelect(QString);
     QScriptValue exec(QString);
     QScriptValue escapeQuotes(QString);
+    QScriptValue json2Update(QScriptValue cmd,QScriptValue cols, QString where,QString table );
+    QScriptValue json2Insert(QScriptValue cmd,QScriptValue cols, QString table );
 };
 
 

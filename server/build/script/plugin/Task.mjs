@@ -53,7 +53,7 @@ Mushi.Plugin.add({
             else if(command.command=='findTask'){
                 var query="SELECT t.id, t.title, t.percentComplete, t.estimate, t.createDate"
                                 + " , t.reporterID, r.firstName as reporter_firstName, r.lastName as reporter_lastName"
-                                + " ,t.ownerId as ownerID, t.parentTaskID, o.firstName as owner_firstName, o.lastName as owner_lastName"
+                                + " ,t.ownerId as ownerID, t.parentTaskID,t.dueDate, o.firstName as owner_firstName, o.lastName as owner_lastName"
                                 + " ,s.name as status_name, s.isOpen as status_isOpen, s.id as status_id"
                                 + " FROM task t"
                                 + " LEFT JOIN user r on r.id = t.reporterID"
@@ -76,12 +76,60 @@ Mushi.Plugin.add({
                 }
                 //log(query);
                 ret.results=db.nestedSelect(query);
-                
-                
-                
-                
             }
             
+            /**
+             *  editTask command
+             *  updates a task with new data passed in command
+             */
+            else if(command.command == 'editTask'){
+                if(und(command.title)==''){
+                    ret.status='failure';
+                    ret.message='Task title cannot be empty!';
+                    return ret;
+                }
+                if(und(command.id)==""){
+                    ret.status='failure';
+                    ret.message='Task id must be provided to edit task!';
+                    return ret;
+                }
+                //get current state of task
+                var currentState = db.nestedSelect(
+                                "SELECT t.id, t.title, t.description, t.percentComplete, t.estimate, t.createDate, t.originalEstimate"
+                                + " , t.reporterID, r.firstName as reporter_firstName, r.lastName as reporter_lastName, r.email as reporter_email "
+                                + " ,t.ownerId as ownerID, t.parentTaskID,t.dueDate, o.firstName as owner_firstName, o.lastName as owner_lastName, o.email as owner_email "
+                                + " ,s.name as status_name, s.isOpen as status_isOpen, s.id as status_id"
+                                + " ,ty.id as type_id,ty.name as type_name, ty.description as type_description"
+                                + " ,p.id as priority_id, p.name as priority_name, p.description as priority_description"
+                                + " FROM task t"
+                                + " LEFT JOIN user r on r.id = t.reporterID"
+                                + " LEFT JOIN user o on o.id = t.ownerID"
+                                + " LEFT JOIN status s on s.id = t.statusID"
+                                + " LEFT JOIN type ty on t.typeID = ty.id"
+                                + " LEFT JOIN Priority p on p.id = t.priorityID"
+                                + " where t.id = "+escapeQuotes(command.id));
+                //trigger our pre-update event
+                Plugin.triggerEvent("Task_preEditTask",{currentState:currentState[0],updateCommand:command});
+                
+                var columns = ['title'
+                               ,'originalEstimate'
+                               ,'description'
+                               ,'percentComplete'
+                               ,'reporterId'
+                               ,'ownerId'
+                               ,'projectID'
+                               ,'estimate'
+                               ,'categoryID'
+                               ,'parentTaskID'
+                               ,'statusID'
+                               ,'dueDate'
+                               ];
+                var query=db.json2Update(command,columns,'id = '+command.id,'task');
+                db.exec(query);
+                ret.status='success';
+                //trigger our post-update event
+                Plugin.triggerEvent("Task_postEditTask",{currentState:currentState[0],updateCommand:command});
+            }
             
             
             

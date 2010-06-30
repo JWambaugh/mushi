@@ -38,7 +38,7 @@ void MushiDB::init(){
 MushiDBResult* MushiDB::query(const std::string sql){
         //QTime timer;
         //timer.start();
-       // printf("%s\n",sql.c_str());
+      //  printf("%s\n",sql.c_str());
 	MushiDBResult *r = new MushiDBResult;
 	r->sql=(char *)sql.c_str();
 	

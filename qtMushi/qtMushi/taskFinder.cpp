@@ -82,12 +82,12 @@ void taskFinder::networkResponse(){
                 continue;
             }
             item =  new taskTreeWidgetItem(treeWidget);
-            item->taskValue = list->at(index);
-            item->setText(0,item->taskValue.get("title","NULL").asCString());
-            item->setText(1,item->taskValue.get("owner","").get("firstName","").asCString());
+            item->setValue(list->at(index));
+            item->setText(0,item->getValue().get("title","NULL").asCString());
+            item->setText(1,item->getValue().get("owner","").get("firstName","").asCString());
            // item->setText(2,html2plaintext(item->taskValue.get("description","NULL").asCString()).left(100).replace("\n"," "));
 
-            item->setText(2,item->taskValue.get("status","NULL").get("name","null").asCString());
+            item->setText(2,item->getValue().get("status","NULL").get("name","null").asCString());
 
             treeWidget->addTopLevelItem(item);
             this->addChildrenToTree(item);
@@ -96,7 +96,7 @@ void taskFinder::networkResponse(){
 
 void taskFinder::addChildrenToTree(taskTreeWidgetItem *parent){
     QList<Json::Value> *list;
-    list=static_cast <qtMushi *>(qApp)->taskDirectory.getChildrenOfTask(parent->taskValue);
+    list=static_cast <qtMushi *>(qApp)->taskDirectory.getChildrenOfTask(parent->getValue());
     taskTreeWidgetItem *item;
     for(int x=0;x<list->count();x++){
         //if we are filtering closed tickets and this is closed, don't show it.
@@ -106,11 +106,11 @@ void taskFinder::addChildrenToTree(taskTreeWidgetItem *parent){
         }
         parent->setExpanded(true);
         item =  new taskTreeWidgetItem();
-        item->taskValue = list->at(x);
-        item->setText(0,item->taskValue.get("title","NULL").asCString());
-        item->setText(1,item->taskValue.get("owner","").get("firstName","").asCString());
+        item->setValue(list->at(x));
+        item->setText(0,item->getValue().get("title","NULL").asCString());
+        item->setText(1,item->getValue().get("owner","").get("firstName","").asCString());
        // item->setText(2,html2plaintext(item->taskValue.get("description","NULL").asCString()).left(100).replace("\n"," "));
-        item->setText(2,item->taskValue.get("status","NULL").get("name","null").asCString());
+        item->setText(2,item->getValue().get("status","NULL").get("name","null").asCString());
         parent->addChild(item);
         this->addChildrenToTree(item);
     }
@@ -132,12 +132,12 @@ Json::Value taskFinder::getSelectedRecord(){
         return blankVal;
     }
     taskTreeWidgetItem *item = static_cast<taskTreeWidgetItem *>(this->treeWidget->currentItem());
-    return item->taskValue;
+    return item->getValue();
 }
 
 void taskFinder::itemActivated(QTreeWidgetItem *item,int column){
     taskTreeWidgetItem *tItem = static_cast<taskTreeWidgetItem *> (item);
-    emit this->taskSelected(tItem->taskValue);
+    emit this->taskSelected(tItem->getValue());
    /* TaskEditor *editor=new TaskEditor();
     editor->setStore(tItem->taskValue);
     connect(editor,SIGNAL(saveComplete()),this,SLOT(search()));

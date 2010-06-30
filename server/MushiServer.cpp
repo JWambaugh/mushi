@@ -68,7 +68,7 @@ void MushiServer::installCommands(){
         //built-in commands
         this->registerCommand(new AddTaskCommand);
         //this->registerCommand(new FindTaskCommand);
-	this->registerCommand(new EditTaskCommand);
+        //this->registerCommand(new EditTaskCommand);
         this->registerCommand(new DeleteTaskCommand);
         this->registerCommand(new GetStatusesCommand);
         this->registerCommand(new GetUsersCommand);

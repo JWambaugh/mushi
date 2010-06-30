@@ -25,7 +25,7 @@ Json::Value &FindTaskCommand::run(MushiSession &sess, Json::Value &command, Json
 		
                 query	<< "SELECT t.id, t.title, t.percentComplete, t.estimate, t.createDate"
                                 << " , t.reporterID, r.firstName as reporter_firstName, r.lastName as reporter_lastName"
-                                << " ,t.ownerId as ownerID, t.parentTaskID, o.firstName as owner_firstName, o.lastName as owner_lastName"
+                                << " ,t.ownerId as ownerID, t.parentTaskID,t.dueDate, o.firstName as owner_firstName, o.lastName as owner_lastName"
                                 << " ,s.name as status_name, s.isOpen as status_isOpen, s.id as status_id"
                                 << " FROM task t"
                                 << " LEFT JOIN user r on r.id = t.reporterID"
