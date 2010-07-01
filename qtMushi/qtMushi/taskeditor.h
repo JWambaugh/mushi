@@ -18,6 +18,7 @@ protected:
     QNetworkReply *reply;
     QList<TaskComment *> notes;
     QVBoxLayout *noteLayout;
+    Json::Value controlValue;
 
 
 public slots:
@@ -31,6 +32,7 @@ public slots:
     void getNotesResponse(Json::Value);
     void refreshFromServer();
     void refreshFromServerComplete(Json::Value);
+    void linkClicked(QUrl url);
 
 signals:
      void saveComplete();

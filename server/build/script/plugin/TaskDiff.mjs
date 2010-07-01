@@ -9,6 +9,7 @@ Mushi.Plugin.add({
     
     //Name of the plugin
     _name:'TaskDiff'
+    ,_requires:['Task']
     
     
     /**
@@ -18,6 +19,24 @@ Mushi.Plugin.add({
         with(Mushi){
             Plugin.addEventHandler({name:'Task_postEditTask', handler:this.postEditHandler});
         }
+    }
+    
+    
+    ,_commandHandler:function(command,ret){
+        with(Mushi){
+            if(command.command == 'getTask'){
+                if(!und(command.taskID)){
+                        ret.status='error';
+                        ret.message='taskId not provided';
+                        return ret;
+                    }
+                    if(!und(ret.controls)){
+                        ret.controls=[];
+                    }
+                    ret.controls.unshift("<a  href='/plugin/TaskDiff/subscribers.mjs?taskID="+command.taskID+"'>Subscribers</a><br><br>somthing else<hr>");
+            }
+        }
+        return ret;
     }
     
    ,postEditHandler:function(data){
@@ -73,8 +92,17 @@ Mushi.Plugin.add({
      * called only once, at system startup
      */
     ,_systemInit:function(){
-        Mushi.log("TaskDiff plugin installed.");
-       // Mushi.log(DiffPrinter.print_comm(Diff.diff_comm("Hello, my name is jordan!","Hello, my last name is bob and i'm here to tell you about eybrowse")));
+        with(Mushi){
+            //check if taskSubscriber table exists
+            if(!db.tableExists("taskSubscriber")){
+                Mushi.log("Doing first time install for TaskDiff");
+                db.exec("create table taskSubscriber (id integer PRIMARY KEY AUTOINCREMENT, taskID REFERENCES task(id), subscriberID REFERENCES user(id) )");
+                Mushi.log("TaskDiff plugin installed.");
+            }
+            Mushi.log("TaskDiff activated");
+            
+           // Mushi.log(DiffPrinter.print_comm(Diff.diff_comm("Hello, my name is jordan!","Hello, my last name is bob and i'm here to tell you about eybrowse")));
+        }
     }
     
     

@@ -45,9 +45,10 @@ void MushiServer::defineHandlers(){
         mg_set_uri_callback(ctx, "/", &m_showIndex,NULL);
         mg_set_uri_callback(ctx, "/version", &m_showVersion,NULL);
         mg_set_uri_callback(ctx, "/config", &m_showConfig,NULL);
+        mg_set_uri_callback(ctx, "/plugin/*", &m_pluginWebRequest,NULL);
         mg_set_uri_callback(ctx, "*.mjs", &m_script,NULL);
         mg_set_uri_callback(ctx, "/command", &m_receiveCommand,NULL);
-        mg_set_uri_callback(ctx, "/plugin/*", &m_pluginWebRequest,NULL);
+
 }
 
 
@@ -149,16 +150,19 @@ static void m_showVersion(struct mg_connection *conn, const struct mg_request_in
 static void m_pluginWebRequest(struct mg_connection *conn, const struct mg_request_info *ri, void *user_data){
     //std::ostringstream dirName;
     //dirName << MushiConfig::getValue("pluginsDirectory","../script/plugin").toStdString() <<ri->uri;
+
     QString uri(ri->uri);
     uri.replace("/plugin","");
-    qDebug()<<uri;
-    QString fileName(MushiConfig::getValue("pluginsDirectory","../script/plugin").append(uri));
+
+    QString fileName(MushiConfig::getValue("pluginsDirectory","../script/plugin"));
+    fileName.append(uri);
+    //qDebug()<<"File name:"<<fileName;
     if(!QFile::exists (fileName)){
          mg_printf(conn, "%s", "HTTP/1.1 404 FILE NOT FOUND\r\nContent-Type: text/html\r\n\r\nThe file at this location cannot be found.");
          return;
     }
 
-    MushiScriptEngine engine(conn,ri,user_data);
+
 
     QString contents;
     //Load and eval the called script
@@ -168,18 +172,25 @@ static void m_pluginWebRequest(struct mg_connection *conn, const struct mg_reque
         return;
     }
     mg_printf(conn, "%s", "HTTP/1.1 200 OK\r\nContent-Type: text/html\r\n\r\n");
-    precompileMJS(contents);
-    //printf("%s\n",contents.toStdString().c_str());
-    engine.engine.evaluate(contents,fileName);
 
-    QStringList errors;
-    errors = engine.engine.uncaughtExceptionBacktrace();
-    if(errors.size()){
-        printf("%s\n",engine.engine.uncaughtException().toString().toStdString().c_str());
-        for (int i = 0; i < errors.size(); ++i)
-              printf("%s\n",errors.at(i).toLocal8Bit().constData());
+    //if its an mjs script
+    if(fileName.contains(".mjs")){
+        MushiScriptEngine engine(conn,ri,user_data);
+        precompileMJS(contents);
+        //qDebug()<<contents;
+        //printf("%s\n",contents.toStdString().c_str());
+        engine.engine.evaluate(contents,fileName);
+
+        QStringList errors;
+        errors = engine.engine.uncaughtExceptionBacktrace();
+        if(errors.size()){
+            printf("%s\n",engine.engine.uncaughtException().toString().toStdString().c_str());
+            for (int i = 0; i < errors.size(); ++i)
+                  printf("%s\n",errors.at(i).toLocal8Bit().constData());
+        }
+    } else {//other file types
+        mg_printf(conn,"%s",contents.toStdString().c_str());
     }
-
 
 }
 

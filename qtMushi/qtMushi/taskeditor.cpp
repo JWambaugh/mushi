@@ -1,6 +1,7 @@
 #include "taskeditor.h"
 #include "servercommand.h"
 #include <QDebug>
+#include <QWebFrame>
 #include <string>
 TaskEditor::TaskEditor(QWidget *parent) :
     QWidget(parent){
@@ -24,6 +25,9 @@ TaskEditor::TaskEditor(QWidget *parent) :
     }
 
     this->connect(this->addNoteButton,SIGNAL(clicked()),this,SLOT(addNote()));
+    this->controls->page()->setLinkDelegationPolicy(QWebPage::DelegateAllLinks);
+    this->connect(this->controls,SIGNAL(linkClicked(QUrl)),this,SLOT(linkClicked(QUrl)));
+    this->controls->setTextSizeMultiplier(0.8);
 
 
 }
@@ -94,8 +98,10 @@ void TaskEditor::saveCompleted(Json::Value val){
 
 
 void TaskEditor::updateFromStore(){
-    this->title->setText(this->store["title"].asString().c_str());
-    this->description->setHtml(this->store["description"].asString().c_str());
+
+
+    this->title->setText(this->store.get("title","").asString().c_str());
+    this->description->setHtml(this->store.get("description","").asString().c_str());
     qDebug()<<"gotHere";
     this->percentComplete->setValue(this->store.get("percentComplete","0").asInt());
 
@@ -103,7 +109,7 @@ void TaskEditor::updateFromStore(){
     qDebug()<<"gotHere";
     this->originalEstimate->setValue(this->currentEstimate->valueFromText(this->store.get("originalEstimate","0").asString().c_str()));
     for(int x=0;x<this->taskCombo->count();x++){
-        if(this->taskCombo->itemData(x).toString().toStdString()==this->store["parentTaskID"].asString()){
+        if(this->taskCombo->itemData(x).toString().toStdString()==this->store.get("parentTaskID","").asString()){
             this->taskCombo->setCurrentIndex(x);
         }
     }
@@ -123,6 +129,26 @@ void TaskEditor::updateFromStore(){
         this->dueDate->setDate(QDate::fromString(QString(this->store.get("dueDate","").asString().c_str()),"yyyy-MM-dd"));
     } else {
         this->dueDate->setDate(QDate::currentDate());
+    }
+
+    qDebug()<<this->store.get("controls","").isArray();
+    if(this->controlValue.isArray()){
+
+        QString buffer;
+        for(int x=0;x<this->controlValue.size();x++){
+            if(x>0)buffer.append("&nbsp;");
+            buffer.append(this->controlValue[x].asString().c_str());
+
+        }
+        this->controls->show();
+        this->controls->setHtml(buffer,QUrl(SERVER_LOCATION));
+        this->controls->setMaximumHeight(this->controls->page()->mainFrame()->contentsSize().height());
+        this->controls->setMinimumHeight(this->controls->page()->mainFrame()->contentsSize().height());
+
+        qDebug()<<"showing controls: "<<buffer;
+    }else{
+        qDebug()<<"hiding controls";
+        this->controls->hide();
     }
 }
 
@@ -188,7 +214,19 @@ void TaskEditor::refreshFromServer(){
 
 void TaskEditor::refreshFromServerComplete(Json::Value response){
     int index =0;
-    this->setStore(response.get("results","")[index]);
+    this->controlValue = response.get("controls","");
+    if(response.get("results","").isArray())
+        this->setStore(response.get("results","")[index]);
+
+}
+
+void TaskEditor::linkClicked(QUrl url){
+    QWebView *window = new QWebView();
+    window->setWindowTitle("Plugin");
+    window->load(url);
+    window->setAttribute(Qt::WA_DeleteOnClose);
+    window->show();
+    qDebug()<<"link handler activated!";
 }
 
 

@@ -169,6 +169,7 @@ void precompileMJS(QString &script){
             printMode=false;
 
            inCode = true;
+           inQuote=false;
             //make any string we've come to so far to a print and send to buffer
             buffer.append("');\n");
             if(pos<script.length()-3 && script.at(pos+2) == '='){

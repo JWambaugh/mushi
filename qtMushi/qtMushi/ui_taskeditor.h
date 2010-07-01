@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'taskeditor.ui'
 **
-** Created: Mon Jun 28 12:11:09 2010
+** Created: Wed Jun 30 16:51:57 2010
 **      by: Qt User Interface Compiler version 4.6.3
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
@@ -30,6 +30,7 @@
 #include <QtGui/QTextEdit>
 #include <QtGui/QVBoxLayout>
 #include <QtGui/QWidget>
+#include <QtWebKit/QWebView>
 
 QT_BEGIN_NAMESPACE
 
@@ -66,6 +67,7 @@ public:
     QSpacerItem *horizontalSpacer_6;
     QLabel *label_8;
     QDateEdit *dueDate;
+    QWebView *controls;
     QPushButton *saveButton;
     QPushButton *addNoteButton;
     QSpacerItem *horizontalSpacer_3;
@@ -193,7 +195,7 @@ public:
 
         horizontalSpacer_2 = new QSpacerItem(381, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
 
-        gridLayout_2->addItem(horizontalSpacer_2, 6, 3, 1, 1);
+        gridLayout_2->addItem(horizontalSpacer_2, 7, 3, 1, 1);
 
         widget = new QWidget(scrollAreaWidgetContents);
         widget->setObjectName(QString::fromUtf8("widget"));
@@ -218,7 +220,7 @@ public:
         verticalLayout->addWidget(noteSplitter);
 
 
-        gridLayout_2->addWidget(widget, 4, 0, 1, 9);
+        gridLayout_2->addWidget(widget, 5, 0, 1, 9);
 
         horizontalSpacer_4 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
 
@@ -242,6 +244,15 @@ public:
         dueDate->setCalendarPopup(true);
 
         gridLayout_2->addWidget(dueDate, 2, 6, 1, 1);
+
+        controls = new QWebView(scrollAreaWidgetContents);
+        controls->setObjectName(QString::fromUtf8("controls"));
+        controls->setEnabled(true);
+        controls->setMinimumSize(QSize(0, 40));
+        controls->setMaximumSize(QSize(16777215, 40));
+        controls->setUrl(QUrl("about:blank"));
+
+        gridLayout_2->addWidget(controls, 4, 0, 1, 9);
 
         scrollArea->setWidget(scrollAreaWidgetContents);
 

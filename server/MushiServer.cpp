@@ -73,7 +73,7 @@ void MushiServer::installCommands(){
         this->registerCommand(new GetStatusesCommand);
         this->registerCommand(new GetUsersCommand);
         this->registerCommand(new AddUserCommand);
-        this->registerCommand(new GetTaskCommand);
+       // this->registerCommand(new GetTaskCommand);
         this->registerCommand(new PluginCommand);
         //install mjscript commands
         QDir scriptDir(MushiConfig::getValue("commandDirectory"));

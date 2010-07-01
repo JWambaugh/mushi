@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'taskcomment.ui'
 **
-** Created: Tue Jun 15 23:44:54 2010
+** Created: Wed Jun 30 17:18:59 2010
 **      by: Qt User Interface Compiler version 4.6.3
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
@@ -61,7 +61,10 @@ public:
         note = new QTextEdit(dateBox);
         note->setObjectName(QString::fromUtf8("note"));
         note->setMinimumSize(QSize(0, 20));
-        note->setVerticalScrollBarPolicy(Qt::ScrollBarAsNeeded);
+        note->setFocusPolicy(Qt::ClickFocus);
+        note->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+        note->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+        note->setReadOnly(false);
 
         gridLayout->addWidget(note, 1, 0, 1, 2);
 

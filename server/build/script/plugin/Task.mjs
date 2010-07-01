@@ -129,6 +129,33 @@ Mushi.Plugin.add({
                 ret.status='success';
                 //trigger our post-update event
                 Plugin.triggerEvent("Task_postEditTask",{currentState:currentState[0],updateCommand:command});
+               
+            }
+            
+            else if(command.command="getTask"){
+                if(!und(command.taskID)){
+                    ret.status='error';
+                    ret.message='taskId not provided';
+                    return ret;
+                }
+                var query="SELECT t.id, t.title, t.description, t.percentComplete, t.estimate, t.createDate, t.originalEstimate"
+                            + " , t.reporterID, r.firstName as reporter_firstName, r.lastName as reporter_lastName, r.email as reporter_email "
+                            + " ,t.ownerId as ownerID, t.parentTaskID,t.dueDate, o.firstName as owner_firstName, o.lastName as owner_lastName, o.email as owner_email "
+                            + " ,s.name as status_name, s.isOpen as status_isOpen, s.id as status_id"
+                            + " ,ty.id as type_id,ty.name as type_name, ty.description as type_description"
+                            + " ,p.id as priority_id, p.name as priority_name, p.description as priority_description"
+                            + " FROM task t"
+                            + " LEFT JOIN user r on r.id = t.reporterID"
+                            + " LEFT JOIN user o on o.id = t.ownerID"
+                            + " LEFT JOIN status s on s.id = t.statusID"
+                            + " LEFT JOIN type ty on t.typeID = ty.id"
+                            + " LEFT JOIN Priority p on p.id = t.priorityID"
+                            + " WHERE t.id = '" +escapeQuotes(command.taskID)+"'";
+                
+                ret.results=db.nestedSelect(query);
+                ret.status='success';
+                
+                
             }
             
             

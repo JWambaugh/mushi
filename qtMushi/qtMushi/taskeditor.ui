@@ -197,7 +197,7 @@ background-color: #fff;
          </item>
         </layout>
        </item>
-       <item row="6" column="3">
+       <item row="7" column="3">
         <spacer name="horizontalSpacer_2">
          <property name="orientation">
           <enum>Qt::Horizontal</enum>
@@ -210,7 +210,7 @@ background-color: #fff;
          </property>
         </spacer>
        </item>
-       <item row="4" column="0" colspan="9">
+       <item row="5" column="0" colspan="9">
         <widget class="QWidget" name="widget" native="true">
          <layout class="QVBoxLayout" name="verticalLayout">
           <property name="margin">
@@ -299,6 +299,30 @@ background-color: #fff;
          </property>
         </widget>
        </item>
+       <item row="4" column="0" colspan="9">
+        <widget class="QWebView" name="controls">
+         <property name="enabled">
+          <bool>true</bool>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>40</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>16777215</width>
+           <height>40</height>
+          </size>
+         </property>
+         <property name="url">
+          <url>
+           <string>about:blank</string>
+          </url>
+         </property>
+        </widget>
+       </item>
       </layout>
      </widget>
     </widget>
@@ -332,6 +356,13 @@ background-color: #fff;
    </item>
   </layout>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>QWebView</class>
+   <extends>QWidget</extends>
+   <header>QtWebKit/QWebView</header>
+  </customwidget>
+ </customwidgets>
  <resources/>
  <connections/>
 </ui>

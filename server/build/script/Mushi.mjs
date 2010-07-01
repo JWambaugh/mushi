@@ -106,7 +106,12 @@ Mushi.db.object2Update=function(obj,columns,where,table){
    return buffer;
 }
 
-
+Mushi.db.tableExists=function(name){
+    if(this.select("SELECT name FROM sqlite_master WHERE name='"+this.escapeQuotes(name)+"'").length>0){
+        return 1;
+    }
+    return 0;
+}
 
 
 
