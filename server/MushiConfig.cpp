@@ -78,6 +78,7 @@ void MushiConfig::setDefaults(){
         setValue("commandDirectory","../script/command");
         setValue("databaseDirectory","../data");
         setValue("SMTPServer","");
+        setValue("pluginsDirectory","../script/plugin");
 	
 	
 }	

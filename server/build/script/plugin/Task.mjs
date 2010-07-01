@@ -132,7 +132,7 @@ Mushi.Plugin.add({
                
             }
             
-            else if(command.command="getTask"){
+            else if(command.command=="getTask"){
                 if(!und(command.taskID)){
                     ret.status='error';
                     ret.message='taskId not provided';
