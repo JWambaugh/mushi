@@ -52,7 +52,7 @@ Mushi.Plugin.add({
             [OriginalValue , NewValue, Label]
             */
             var compareRows = [
-                                   [task.description, command.description, "Description"]
+                                   [stripTags(task.description,{removeHead:1}), stripTags(command.description,{removeHead:1}), "Description"]
                                    ,[task.estimate, command.estimate, "Estimate"]
                                    ,[task.originalEstimate, command.originalEstimate, "Original Estimate"]
                                    ,[task.title, command.title, "Title"]
