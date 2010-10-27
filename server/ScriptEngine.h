@@ -9,18 +9,19 @@
 #include "MushiScriptDB.h"
 #include "MushiScriptConn.h"
 #include "MushiScriptGlobal.h"
-
+#include "mushirequest.h"
 
 class MushiScriptEngine : public QObject, protected QScriptable
 {
     Q_OBJECT
 private:
     MushiScriptDB *scriptDB;
-    void setConnData(struct mg_connection *conn, const struct mg_request_info *ri,void *user_data);
+    void setConnData(MushiRequest &request);
     void init();
     void initScripts();
+    MushiRequest *request;
 public:
-    MushiScriptEngine(struct mg_connection *conn, const struct mg_request_info *ri,void *user_data);
+    MushiScriptEngine(MushiRequest &request);
     MushiScriptEngine();
 
     ~MushiScriptEngine();

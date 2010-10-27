@@ -56,19 +56,19 @@ void MushiScriptEngine::init(){
 
 }
 
-MushiScriptEngine::MushiScriptEngine(struct mg_connection *conn, const struct mg_request_info *ri,void *user_data){
+MushiScriptEngine::MushiScriptEngine(MushiRequest &request){
     this->init();
-    this->setConnData(conn,ri,user_data);
+    this->setConnData(request);
     this->initScripts();
 }
 
-void MushiScriptEngine::setConnData(struct mg_connection *conn, const struct mg_request_info *ri,void *user_data){
+void MushiScriptEngine::setConnData(MushiRequest &request){
     QScriptValue globalObject=engine.globalObject();
 
     //get global Mushi object
     QScriptValue mushiObject = globalObject.property("Mushi");
     //expose conn object to script userspace
-    MushiScriptConn *connObject = new MushiScriptConn(conn,ri,user_data);
+    MushiScriptConn *connObject = new MushiScriptConn(request);
     QScriptValue connObjectValue= engine.newQObject(connObject,QScriptEngine::QtOwnership,0);
     mushiObject.setProperty("conn", connObjectValue);
 

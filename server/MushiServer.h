@@ -47,13 +47,16 @@ public:
         Json::Value runCommand(Json::Value command,MushiScriptEngine &engine, MushiDB &db);
 	
 	int registerCommand(MushiCommand *command);
+        static void *eventHandler(enum mg_event event,
+                                   struct mg_connection *conn,
+                                   const struct mg_request_info *request_info);
 
 private:
 	MushiServer();
 	mg_context	*ctx;
 	MushiDB *db;
 	std::vector<class MushiCommand *> commands;
-	void defineHandlers();
+
 	void installCommands();
 };
 #endif

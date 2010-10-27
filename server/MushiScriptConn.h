@@ -3,12 +3,13 @@
 
 #include <QObject>
 #include "mongoose.h"
+#include "mushirequest.h"
 class MushiScriptConn : public QObject
 {
     Q_OBJECT
 public:
-    MushiScriptConn(struct mg_connection *conn, const struct mg_request_info *ri, void *user_data);
-    ~MushiScriptConn(){};
+    MushiScriptConn(MushiRequest &request);
+    ~MushiScriptConn(){}
 public slots:
     void print(QString string);
     QString userData();
@@ -16,9 +17,7 @@ public slots:
     QString URI();
     QString getVar(QString key);
 private:
-    struct mg_connection *_conn;
-    const struct mg_request_info *_ri;
-    void *_user_data;
+    MushiRequest *request;
 };
 
 #endif // MUSHISCRIPTCONN_H

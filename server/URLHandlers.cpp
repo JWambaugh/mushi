@@ -39,8 +39,9 @@
 #include "URLHandlers.h"
 #include "MushiDB.h"
 #include "ScriptEngine.h"
+#include "mushirequest.h"
 #include "../lib_json/json.h"
-
+/*
 void MushiServer::defineHandlers(){
         mg_set_uri_callback(ctx, "/", &m_showIndex,NULL);
         mg_set_uri_callback(ctx, "/version", &m_showVersion,NULL);
@@ -49,59 +50,92 @@ void MushiServer::defineHandlers(){
         mg_set_uri_callback(ctx, "*.mjs", &m_script,NULL);
         mg_set_uri_callback(ctx, "/command", &m_receiveCommand,NULL);
 
+}*/
+
+void *MushiServer::eventHandler(enum mg_event event,
+                              struct mg_connection *conn,
+                              const struct mg_request_info *request_info){
+
+    MushiRequest request(conn,request_info);
+    if(event==MG_NEW_REQUEST){
+
+        if(request.getURI().contains(QRegExp("^/$"))){
+            m_showIndex(request);
+            return (void*)"processed";
+        }else if(request.getURI().contains(QRegExp("\.mjs"))){
+            m_script(request);
+            return (void*)"processed";
+        } else if(request.getURI().contains(QRegExp("^/command"))){
+            m_receiveCommand(request);
+            return (void*)"processed";
+        }else{
+            //serve file if its available
+
+        }
+
+
+
+    } else{
+        return NULL;
+    }
+
+
 }
 
 
+
 static void
-m_receiveCommand(struct mg_connection *conn, const struct mg_request_info *ri, void *user_data)
+m_receiveCommand(MushiRequest &request)
 {
         QTime timer;
 
 	Json::Reader reader;
 	JSON_WRITE_CLASS writer;
 	Json::Value cmd;
-	char	 *request_method;
-	char *data= ri->post_data;
-	request_method = ri->request_method;
 
 
-	if(data==0){
-		mg_printf(conn,"data wasn't posted.");
+
+        if(request.getPost()==""){
+                request.write("data wasn't posted.");
 		return;
 	}
-	url_decode(data,strlen(data),data,strlen(data)+1 );
-        if (!strcmp(request_method, "POST")) {
+        //url_decode(data,strlen(data),data,strlen(data)+1 );
+        qDebug()<<request.getMethod();
+        if (request.getMethod()== "POST") {
                 timer.start();
                 //get a database handle
                 MushiDB db;
                 db.init();
                 //init a script engine
-                MushiScriptEngine engine(conn,ri,user_data);
+                MushiScriptEngine engine(request);
                 //qDebug()<<"Time to initialize engine: "<<timer.elapsed();
                // printf("Received POST: %s\n",data);
 
 		
 		
-		std::string input =data;
+
 		
-		//TODO: Remove this after testing!
-		input=replaceOnce(input,"data=", "");
+
 		
-		
-		reader.parse(input, cmd);
+                QString data=QUrl::fromPercentEncoding(request.getPost().toAscii());
+
+                //deprecated calls prefix data with 'data=' so remove that if its there.
+                data=data.replace(QRegExp("^data="),"");
+
+                reader.parse(data.toStdString(), cmd);
                 // qDebug()<<"completed parse at: "<<timer.elapsed();
 		
                // char *buff = (char *)writer.write(MushiServer::getInstance()->runCommand(cmd,engine)).c_str();
-                std::string response;
+                QString response;
 
                 response.append("HTTP/1.1 200 OK\r\n"
                                 "Content-Type: text/html\r\n"
                                 "Connection: close\r\n\r\n");
 
-                response.append(writer.write(MushiServer::getInstance()->runCommand(cmd,engine,db)));
+                response.append(writer.write(MushiServer::getInstance()->runCommand(cmd,engine,db)).c_str());
               //  qDebug()<<"completed commands at: "<<timer.elapsed();
                 //mg_printf(conn, "%s",buff);
-                mg_write(conn, response.c_str(),response.length());
+                request.write(response);
                // qDebug()<<"Time to complete command request: "<<timer.elapsed();
 
                                   //free(buff);
@@ -111,11 +145,11 @@ m_receiveCommand(struct mg_connection *conn, const struct mg_request_info *ri, v
 	//not a POST
 	else{
 	
-		mg_printf(conn, "Commands may only be POSTed.");
+                request.write( "Commands may only be POSTed.");
 	}
 }
 
-static void m_showConfig(struct mg_connection *conn, const struct mg_request_info *ri, void *user_data){
+static void m_showConfig(MushiRequest &request){
 	Json::Value val;
 	JSON_WRITE_CLASS writer;
 	val["version"] = MUSHI_SERVER_VERSION;
@@ -128,11 +162,11 @@ static void m_showConfig(struct mg_connection *conn, const struct mg_request_inf
 		val[r->getCell(x,0)]=r->getCell(x,1);
 	}
 	
-	mg_printf(conn, "%s",(char *)writer.write(val).c_str());
+        request.write(writer.write(val));
 }
 
 
-static void m_showVersion(struct mg_connection *conn, const struct mg_request_info *ri, void *user_data){
+static void m_showVersion(MushiRequest &request){
 	Json::Value val;
 	JSON_WRITE_CLASS writer;
 	val["version"] = MUSHI_SERVER_VERSION;
@@ -142,23 +176,23 @@ static void m_showVersion(struct mg_connection *conn, const struct mg_request_in
 	val["protocolVersion"] = MUSHI_PROTOCOL_VERSION;
 	val["name"] = MUSHI_SERVER_NAME;
         val["about"] = MUSHI_ABOUT;
-	mg_printf(conn, "%s",(char *)writer.write(val).c_str());
+        request.write(writer.write(val));
 }
 
 
 
-static void m_pluginWebRequest(struct mg_connection *conn, const struct mg_request_info *ri, void *user_data){
+static void m_pluginWebRequest(MushiRequest &request){
     //std::ostringstream dirName;
     //dirName << MushiConfig::getValue("pluginsDirectory","../script/plugin").toStdString() <<ri->uri;
 
-    QString uri(ri->uri);
+    QString uri(request.getURI());
     uri.replace("/plugin","");
 
     QString fileName(MushiConfig::getValue("pluginsDirectory","../script/plugin"));
     fileName.append(uri);
     //qDebug()<<"File name:"<<fileName;
     if(!QFile::exists (fileName)){
-         mg_printf(conn, "%s", "HTTP/1.1 404 FILE NOT FOUND\r\nContent-Type: text/html\r\n\r\nThe file at this location cannot be found.");
+         request.write( "HTTP/1.1 404 FILE NOT FOUND\r\nContent-Type: text/html\r\n\r\nThe file at this location cannot be found.");
          return;
     }
 
@@ -168,14 +202,14 @@ static void m_pluginWebRequest(struct mg_connection *conn, const struct mg_reque
     //Load and eval the called script
     contents= getFileContents(fileName);
     if(contents==""){
-        mg_printf(conn, "%s", "HTTP/1.1 404 FILE NOT FOUND\r\nContent-Type: text/html\r\n\r\nThe file at this location cannot be found.");
+        request.write("HTTP/1.1 404 FILE NOT FOUND\r\nContent-Type: text/html\r\n\r\nThe file at this location cannot be found.");
         return;
     }
-    mg_printf(conn, "%s", "HTTP/1.1 200 OK\r\nContent-Type: text/html\r\n\r\n");
+    request.write( "HTTP/1.1 200 OK\r\nContent-Type: text/html\r\n\r\n");
 
     //if its an mjs script
     if(fileName.contains(".mjs")){
-        MushiScriptEngine engine(conn,ri,user_data);
+        MushiScriptEngine engine(request);
         precompileMJS(contents);
         //qDebug()<<contents;
         //printf("%s\n",contents.toStdString().c_str());
@@ -189,7 +223,7 @@ static void m_pluginWebRequest(struct mg_connection *conn, const struct mg_reque
                   printf("%s\n",errors.at(i).toLocal8Bit().constData());
         }
     } else {//other file types
-        mg_printf(conn,"%s",contents.toStdString().c_str());
+       request.write(contents.toStdString());
     }
 
 }
@@ -198,37 +232,37 @@ static void m_pluginWebRequest(struct mg_connection *conn, const struct mg_reque
 /*
  * Handler for the / (root) of the server
  */
-static void m_showIndex(struct mg_connection *conn, const struct mg_request_info *ri, void *user_data){
-    mg_printf(conn, "%s", "HTTP/1.1 301 Moved Permanently\r\nLocation: /index.mjs\r\n\r\n");
+static void m_showIndex(MushiRequest &request){
+    request.write( "HTTP/1.1 301 Moved Permanently\r\nLocation: /index.mjs\r\n\r\n");
 
 }
 
 /**
 Javascript handler
 */
-static void m_script(struct mg_connection *conn, const struct mg_request_info *ri,void *user_data){
+static void m_script(MushiRequest &request){
     QTime timer;
     timer.start();
 
     //mg_printf(conn,"Script called!");
 
     std::ostringstream fileName;
-    fileName << MushiConfig::getValue("interfaceDirectory").toStdString() <<ri->uri;
+    fileName << MushiConfig::getValue("interfaceDirectory").toStdString() <<request.getURI().toStdString();
    // mg_printf(conn,"%s",getFileContents(buffer.str()).c_str());
 
 
 
 
-    MushiScriptEngine engine(conn,ri,user_data);
+    MushiScriptEngine engine(request);
 
     QString contents;
     //Load and eval the called script
     contents= getFileContents(QString(fileName.str().c_str()));
     if(contents==""){
-        mg_printf(conn, "%s", "HTTP/1.1 404 FILE NOT FOUND\r\nContent-Type: text/html\r\n\r\nThe file at this location cannot be found.");
+        request.write( "HTTP/1.1 404 FILE NOT FOUND\r\nContent-Type: text/html\r\n\r\nThe file at this location cannot be found.");
         return;
     }
-    mg_printf(conn, "%s", "HTTP/1.1 200 OK\r\nContent-Type: text/html\r\n\r\n");
+    request.write("HTTP/1.1 200 OK\r\nContent-Type: text/html\r\n\r\n");
     precompileMJS(contents);
     //printf("%s\n",contents.toStdString().c_str());
     engine.engine.evaluate(contents,QString(fileName.str().c_str()));

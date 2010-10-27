@@ -185,16 +185,20 @@ void MushiServer::startup(int argc, char *argv[]){
 
             }
         }
-	
-        ctx = mg_start();
-        mg_set_option(ctx, "root",MushiConfig::getValue("interfaceDirectory").toStdString().c_str() );  // Set document root
-        mg_set_option(ctx, "ports", MushiConfig::getValue("listenPort").toStdString().c_str());
+        const char *options[] = {
+          "document_root", MushiConfig::getValue("interfaceDirectory").toStdString().c_str(),
+          "listening_ports", MushiConfig::getValue("listenPort").toStdString().c_str(),
+
+          NULL
+        };
+        ctx = mg_start(&MushiServer::eventHandler,options);
+
         char *port = (char *)MushiConfig::getValue("listenPort").toStdString().c_str();
 	printf("listening on port %s.\n",port);
         //free(port);
 	
 	
-	defineHandlers();
+
 	
         printf("Server started.\n");
 	

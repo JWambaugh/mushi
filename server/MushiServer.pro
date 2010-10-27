@@ -38,7 +38,8 @@ SOURCES += utils.cpp \
     commands/GetUsersCommand.cpp \
     commands/AddUserCommand.cpp \
     commands/GetTaskCommand.cpp \
-    commands/PluginCommand.cpp
+    commands/PluginCommand.cpp \
+    mushirequest.cpp
 HEADERS += utils.h \
     URLHandlers.h \
     sqlite3.h \
@@ -72,5 +73,6 @@ HEADERS += utils.h \
     commands/GetUsersCommand.h \
     commands/GetTaskCommand.h \
     commands/AddUserCommand.h \
-    commands/PluginCommand.h
+    commands/PluginCommand.h \
+    mushirequest.h
 win32:LIBS += -lws2_32
