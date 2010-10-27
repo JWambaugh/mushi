@@ -24,7 +24,7 @@
 #endif
 
 
-#define MUSHI_SERVER_VERSION "0.2.1"
+#define MUSHI_SERVER_VERSION "0.2.2"
 #define MUSHI_SERVER_NAME "Mushi - Server (Premortal)"
 #define MUSHI_PROTOCOL_VERSION "0.-1"
 #define MUSHI_AUTHOR "Jordan CM Wambaugh"
