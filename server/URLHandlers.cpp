@@ -100,7 +100,7 @@ m_receiveCommand(MushiRequest &request)
 		return;
 	}
         //url_decode(data,strlen(data),data,strlen(data)+1 );
-        qDebug()<<request.getMethod();
+        //qDebug()<<request.getMethod();
         if (request.getMethod()== "POST") {
                 timer.start();
                 //get a database handle
