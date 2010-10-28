@@ -56,29 +56,32 @@ void *MushiServer::eventHandler(enum mg_event event,
                               struct mg_connection *conn,
                               const struct mg_request_info *request_info){
 
+        QTime timer;
+        timer.start();
     MushiRequest request(conn,request_info);
+
+    void *response = (void*)"processed";
     if(event==MG_NEW_REQUEST){
 
         if(request.getURI().contains(QRegExp("^/$"))){
             m_showIndex(request);
-            return (void*)"processed";
         }else if(request.getURI().contains(QRegExp("\.mjs"))){
             m_script(request);
-            return (void*)"processed";
         } else if(request.getURI().contains(QRegExp("^/command"))){
             m_receiveCommand(request);
-            return (void*)"processed";
         }else{
             //serve file if its available
-
+                response=NULL;
         }
 
 
 
     } else{
-        return NULL;
-    }
+        response=NULL;
+        }
+        qDebug()<<request.getURI()<<": "<<timer.elapsed();
 
+        return response;
 
 }
 

@@ -74,9 +74,9 @@ QCoreApplication application(argc,argv);
 	/* Serve connections infinitely until someone kills us */
 	while(1){
 #ifdef _WIN32
-            Sleep(500);
+            Sleep(1);
 #else
-		sleep(500);
+                sleep(50);
 #endif
             }
 	/* Probably unreached, because we will be killed by a signal */

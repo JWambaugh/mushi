@@ -6,7 +6,7 @@
 #include <QNetworkAccessManager>
 #include "taskFinder.h"
 
-#define SERVER_LOCATION "http://wambaugh.org:8888"
+#define SERVER_LOCATION "http://localhost:8080"
 #ifndef JSON_WRITE_CLASS
 #define JSON_WRITE_CLASS Json::StyledWriter
 #endif

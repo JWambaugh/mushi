@@ -1,5 +1,6 @@
 #include "mushirequest.h"
 
+#include <QUrl>
 MushiRequest::MushiRequest(mg_connection *connection,const struct mg_request_info *request_info,QObject *parent) : QObject(parent){
     this->conn=connection;
     this->read=false;
@@ -43,6 +44,19 @@ void MushiRequest::write(char *data){
 
     mg_write(this->conn,data,strlen(data));
 }
+
+
+QString MushiRequest::getVar(QString key){
+        QUrl url(this->request_info->query_string);
+        return url.queryItemValue(key);
+}
+
+QString MushiRequest::getQueryString(){
+        return QString(this->request_info->query_string);
+}
+
+
+
 
 
 

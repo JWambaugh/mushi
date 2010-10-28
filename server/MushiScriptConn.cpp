@@ -21,8 +21,8 @@ QString MushiScriptConn::userData(){
 }
 
 QString MushiScriptConn::queryString(){
-    //todo:IMPLEMENT querystring
-    return QString();
+
+    return this->request->getQueryString();
 }
 
 
@@ -32,6 +32,6 @@ QString MushiScriptConn::URI(){
 
 
 QString MushiScriptConn::getVar(QString key){
-    //TODO: implement getvar
-    return QString();
+
+    return this->request->getVar(key);
 }

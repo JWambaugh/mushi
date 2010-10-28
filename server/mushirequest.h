@@ -14,6 +14,9 @@ public:
     void write(QString data);
     void write(std::string data);
     void write(char *);
+
+    QString getVar(QString key);
+    QString getQueryString();
 signals:
 
 public slots:
